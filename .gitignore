@@ -1,0 +1,6 @@
+# Log da tarefa agendada de auto-push (gerado em runtime, nao versionar)
+.auto-push.log
+.auto-push.log.old
+
+# Backup file que ficou de uma execucao antiga
+index.html.html
