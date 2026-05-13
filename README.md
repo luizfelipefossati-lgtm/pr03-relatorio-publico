@@ -1,3 +1,17 @@
-# Relatório PR03 — Indicadores Épicos
-Snapshot público atualizado automaticamente a cada 6 horas.
-Última geração: 2026-05-11T21:12:56Z
+# Relatorio PR03 - Indicadores Epicos
+
+Snapshot publico do dashboard de OTD por EPICs do Jira (projetos Engeplus).
+Atualizado automaticamente pelo scheduled task "deploy-pr03-vercel".
+
+- **Ultima geracao:** 2026-05-13T13:15:50Z (13/05/2026 10:15 -03)
+- **Periodo coberto:** Visao Mensal (Abr/Mai 2026) + Acumulado (Dez/2025 - Mai/2026)
+- **Fonte:** projetos-engeplus.atlassian.net (issuetype = Epic)
+- **Hospedagem:** Vercel (auto-deploy a partir deste repo)
+
+## Como funciona
+
+Os dados sao buscados via MCP do Jira no momento da geracao do snapshot, embutidos
+no HTML como variavel `window.__SNAPSHOT__`, e o JavaScript original do artifact
+`callMcpTool` foi monkey-patched para devolver esses dados em vez de fazer
+requisicao ao vivo. Isso permite que a pagina rode em dominio publico sem
+acesso ao Jira.

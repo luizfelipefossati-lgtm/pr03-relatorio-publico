@@ -1,141 +1,184 @@
 <!DOCTYPE html>
-<!-- Snapshot gerado em 2026-05-11T21:09:57.556729Z -->
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Pr03 Relatorio Indicadores Epics",
+  "schemaVersion": 1,
+  "description": "Dashboard PR.03 - Relatório de Indicadores de EPICs do Jira. Mostra OTD, status por projeto, tabela detalhada com dados ao vivo. Projetos: EG0240, EG0256, EG0273, EG0274, G0280.",
+  "mcpTools": [
+    "mcp__6387c33d-d206-438d-bef3-584f23bf35a2__searchJiraIssuesUsingJql",
+    "mcp__6387c33d-d206-438d-bef3-584f23bf35a2__getVisibleJiraProjects",
+    "mcp__6387c33d-d206-438d-bef3-584f23bf35a2__getJiraIssue"
+  ],
+  "mcpServerNames": [
+    "Atlassian",
+    "Atlassian",
+    "Atlassian"
+  ]
+}
+</script>
 <html lang="pt-BR">
 <head>
+<!-- Snapshot estatico gerado em 2026-05-13T13:15:33Z -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Estudos e Projetos — Relatório de Indicadores</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
-:root{color-scheme:light;--pri:#0F1A2E;--sec:#2563EB;--ok:#166534;--okbg:#F0FDF4;--w:#92400E;--wbg:#FEFCE8;--e:#991B1B;--ebg:#FEF2F2;--inf:#1E40AF;--infbg:#EFF6FF;--nbg:#F9FAFB;--bdr:#E5E7EB;--bg:#FFFFFF;--tx:#111827;--tx3:#6B7280;--tx4:#9CA3AF;--r:10px;--s:0 1px 3px rgba(0,0,0,.04);--accent:#1FA67A}
+:root{color-scheme:dark;--pri:#0D1526;--pri2:#111C32;--pri3:#162240;--accent:#1FA67A;--accent2:#22D896;--ok:#22C55E;--okbg:rgba(34,197,94,.12);--w:#F59E0B;--wbg:rgba(245,158,11,.10);--e:#EF4444;--ebg:rgba(239,68,68,.10);--inf:#60A5FA;--infbg:rgba(96,165,250,.10);--card:#131B2E;--card2:#182136;--bdr:rgba(255,255,255,.06);--bdr2:rgba(255,255,255,.10);--bg:#0B1120;--tx:#E8ECF4;--tx2:#CBD5E1;--tx3:#8B98B0;--tx4:#5A6A85;--r:12px;--s:0 2px 8px rgba(0,0,0,.25);--glow:0 0 20px rgba(31,166,122,.08)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;background:var(--nbg);color:var(--tx);font-size:13px;line-height:1.55;padding:0}
-.snap-banner{background:#fef3c7;padding:8px;text-align:center;font-size:12px;color:#92400e;border-bottom:1px solid #fcd34d}
-.snap-banner strong{font-weight:700}
-.hd{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:linear-gradient(135deg,#0F1A2E 0%,#162544 100%);color:#fff;margin-bottom:0;position:sticky;top:0;z-index:100}
-.hd-logo{font-size:18px;font-weight:900;letter-spacing:3px;line-height:1;display:flex;align-items:baseline;gap:0}
-.hd-logo span:first-child{color:var(--accent)}
-.hd-logo span:last-child{color:#fff;opacity:.92}
-.hd-logo small{display:block;font-size:6.5px;font-weight:500;letter-spacing:3px;opacity:.35;margin-top:1px}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--tx);font-size:13px;line-height:1.55;padding:0;min-height:100vh}
+.hd{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:60px;background:linear-gradient(135deg,#080E1C 0%,#0F1829 50%,#0D1526 100%);border-bottom:1px solid var(--bdr2);position:sticky;top:0;z-index:100}
+.hd-logo{font-size:20px;font-weight:900;letter-spacing:3.5px;line-height:1}
+.hd-logo span:first-child{color:var(--accent);text-shadow:0 0 18px rgba(31,166,122,.35)}
+.hd-logo span:last-child{color:#fff;opacity:.88}
+.hd-logo small{display:block;font-size:6.5px;font-weight:500;letter-spacing:3.5px;opacity:.28;margin-top:2px}
 .hd-right{text-align:right}
-.hd-right .title{font-size:12px;font-weight:600;opacity:.85;letter-spacing:.3px}
-.hd-right .meta{font-size:9px;opacity:.45;margin-top:2px}
-.tabs{display:flex;gap:6px;padding:12px 24px 0;background:var(--bg);border-bottom:1px solid var(--bdr)}
-.tab{padding:7px 18px;font-size:11px;font-weight:600;color:var(--tx3);background:transparent;border:1.5px solid var(--bdr);border-bottom:none;border-radius:20px 20px 0 0;cursor:pointer;transition:all .2s ease;position:relative}
-.tab:hover{background:#F3F4F6;color:var(--tx)}
-.tab.act{background:var(--pri);color:#fff;border-color:var(--pri)}
-.tab .tg{font-size:7.5px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;letter-spacing:.3px}
-.tg-live{background:rgba(31,166,122,.15);color:var(--accent)}
-.tab.act .tg-live{background:rgba(255,255,255,.18);color:#fff}
-.tg-lock{background:rgba(146,64,14,.1);color:var(--w)}
-.tab.act .tg-lock{background:rgba(255,255,255,.18);color:#fff}
-.content-wrap{max-width:1140px;margin:0 auto;padding:16px 24px 32px}
-.ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 0;margin-bottom:16px;border-bottom:1px solid var(--bdr)}
-.ctl label{font-size:8px;font-weight:700;color:var(--tx4);text-transform:uppercase;letter-spacing:.5px}
-.ctl select{padding:4px 8px;border:1px solid var(--bdr);border-radius:6px;font-size:10px;background:var(--bg);color:var(--tx);outline:none;transition:border-color .15s}
-.ctl select:focus{border-color:var(--sec)}
-.ctl button{padding:5px 14px;border:none;border-radius:6px;font-size:10px;font-weight:700;background:var(--sec);color:#fff;cursor:pointer;transition:background .15s}
-.ctl button:hover{background:#1D4ED8}
-.ctl button:disabled{opacity:.3;cursor:default}
+.hd-right .title{font-size:12px;font-weight:600;color:var(--tx2);letter-spacing:.3px}
+.hd-right .meta{font-size:9px;color:var(--tx4);margin-top:2px}
+.tabs{display:flex;gap:4px;padding:14px 28px 0;background:var(--pri);border-bottom:1px solid var(--bdr)}
+.tab{padding:8px 22px;font-size:11px;font-weight:600;color:var(--tx3);background:transparent;border:1px solid var(--bdr2);border-bottom:none;border-radius:10px 10px 0 0;cursor:pointer;transition:all .25s;position:relative}
+.tab:hover{background:var(--card);color:var(--tx2)}
+.tab.act{background:var(--bg);color:var(--accent2);border-color:var(--accent);border-bottom:1px solid var(--bg)}
+.tab .tg{font-size:7.5px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:6px;letter-spacing:.3px}
+.tg-live{background:rgba(34,216,150,.15);color:var(--accent2)}
+.tab.act .tg-live{background:rgba(34,216,150,.2);color:var(--accent2)}
+.tg-lock{background:rgba(245,158,11,.12);color:var(--w)}
+.tab.act .tg-lock{background:rgba(245,158,11,.15);color:var(--w)}
+.tg-acum{background:rgba(96,165,250,.15);color:var(--inf)}
+.tab.act .tg-acum{background:rgba(96,165,250,.2);color:var(--inf)}
+.content-wrap{max-width:1200px;margin:0 auto;padding:20px 28px 40px}
+.ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 0;margin-bottom:20px;border-bottom:1px solid var(--bdr)}
+.ctl label{font-size:8px;font-weight:700;color:var(--tx4);text-transform:uppercase;letter-spacing:.6px}
+.ctl select{padding:5px 10px;border:1px solid var(--bdr2);border-radius:8px;font-size:10px;background:var(--card);color:var(--tx);outline:none;transition:border-color .15s}
+.ctl select:focus{border-color:var(--accent)}
+.ctl button{padding:6px 16px;border:none;border-radius:8px;font-size:10px;font-weight:700;background:linear-gradient(135deg,var(--accent) 0%,#17906A 100%);color:#fff;cursor:pointer;transition:all .2s;box-shadow:0 2px 8px rgba(31,166,122,.25)}
+.ctl button:hover{box-shadow:0 4px 14px rgba(31,166,122,.35)}
+.ctl button:disabled{opacity:.3;cursor:default;box-shadow:none}
 .ctl .ts{font-size:8px;color:var(--tx4);margin-left:auto}
-.pg-t{font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:2px;padding:0 0 8px;margin-top:24px;margin-bottom:12px;border-left:3px solid var(--accent);padding-left:12px;display:flex;align-items:center;gap:8px}
-.pg-t .n{background:var(--pri);color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:800}
-.ks{display:grid;grid-template-columns:2fr repeat(4,1fr);gap:12px;margin-bottom:20px}
-@media (max-width:700px){.ks{grid-template-columns:1fr 1fr}}
-.k{background:var(--bg);border:1px solid var(--bdr);border-top:3px solid var(--bdr);border-radius:var(--r);padding:16px;text-align:center;box-shadow:var(--s);transition:box-shadow .15s}
-.k:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.k .kl{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--tx4);margin-bottom:6px}
-.k .kv{font-size:22px;font-weight:900;line-height:1}
-.k .kd{font-size:8px;color:var(--tx4);margin-top:6px;letter-spacing:.2px}
-.k-h{border-top:3px solid var(--accent);background:radial-gradient(ellipse at 30% 50%,#F0FDF8 0%,#F8FAFC 60%,#EFF6FF 100%);padding:20px 16px;grid-row:span 1}
-.k-h .kv{font-size:48px;color:var(--pri);letter-spacing:-1px}
-.k-h .kl{color:var(--pri);font-size:9px;opacity:.7}
+.pg-t{font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:2.5px;padding:0 0 10px;margin-top:28px;margin-bottom:14px;border-left:3px solid var(--accent);padding-left:14px;display:flex;align-items:center;gap:10px}
+.pg-t .n{background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;box-shadow:0 0 10px rgba(31,166,122,.3)}
+.ks{display:grid;grid-template-columns:2fr repeat(4,1fr);gap:14px;margin-bottom:24px}
+@media(max-width:700px){.ks{grid-template-columns:1fr 1fr}}
+.kpis-a{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+@media(max-width:700px){.kpis-a{grid-template-columns:1fr 1fr}}
+.k{background:var(--card);border:1px solid var(--bdr2);border-top:3px solid var(--bdr2);border-radius:var(--r);padding:18px;text-align:center;box-shadow:var(--s);transition:all .25s;position:relative;overflow:hidden}
+.k:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.k .kl{font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--tx4);margin-bottom:8px}
+.k .kv{font-size:24px;font-weight:900;line-height:1}
+.k .kd{font-size:8.5px;color:var(--tx4);margin-top:8px;letter-spacing:.2px}
+.k-h{border-top:3px solid var(--accent);background:linear-gradient(145deg,#0D2A22 0%,#111E33 50%,#131B2E 100%);padding:22px 18px;box-shadow:var(--glow),var(--s)}
+.k-h .kv{font-size:52px;color:var(--accent2);letter-spacing:-1px;text-shadow:0 0 30px rgba(34,216,150,.2)}
+.k-h .kl{color:var(--accent);font-size:9px;opacity:.8}
 .k-h .kd{font-size:9px;color:var(--tx3)}
-.k-ok{border-top-color:var(--ok)}
-.k-ok .kv{color:var(--ok)}
-.k-w{border-top-color:var(--w)}
-.k-w .kv{color:var(--w)}
-.k-e{border-top-color:var(--e)}
-.k-e .kv{color:var(--e)}
-.k-n{border-top-color:var(--bdr)}
-.k-n .kv{color:var(--tx3)}
-.cg{display:grid;grid-template-columns:1fr 1fr 2fr;gap:12px;margin-bottom:20px}
-@media (max-width:600px){.cg{grid-template-columns:1fr}}
-.cc{background:var(--bg);border:1px solid var(--bdr);border-radius:var(--r);padding:12px;box-shadow:var(--s)}
-.cc h4{font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.k-ok{border-top-color:var(--ok)}.k-ok .kv{color:var(--ok);text-shadow:0 0 20px rgba(34,197,94,.15)}
+.k-w{border-top-color:var(--w)}.k-w .kv{color:var(--w);text-shadow:0 0 20px rgba(245,158,11,.15)}
+.k-e{border-top-color:var(--e)}.k-e .kv{color:var(--e);text-shadow:0 0 20px rgba(239,68,68,.15)}
+.k-n{border-top-color:var(--bdr2)}.k-n .kv{color:var(--tx3)}
+.cg{display:grid;grid-template-columns:1fr 1fr 2fr;gap:14px;margin-bottom:24px}
+@media(max-width:600px){.cg{grid-template-columns:1fr}}
+.cc{background:var(--card);border:1px solid var(--bdr2);border-radius:var(--r);padding:16px;box-shadow:var(--s)}
+.cc h4,.chart-card h4{font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
 .oc{position:relative}
 .oc .ol{position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);text-align:center;pointer-events:none}
-.oc .ol .on{font-size:26px;font-weight:900;color:var(--pri);display:block;line-height:1}
-.oc .ol .ot{font-size:7px;color:var(--tx4);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.al{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-@media (max-width:500px){.al{grid-template-columns:1fr}}
-.ac{border-radius:6px;padding:10px 14px;border-left:3px solid;font-size:11px}
-.ac h5{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
-.ac p{font-size:10px;line-height:1.45}
-.ac-e{background:#FEF2F2;border-color:var(--e);color:var(--e)}
-.ac-w{background:#FEFCE8;border-color:var(--w);color:var(--w)}
-.ac-ok{background:#F0FDF4;border-color:var(--ok);color:var(--ok)}
-.sc{margin-bottom:20px}
-.sh{font-size:11px;font-weight:700;color:var(--pri);margin-bottom:8px;display:flex;align-items:center;gap:6px;border-left:3px solid var(--accent);padding-left:10px;letter-spacing:.5px}
+.oc .ol .on{font-size:28px;font-weight:900;color:var(--tx);display:block;line-height:1}
+.oc .ol .ot{font-size:7px;color:var(--tx4);font-weight:600;text-transform:uppercase;letter-spacing:.6px}
+.al{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+@media(max-width:500px){.al{grid-template-columns:1fr}}
+.ac{border-radius:10px;padding:12px 16px;border-left:3px solid;font-size:11px}
+.ac h5{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.ac p{font-size:10px;line-height:1.5}
+.ac-e{background:var(--ebg);border-color:var(--e);color:#FCA5A5}.ac-e h5{color:var(--e)}
+.ac-w{background:var(--wbg);border-color:var(--w);color:#FCD34D}.ac-w h5{color:var(--w)}
+.ac-ok{background:var(--okbg);border-color:var(--ok);color:#86EFAC}.ac-ok h5{color:var(--ok)}
+.sc{margin-bottom:24px}
+.sh{font-size:11px;font-weight:700;color:var(--tx2);margin-bottom:10px;display:flex;align-items:center;gap:8px;border-left:3px solid var(--accent);padding-left:12px;letter-spacing:.5px}
 .sh .cnt{font-size:9px;color:var(--tx4);font-weight:500}
-.fb{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;padding:6px 10px;background:#F3F4F6;border:none;border-radius:20px}
-.fb select{padding:3px 6px;border:1px solid var(--bdr);border-radius:4px;font-size:9px;background:var(--bg)}
-.fb label{font-size:7px;font-weight:700;color:var(--tx4);text-transform:uppercase;letter-spacing:.4px}
-.tw{overflow-x:auto;border:1px solid var(--bdr);border-radius:var(--r);box-shadow:var(--s)}
+.fb{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px;padding:8px 14px;background:var(--card2);border:1px solid var(--bdr);border-radius:20px}
+.fb select{padding:4px 8px;border:1px solid var(--bdr2);border-radius:6px;font-size:9px;background:var(--card);color:var(--tx)}
+.fb label{font-size:7px;font-weight:700;color:var(--tx4);text-transform:uppercase;letter-spacing:.5px}
+.tw{overflow-x:auto;border:1px solid var(--bdr2);border-radius:var(--r);box-shadow:var(--s)}
 table{width:100%;border-collapse:collapse;font-size:11px}
-thead th{background:var(--pri);color:#fff;padding:8px 12px;text-align:left;font-weight:600;font-size:8px;text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
-tbody td{padding:8px 12px;border-bottom:1px solid var(--bdr)}
-tbody tr{height:38px}
-tbody tr:nth-child(even){background:#FAFBFC}
-tbody tr:hover{background:#F1F5F9}
-tbody tr.g{background:#F1F5F9;border-left:3px solid var(--accent)}
-tbody tr.g td{padding:8px 12px;font-weight:700;font-size:11px;color:var(--pri)}
-tfoot td{padding:8px 12px;font-weight:700;background:#F8FAFC;border-top:2px solid var(--pri);font-size:11px}
-.b{display:inline-block;padding:2px 7px;border-radius:4px;font-size:8px;font-weight:600;letter-spacing:.2px}
-.b-ok{background:var(--okbg);color:var(--ok)}
-.b-w{background:var(--wbg);color:var(--w)}
-.b-e{background:var(--ebg);color:var(--e)}
-.b-n{background:var(--nbg);color:var(--tx3)}
-.b-i{background:var(--infbg);color:var(--inf)}
-a.l{color:var(--sec);text-decoration:none;font-weight:600}
-a.l:hover{text-decoration:underline}
-.lk{background:#FFFBEB;border:1px solid #FDE68A;border-left:4px solid #D97706;border-radius:var(--r);padding:16px;margin-bottom:20px}
-.lk h4{font-size:11px;font-weight:700;color:#92400E;margin-bottom:2px}
-.lk .ls{font-size:9px;color:#A16207;margin-bottom:10px}
-.lk table thead th{background:#78350F}
-.lk-s{margin-bottom:10px}
-.st{font-size:9px;font-weight:700;padding:3px 10px;border-radius:12px;margin-bottom:4px;display:inline-block}
-.st-u{background:var(--ebg);color:var(--e)}
-.st-s{background:var(--wbg);color:var(--w)}
-.st-p{background:var(--infbg);color:var(--inf)}
-.dv{border:none;border-top:1px dashed var(--bdr);margin:20px 0}
-.msg{background:var(--okbg);color:var(--ok);padding:12px;border-radius:var(--r);font-size:10px;text-align:center;font-weight:600;border:1px solid #BBF7D0}
-.ru{background:var(--nbg);border:1px solid var(--bdr);border-radius:var(--r);padding:10px 14px;font-size:9px;color:var(--tx3);line-height:1.7;margin-top:8px}
+thead th{background:var(--pri3);color:var(--tx3);padding:10px 14px;text-align:left;font-weight:600;font-size:8px;text-transform:uppercase;letter-spacing:1.2px;white-space:nowrap;border-bottom:1px solid var(--bdr2)}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--bdr);color:var(--tx2)}
+tbody tr{height:40px;transition:background .15s}
+tbody tr:nth-child(even){background:rgba(255,255,255,.015)}
+tbody tr:hover{background:rgba(31,166,122,.05)}
+tbody tr.g{background:var(--pri3);border-left:3px solid var(--accent)}
+tbody tr.g td{padding:9px 14px;font-weight:700;font-size:11px;color:var(--accent)}
+tfoot td{padding:10px 14px;font-weight:700;background:var(--pri3);border-top:2px solid var(--accent);font-size:11px;color:var(--tx)}
+.b{display:inline-block;padding:3px 8px;border-radius:6px;font-size:8px;font-weight:600;letter-spacing:.2px}
+.b-ok{background:var(--okbg);color:var(--ok)}.b-w{background:var(--wbg);color:var(--w)}.b-e{background:var(--ebg);color:var(--e)}.b-n{background:rgba(255,255,255,.05);color:var(--tx3)}.b-i{background:var(--infbg);color:var(--inf)}
+a.l{color:var(--inf);text-decoration:none;font-weight:600;transition:color .15s}
+a.l:hover{color:var(--accent2);text-decoration:underline}
+.lk{background:linear-gradient(145deg,rgba(245,158,11,.06) 0%,var(--card) 100%);border:1px solid rgba(245,158,11,.15);border-left:4px solid var(--w);border-radius:var(--r);padding:18px;margin-bottom:24px}
+.lk h4{font-size:11px;font-weight:700;color:var(--w);margin-bottom:4px}
+.lk .ls{font-size:9px;color:#FCD34D;margin-bottom:12px;opacity:.7}
+.lk table thead th{background:rgba(120,53,15,.3);color:#FCD34D}
+.lk-s{margin-bottom:12px}
+.st{font-size:9px;font-weight:700;padding:4px 12px;border-radius:12px;margin-bottom:6px;display:inline-block}
+.st-u{background:var(--ebg);color:var(--e)}.st-s{background:var(--wbg);color:var(--w)}.st-p{background:var(--infbg);color:var(--inf)}
+.chart-row{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:24px}
+.chart-card{background:var(--card);border:1px solid var(--bdr2);border-radius:var(--r);padding:16px;box-shadow:var(--s)}
+.c-ok{background:rgba(34,197,94,.15);color:var(--ok);font-weight:800;border-radius:6px}
+.c-w{background:rgba(245,158,11,.12);color:var(--w);font-weight:800;border-radius:6px}
+.c-e{background:rgba(239,68,68,.12);color:var(--e);font-weight:800;border-radius:6px}
+.c-na{color:var(--tx4);font-style:italic;font-size:9px}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;margin-bottom:24px}
+.proj-card{background:var(--card);border:1px solid var(--bdr2);border-radius:var(--r);padding:16px;box-shadow:var(--s);transition:all .25s}
+.proj-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.proj-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--bdr)}
+.proj-name{font-size:13px;font-weight:700;color:var(--tx)}
+.proj-otd{font-size:22px;font-weight:900;line-height:1}
+.proj-otd-ok{color:var(--ok)}.proj-otd-w{color:var(--w)}.proj-otd-e{color:var(--e)}
+.proj-row{display:flex;justify-content:space-between;font-size:10px;padding:3px 0;color:var(--tx3)}
+.proj-row span:last-child{font-weight:600;color:var(--tx2)}
+.proj-bar{height:6px;background:var(--pri3);border-radius:3px;margin-top:8px;overflow:hidden}
+.proj-bar-fill{height:100%;border-radius:3px;transition:width .5s}
+.legend{display:flex;gap:16px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:9px;color:var(--tx3)}
+.legend-dot{width:10px;height:10px;border-radius:3px}
+hr.dv{border:none;border-top:1px solid var(--bdr);margin:24px 0}
+.msg{background:var(--okbg);color:var(--ok);padding:14px;border-radius:var(--r);font-size:10px;text-align:center;font-weight:600;border:1px solid rgba(34,197,94,.15)}
+.ru{background:var(--card);border:1px solid var(--bdr2);border-radius:var(--r);padding:12px 16px;font-size:9px;color:var(--tx3);line-height:1.7;margin-top:10px}
 .ru summary{font-weight:700;color:var(--tx4);cursor:pointer;font-size:9px;letter-spacing:.3px}
-.ru ul{margin:6px 0 0 16px;list-style:disc}
-.ru strong{color:var(--tx)}
-.ft{font-size:8px;color:var(--tx4);padding:12px 0;border-top:1px solid var(--bdr);margin-top:16px;text-align:center;display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
-.em{text-align:center;color:var(--tx4);padding:20px;font-style:italic;font-size:10px}
+.ru ul{margin:8px 0 0 16px;list-style:disc}.ru strong{color:var(--tx2)}
+.ft{font-size:8px;color:var(--tx4);padding:14px 0;border-top:1px solid var(--bdr);margin-top:20px;text-align:center;display:flex;justify-content:center;flex-wrap:wrap;gap:14px}
+.ld{text-align:center;padding:72px 24px}
+.sp{width:32px;height:32px;border:3px solid var(--bdr2);border-top-color:var(--accent);border-radius:50%;display:inline-block;animation:rot .7s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.er{background:var(--ebg);border:1px solid rgba(239,68,68,.2);color:var(--e);padding:14px;border-radius:var(--r);font-size:11px;margin:8px 0}
+.em{text-align:center;color:var(--tx4);padding:24px;font-style:italic;font-size:10px}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--pri)}
+::-webkit-scrollbar-thumb{background:var(--tx4);border-radius:4px}
 </style>
 </head>
 <body>
-
-<div class="snap-banner"><strong>Snapshot estático</strong> &middot; última atualização: 11/05/2026 18:08 (BRT) &middot; este relatório é atualizado automaticamente a cada 6 horas</div>
+<div style="background:#fef3c7;padding:8px;text-align:center;font-size:12px;color:#92400e">Snapshot estatico - ultima atualizacao: 13/05/2026 13:15 (dados travados, pagina nao consulta o Jira ao vivo)</div>
 
 <div class="hd">
   <div class="hd-logo"><div><span>ENGE</span><span>PLUS</span><small>ENGENHARIA E CONSULTORIA</small></div></div>
-  <div class="hd-right"><div class="title">Estudos e Projetos — Relatório de Indicadores</div><div class="meta" id="hm"></div></div>
+  <div class="hd-right">
+    <div class="title">Estudos e Projetos — Relatório de Indicadores</div>
+    <div class="meta" id="hm"></div>
+  </div>
 </div>
 
 <div class="tabs" id="tabs"></div>
 
 <div class="content-wrap">
-  <div class="ctl">
-    <label>Projeto</label>
-    <select id="sP"><option value="all">Todos</option></select>
-    <span class="ts" id="ts"></span>
-  </div>
-  <div id="MC" style="display:none">
+
+  <!-- LOADING GLOBAL -->
+  <div id="LA" class="ld"><div class="sp"></div><div style="margin-top:12px;color:var(--tx3);font-size:11px" id="LM">Carregando...</div></div>
+  <div id="EA"></div>
+
+  <!-- ========== MONTHLY VIEW ========== -->
+  <div id="MV" style="display:none">
+    <div class="ctl">
+      <label>Projeto</label>
+      <select id="sP"><option value="all">Todos</option></select>
+      <span class="ts" id="ts"></span>
+    </div>
     <div class="pg-t"><span class="n">1</span> RESUMO EXECUTIVO</div>
     <div class="ks">
       <div class="k k-h" id="cO"><div class="kl">OTD — On Time Delivery</div><div class="kv" id="vO">—</div><div class="kd" id="dO"></div></div>
@@ -150,11 +193,12 @@ a.l:hover{text-decoration:underline}
       <div class="cc"><h4>Desempenho por Projeto</h4><div id="c2w" style="height:160px"><canvas id="c2"></canvas></div></div>
     </div>
     <div class="al" id="ab"></div>
-    <div class="sc"><div class="sh">OTD por Projeto</div><div class="tw"><table><thead><tr><th>Projeto</th><th>Prev.</th><th>Entreg.</th><th>No Prazo</th><th>Peq.Atr.</th><th>Pend.</th><th style="text-align:right">OTD%</th></tr></thead><tbody id="tO"></tbody><tfoot id="tOF"></tfoot></table></div></div>
+    <div class="sc"><div class="sh">OTD por Projeto</div>
+      <div class="tw"><table><thead><tr><th>Projeto</th><th>Prev.</th><th>Entreg.</th><th>No Prazo</th><th>Peq.Atr.</th><th>Pend.</th><th style="text-align:right">OTD%</th></tr></thead><tbody id="tO"></tbody><tfoot id="tOF"></tfoot></table></div>
+    </div>
     <hr class="dv">
     <div class="pg-t"><span class="n">2</span> DETALHAMENTO OPERACIONAL</div>
-    <div class="sc">
-      <div class="sh">Pendências <span class="cnt" id="cP"></span></div>
+    <div class="sc"><div class="sh">Pendências <span class="cnt" id="cP"></span></div>
       <div class="fb">
         <label>Origem</label><select id="fO"><option value="all">Todas</option><option value="month">Do mês</option><option value="acum">Acumuladas</option></select>
         <label>Semana</label><select id="fS"><option value="all">Todas</option><option value="1">Sem.1</option><option value="2">Sem.2</option><option value="3">Sem.3</option><option value="4">Sem.4</option></select>
@@ -162,13 +206,62 @@ a.l:hover{text-decoration:underline}
       </div>
       <div class="tw"><table><thead><tr><th>Epic</th><th>Descrição</th><th>Due Date</th><th>Status</th><th style="text-align:right">Atraso</th><th>Origem</th></tr></thead><tbody id="tP"></tbody></table></div>
     </div>
-    <div class="sc"><div class="sh">Entregas do Mês</div><div class="tw"><table><thead><tr><th>Epic</th><th>Descrição</th><th>Due Date</th><th>Status</th><th>OTD</th></tr></thead><tbody id="tD"></tbody></table></div></div>
+    <div class="sc"><div class="sh">Entregas do Mês</div>
+      <div class="tw"><table><thead><tr><th>Epic</th><th>Descrição</th><th>Due Date</th><th>Status</th><th>OTD</th></tr></thead><tbody id="tD"></tbody></table></div>
+    </div>
     <div class="sc"><div class="sh">Retrabalho</div><div id="rW"></div></div>
     <div class="lk"><h4>Lookahead — Próximos 2 Meses</h4><div class="ls" id="lS"></div><div id="lB"></div></div>
-    <details class="ru"><summary>Regras de cálculo</summary><ul><li><strong>OTD</strong> = EPICs entregues / previstos. Status "done" = entregue.</li><li>Entrega antecipada atende OTD. Entrega no mês com atraso = SIM* (ressalva).</li><li>Retorno para revisão → não atende (status atual vale).</li><li>Pendências acumulam até reprogramação ou entrega.</li><li>Retrabalho = EPICs enviados no mês que já saíram de "Enviado" anteriormente.</li></ul></details>
+    <details class="ru"><summary>Regras de cálculo</summary>
+      <ul>
+        <li><strong>OTD</strong> = EPICs entregues / previstos. Status "done" = entregue.</li>
+        <li>Entrega antecipada atende OTD. Entrega no mês com atraso = SIM* (ressalva).</li>
+        <li>Retorno para revisão → não atende (status atual vale).</li>
+        <li>Pendências acumulam até reprogramação ou entrega.</li>
+        <li>Retrabalho = EPICs enviados no mês que já saíram de "Enviado" anteriormente.</li>
+      </ul>
+    </details>
   </div>
+
+  <!-- ========== ACCUMULATED VIEW ========== -->
+  <div id="AV" style="display:none">
+    <div class="ctl">
+      <label>Período de</label>
+      <select id="asM"></select><select id="asY"></select>
+      <label>até</label>
+      <select id="aeM"></select><select id="aeY"></select>
+      <button id="aBtnLoad">Carregar</button>
+      <span class="ts" id="aTs"></span>
+    </div>
+    <div id="aLA" class="ld" style="display:none"><div class="sp"></div><div style="margin-top:12px;color:var(--tx3);font-size:11px" id="aLM">Carregando...</div></div>
+    <div id="aContent" style="display:none">
+      <div class="pg-t"><span class="n">1</span> RESUMO ACUMULADO</div>
+      <div class="kpis-a">
+        <div class="k k-h"><div class="kl">OTD Acumulado</div><div class="kv" id="aOtd" style="font-size:42px">—</div><div class="kd" id="aOtdD"></div></div>
+        <div class="k" id="aPrevC"><div class="kl">Total Previstos</div><div class="kv" id="aPrev">—</div><div class="kd" id="aPrevD"></div></div>
+        <div class="k" id="aDelC"><div class="kl">Total Entregues</div><div class="kv" id="aDel">—</div><div class="kd" id="aDelD"></div></div>
+        <div class="k" id="aPendC"><div class="kl">Total Pendentes</div><div class="kv" id="aPend">—</div><div class="kd" id="aPendD"></div></div>
+      </div>
+      <div class="chart-row"><div class="chart-card"><h4>Evolução do OTD mensal</h4><div style="height:220px"><canvas id="chEvo"></canvas></div></div></div>
+      <div class="pg-t"><span class="n">2</span> HEATMAP — OTD POR PROJETO × MÊS</div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--ok)"></div> ≥ 80% (Bom)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--w)"></div> 50–79% (Atenção)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--e)"></div> &lt; 50% (Crítico)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--pri3)"></div> Sem previsão</div>
+      </div>
+      <div class="tw" id="hmWrap"><table><thead id="hmH"></thead><tbody id="hmB"></tbody><tfoot id="hmF"></tfoot></table></div>
+      <hr class="dv">
+      <div class="pg-t"><span class="n">3</span> DESEMPENHO POR PROJETO</div>
+      <div class="chart-row"><div class="chart-card"><h4>OTD acumulado por projeto</h4><div id="chBarW" style="height:200px"><canvas id="chBar"></canvas></div></div></div>
+      <div class="proj-grid" id="projGrid"></div>
+      <hr class="dv">
+      <div class="pg-t"><span class="n">4</span> EPICS NÃO ATENDIDOS NO PERÍODO</div>
+      <div class="tw"><table><thead><tr><th style="text-align:left">Projeto</th><th style="text-align:left">Epic</th><th style="text-align:left">Descrição</th><th>Due Date</th><th>Status</th><th>Mês Ref.</th></tr></thead><tbody id="aTpend"></tbody></table></div>
+    </div>
+  </div>
+
   <div class="ft" id="FT" style="display:none">
-    <span>Fonte: JIRA (projetos-engeplus.atlassian.net) — issuetype = Epic</span>
+    <span>Fonte: JIRA (snapshot estatico — atualizado em 13/05/2026 13:15) — issuetype = Epic</span>
     <span>PR.03 — Processo de Estudos e Projetos</span>
     <span id="fTs"></span>
     <span>Engeplus Engenharia e Consultoria</span>
@@ -176,121 +269,677 @@ a.l:hover{text-decoration:underline}
 </div>
 
 <script>
-const __EMBEDDED__ = {"2026-04": {"planned": [{"key": "EG0240-1", "fields": {"summary": "TOMO III - REVISÃO PERIÓDICA DE SEGURANÇA DE BARRAGEM (RPSB)", "project": {"key": "EG0240", "name": "EG0240 - GOITÁ/ COMPESA"}, "duedate": "2026-04-30", "resolutiondate": "2026-04-30T16:24:47.919-0300", "updated": "2026-05-11T14:30:26.188-0300", "status": {"name": "Concluído", "statusCategory": {"key": "done"}}}}, {"key": "EG0273-15", "fields": {"summary": "Análise e Aprovação DNIT - Relatório Projeto Executivo", "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0273-14", "fields": {"summary": "Relatório Projeto Executivo", "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0273-13", "fields": {"summary": "Orçamento e Plano de Execução da Obra", "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0273-12", "fields": {"summary": "Projeto de Componentes Ambientais e Paisagismo", "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0273-11", "fields": {"summary": "Projeto de Sinalização e Segurança Viária", "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0273-10", "fields": {"summary": "Projeto de Obras Complementares", "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0273-9", "fields": {"summary": "Verificação Projetos de OAEs ", "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0273-8", "fields": {"summary": "Projeto de Pavimentação", "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0273-7", "fields": {"summary": "Projeto de Drenagem e OAC", "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0273-6", "fields": {"summary": "Projeto de Terrraplenagem", "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0273-5", "fields": {"summary": "Projeto Geométrico", "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0273-4", "fields": {"summary": "Estudos Hidrológicos", "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0273-3", "fields": {"summary": "Estudos Geológicos", "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0274-57", "fields": {"summary": "Proj. Básico - Projeto Geométrico e Interseções", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-04-17", "resolutiondate": null, "updated": "2026-01-07T10:24:08.450-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-44", "fields": {"summary": "Levantamento Ambiental", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-04-01", "resolutiondate": "2026-04-30T14:58:08.375-0300", "updated": "2026-04-30T14:58:08.381-0300", "status": {"name": "Enviado - Aguardando Análise", "statusCategory": {"key": "done"}}}}, {"key": "G0280-51", "fields": {"summary": "EBE Baronesa do Gravataí", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-04-24", "resolutiondate": null, "updated": "2026-02-02T18:18:17.350-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "G0280-50", "fields": {"summary": "EBE Ponta da Cadeia", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-04-17", "resolutiondate": null, "updated": "2026-02-02T18:17:29.825-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "G0280-49", "fields": {"summary": "EBE 5S", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-04-01", "resolutiondate": "2026-04-09T16:19:58.505-0300", "updated": "2026-04-09T16:19:58.526-0300", "status": {"name": "Enviado - Aguardando Análise", "statusCategory": {"key": "done"}}}}], "overdue": [{"key": "EG0275-4", "fields": {"summary": "Relatório Final Estudos Ambientais", "project": {"key": "EG0275", "name": "EG0275 - CODEVASF"}, "duedate": "2026-02-27", "resolutiondate": null, "updated": "2026-02-19T10:40:22.817-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}, {"key": "G0280-45", "fields": {"summary": "EBE 1S", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-03-04", "resolutiondate": null, "updated": "2026-04-30T14:35:10.643-0300", "status": {"name": "Em Revisão", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0274-41", "fields": {"summary": "Estudos Geotécnicos", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-03-25", "resolutiondate": null, "updated": "2026-03-27T09:06:10.644-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}], "sent": {"total": 20, "rework": 2, "details": [{"key": "G0280-48", "sm": "EBE 4S", "pj": "G0280", "rw": true}, {"key": "G0280-49", "sm": "EBE 5S", "pj": "G0280", "rw": true}, {"key": "EG0239-27", "sm": "TOMO Vl - PAE", "pj": "EG0239", "rw": false}, {"key": "EG0240-1", "sm": "TOMO III - REVISÃO PERIÓDICA DE SEGURANÇA DE BARRAGEM (RPSB)", "pj": "EG0240", "rw": false}, {"key": "EG0241-44", "sm": "TOMO VI - PLANO DE AÇÃO EMERGENCIAL (PAE)", "pj": "EG0241", "rw": false}, {"key": "EG0256-23", "sm": "Áreas de Influência Direta e Indireta", "pj": "EG0256", "rw": false}, {"key": "EG0273-10", "sm": "Projeto de Obras Complementares", "pj": "EG0273", "rw": false}, {"key": "EG0273-11", "sm": "Projeto de Sinalização e Segurança Viária", "pj": "EG0273", "rw": false}, {"key": "EG0273-12", "sm": "Projeto de Componentes Ambientais e Paisagismo", "pj": "EG0273", "rw": false}, {"key": "EG0273-13", "sm": "Orçamento e Plano de Execução da Obra", "pj": "EG0273", "rw": false}, {"key": "EG0273-14", "sm": "Relatório Projeto Executivo", "pj": "EG0273", "rw": false}, {"key": "EG0273-15", "sm": "Análise e Aprovação DNIT - Relatório Projeto Executivo", "pj": "EG0273", "rw": false}, {"key": "EG0273-3", "sm": "Estudos Geológicos", "pj": "EG0273", "rw": false}, {"key": "EG0273-4", "sm": "Estudos Hidrológicos", "pj": "EG0273", "rw": false}, {"key": "EG0273-5", "sm": "Projeto Geométrico", "pj": "EG0273", "rw": false}, {"key": "EG0273-6", "sm": "Projeto de Terrraplenagem", "pj": "EG0273", "rw": false}, {"key": "EG0273-7", "sm": "Projeto de Drenagem e OAC", "pj": "EG0273", "rw": false}, {"key": "EG0273-8", "sm": "Projeto de Pavimentação", "pj": "EG0273", "rw": false}, {"key": "EG0273-9", "sm": "Verificação Projetos de OAEs ", "pj": "EG0273", "rw": false}, {"key": "EG0274-44", "sm": "Levantamento Ambiental", "pj": "EG0274", "rw": false}]}, "look": [{"key": "EG0239-28", "fields": {"summary": "TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)", "project": {"key": "EG0239", "name": "EG0239 - CARPINA/ COMPESA"}, "duedate": "2026-05-30", "resolutiondate": null, "updated": "2026-04-16T15:52:05.788-0300", "status": {"name": "Em Revisão", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0239-27", "fields": {"summary": "TOMO Vl - PAE", "project": {"key": "EG0239", "name": "EG0239 - CARPINA/ COMPESA"}, "duedate": "2026-05-15", "resolutiondate": null, "updated": "2026-04-29T09:41:08.057-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0239-26", "fields": {"summary": "TOMO IV -  PLANO DE OPERAÇÃO, MANUTENÇÃO E INSTRUMENTAÇÃO (POMI)", "project": {"key": "EG0239", "name": "EG0239 - CARPINA/ COMPESA"}, "duedate": "2026-05-15", "resolutiondate": null, "updated": "2026-04-16T15:48:39.058-0300", "status": {"name": "Em Revisão", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0240-43", "fields": {"summary": "TOMO IV - PROJETO DE INSTRUMENTAÇÃO", "project": {"key": "EG0240", "name": "EG0240 - GOITÁ/ COMPESA"}, "duedate": "2026-05-29", "resolutiondate": null, "updated": "2026-04-30T16:25:20.588-0300", "status": {"name": "Em Revisão", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0241-44", "fields": {"summary": "TOMO VI - PLANO DE AÇÃO EMERGENCIAL (PAE)", "project": {"key": "EG0241", "name": "EG0241 - XARÉU/ COMPESA"}, "duedate": "2026-05-15", "resolutiondate": "2026-04-30T16:21:58.790-0300", "updated": "2026-04-30T16:21:58.810-0300", "status": {"name": "Enviado - Aguardando Análise", "statusCategory": {"key": "done"}}}}, {"key": "EG0241-43", "fields": {"summary": "TOMO IV - PLANO DE OPERAÇÃO, MANUTENÇÃO E INSTRUMENTAÇÃO (POMI)", "project": {"key": "EG0241", "name": "EG0241 - XARÉU/ COMPESA"}, "duedate": "2026-05-30", "resolutiondate": null, "updated": "2026-04-16T17:15:18.819-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0241-42", "fields": {"summary": "TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)", "project": {"key": "EG0241", "name": "EG0241 - XARÉU/ COMPESA"}, "duedate": "2026-05-05", "resolutiondate": null, "updated": "2026-04-29T09:43:50.264-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0274-58", "fields": {"summary": "Proj. Básico - Projeto de Terraplenagem", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-05-15", "resolutiondate": null, "updated": "2026-01-07T10:24:14.779-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-43", "fields": {"summary": "Estudos Hidrológicos ", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-05-15", "resolutiondate": null, "updated": "2026-04-24T08:54:30.296-0300", "status": {"name": "Em Revisão", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0274-39", "fields": {"summary": "Estudo de Concepção e Traçado", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-05-15", "resolutiondate": null, "updated": "2026-04-30T14:59:56.239-0300", "status": {"name": "Em Revisão", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0274-21", "fields": {"summary": "Proj. Básico - Projeto de Pavimentação", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-05-17", "resolutiondate": null, "updated": "2026-04-06T13:26:43.093-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "G0280-55", "fields": {"summary": "EBE Nova Brasília", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-05-22", "resolutiondate": null, "updated": "2026-03-13T13:01:11.078-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "G0280-54", "fields": {"summary": "EBE Asa Branca", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-05-15", "resolutiondate": null, "updated": "2026-03-13T13:00:48.512-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "G0280-53", "fields": {"summary": "EBE Gaspar Martins", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-05-08", "resolutiondate": null, "updated": "2026-03-13T13:00:32.149-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "G0280-52", "fields": {"summary": "EBE Barros Cassal", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-05-01", "resolutiondate": null, "updated": "2026-03-13T13:00:11.729-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-59", "fields": {"summary": "Proj. Básico - Projeto de Drenagem e OAC", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-06-05", "resolutiondate": null, "updated": "2026-04-06T13:27:05.211-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-63", "fields": {"summary": "Proj. Básico - Projeto de Sinalização e Segurança Viária", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-06-09", "resolutiondate": null, "updated": "2026-01-07T10:25:54.632-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0240-4", "fields": {"summary": "TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)", "project": {"key": "EG0240", "name": "EG0240 - GOITÁ/ COMPESA"}, "duedate": "2026-06-15", "resolutiondate": null, "updated": "2026-04-29T09:36:37.884-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-60", "fields": {"summary": "Proj. Básico - Projetos de OAEs", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-06-24", "resolutiondate": null, "updated": "2026-01-07T10:24:38.137-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-64", "fields": {"summary": "Proj. Básico - Projeto de Componentes Ambientais e Paisagismo", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-06-25", "resolutiondate": null, "updated": "2026-01-07T10:26:11.103-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-62", "fields": {"summary": "Proj. Básico - Projeto de Obras Complementares", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-06-25", "resolutiondate": null, "updated": "2026-01-07T10:25:33.480-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-61", "fields": {"summary": "Proj. Básico - Projetos de Contenções", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-06-25", "resolutiondate": null, "updated": "2026-01-07T10:25:20.757-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0256-24", "fields": {"summary": "Diagnóstico Ambiental - Meio Físico - Condições Meteorológicas", "project": {"key": "EG0256", "name": "EG0256 - SOPS_RS - EIA RIMA"}, "duedate": "2026-06-30", "resolutiondate": null, "updated": "2026-04-07T13:43:35.500-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}], "period": {"s": "2026-04-01", "e": "2026-04-30", "l": "Abril 2026", "m": 3, "y": 2026}}, "2026-05": {"planned": [{"key": "EG0239-28", "fields": {"summary": "TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)", "project": {"key": "EG0239", "name": "EG0239 - CARPINA/ COMPESA"}, "duedate": "2026-05-30", "resolutiondate": null, "updated": "2026-04-16T15:52:05.788-0300", "status": {"name": "Em Revisão", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0239-27", "fields": {"summary": "TOMO Vl - PAE", "project": {"key": "EG0239", "name": "EG0239 - CARPINA/ COMPESA"}, "duedate": "2026-05-15", "resolutiondate": null, "updated": "2026-04-29T09:41:08.057-0300", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}}}, {"key": "EG0239-26", "fields": {"summary": "TOMO IV -  PLANO DE OPERAÇÃO, MANUTENÇÃO E INSTRUMENTAÇÃO (POMI)", "project": {"key": "EG0239", "name": "EG0239 - CARPINA/ COMPESA"}, "duedate": "2026-05-15", "resolutiondate": null, "updated": "2026-04-16T15:48:39.058-0300", "status": {"name": "Em Revisão", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0240-43", "fields": {"summary": "TOMO IV - PROJETO DE INSTRUMENTAÇÃO", "project": {"key": "EG0240", "name": "EG0240 - GOITÁ/ COMPESA"}, "duedate": "2026-05-29", "resolutiondate": null, "updated": "2026-04-30T16:25:20.588-0300", "status": {"name": "Em Revisão", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0241-44", "fields": {"summary": "TOMO VI - PLANO DE AÇÃO EMERGENCIAL (PAE)", "project": {"key": "EG0241", "name": "EG0241 - XARÉU/ COMPESA"}, "duedate": "2026-05-15", "resolutiondate": "2026-04-30T16:21:58.790-0300", "updated": "2026-04-30T16:21:58.810-0300", "status": {"name": "Enviado - Aguardando Análise", "statusCategory": {"key": "done"}}}}, {"key": "EG0241-43", "fields": {"summary": "TOMO IV - PLANO DE OPERAÇÃO, MANUTENÇÃO E INSTRUMENTAÇÃO (POMI)", "project": {"key": "EG0241", "name": "EG0241 - XARÉU/ COMPESA"}, "duedate": "2026-05-30", "resolutiondate": null, "updated": "2026-04-16T17:15:18.819-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0241-42", "fields": {"summary": "TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)", "project": {"key": "EG0241", "name": "EG0241 - XARÉU/ COMPESA"}, "duedate": "2026-05-05", "resolutiondate": null, "updated": "2026-04-29T09:43:50.264-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0274-58", "fields": {"summary": "Proj. Básico - Projeto de Terraplenagem", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-05-15", "resolutiondate": null, "updated": "2026-01-07T10:24:14.779-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-43", "fields": {"summary": "Estudos Hidrológicos ", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-05-15", "resolutiondate": null, "updated": "2026-04-24T08:54:30.296-0300", "status": {"name": "Em Revisão", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0274-39", "fields": {"summary": "Estudo de Concepção e Traçado", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-05-15", "resolutiondate": null, "updated": "2026-04-30T14:59:56.239-0300", "status": {"name": "Em Revisão", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0274-21", "fields": {"summary": "Proj. Básico - Projeto de Pavimentação", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-05-17", "resolutiondate": null, "updated": "2026-04-06T13:26:43.093-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "G0280-55", "fields": {"summary": "EBE Nova Brasília", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-05-22", "resolutiondate": null, "updated": "2026-03-13T13:01:11.078-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "G0280-54", "fields": {"summary": "EBE Asa Branca", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-05-15", "resolutiondate": null, "updated": "2026-03-13T13:00:48.512-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "G0280-53", "fields": {"summary": "EBE Gaspar Martins", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-05-08", "resolutiondate": null, "updated": "2026-03-13T13:00:32.149-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "G0280-52", "fields": {"summary": "EBE Barros Cassal", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-05-01", "resolutiondate": null, "updated": "2026-03-13T13:00:11.729-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}], "overdue": [{"key": "EG0275-4", "fields": {"summary": "Relatório Final Estudos Ambientais", "project": {"key": "EG0275", "name": "EG0275 - CODEVASF"}, "duedate": "2026-02-27", "resolutiondate": null, "updated": "2026-02-19T10:40:22.817-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}, {"key": "G0280-45", "fields": {"summary": "EBE 1S", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-03-04", "resolutiondate": null, "updated": "2026-04-30T14:35:10.643-0300", "status": {"name": "Em Revisão", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0274-41", "fields": {"summary": "Estudos Geotécnicos", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-03-25", "resolutiondate": null, "updated": "2026-03-27T09:06:10.644-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}, {"key": "G0280-50", "fields": {"summary": "EBE Ponta da Cadeia", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-04-17", "resolutiondate": null, "updated": "2026-02-02T18:17:29.825-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-57", "fields": {"summary": "Proj. Básico - Projeto Geométrico e Interseções", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-04-17", "resolutiondate": null, "updated": "2026-01-07T10:24:08.450-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "G0280-51", "fields": {"summary": "EBE Baronesa do Gravataí", "project": {"key": "G0280", "name": "EG0280 - DMAE"}, "duedate": "2026-04-24", "resolutiondate": null, "updated": "2026-02-02T18:18:17.350-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}], "sent": {"total": 0, "rework": 0, "details": []}, "look": [{"key": "EG0274-59", "fields": {"summary": "Proj. Básico - Projeto de Drenagem e OAC", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-06-05", "resolutiondate": null, "updated": "2026-04-06T13:27:05.211-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-63", "fields": {"summary": "Proj. Básico - Projeto de Sinalização e Segurança Viária", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-06-09", "resolutiondate": null, "updated": "2026-01-07T10:25:54.632-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0240-4", "fields": {"summary": "TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)", "project": {"key": "EG0240", "name": "EG0240 - GOITÁ/ COMPESA"}, "duedate": "2026-06-15", "resolutiondate": null, "updated": "2026-04-29T09:36:37.884-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-60", "fields": {"summary": "Proj. Básico - Projetos de OAEs", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-06-24", "resolutiondate": null, "updated": "2026-01-07T10:24:38.137-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-64", "fields": {"summary": "Proj. Básico - Projeto de Componentes Ambientais e Paisagismo", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-06-25", "resolutiondate": null, "updated": "2026-01-07T10:26:11.103-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-62", "fields": {"summary": "Proj. Básico - Projeto de Obras Complementares", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-06-25", "resolutiondate": null, "updated": "2026-01-07T10:25:33.480-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0274-61", "fields": {"summary": "Proj. Básico - Projetos de Contenções", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-06-25", "resolutiondate": null, "updated": "2026-01-07T10:25:20.757-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0256-24", "fields": {"summary": "Diagnóstico Ambiental - Meio Físico - Condições Meteorológicas", "project": {"key": "EG0256", "name": "EG0256 - SOPS_RS - EIA RIMA"}, "duedate": "2026-06-30", "resolutiondate": null, "updated": "2026-04-07T13:43:35.500-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0275-5", "fields": {"summary": "Relatório Parcial Projeto Básico", "project": {"key": "EG0275", "name": "EG0275 - CODEVASF"}, "duedate": "2026-07-15", "resolutiondate": null, "updated": "2026-04-08T11:01:58.045-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0275-6", "fields": {"summary": "Relatório Final Projeto Básico", "project": {"key": "EG0275", "name": "EG0275 - CODEVASF"}, "duedate": "2026-07-17", "resolutiondate": null, "updated": "2026-04-08T11:01:56.417-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0274-65", "fields": {"summary": "Proj. Básico - Projeto de Desapropriação", "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-07-17", "resolutiondate": null, "updated": "2026-01-07T10:29:31.783-0300", "status": {"name": "Tarefas pendentes", "statusCategory": {"key": "new"}}}}, {"key": "EG0256-27", "fields": {"summary": "Diagnóstico Ambiental - Meio Físico - Avaliação Agrícola", "project": {"key": "EG0256", "name": "EG0256 - SOPS_RS - EIA RIMA"}, "duedate": "2026-07-31", "resolutiondate": null, "updated": "2026-04-07T13:44:04.266-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0256-26", "fields": {"summary": "Diagnóstico Ambiental - Meio Físico - Pedologia", "project": {"key": "EG0256", "name": "EG0256 - SOPS_RS - EIA RIMA"}, "duedate": "2026-07-31", "resolutiondate": null, "updated": "2026-04-01T08:52:17.522-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}, {"key": "EG0256-25", "fields": {"summary": "Diagnóstico Ambiental - Meio Físico - Geologia e Geomorfologia", "project": {"key": "EG0256", "name": "EG0256 - SOPS_RS - EIA RIMA"}, "duedate": "2026-07-31", "resolutiondate": null, "updated": "2026-04-07T13:44:00.358-0300", "status": {"name": "Em andamento", "statusCategory": {"key": "indeterminate"}}}}], "period": {"s": "2026-05-01", "e": "2026-05-31", "l": "Maio 2026", "m": 4, "y": 2026}}};
-const __PROJECTS__ = {"values": [{"key": "EG0232", "name": "EG0232 - EMBASA"}, {"key": "EG0235", "name": "EG0235 - SEMOBI"}, {"key": "EG0239", "name": "EG0239 - CARPINA/ COMPESA"}, {"key": "EG0240", "name": "EG0240 - GOITÁ/ COMPESA"}, {"key": "EG0241", "name": "EG0241 - XARÉU/ COMPESA"}, {"key": "EG0256", "name": "EG0256 - SOPS_RS - EIA RIMA"}, {"key": "EG0257", "name": "EG0257 - DMAE "}, {"key": "EG0272", "name": "EG0272 - CASAN"}, {"key": "EG0273", "name": "EG0273 - DNIT AP"}, {"key": "EG0274", "name": "EG0274 - DNIT"}, {"key": "EG0275", "name": "EG0275 - CODEVASF"}, {"key": "EG0285", "name": "EG0285 - EMBASA - BARREIRAS"}, {"key": "EG0287", "name": "EG0287 - Dique de Camboriú"}, {"key": "G0120", "name": "EG0120 - DAER"}, {"key": "G0280", "name": "EG0280 - DMAE"}, {"key": "PE", "name": "Projetos -  Engenharia"}]};
+/* === SNAPSHOT DATA - injected at build time === */
+window.__SNAPSHOT__ = {"projects":{"values":[{"key":"EG0232","name":"EG0232 - EMBASA"},{"key":"EG0235","name":"EG0235 - SEMOBI"},{"key":"EG0239","name":"EG0239 - CARPINA/ COMPESA"},{"key":"EG0240","name":"EG0240 - GOITÁ/ COMPESA"},{"key":"EG0241","name":"EG0241 - XARÉU/ COMPESA"},{"key":"EG0256","name":"EG0256 - SOPS_RS - EIA RIMA"},{"key":"EG0257","name":"EG0257 - DMAE "},{"key":"EG0272","name":"EG0272 - CASAN"},{"key":"EG0273","name":"EG0273 - DNIT AP"},{"key":"EG0274","name":"EG0274 - DNIT"},{"key":"EG0275","name":"EG0275 - CODEVASF"},{"key":"EG0285","name":"EG0285 - EMBASA - BARREIRAS"},{"key":"EG0287","name":"EG0287 - Dique de Camboriú"},{"key":"G0120","name":"EG0120 - DAER"},{"key":"G0280","name":"EG0280 - DMAE"},{"key":"PE","name":"Projetos -  Engenharia"}]},"planned":{"2025-12":{"issues":{"nodes":[{"key":"EG0240-5","fields":{"summary":"TOMO VI - PLANO DE AÇÃO EMERGENCIAL (PAE)","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"EG0240","name":"EG0240 - GOITÁ/ COMPESA"},"duedate":"2025-12-01","resolutiondate":null,"updated":"2026-03-30T15:16:46.340-0300"}},{"key":"EG0275-3","fields":{"summary":"Relatório Final EVTEA","status":{"name":"Medido e Faturado","statusCategory":{"key":"done"}},"project":{"key":"EG0275","name":"EG0275 - CODEVASF"},"duedate":"2025-12-11","resolutiondate":"2025-10-31T10:47:03.797-0300","updated":"2025-10-31T10:48:57.520-0300"}}]}},"2026-01":{"issues":{"nodes":[{"key":"G0120-8","fields":{"summary":"Minuta Atestado  - Daer ","status":{"name":"Concluído","statusCategory":{"key":"done"}},"project":{"key":"G0120","name":"EG0120 - DAER"},"duedate":"2026-01-30","resolutiondate":"2026-02-25T09:52:56.048-0300","updated":"2026-02-25T09:52:56.073-0300"}}]}},"2026-02":{"issues":{"nodes":[{"key":"EG0275-4","fields":{"summary":"Relatório Final Estudos Ambientais","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0275","name":"EG0275 - CODEVASF"},"duedate":"2026-02-27","resolutiondate":null,"updated":"2026-02-19T10:40:22.817-0300"}}]}},"2026-03":{"issues":{"nodes":[{"key":"EG0256-23","fields":{"summary":"Áreas de Influência Direta e Indireta","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0256","name":"EG0256 - SOPS_RS - EIA RIMA"},"duedate":"2026-03-31","resolutiondate":null,"updated":"2026-04-01T09:07:29.995-0300"}},{"key":"EG0273-2","fields":{"summary":"Estudos Topográficos Complementares","status":{"name":"Concluído","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-03-05","resolutiondate":"2026-03-09T20:28:03.860-0300","updated":"2026-03-09T20:28:03.869-0300"}},{"key":"EG0274-17","fields":{"summary":"Caracterização Funcional/Estrutural do Pavimento","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-03-06","resolutiondate":"2026-03-12T08:59:10.783-0300","updated":"2026-03-12T08:59:10.803-0300"}},{"key":"EG0274-40","fields":{"summary":"Estudos Topográficos, interferências e cadastramento de OAE/OAC  ","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-03-13","resolutiondate":"2026-03-23T14:51:02.855-0300","updated":"2026-04-06T13:26:39.768-0300"}},{"key":"EG0274-41","fields":{"summary":"Estudos Geotécnicos","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-03-25","resolutiondate":null,"updated":"2026-03-27T09:06:10.644-0300"}},{"key":"G0280-45","fields":{"summary":"EBE 1S","status":{"name":"Em Revisão","statusCategory":{"key":"indeterminate"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-03-04","resolutiondate":null,"updated":"2026-04-30T14:35:10.643-0300"}},{"key":"G0280-46","fields":{"summary":"EBE 2S","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-03-11","resolutiondate":"2026-03-13T10:42:29.779-0300","updated":"2026-03-13T10:42:29.836-0300"}},{"key":"G0280-47","fields":{"summary":"EBE 3S","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-03-18","resolutiondate":"2026-03-24T11:03:07.500-0300","updated":"2026-03-24T11:03:07.520-0300"}},{"key":"G0280-48","fields":{"summary":"EBE 4S","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-03-25","resolutiondate":"2026-04-01T16:17:19.670-0300","updated":"2026-04-01T16:17:19.692-0300"}}]}},"2026-04":{"issues":{"nodes":[{"key":"EG0240-1","fields":{"summary":"TOMO III - REVISÃO PERIÓDICA DE SEGURANÇA DE BARRAGEM (RPSB)","status":{"name":"Concluído","statusCategory":{"key":"done"}},"project":{"key":"EG0240","name":"EG0240 - GOITÁ/ COMPESA"},"duedate":"2026-04-30","resolutiondate":"2026-04-30T16:24:47.919-0300","updated":"2026-05-11T14:30:26.188-0300"}},{"key":"EG0273-15","fields":{"summary":"Análise e Aprovação DNIT - Relatório Projeto Executivo","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-14","fields":{"summary":"Relatório Projeto Executivo","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-13","fields":{"summary":"Orçamento e Plano de Execução da Obra","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-12","fields":{"summary":"Projeto de Componentes Ambientais e Paisagismo","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-11","fields":{"summary":"Projeto de Sinalização e Segurança Viária","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-10","fields":{"summary":"Projeto de Obras Complementares","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-9","fields":{"summary":"Verificação Projetos de OAEs ","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-8","fields":{"summary":"Projeto de Pavimentação","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-7","fields":{"summary":"Projeto de Drenagem e OAC","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-6","fields":{"summary":"Projeto de Terrraplenagem","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-5","fields":{"summary":"Projeto Geométrico","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-4","fields":{"summary":"Estudos Hidrológicos","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-3","fields":{"summary":"Estudos Geológicos","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0274-44","fields":{"summary":"Levantamento Ambiental","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-04-01","resolutiondate":"2026-04-30T14:58:08.375-0300","updated":"2026-04-30T14:58:08.381-0300"}},{"key":"EG0274-57","fields":{"summary":"Proj. Básico - Projeto Geométrico e Interseções","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-04-17","resolutiondate":null,"updated":"2026-01-07T10:24:08.450-0300"}},{"key":"G0280-49","fields":{"summary":"EBE 5S","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-04-01","resolutiondate":"2026-04-09T16:19:58.505-0300","updated":"2026-04-09T16:19:58.526-0300"}},{"key":"G0280-50","fields":{"summary":"EBE Ponta da Cadeia","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-04-17","resolutiondate":null,"updated":"2026-02-02T18:17:29.825-0300"}},{"key":"G0280-51","fields":{"summary":"EBE Baronesa do Gravataí","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-04-24","resolutiondate":null,"updated":"2026-02-02T18:18:17.350-0300"}}]}},"2026-05":{"issues":{"nodes":[{"key":"EG0239-27","fields":{"summary":"TOMO Vl - PAE","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0239","name":"EG0239 - CARPINA/ COMPESA"},"duedate":"2026-05-15","resolutiondate":null,"updated":"2026-04-29T09:41:08.057-0300"}},{"key":"EG0239-26","fields":{"summary":"TOMO IV -  PLANO DE OPERAÇÃO, MANUTENÇÃO E INSTRUMENTAÇÃO (POMI)","status":{"name":"Em Revisão","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0239","name":"EG0239 - CARPINA/ COMPESA"},"duedate":"2026-05-15","resolutiondate":null,"updated":"2026-04-16T15:48:39.058-0300"}},{"key":"EG0239-28","fields":{"summary":"TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)","status":{"name":"Em Revisão","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0239","name":"EG0239 - CARPINA/ COMPESA"},"duedate":"2026-05-30","resolutiondate":null,"updated":"2026-04-16T15:52:05.788-0300"}},{"key":"EG0240-43","fields":{"summary":"TOMO IV - PROJETO DE INSTRUMENTAÇÃO","status":{"name":"Em Revisão","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0240","name":"EG0240 - GOITÁ/ COMPESA"},"duedate":"2026-05-29","resolutiondate":null,"updated":"2026-04-30T16:25:20.588-0300"}},{"key":"EG0241-42","fields":{"summary":"TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0241","name":"EG0241 - XARÉU/ COMPESA"},"duedate":"2026-05-05","resolutiondate":null,"updated":"2026-04-29T09:43:50.264-0300"}},{"key":"EG0241-44","fields":{"summary":"TOMO VI - PLANO DE AÇÃO EMERGENCIAL (PAE)","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"EG0241","name":"EG0241 - XARÉU/ COMPESA"},"duedate":"2026-05-15","resolutiondate":"2026-04-30T16:21:58.790-0300","updated":"2026-04-30T16:21:58.810-0300"}},{"key":"EG0241-43","fields":{"summary":"TOMO IV - PLANO DE OPERAÇÃO, MANUTENÇÃO E INSTRUMENTAÇÃO (POMI)","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"EG0241","name":"EG0241 - XARÉU/ COMPESA"},"duedate":"2026-05-30","resolutiondate":"2026-05-12T15:23:40.878-0300","updated":"2026-05-12T15:23:40.902-0300"}},{"key":"EG0274-58","fields":{"summary":"Proj. Básico - Projeto de Terraplenagem","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-05-15","resolutiondate":null,"updated":"2026-01-07T10:24:14.779-0300"}},{"key":"EG0274-43","fields":{"summary":"Estudos Hidrológicos ","status":{"name":"Em Revisão","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-05-15","resolutiondate":null,"updated":"2026-04-24T08:54:30.296-0300"}},{"key":"EG0274-39","fields":{"summary":"Estudo de Concepção e Traçado","status":{"name":"Em Revisão","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-05-15","resolutiondate":null,"updated":"2026-04-30T14:59:56.239-0300"}},{"key":"EG0274-21","fields":{"summary":"Proj. Básico - Projeto de Pavimentação","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-05-17","resolutiondate":null,"updated":"2026-04-06T13:26:43.093-0300"}},{"key":"G0280-52","fields":{"summary":"EBE Barros Cassal","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-05-01","resolutiondate":null,"updated":"2026-03-13T13:00:11.729-0300"}},{"key":"G0280-53","fields":{"summary":"EBE Gaspar Martins","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-05-08","resolutiondate":null,"updated":"2026-03-13T13:00:32.149-0300"}},{"key":"G0280-54","fields":{"summary":"EBE Asa Branca","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-05-15","resolutiondate":null,"updated":"2026-03-13T13:00:48.512-0300"}},{"key":"G0280-55","fields":{"summary":"EBE Nova Brasília","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-05-22","resolutiondate":null,"updated":"2026-03-13T13:01:11.078-0300"}}]}}},"overdue":{"2026-04":{"issues":{"nodes":[{"key":"EG0275-4","fields":{"summary":"Relatório Final Estudos Ambientais","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0275","name":"EG0275 - CODEVASF"},"duedate":"2026-02-27","resolutiondate":null,"updated":"2026-02-19T10:40:22.817-0300"}},{"key":"G0280-45","fields":{"summary":"EBE 1S","status":{"name":"Em Revisão","statusCategory":{"key":"indeterminate"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-03-04","resolutiondate":null,"updated":"2026-04-30T14:35:10.643-0300"}},{"key":"EG0274-41","fields":{"summary":"Estudos Geotécnicos","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-03-25","resolutiondate":null,"updated":"2026-03-27T09:06:10.644-0300"}}]}},"2026-05":{"issues":{"nodes":[{"key":"EG0275-4","fields":{"summary":"Relatório Final Estudos Ambientais","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0275","name":"EG0275 - CODEVASF"},"duedate":"2026-02-27","resolutiondate":null,"updated":"2026-02-19T10:40:22.817-0300"}},{"key":"G0280-45","fields":{"summary":"EBE 1S","status":{"name":"Em Revisão","statusCategory":{"key":"indeterminate"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-03-04","resolutiondate":null,"updated":"2026-04-30T14:35:10.643-0300"}},{"key":"EG0274-41","fields":{"summary":"Estudos Geotécnicos","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-03-25","resolutiondate":null,"updated":"2026-03-27T09:06:10.644-0300"}},{"key":"G0280-50","fields":{"summary":"EBE Ponta da Cadeia","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-04-17","resolutiondate":null,"updated":"2026-02-02T18:17:29.825-0300"}},{"key":"EG0274-57","fields":{"summary":"Proj. Básico - Projeto Geométrico e Interseções","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-04-17","resolutiondate":null,"updated":"2026-01-07T10:24:08.450-0300"}},{"key":"G0280-51","fields":{"summary":"EBE Baronesa do Gravataí","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-04-24","resolutiondate":null,"updated":"2026-02-02T18:18:17.350-0300"}}]}}},"sent":{"2026-04":{"issues":{"nodes":[{"key":"G0280-49","fields":{"summary":"EBE 5S","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-04-01","resolutiondate":"2026-04-09T16:19:58.505-0300","updated":"2026-04-09T16:19:58.526-0300"}},{"key":"G0280-48","fields":{"summary":"EBE 4S","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-03-25","resolutiondate":"2026-04-01T16:17:19.670-0300","updated":"2026-04-01T16:17:19.692-0300"}},{"key":"EG0274-44","fields":{"summary":"Levantamento Ambiental","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-04-01","resolutiondate":"2026-04-30T14:58:08.375-0300","updated":"2026-04-30T14:58:08.381-0300"}},{"key":"EG0273-15","fields":{"summary":"Análise e Aprovação DNIT - Relatório Projeto Executivo","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-14","fields":{"summary":"Relatório Projeto Executivo","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-13","fields":{"summary":"Orçamento e Plano de Execução da Obra","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-12","fields":{"summary":"Projeto de Componentes Ambientais e Paisagismo","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-11","fields":{"summary":"Projeto de Sinalização e Segurança Viária","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-10","fields":{"summary":"Projeto de Obras Complementares","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-9","fields":{"summary":"Verificação Projetos de OAEs ","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-8","fields":{"summary":"Projeto de Pavimentação","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-7","fields":{"summary":"Projeto de Drenagem e OAC","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-6","fields":{"summary":"Projeto de Terrraplenagem","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-5","fields":{"summary":"Projeto Geométrico","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-4","fields":{"summary":"Estudos Hidrológicos","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-3","fields":{"summary":"Estudos Geológicos","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0256-23","fields":{"summary":"Áreas de Influência Direta e Indireta","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0256","name":"EG0256 - SOPS_RS - EIA RIMA"},"duedate":"2026-03-31","resolutiondate":null,"updated":"2026-04-01T09:07:29.995-0300"}},{"key":"EG0241-44","fields":{"summary":"TOMO VI - PLANO DE AÇÃO EMERGENCIAL (PAE)","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"EG0241","name":"EG0241 - XARÉU/ COMPESA"},"duedate":"2026-05-15","resolutiondate":"2026-04-30T16:21:58.790-0300","updated":"2026-04-30T16:21:58.810-0300"}},{"key":"EG0240-1","fields":{"summary":"TOMO III - REVISÃO PERIÓDICA DE SEGURANÇA DE BARRAGEM (RPSB)","status":{"name":"Concluído","statusCategory":{"key":"done"}},"project":{"key":"EG0240","name":"EG0240 - GOITÁ/ COMPESA"},"duedate":"2026-04-30","resolutiondate":"2026-04-30T16:24:47.919-0300","updated":"2026-05-11T14:30:26.188-0300"}},{"key":"EG0239-27","fields":{"summary":"TOMO Vl - PAE","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0239","name":"EG0239 - CARPINA/ COMPESA"},"duedate":"2026-05-15","resolutiondate":null,"updated":"2026-04-29T09:41:08.057-0300"}}]}},"2026-05":{"issues":{"nodes":[{"key":"EG0241-43","fields":{"summary":"TOMO IV - PLANO DE OPERAÇÃO, MANUTENÇÃO E INSTRUMENTAÇÃO (POMI)","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"EG0241","name":"EG0241 - XARÉU/ COMPESA"},"duedate":"2026-05-30","resolutiondate":"2026-05-12T15:23:40.878-0300","updated":"2026-05-12T15:23:40.902-0300"}}]}}},"resolved":{"2026-04":{"issues":{"nodes":[{"key":"G0280-49","fields":{"summary":"EBE 5S","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-04-01","resolutiondate":"2026-04-09T16:19:58.505-0300","updated":"2026-04-09T16:19:58.526-0300"}},{"key":"G0280-48","fields":{"summary":"EBE 4S","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-03-25","resolutiondate":"2026-04-01T16:17:19.670-0300","updated":"2026-04-01T16:17:19.692-0300"}}]}},"2026-05":{"issues":{"nodes":[{"key":"EG0241-43","fields":{"summary":"TOMO IV - PLANO DE OPERAÇÃO, MANUTENÇÃO E INSTRUMENTAÇÃO (POMI)","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"EG0241","name":"EG0241 - XARÉU/ COMPESA"},"duedate":"2026-05-30","resolutiondate":"2026-05-12T15:23:40.878-0300","updated":"2026-05-12T15:23:40.902-0300"}}]}}},"rework":{"2026-04":{"issues":{"nodes":[{"key":"EG0273-15","fields":{"summary":"Análise e Aprovação DNIT - Relatório Projeto Executivo","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-14","fields":{"summary":"Relatório Projeto Executivo","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-13","fields":{"summary":"Orçamento e Plano de Execução da Obra","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-12","fields":{"summary":"Projeto de Componentes Ambientais e Paisagismo","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-11","fields":{"summary":"Projeto de Sinalização e Segurança Viária","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-10","fields":{"summary":"Projeto de Obras Complementares","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-9","fields":{"summary":"Verificação Projetos de OAEs ","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-8","fields":{"summary":"Projeto de Pavimentação","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-7","fields":{"summary":"Projeto de Drenagem e OAC","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-6","fields":{"summary":"Projeto de Terrraplenagem","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-5","fields":{"summary":"Projeto Geométrico","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-4","fields":{"summary":"Estudos Hidrológicos","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0273-3","fields":{"summary":"Estudos Geológicos","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0273","name":"EG0273 - DNIT AP"},"duedate":"2026-04-13","resolutiondate":null,"updated":"2026-04-30T16:40:04.648-0300"}},{"key":"EG0256-23","fields":{"summary":"Áreas de Influência Direta e Indireta","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0256","name":"EG0256 - SOPS_RS - EIA RIMA"},"duedate":"2026-03-31","resolutiondate":null,"updated":"2026-04-01T09:07:29.995-0300"}},{"key":"EG0240-1","fields":{"summary":"TOMO III - REVISÃO PERIÓDICA DE SEGURANÇA DE BARRAGEM (RPSB)","status":{"name":"Concluído","statusCategory":{"key":"done"}},"project":{"key":"EG0240","name":"EG0240 - GOITÁ/ COMPESA"},"duedate":"2026-04-30","resolutiondate":"2026-04-30T16:24:47.919-0300","updated":"2026-05-11T14:30:26.188-0300"}},{"key":"EG0239-27","fields":{"summary":"TOMO Vl - PAE","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0239","name":"EG0239 - CARPINA/ COMPESA"},"duedate":"2026-05-15","resolutiondate":null,"updated":"2026-04-29T09:41:08.057-0300"}}]}},"2026-05":{"issues":{"nodes":[]}}},"lookahead":{"2026-04":{"issues":{"nodes":[{"key":"EG0239-27","fields":{"summary":"TOMO Vl - PAE","status":{"name":"Enviado - Aguardando Análise1","statusCategory":{"key":"done"}},"project":{"key":"EG0239","name":"EG0239 - CARPINA/ COMPESA"},"duedate":"2026-05-15","resolutiondate":null,"updated":"2026-04-29T09:41:08.057-0300"}},{"key":"EG0239-26","fields":{"summary":"TOMO IV -  PLANO DE OPERAÇÃO, MANUTENÇÃO E INSTRUMENTAÇÃO (POMI)","status":{"name":"Em Revisão","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0239","name":"EG0239 - CARPINA/ COMPESA"},"duedate":"2026-05-15","resolutiondate":null,"updated":"2026-04-16T15:48:39.058-0300"}},{"key":"EG0239-28","fields":{"summary":"TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)","status":{"name":"Em Revisão","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0239","name":"EG0239 - CARPINA/ COMPESA"},"duedate":"2026-05-30","resolutiondate":null,"updated":"2026-04-16T15:52:05.788-0300"}},{"key":"EG0240-43","fields":{"summary":"TOMO IV - PROJETO DE INSTRUMENTAÇÃO","status":{"name":"Em Revisão","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0240","name":"EG0240 - GOITÁ/ COMPESA"},"duedate":"2026-05-29","resolutiondate":null,"updated":"2026-04-30T16:25:20.588-0300"}},{"key":"EG0241-42","fields":{"summary":"TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0241","name":"EG0241 - XARÉU/ COMPESA"},"duedate":"2026-05-05","resolutiondate":null,"updated":"2026-04-29T09:43:50.264-0300"}},{"key":"EG0241-44","fields":{"summary":"TOMO VI - PLANO DE AÇÃO EMERGENCIAL (PAE)","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"EG0241","name":"EG0241 - XARÉU/ COMPESA"},"duedate":"2026-05-15","resolutiondate":"2026-04-30T16:21:58.790-0300","updated":"2026-04-30T16:21:58.810-0300"}},{"key":"EG0241-43","fields":{"summary":"TOMO IV - PLANO DE OPERAÇÃO, MANUTENÇÃO E INSTRUMENTAÇÃO (POMI)","status":{"name":"Enviado - Aguardando Análise","statusCategory":{"key":"done"}},"project":{"key":"EG0241","name":"EG0241 - XARÉU/ COMPESA"},"duedate":"2026-05-30","resolutiondate":"2026-05-12T15:23:40.878-0300","updated":"2026-05-12T15:23:40.902-0300"}},{"key":"EG0274-58","fields":{"summary":"Proj. Básico - Projeto de Terraplenagem","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-05-15","resolutiondate":null,"updated":"2026-01-07T10:24:14.779-0300"}},{"key":"EG0274-43","fields":{"summary":"Estudos Hidrológicos ","status":{"name":"Em Revisão","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-05-15","resolutiondate":null,"updated":"2026-04-24T08:54:30.296-0300"}},{"key":"EG0274-39","fields":{"summary":"Estudo de Concepção e Traçado","status":{"name":"Em Revisão","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-05-15","resolutiondate":null,"updated":"2026-04-30T14:59:56.239-0300"}},{"key":"EG0274-21","fields":{"summary":"Proj. Básico - Projeto de Pavimentação","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-05-17","resolutiondate":null,"updated":"2026-04-06T13:26:43.093-0300"}},{"key":"G0280-52","fields":{"summary":"EBE Barros Cassal","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-05-01","resolutiondate":null,"updated":"2026-03-13T13:00:11.729-0300"}},{"key":"G0280-53","fields":{"summary":"EBE Gaspar Martins","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-05-08","resolutiondate":null,"updated":"2026-03-13T13:00:32.149-0300"}},{"key":"G0280-54","fields":{"summary":"EBE Asa Branca","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-05-15","resolutiondate":null,"updated":"2026-03-13T13:00:48.512-0300"}},{"key":"G0280-55","fields":{"summary":"EBE Nova Brasília","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"G0280","name":"EG0280 - DMAE"},"duedate":"2026-05-22","resolutiondate":null,"updated":"2026-03-13T13:01:11.078-0300"}},{"key":"EG0274-59","fields":{"summary":"Proj. Básico - Projeto de Drenagem e OAC","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-06-05","resolutiondate":null,"updated":"2026-04-06T13:27:05.211-0300"}},{"key":"EG0274-63","fields":{"summary":"Proj. Básico - Projeto de Sinalização e Segurança Viária","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-06-09","resolutiondate":null,"updated":"2026-01-07T10:25:54.632-0300"}},{"key":"EG0240-4","fields":{"summary":"TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0240","name":"EG0240 - GOITÁ/ COMPESA"},"duedate":"2026-06-15","resolutiondate":null,"updated":"2026-04-29T09:36:37.884-0300"}},{"key":"EG0274-60","fields":{"summary":"Proj. Básico - Projetos de OAEs","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-06-24","resolutiondate":null,"updated":"2026-01-07T10:24:38.137-0300"}},{"key":"EG0274-64","fields":{"summary":"Proj. Básico - Projeto de Componentes Ambientais e Paisagismo","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-06-25","resolutiondate":null,"updated":"2026-01-07T10:26:11.103-0300"}},{"key":"EG0274-62","fields":{"summary":"Proj. Básico - Projeto de Obras Complementares","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-06-25","resolutiondate":null,"updated":"2026-01-07T10:25:33.480-0300"}},{"key":"EG0274-61","fields":{"summary":"Proj. Básico - Projetos de Contenções","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-06-25","resolutiondate":null,"updated":"2026-01-07T10:25:20.757-0300"}},{"key":"EG0256-24","fields":{"summary":"Diagnóstico Ambiental - Meio Físico - Condições Meteorológicas","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0256","name":"EG0256 - SOPS_RS - EIA RIMA"},"duedate":"2026-06-30","resolutiondate":null,"updated":"2026-04-07T13:43:35.500-0300"}}]}},"2026-05":{"issues":{"nodes":[{"key":"EG0274-59","fields":{"summary":"Proj. Básico - Projeto de Drenagem e OAC","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-06-05","resolutiondate":null,"updated":"2026-04-06T13:27:05.211-0300"}},{"key":"EG0274-63","fields":{"summary":"Proj. Básico - Projeto de Sinalização e Segurança Viária","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-06-09","resolutiondate":null,"updated":"2026-01-07T10:25:54.632-0300"}},{"key":"EG0240-4","fields":{"summary":"TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0240","name":"EG0240 - GOITÁ/ COMPESA"},"duedate":"2026-06-15","resolutiondate":null,"updated":"2026-04-29T09:36:37.884-0300"}},{"key":"EG0274-60","fields":{"summary":"Proj. Básico - Projetos de OAEs","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-06-24","resolutiondate":null,"updated":"2026-01-07T10:24:38.137-0300"}},{"key":"EG0274-64","fields":{"summary":"Proj. Básico - Projeto de Componentes Ambientais e Paisagismo","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-06-25","resolutiondate":null,"updated":"2026-01-07T10:26:11.103-0300"}},{"key":"EG0274-62","fields":{"summary":"Proj. Básico - Projeto de Obras Complementares","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-06-25","resolutiondate":null,"updated":"2026-01-07T10:25:33.480-0300"}},{"key":"EG0274-61","fields":{"summary":"Proj. Básico - Projetos de Contenções","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-06-25","resolutiondate":null,"updated":"2026-01-07T10:25:20.757-0300"}},{"key":"EG0256-24","fields":{"summary":"Diagnóstico Ambiental - Meio Físico - Condições Meteorológicas","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0256","name":"EG0256 - SOPS_RS - EIA RIMA"},"duedate":"2026-06-30","resolutiondate":null,"updated":"2026-04-07T13:43:35.500-0300"}},{"key":"EG0275-5","fields":{"summary":"Relatório Parcial Projeto Básico","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0275","name":"EG0275 - CODEVASF"},"duedate":"2026-07-15","resolutiondate":null,"updated":"2026-04-08T11:01:58.045-0300"}},{"key":"EG0275-6","fields":{"summary":"Relatório Final Projeto Básico","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0275","name":"EG0275 - CODEVASF"},"duedate":"2026-07-17","resolutiondate":null,"updated":"2026-04-08T11:01:56.417-0300"}},{"key":"EG0274-65","fields":{"summary":"Proj. Básico - Projeto de Desapropriação","status":{"name":"Tarefas pendentes","statusCategory":{"key":"new"}},"project":{"key":"EG0274","name":"EG0274 - DNIT"},"duedate":"2026-07-17","resolutiondate":null,"updated":"2026-01-07T10:29:31.783-0300"}},{"key":"EG0256-27","fields":{"summary":"Diagnóstico Ambiental - Meio Físico - Avaliação Agrícola","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0256","name":"EG0256 - SOPS_RS - EIA RIMA"},"duedate":"2026-07-31","resolutiondate":null,"updated":"2026-04-07T13:44:04.266-0300"}},{"key":"EG0256-26","fields":{"summary":"Diagnóstico Ambiental - Meio Físico - Pedologia","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0256","name":"EG0256 - SOPS_RS - EIA RIMA"},"duedate":"2026-07-31","resolutiondate":null,"updated":"2026-04-01T08:52:17.522-0300"}},{"key":"EG0256-25","fields":{"summary":"Diagnóstico Ambiental - Meio Físico - Geologia e Geomorfologia","status":{"name":"Em andamento","statusCategory":{"key":"indeterminate"}},"project":{"key":"EG0256","name":"EG0256 - SOPS_RS - EIA RIMA"},"duedate":"2026-07-31","resolutiondate":null,"updated":"2026-04-07T13:44:00.358-0300"}}]}}}};
+window.cowork = window.cowork || {};
+window.cowork.callMcpTool = async function(tool, params) {
+  const S = window.__SNAPSHOT__;
+  if (tool && tool.indexOf('getVisibleJiraProjects') >= 0) return {content:[{text: JSON.stringify(S.projects)}]};
+  if (tool && tool.indexOf('searchJiraIssuesUsingJql') >= 0) {
+    const jql = (params && params.jql) || '';
+    // Parse month from JQL pattern
+    function ym(d){return d.substring(0,7);}
+    // planned month: duedate>=YYYY-MM-01 AND duedate<=YYYY-MM-<DD>
+    let m;
+    if (jql.indexOf('statusCategory=Done AND resolved>=') >= 0) {
+      m = jql.match(/resolved>="(\d{4}-\d{2})/);
+      if (m && S.resolved[m[1]]) return {content:[{text: JSON.stringify(S.resolved[m[1]])}]};
+      return {content:[{text: JSON.stringify({issues:{nodes:[]}})}]};
+    }
+    if (jql.indexOf('status changed to') >= 0 && jql.indexOf('status changed from') >= 0) {
+      m = jql.match(/DURING \("(\d{4}-\d{2})/);
+      if (m && S.rework[m[1]]) return {content:[{text: JSON.stringify(S.rework[m[1]])}]};
+      return {content:[{text: JSON.stringify({issues:{nodes:[]}})}]};
+    }
+    if (jql.indexOf('status changed to') >= 0) {
+      m = jql.match(/DURING \("(\d{4}-\d{2})/);
+      if (m && S.sent[m[1]]) return {content:[{text: JSON.stringify(S.sent[m[1]])}]};
+      return {content:[{text: JSON.stringify({issues:{nodes:[]}})}]};
+    }
+    if (jql.indexOf('statusCategory!=Done') >= 0 || jql.indexOf('statusCategory!=Done') >= 0) {
+      // overdue: duedate<"YYYY-MM-01"
+      m = jql.match(/duedate<"(\d{4}-\d{2})/);
+      if (m && S.overdue[m[1]]) return {content:[{text: JSON.stringify(S.overdue[m[1]])}]};
+      return {content:[{text: JSON.stringify({issues:{nodes:[]}})}]};
+    }
+    // planned or lookahead: duedate>=YYYY-MM-01 AND duedate<=...
+    const gm = jql.match(/duedate>="(\d{4}-\d{2})-01" AND duedate<="(\d{4}-\d{2})/);
+    if (gm) {
+      const start = gm[1], end = gm[2];
+      if (start === end) {
+        if (S.planned[start]) return {content:[{text: JSON.stringify(S.planned[start])}]};
+      } else {
+        // lookahead: identify by start month
+        // For April tab, start=May -> key 2026-04, for May tab, start=June -> key 2026-05
+        let key = null;
+        const [sy, sm] = start.split('-').map(Number);
+        const prev = new Date(sy, sm - 2, 1);
+        key = prev.getFullYear() + '-' + String(prev.getMonth()+1).padStart(2,'0');
+        if (S.lookahead[key]) return {content:[{text: JSON.stringify(S.lookahead[key])}]};
+      }
+      return {content:[{text: JSON.stringify({issues:{nodes:[]}})}]};
+    }
+    return {content:[{text: JSON.stringify({issues:{nodes:[]}})}]};
+  }
+  return {content:[{text: '{}'}]};
+};
+</script>
+<script>
+/* ========== CONSTANTS ========== */
+const CL='ead785de-33f3-4746-9bdb-a2a58cf5213b';
+const TJ='mcp__6387c33d-d206-438d-bef3-584f23bf35a2__searchJiraIssuesUsingJql';
+const TP='mcp__6387c33d-d206-438d-bef3-584f23bf35a2__getVisibleJiraProjects';
 const JB='https://projetos-engeplus.atlassian.net/browse/';
 const MO=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-let ch1,ch2,ch3,prjs=[],cache={},aKey=null;
+const MS=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
 
+/* ========== STATE ========== */
+let ch1=null,ch2=null,ch3=null;
+let prjs=[];
+let cache={};
+let curKey=null;
+let activeView='monthly';   // 'monthly' | 'accumulated'
+let acCharts=[];
+let acCache=null;            // cached accumulated data
+let acMonths=null;           // cached accumulated months array
+
+/* ========== MCP UTILS ========== */
+function uw(r){
+  if(!r)return r;
+  if(r.content&&Array.isArray(r.content)){
+    for(const b of r.content){
+      if(typeof b==='string'){try{return JSON.parse(b)}catch(e){}}
+      if(b&&b.text){try{return JSON.parse(b.text)}catch(e){}}
+    }
+  }
+  if(typeof r.content==='string'){try{return JSON.parse(r.content)}catch(e){}}
+  return r;
+}
+
+function gn(r){
+  const d=uw(r);
+  if(!d)return[];
+  if(d.issues){
+    if(Array.isArray(d.issues.nodes))return d.issues.nodes;
+    if(Array.isArray(d.issues))return d.issues;
+  }
+  if(Array.isArray(d))return d;
+  return[];
+}
+
+async function Q(jql,fields){
+  let all=[],token=null,page=0;
+  while(page<20){
+    page++;
+    const params={cloudId:CL,jql:jql,maxResults:100};
+    if(fields)params.fields=fields;
+    if(token)params.nextPageToken=token;
+    let raw;
+    try{raw=await window.cowork.callMcpTool(TJ,params)}catch(err){console.error('JQL error:',err);break}
+    const parsed=uw(raw);
+    const items=gn(raw);
+    all=all.concat(items);
+    // Pagination: check multiple possible formats
+    if(parsed&&parsed.nextPageToken&&parsed.isLast===false){
+      token=parsed.nextPageToken;
+    }else if(parsed&&parsed.nextPageToken&&!parsed.isLast){
+      token=parsed.nextPageToken;
+    }else{
+      break;// No more pages
+    }
+  }
+  return all;
+}
+
+async function LP(){
+  const r=await window.cowork.callMcpTool(TP,{cloudId:CL,expandIssueTypes:false});
+  const d=uw(r);
+  prjs=(d&&d.values?d.values:[]).sort((a,b)=>(a.name||'').localeCompare(b.name||''));
+  const selects=[document.getElementById('sP'),document.getElementById('fP')];
+  selects.forEach(s=>{
+    if(!s)return;
+    prjs.forEach(p=>{
+      const o=document.createElement('option');
+      o.value=p.key;o.textContent=p.name;
+      s.appendChild(o);
+    });
+  });
+}
+
+/* ========== FIELD HELPERS ========== */
 function ct(i){return i.fields?.status?.statusCategory?.key||''}
 function dn(i){return ct(i)==='done'}
 function sn(i){return i.fields?.status?.name||'?'}
 function bg(i){const c=ct(i);return'<span class="b '+(c==='done'?'b-ok':c==='indeterminate'?'b-w':'b-n')+'">'+sn(i)+'</span>'}
 function dd(i){return i.fields?.resolutiondate?.substring(0,10)||(dn(i)?i.fields?.updated?.substring(0,10):null)}
-function oi(i){if(!dn(i))return{c:'b-e',t:'NÃO',k:'no'};const d=dd(i),du=i.fields?.duedate;if(d&&du&&d>du&&d.substring(0,7)===du.substring(0,7))return{c:'b-w',t:'SIM*',k:'delay'};return{c:'b-ok',t:'SIM',k:'yes'}}
+function oi(i){
+  if(!dn(i))return{c:'b-e',t:'NÃO',k:'no'};
+  const d=dd(i),du=i.fields?.duedate;
+  if(d&&du&&d>du&&d.substring(0,7)===du.substring(0,7))return{c:'b-w',t:'SIM*',k:'delay'};
+  return{c:'b-ok',t:'SIM',k:'yes'};
+}
+function oc(v){return v>=80?'k-ok':v>=60?'k-w':'k-e'}
 function occ(v){return v>=80?'var(--ok)':v>=60?'var(--w)':'var(--e)'}
 function wk(d){if(!d)return 0;const dy=parseInt(d.substring(8,10));return dy<=7?1:dy<=14?2:dy<=21?3:4}
 function pk(i){return i.fields?.project?.key||'?'}
 function pn(i){return i.fields?.project?.name||pk(i)}
-function grp(list){const m={};list.forEach(i=>{const k=pk(i);if(!m[k])m[k]=[];m[k].push(i)});const r=[];Object.keys(m).sort().forEach(k=>{m[k].sort((a,b)=>(a.fields?.duedate||'').localeCompare(b.fields?.duedate||''));r.push({t:'g',n:pn(m[k][0]),c:m[k].length});m[k].forEach(i=>r.push({t:'i',i}))});return r}
+function isPast(p){const n=new Date();return p.y<n.getFullYear()||(p.y===n.getFullYear()&&p.m<n.getMonth())}
 
-function switchTab(key){
-  aKey=key;
-  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('act',b.dataset.key===key));
-  if(cache[key])render(cache[key]);
+// Accumulated color helpers (50/80 thresholds)
+function acCls(v){return v>=80?'ok':v>=50?'w':'e'}
+function acCol(v){return v>=80?'var(--ok)':v>=50?'var(--w)':'var(--e)'}
+function acBg(v){return v>=80?'rgba(34,197,94,.15)':v>=50?'rgba(245,158,11,.12)':'rgba(239,68,68,.12)'}
+
+function grp(list){
+  const m={};
+  list.forEach(i=>{const k=pk(i);if(!m[k])m[k]=[];m[k].push(i)});
+  const r=[];
+  Object.keys(m).sort().forEach(k=>{
+    m[k].sort((a,b)=>(a.fields?.duedate||'').localeCompare(b.fields?.duedate||''));
+    r.push({t:'g',n:pn(m[k][0]),c:m[k].length});
+    m[k].forEach(i=>r.push({t:'i',i}));
+  });
+  return r;
 }
 
-function render(d){
-  const pf=document.getElementById('sP').value,fo=document.getElementById('fO').value,fs=document.getElementById('fS').value,fp=document.getElementById('fP').value;
+/* ========== MONTHLY: LOAD ========== */
+async function loadMonth(info){
+  const{m,y,key}=info;
+  const s=y+'-'+String(m+1).padStart(2,'0')+'-01';
+  const ld=new Date(y,m+1,0).getDate();
+  const e=y+'-'+String(m+1).padStart(2,'0')+'-'+String(ld).padStart(2,'0');
+  const per={s,e,l:MO[m]+' '+y,m,y};
+  const F=['summary','status','project','duedate','resolutiondate','updated'];
+
+  const planned=await Q('issuetype=Epic AND duedate>="'+s+'" AND duedate<="'+e+'" ORDER BY project ASC, duedate ASC',F);
+  const overdue=await Q('issuetype=Epic AND duedate<"'+s+'" AND statusCategory!=Done ORDER BY duedate ASC',F);
+
+  const lS=new Date(y,m+1,1),lE=new Date(y,m+3,0);
+  const ls0=lS.getFullYear()+'-'+String(lS.getMonth()+1).padStart(2,'0')+'-01';
+  const le0=lE.getFullYear()+'-'+String(lE.getMonth()+1).padStart(2,'0')+'-'+String(lE.getDate()).padStart(2,'0');
+  const look=await Q('issuetype=Epic AND duedate>="'+ls0+'" AND duedate<="'+le0+'" ORDER BY duedate ASC',F);
+
+  let sent=[];
+  try{sent=await Q('issuetype=Epic AND status changed to "Enviado - Aguardando Análise" DURING ("'+s+'","'+e+'")',F)}catch(ex){console.warn('sent query fail:',ex)}
+  let res2=[];
+  try{res2=await Q('issuetype=Epic AND statusCategory=Done AND resolved>="'+s+'" AND resolved<="'+e+'"',F)}catch(ex){console.warn('resolved query fail:',ex)}
+
+  const sm=new Map();
+  sent.forEach(i=>sm.set(i.key,i));
+  res2.forEach(i=>{if(!sm.has(i.key))sm.set(i.key,i)});
+  const allSent=[...sm.values()];
+
+  let rework=[];
+  try{rework=await Q('issuetype=Epic AND status changed to "Enviado - Aguardando Análise" DURING ("'+s+'","'+e+'") AND status changed from "Enviado - Aguardando Análise"',F)}catch(ex){console.warn('rework query fail:',ex)}
+  const rwKeys=new Set(rework.map(i=>i.key));
+
+  const sentD=allSent.map(i=>({key:i.key,sm:i.fields?.summary||'',pj:pk(i),rw:rwKeys.has(i.key)}));
+  sentD.sort((a,b)=>(a.rw===b.rw?0:a.rw?-1:1));
+
+  cache[key]={planned,overdue,sent:{total:allSent.length,rework:rwKeys.size,details:sentD},look,period:per};
+}
+
+/* ========== MONTHLY: RENDER ========== */
+function destroyMonthlyCharts(){
+  if(ch1){ch1.destroy();ch1=null}
+  if(ch2){ch2.destroy();ch2=null}
+  if(ch3){ch3.destroy();ch3=null}
+}
+
+function renderMonthly(d){
+  const pf=document.getElementById('sP').value;
+  const fo=document.getElementById('fO').value;
+  const fs=document.getElementById('fS').value;
+  const fp=document.getElementById('fP').value;
   const{planned,overdue,sent,look,period}=d;
-  document.getElementById('hm').textContent=period.l+' — Snapshot';
+
+  document.getElementById('hm').textContent=period.l+(isPast(period)?' — Período encerrado':' — Ao vivo');
+
   let vP=planned,vO=overdue,vS=sent.details,vL=look;
-  if(pf!=='all'){vP=planned.filter(i=>pk(i)===pf);vO=overdue.filter(i=>pk(i)===pf);vS=sent.details.filter(x=>x.pj===pf);vL=look.filter(i=>pk(i)===pf)}
-  const tot=vP.length,del=vP.filter(dn).length,onT=vP.filter(i=>oi(i).k==='yes').length,sml=vP.filter(i=>oi(i).k==='delay').length,pend=tot-del,oC=vO.length,allP=pend+oC;
-  const tS=vS.length,tRw=vS.filter(x=>x.rw).length,rp=tS>0?Math.round(tRw/tS*100):0,otd=tot>0?Math.round(del/tot*100):0;
-  document.getElementById('vO').textContent=tot>0?otd+'%':'—';document.getElementById('dO').textContent=del+' de '+tot;
-  document.getElementById('vT').textContent=tot;document.getElementById('dT').textContent=period.l;
-  document.getElementById('vD').textContent=del;document.getElementById('dD').textContent=onT+' prazo · '+sml+' peq.atr.';document.getElementById('cD').className='k '+(del>0?'k-ok':'k-n');
-  document.getElementById('vA').textContent=allP;document.getElementById('dA').textContent=pend+' mês · '+oC+' acum.';document.getElementById('cA').className='k '+(allP>0?'k-e':'k-ok');
-  document.getElementById('vR').textContent=tS>0?rp+'%':'0%';document.getElementById('dR').textContent=tRw+'/'+tS;document.getElementById('cR').className='k '+(rp>15?'k-e':rp>5?'k-w':'k-ok');
-  if(ch1)ch1.destroy();if(ch2)ch2.destroy();if(ch3)ch3.destroy();
+  if(pf!=='all'){
+    vP=planned.filter(i=>pk(i)===pf);
+    vO=overdue.filter(i=>pk(i)===pf);
+    vS=sent.details.filter(x=>x.pj===pf);
+    vL=look.filter(i=>pk(i)===pf);
+  }
+
+  const tot=vP.length,del=vP.filter(dn).length;
+  const onT=vP.filter(i=>oi(i).k==='yes').length;
+  const sml=vP.filter(i=>oi(i).k==='delay').length;
+  const pend=tot-del,oC=vO.length,allP=pend+oC;
+  const tS=vS.length,tRw=vS.filter(x=>x.rw).length;
+  const rp=tS>0?Math.round(tRw/tS*100):0;
+  const otd=tot>0?Math.round(del/tot*100):0;
+
+  // KPIs
+  document.getElementById('vO').textContent=tot>0?otd+'%':'—';
+  document.getElementById('dO').textContent=del+' de '+tot;
+  document.getElementById('vT').textContent=tot;
+  document.getElementById('dT').textContent=period.l;
+  document.getElementById('vD').textContent=del;
+  document.getElementById('dD').textContent=onT+' prazo · '+sml+' peq.atr.';
+  document.getElementById('cD').className='k '+(del>0?'k-ok':'k-n');
+  document.getElementById('vA').textContent=allP;
+  document.getElementById('dA').textContent=pend+' mês · '+oC+' acum.';
+  document.getElementById('cA').className='k '+(allP>0?'k-e':'k-ok');
+  document.getElementById('vR').textContent=tS>0?rp+'%':'0%';
+  document.getElementById('dR').textContent=tRw+'/'+tS;
+  document.getElementById('cR').className='k '+(rp>15?'k-e':rp>5?'k-w':'k-ok');
+
+  // Charts
+  destroyMonthlyCharts();
   document.getElementById('o1').textContent=tot>0?otd+'%':'—';
   document.getElementById('o3').textContent=tS>0?rp+'%':'0%';
   const co={responsive:true,maintainAspectRatio:false,cutout:'72%',plugins:{legend:{display:false}}};
-  ch1=new Chart(document.getElementById('c1'),{type:'doughnut',data:{labels:['No prazo','Peq. atraso','Pendente'],datasets:[{data:[onT,sml,allP],backgroundColor:['#166534','#D97706','#D1D5DB'],borderWidth:0}]},options:co});
-  ch3=new Chart(document.getElementById('c3'),{type:'doughnut',data:{labels:['1º envio','Reenvio'],datasets:[{data:[Math.max(tS-tRw,0),tRw],backgroundColor:['#166534','#991B1B'],borderWidth:0}]},options:co});
-  const bp={};vP.forEach(i=>{const k=pk(i);if(!bp[k])bp[k]={n:pn(i),t:0,d:0};bp[k].t++;if(dn(i))bp[k].d++});
-  const bk=Object.keys(bp).sort(),c2h=Math.max(120,bk.length*26);document.getElementById('c2w').style.height=c2h+'px';
-  ch2=new Chart(document.getElementById('c2'),{type:'bar',data:{labels:bk.map(k=>bp[k].n.length>18?bp[k].n.substring(0,18)+'…':bp[k].n),datasets:[{label:'Entregues',data:bk.map(k=>bp[k].d),backgroundColor:'#166534',borderRadius:2},{label:'Pendentes',data:bk.map(k=>bp[k].t-bp[k].d),backgroundColor:'#D1D5DB',borderRadius:2}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:8,font:{size:9}}}},scales:{x:{stacked:true,display:false},y:{stacked:true,ticks:{font:{size:9}}}}}});
+  ch1=new Chart(document.getElementById('c1'),{type:'doughnut',data:{labels:['No prazo','Peq. atraso','Pendente'],datasets:[{data:[onT,sml,allP],backgroundColor:['#22C55E','#F59E0B','#374151'],borderWidth:0}]},options:co});
+  ch3=new Chart(document.getElementById('c3'),{type:'doughnut',data:{labels:['1º envio','Reenvio'],datasets:[{data:[Math.max(tS-tRw,0),tRw],backgroundColor:['#22C55E','#EF4444'],borderWidth:0}]},options:co});
+
+  const bp={};
+  vP.forEach(i=>{const k=pk(i);if(!bp[k])bp[k]={n:pn(i),t:0,d:0};bp[k].t++;if(dn(i))bp[k].d++});
+  const bk=Object.keys(bp).sort();
+  const c2h=Math.max(120,bk.length*26);
+  document.getElementById('c2w').style.height=c2h+'px';
+  ch2=new Chart(document.getElementById('c2'),{type:'bar',data:{labels:bk.map(k=>bp[k].n.length>18?bp[k].n.substring(0,18)+'…':bp[k].n),datasets:[{label:'Entregues',data:bk.map(k=>bp[k].d),backgroundColor:'#22C55E',borderRadius:3},{label:'Pendentes',data:bk.map(k=>bp[k].t-bp[k].d),backgroundColor:'#374151',borderRadius:3}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#8B98B0',boxWidth:8,font:{size:9}}}},scales:{x:{stacked:true,display:false},y:{stacked:true,ticks:{color:'#8B98B0',font:{size:9}},grid:{display:false}}}}});
+
+  // Alerts
   const ab=document.getElementById('ab');ab.innerHTML='';
   if(oC>0)ab.innerHTML+='<div class="ac ac-e"><h5>Pendências acumuladas</h5><p>'+oC+' EPICs de meses anteriores.</p></div>';
   if(pend>0)ab.innerHTML+='<div class="ac ac-w"><h5>Pendências do mês</h5><p>'+pend+' EPICs não entregues.</p></div>';
   if(tRw>0)ab.innerHTML+='<div class="ac ac-w"><h5>Retrabalho</h5><p>'+tRw+' EPICs com reenvio.</p></div>';
   if(allP===0&&tot>0)ab.innerHTML+='<div class="ac ac-ok"><h5>Entregas completas</h5><p>Sem pendências em '+period.l+'.</p></div>';
-  let h='';let sT=0,sDl=0,sOn=0,sSd=0,sPd=0;
-  bk.forEach(k=>{const g=bp[k],pl=vP.filter(i=>pk(i)===k),t=pl.length,dl=pl.filter(dn).length,on=pl.filter(i=>oi(i).k==='yes').length,sd=pl.filter(i=>oi(i).k==='delay').length,pd=t-dl,p=Math.round(dl/t*100);sT+=t;sDl+=dl;sOn+=on;sSd+=sd;sPd+=pd;h+='<tr><td><strong>'+g.n+'</strong></td><td>'+t+'</td><td>'+dl+'</td><td>'+on+'</td><td>'+sd+'</td><td>'+pd+'</td><td style="text-align:right;font-weight:800;color:'+occ(p)+'">'+p+'%</td></tr>'});
+
+  // OTD table
+  let h='',sT=0,sDl=0,sOn=0,sSd=0,sPd=0;
+  bk.forEach(k=>{
+    const g=bp[k],pl=vP.filter(i=>pk(i)===k),t=pl.length,dl=pl.filter(dn).length;
+    const on=pl.filter(i=>oi(i).k==='yes').length,sd=pl.filter(i=>oi(i).k==='delay').length;
+    const pd=t-dl,p=Math.round(dl/t*100);
+    sT+=t;sDl+=dl;sOn+=on;sSd+=sd;sPd+=pd;
+    h+='<tr><td><strong>'+g.n+'</strong></td><td>'+t+'</td><td>'+dl+'</td><td>'+on+'</td><td>'+sd+'</td><td>'+pd+'</td><td style="text-align:right;font-weight:800;color:'+occ(p)+'">'+p+'%</td></tr>';
+  });
   document.getElementById('tO').innerHTML=h;
   const sO=sT>0?Math.round(sDl/sT*100):0;
   document.getElementById('tOF').innerHTML='<tr><td>TOTAL</td><td>'+sT+'</td><td>'+sDl+'</td><td>'+sOn+'</td><td>'+sSd+'</td><td>'+sPd+'</td><td style="text-align:right;font-weight:800;color:'+occ(sO)+'">'+sO+'%</td></tr>';
-  const pMo=vP.filter(i=>!dn(i)).map(i=>({...i,_s:'month'})),pAc=vO.map(i=>({...i,_s:'acum'}));
+
+  // Pending
+  const pMo=vP.filter(i=>!dn(i)).map(i=>({...i,_s:'month'}));
+  const pAc=vO.map(i=>({...i,_s:'acum'}));
   let pA=[...pMo,...pAc];
   if(fo==='month')pA=pMo;else if(fo==='acum')pA=pAc;
   if(fs!=='all')pA=pA.filter(i=>wk(i.fields?.duedate)===parseInt(fs));
   if(fp!=='all')pA=pA.filter(i=>pk(i)===fp);
-  const gP=grp(pA);document.getElementById('cP').textContent='('+pA.length+')';
-  h='';if(!pA.length)h='<tr><td colspan="6" class="em">Nenhuma pendência</td></tr>';
-  gP.forEach(g=>{if(g.t==='g')h+='<tr class="g"><td colspan="6"><strong>'+g.n+'</strong> <span style="font-size:9px;color:var(--tx4)">('+g.c+')</span></td></tr>';else{const i=g.i,du=i.fields?.duedate||'—',days=du!=='—'?Math.max(0,Math.floor((new Date()-new Date(du))/864e5)):0;h+='<tr><td><a class="l" href="'+JB+i.key+'" target="_blank">'+i.key+'</a></td><td>'+(i.fields?.summary||'').substring(0,48)+'</td><td>'+du+'</td><td>'+bg(i)+'</td><td style="text-align:right"><span class="b b-e">'+(days>0?days+'d':'—')+'</span></td><td><span class="b '+(i._s==='acum'?'b-e">Acumulado':'b-i">'+period.l)+'</span></td></tr>'}});
+  document.getElementById('cP').textContent='('+pA.length+')';
+  const gP=grp(pA);
+  h='';
+  if(!pA.length)h='<tr><td colspan="6" class="em">Nenhuma pendência</td></tr>';
+  gP.forEach(g=>{
+    if(g.t==='g')h+='<tr class="g"><td colspan="6"><strong>'+g.n+'</strong> <span style="font-size:9px;color:var(--tx4)">('+g.c+')</span></td></tr>';
+    else{
+      const i=g.i,du=i.fields?.duedate||'—';
+      const days=du!=='—'?Math.max(0,Math.floor((new Date()-new Date(du))/864e5)):0;
+      h+='<tr><td><a class="l" href="'+JB+i.key+'" target="_blank">'+i.key+'</a></td><td>'+(i.fields?.summary||'').substring(0,48)+'</td><td>'+du+'</td><td>'+bg(i)+'</td><td style="text-align:right"><span class="b b-e">'+(days>0?days+'d':'—')+'</span></td><td><span class="b '+(i._s==='acum'?'b-e">Acumulado':'b-i">'+period.l)+'</span></td></tr>';
+    }
+  });
   document.getElementById('tP').innerHTML=h;
-  const gDel=grp(vP.filter(dn));h='';
+
+  // Delivered
+  const gDel=grp(vP.filter(dn));
+  h='';
   if(!vP.filter(dn).length)h='<tr><td colspan="5" class="em">Nenhuma entrega</td></tr>';
-  gDel.forEach(g=>{if(g.t==='g')h+='<tr class="g"><td colspan="5"><strong>'+g.n+'</strong> ('+g.c+')</td></tr>';else{const i=g.i,o=oi(i);h+='<tr><td><a class="l" href="'+JB+i.key+'" target="_blank">'+i.key+'</a></td><td>'+(i.fields?.summary||'').substring(0,48)+'</td><td>'+(i.fields?.duedate||'—')+'</td><td>'+bg(i)+'</td><td><span class="b '+o.c+'">'+o.t+'</span></td></tr>'}});
+  gDel.forEach(g=>{
+    if(g.t==='g')h+='<tr class="g"><td colspan="5"><strong>'+g.n+'</strong> ('+g.c+')</td></tr>';
+    else{const i=g.i,o=oi(i);h+='<tr><td><a class="l" href="'+JB+i.key+'" target="_blank">'+i.key+'</a></td><td>'+(i.fields?.summary||'').substring(0,48)+'</td><td>'+(i.fields?.duedate||'—')+'</td><td>'+bg(i)+'</td><td><span class="b '+o.c+'">'+o.t+'</span></td></tr>'}
+  });
   document.getElementById('tD').innerHTML=h;
+
+  // Retrabalho
   if(!vS.length){document.getElementById('rW').innerHTML='<div class="msg">Sem registros de retrabalho no período.</div>'}
-  else{h='<div class="tw"><table><thead><tr><th>Epic</th><th>Descrição</th><th>Retrabalho?</th></tr></thead><tbody>';
-  const byP={};vS.forEach(x=>{if(!byP[x.pj])byP[x.pj]=[];byP[x.pj].push(x)});
-  Object.keys(byP).sort().forEach(k=>{h+='<tr class="g"><td colspan="3"><strong>'+k+'</strong> ('+byP[k].length+')</td></tr>';
-  byP[k].forEach(x=>{h+='<tr><td><a class="l" href="'+JB+x.key+'" target="_blank">'+x.key+'</a></td><td>'+x.sm.substring(0,48)+'</td><td>'+(x.rw?'<span class="b b-e">SIM — reenvio</span>':'<span class="b b-ok">NÃO</span>')+'</td></tr>'})});
-  h+='</tbody></table></div>';document.getElementById('rW').innerHTML=h}
+  else{
+    h='<div class="tw"><table><thead><tr><th>Epic</th><th>Descrição</th><th>Retrabalho?</th></tr></thead><tbody>';
+    const byP={};vS.forEach(x=>{if(!byP[x.pj])byP[x.pj]=[];byP[x.pj].push(x)});
+    Object.keys(byP).sort().forEach(k=>{
+      h+='<tr class="g"><td colspan="3"><strong>'+k+'</strong> ('+byP[k].length+')</td></tr>';
+      byP[k].forEach(x=>{h+='<tr><td><a class="l" href="'+JB+x.key+'" target="_blank">'+x.key+'</a></td><td>'+x.sm.substring(0,48)+'</td><td>'+(x.rw?'<span class="b b-e">SIM — reenvio</span>':'<span class="b b-ok">NÃO</span>')+'</td></tr>'});
+    });
+    h+='</tbody></table></div>';
+    document.getElementById('rW').innerHTML=h;
+  }
+
+  // Lookahead
   const m1=new Date(period.y,period.m+1,1);
   document.getElementById('lS').textContent='Vencimentos em '+MO[m1.getMonth()]+' e '+MO[(period.m+2)%12]+' — planeje a retirada de restrições';
   const lAll=(pf!=='all'?vL:look).filter(i=>!dn(i));
   const segs=[{l:[],c:'st-u',t:'Até 30 dias'},{l:[],c:'st-s',t:'31 a 60 dias'},{l:[],c:'st-p',t:'Acima de 60 dias'}];
   lAll.forEach(i=>{const du=i.fields?.duedate,dy=du?Math.max(0,Math.ceil((new Date(du)-new Date())/864e5)):99;if(dy<=30)segs[0].l.push({i,d:dy});else if(dy<=60)segs[1].l.push({i,d:dy});else segs[2].l.push({i,d:dy})});
-  h='';segs.forEach(seg=>{const gI=grp(seg.l.sort((a,b)=>a.d-b.d).map(x=>x.i));
-  h+='<div class="lk-s"><div class="st '+seg.c+'">'+seg.t+' ('+seg.l.length+')</div>';
-  if(!seg.l.length)h+='<div style="font-size:9px;color:var(--tx4);padding:4px;font-style:italic">Nenhum vencimento</div>';
-  else{h+='<div class="tw"><table><thead><tr><th>Epic</th><th>Descrição</th><th>Due Date</th><th>Status</th><th style="text-align:right">Dias</th></tr></thead><tbody>';
-  gI.forEach(g=>{if(g.t==='g')h+='<tr class="g"><td colspan="5"><strong>'+g.n+'</strong> ('+g.c+')</td></tr>';else{const i=g.i,du=i.fields?.duedate,dy=du?Math.max(0,Math.ceil((new Date(du)-new Date())/864e5)):0;h+='<tr><td><a class="l" href="'+JB+i.key+'" target="_blank">'+i.key+'</a></td><td>'+(i.fields?.summary||'').substring(0,48)+'</td><td>'+(du||'—')+'</td><td>'+bg(i)+'</td><td style="text-align:right"><span class="b '+(dy<=15?'b-e':dy<=30?'b-w':'b-i')+'">'+dy+'d</span></td></tr>'}});
-  h+='</tbody></table></div>'}h+='</div>'});
-  document.getElementById('lB').innerHTML=h;
-  document.getElementById('MC').style.display='block';
-  document.getElementById('FT').style.display='block';
-}
-
-['sP','fO','fS','fP'].forEach(id=>document.getElementById(id).addEventListener('change',()=>{if(aKey&&cache[aKey])render(cache[aKey])}));
-
-function init(){
-  cache = __EMBEDDED__;
-  prjs = (__PROJECTS__.values||[]).sort((a,b)=>a.name.localeCompare(b.name));
-  [document.getElementById('sP'),document.getElementById('fP')].forEach(s=>{prjs.forEach(p=>{const o=document.createElement('option');o.value=p.key;o.textContent=p.name;s.appendChild(o)})});
-  const keys = Object.keys(cache).sort();
-  const tabsC = document.getElementById('tabs');
-  tabsC.innerHTML='';
-  keys.forEach((key,idx)=>{
-    const c = cache[key], per = c.period;
-    const b = document.createElement('button');
-    b.className='tab';
-    b.dataset.key=key;
-    const isLast = idx===keys.length-1;
-    b.innerHTML=per.l+(isLast?'<span class="tg tg-live">Ao vivo</span>':'<span class="tg tg-lock">Encerrado</span>');
-    b.onclick=()=>switchTab(key);
-    tabsC.appendChild(b);
+  h='';
+  segs.forEach(seg=>{
+    const gI=grp(seg.l.sort((a,b)=>a.d-b.d).map(x=>x.i));
+    h+='<div class="lk-s"><div class="st '+seg.c+'">'+seg.t+' ('+seg.l.length+')</div>';
+    if(!seg.l.length)h+='<div style="font-size:9px;color:var(--tx4);padding:4px;font-style:italic">Nenhum vencimento</div>';
+    else{
+      h+='<div class="tw"><table><thead><tr><th>Epic</th><th>Descrição</th><th>Due Date</th><th>Status</th><th style="text-align:right">Dias</th></tr></thead><tbody>';
+      gI.forEach(g=>{
+        if(g.t==='g')h+='<tr class="g"><td colspan="5"><strong>'+g.n+'</strong> ('+g.c+')</td></tr>';
+        else{const i=g.i,du=i.fields?.duedate,dy=du?Math.max(0,Math.ceil((new Date(du)-new Date())/864e5)):0;h+='<tr><td><a class="l" href="'+JB+i.key+'" target="_blank">'+i.key+'</a></td><td>'+(i.fields?.summary||'').substring(0,48)+'</td><td>'+(du||'—')+'</td><td>'+bg(i)+'</td><td style="text-align:right"><span class="b '+(dy<=15?'b-e':dy<=30?'b-w':'b-i')+'">'+dy+'d</span></td></tr>'}
+      });
+      h+='</tbody></table></div>';
+    }
+    h+='</div>';
   });
-  document.getElementById('ts').textContent='Snapshot: 11/05/2026 18:08 (BRT)';
-  document.getElementById('fTs').textContent='Snapshot: 11/05/2026 18:08 (BRT)';
-  switchTab(keys[keys.length-1]);
+  document.getElementById('lB').innerHTML=h;
 }
-init();
+
+/* ========== ACCUMULATED: LOAD ========== */
+function monthRange(sy,sm,ey,em){
+  const keys=[];let y=sy,m=sm;
+  while(y<ey||(y===ey&&m<=em)){
+    keys.push({m,y,key:y+'-'+String(m+1).padStart(2,'0'),label:MS[m]+'/'+y});
+    m++;if(m>11){m=0;y++}
+  }
+  return keys;
+}
+
+function destroyAccumCharts(){
+  acCharts.forEach(c=>{try{c.destroy()}catch(e){}});
+  acCharts=[];
+}
+
+async function loadAccum(){
+  const sm=+document.getElementById('asM').value,sy=+document.getElementById('asY').value;
+  const em=+document.getElementById('aeM').value,ey=+document.getElementById('aeY').value;
+  const months=monthRange(sy,sm,ey,em);
+  if(!months.length){document.getElementById('EA').innerHTML='<div class="er">Período inválido.</div>';return}
+
+  document.getElementById('aLA').style.display='block';
+  document.getElementById('aContent').style.display='none';
+  document.getElementById('aBtnLoad').disabled=true;
+
+  try{
+    if(!prjs.length)await LP();
+    const F=['summary','status','project','duedate','resolutiondate','updated'];
+    const allData=[];
+    for(let i=0;i<months.length;i++){
+      document.getElementById('aLM').textContent='Carregando '+MO[months[i].m]+' '+months[i].y+' ('+(i+1)+'/'+months.length+')...';
+      const mi=months[i];
+      const s=mi.y+'-'+String(mi.m+1).padStart(2,'0')+'-01';
+      const ld=new Date(mi.y,mi.m+1,0).getDate();
+      const e=mi.y+'-'+String(mi.m+1).padStart(2,'0')+'-'+String(ld).padStart(2,'0');
+      const planned=await Q('issuetype=Epic AND duedate>="'+s+'" AND duedate<="'+e+'" ORDER BY project ASC, duedate ASC',F);
+      allData.push({...mi,planned});
+    }
+    acCache=allData;
+    acMonths=months;
+    renderAccum(months,allData);
+    document.getElementById('aLA').style.display='none';
+    document.getElementById('aContent').style.display='block';
+    const now=new Date().toLocaleString('pt-BR');
+    document.getElementById('aTs').textContent=now;
+    document.getElementById('hm').textContent='Visão Acumulada — '+MO[sm]+'/'+sy+' a '+MO[em]+'/'+ey;
+  }catch(e){
+    document.getElementById('aLA').style.display='none';
+    document.getElementById('EA').innerHTML='<div class="er">Erro ao carregar acumulado: '+(e.message||JSON.stringify(e))+'</div>';
+  }
+  document.getElementById('aBtnLoad').disabled=false;
+}
+
+/* ========== ACCUMULATED: RENDER ========== */
+function renderAccum(months,allData){
+  destroyAccumCharts();
+
+  const projMap={};
+  let gT=0,gD=0;
+  const monthOtds=[];
+  const allPending=[];
+
+  allData.forEach(md=>{
+    const pl=md.planned;
+    let mT=0,mD=0;
+    const byP={};
+    pl.forEach(i=>{const k=pk(i);if(!byP[k])byP[k]={name:pn(i),items:[]};byP[k].items.push(i)});
+
+    Object.keys(byP).forEach(k=>{
+      const g=byP[k],t=g.items.length,d=g.items.filter(dn).length;
+      if(!projMap[k])projMap[k]={name:g.name,months:{},totT:0,totD:0};
+      if(t>0){
+        const otd=Math.round(d/t*100);
+        projMap[k].months[md.key]={total:t,del:d,otd,pend:t-d};
+        projMap[k].totT+=t;projMap[k].totD+=d;
+        mT+=t;mD+=d;
+        g.items.filter(i=>!dn(i)).forEach(i=>{
+          allPending.push({proj:g.name,projKey:k,epic:i.key,summary:i.fields?.summary||'',due:i.fields?.duedate||'—',status:sn(i),statusCat:ct(i),monthLabel:MO[md.m]+' '+md.y});
+        });
+      }
+    });
+    gT+=mT;gD+=mD;
+    monthOtds.push({label:MO[md.m]+' '+md.y,short:md.label,otd:mT>0?Math.round(mD/mT*100):null,t:mT,d:mD});
+  });
+
+  const activeProjs=Object.keys(projMap).filter(k=>projMap[k].totT>0).sort((a,b)=>projMap[a].name.localeCompare(projMap[b].name));
+  const gOtd=gT>0?Math.round(gD/gT*100):0;
+  const gPend=gT-gD;
+
+  // KPIs — using correct k-ok/k-w/k-e classes
+  document.getElementById('aOtd').textContent=gT>0?gOtd+'%':'—';
+  document.getElementById('aOtdD').textContent=gD+' de '+gT+' entregues';
+  document.getElementById('aPrev').textContent=gT;
+  document.getElementById('aPrevD').textContent=months.length+' meses';
+  document.getElementById('aDel').textContent=gD;
+  document.getElementById('aDelD').textContent=gT>0?gOtd+'% no prazo':'';
+  document.getElementById('aPend').textContent=gPend;
+  document.getElementById('aPendD').textContent=gT>0?Math.round(gPend/gT*100)+'% do total':'';
+  document.getElementById('aDelC').className='k k-'+acCls(gOtd);
+  document.getElementById('aPendC').className='k '+(gPend>0?'k-e':'k-ok');
+
+  // Evolution chart
+  const evoLabels=monthOtds.map(x=>x.short);
+  const evoData=monthOtds.map(x=>x.otd);
+  const evoColors=monthOtds.map(x=>x.otd!==null?acCol(x.otd):'var(--tx4)');
+  const chEvo=new Chart(document.getElementById('chEvo'),{type:'line',data:{labels:evoLabels,datasets:[
+    {label:'OTD %',data:evoData,borderColor:'#1FA67A',backgroundColor:'rgba(31,166,122,.1)',fill:true,tension:.3,pointRadius:5,pointBackgroundColor:evoColors,pointBorderColor:evoColors,borderWidth:2.5},
+    {label:'Meta 80%',data:Array(evoLabels.length).fill(80),borderColor:'rgba(34,197,94,.3)',borderDash:[6,4],borderWidth:1,pointRadius:0,fill:false},
+    {label:'Alerta 50%',data:Array(evoLabels.length).fill(50),borderColor:'rgba(239,68,68,.25)',borderDash:[6,4],borderWidth:1,pointRadius:0,fill:false}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{color:'#8B98B0',boxWidth:8,font:{size:9}}}},scales:{y:{min:0,max:100,ticks:{color:'#8B98B0',font:{size:9},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,.04)'}},x:{ticks:{color:'#8B98B0',font:{size:9}},grid:{color:'rgba(255,255,255,.03)'}}}}});
+  acCharts.push(chEvo);
+
+  // Heatmap
+  let hH='<tr><th style="text-align:left">Projeto</th>';
+  months.forEach(m=>{hH+='<th style="text-align:center">'+m.label+'</th>'});
+  hH+='<th style="text-align:center">Acumulado</th></tr>';
+  document.getElementById('hmH').innerHTML=hH;
+
+  let hB='';
+  activeProjs.forEach(k=>{
+    const p=projMap[k];
+    hB+='<tr><td style="text-align:left;font-weight:600">'+p.name+'</td>';
+    months.forEach(m=>{
+      const d=p.months[m.key];
+      if(d){hB+='<td class="c-'+acCls(d.otd)+'" style="text-align:center">'+d.otd+'%<br><span style="font-size:8px;opacity:.7">'+d.del+'/'+d.total+'</span></td>'}
+      else{hB+='<td class="c-na" style="text-align:center">—</td>'}
+    });
+    const aO=p.totT>0?Math.round(p.totD/p.totT*100):0;
+    hB+='<td class="c-'+acCls(aO)+'" style="text-align:center;font-size:13px">'+aO+'%<br><span style="font-size:8px;opacity:.7">'+p.totD+'/'+p.totT+'</span></td></tr>';
+  });
+  document.getElementById('hmB').innerHTML=hB;
+
+  let hF='<tr><td style="text-align:left;font-weight:700">TOTAL</td>';
+  months.forEach((m,idx)=>{
+    const mo=monthOtds[idx];
+    if(mo.otd!==null){hF+='<td class="c-'+acCls(mo.otd)+'" style="text-align:center">'+mo.otd+'%<br><span style="font-size:8px;opacity:.7">'+mo.d+'/'+mo.t+'</span></td>'}
+    else{hF+='<td class="c-na" style="text-align:center">—</td>'}
+  });
+  hF+='<td class="c-'+acCls(gOtd)+'" style="text-align:center;font-size:14px;font-weight:900">'+gOtd+'%<br><span style="font-size:8px;opacity:.7">'+gD+'/'+gT+'</span></td></tr>';
+  document.getElementById('hmF').innerHTML=hF;
+
+  // Bar chart
+  const barLabels=activeProjs.map(k=>projMap[k].name.length>22?projMap[k].name.substring(0,22)+'…':projMap[k].name);
+  const barData=activeProjs.map(k=>{const p=projMap[k];return p.totT>0?Math.round(p.totD/p.totT*100):0});
+  const barColors=barData.map(v=>v>=80?'#22C55E':v>=50?'#F59E0B':'#EF4444');
+  const c2h=Math.max(160,activeProjs.length*28);
+  document.getElementById('chBarW').style.height=c2h+'px';
+  const chBar=new Chart(document.getElementById('chBar'),{type:'bar',data:{labels:barLabels,datasets:[{label:'OTD %',data:barData,backgroundColor:barColors,borderRadius:4,barThickness:18}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw+'%'}}},scales:{x:{min:0,max:100,ticks:{color:'#8B98B0',font:{size:9},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,.04)'}},y:{ticks:{color:'#CBD5E1',font:{size:10}},grid:{display:false}}}}});
+  acCharts.push(chBar);
+
+  // Project cards
+  let cH='';
+  activeProjs.forEach(k=>{
+    const p=projMap[k];
+    const aO=p.totT>0?Math.round(p.totD/p.totT*100):0;
+    const pd=p.totT-p.totD;
+    const cls=acCls(aO);
+    cH+='<div class="proj-card"><div class="proj-head"><span class="proj-name">'+p.name+'</span><span class="proj-otd proj-otd-'+cls+'">'+aO+'%</span></div>';
+    cH+='<div class="proj-row"><span>Previstos</span><span>'+p.totT+'</span></div>';
+    cH+='<div class="proj-row"><span>Entregues</span><span style="color:var(--ok)">'+p.totD+'</span></div>';
+    cH+='<div class="proj-row"><span>Pendentes</span><span style="color:'+(pd>0?'var(--e)':'var(--ok)')+'">'+pd+'</span></div>';
+    cH+='<div style="display:flex;gap:3px;margin-top:10px;flex-wrap:wrap">';
+    months.forEach(m=>{
+      const d=p.months[m.key];
+      if(d){cH+='<span style="background:'+acBg(d.otd)+';color:'+acCol(d.otd)+';padding:2px 6px;border-radius:4px;font-size:8px;font-weight:700" title="'+MO[m.m]+' '+m.y+': '+d.otd+'% ('+d.del+'/'+d.total+')">'+m.label+'<br>'+d.otd+'%</span>'}
+      else{cH+='<span style="background:var(--pri3);color:var(--tx4);padding:2px 6px;border-radius:4px;font-size:8px" title="Sem previsão">'+m.label+'<br>—</span>'}
+    });
+    cH+='</div><div class="proj-bar"><div class="proj-bar-fill" style="width:'+aO+'%;background:'+acCol(aO)+'"></div></div></div>';
+  });
+  document.getElementById('projGrid').innerHTML=cH;
+
+  // Pending table
+  allPending.sort((a,b)=>a.proj.localeCompare(b.proj)||(a.due||'').localeCompare(b.due||''));
+  let tH='';
+  if(!allPending.length){tH='<tr><td colspan="6" class="em">Nenhum epic pendente no período</td></tr>'}
+  else{
+    let lastP='';
+    allPending.forEach(p=>{
+      if(p.proj!==lastP){tH+='<tr class="g"><td colspan="6"><strong>'+p.proj+' ('+p.projKey+')</strong></td></tr>';lastP=p.proj}
+      const sc=p.statusCat==='done'?'b-ok':p.statusCat==='indeterminate'?'b-w':'b-e';
+      tH+='<tr><td>'+p.proj+'</td><td><a class="l" href="'+JB+p.epic+'" target="_blank">'+p.epic+'</a></td><td>'+p.summary.substring(0,50)+'</td><td style="text-align:center">'+p.due+'</td><td style="text-align:center"><span class="b '+sc+'">'+p.status+'</span></td><td style="text-align:center"><span class="b b-w">'+p.monthLabel+'</span></td></tr>';
+    });
+  }
+  document.getElementById('aTpend').innerHTML=tH;
+}
+
+/* ========== TAB SWITCHING ========== */
+function switchView(key){
+  curKey=key;
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('act',b.dataset.key===key));
+  document.getElementById('EA').innerHTML='';
+
+  // Hide both views first
+  document.getElementById('MV').style.display='none';
+  document.getElementById('AV').style.display='none';
+
+  if(key==='acum'){
+    activeView='accumulated';
+    document.getElementById('AV').style.display='block';
+    document.getElementById('FT').style.display='block';
+
+    if(acCache&&acMonths){
+      // Already loaded — just re-show
+      document.getElementById('aContent').style.display='block';
+      document.getElementById('aLA').style.display='none';
+      // Re-render charts (they were destroyed when hiding)
+      destroyAccumCharts();
+      renderAccum(acMonths,acCache);
+      const sm=+document.getElementById('asM').value,sy=+document.getElementById('asY').value;
+      const em=+document.getElementById('aeM').value,ey=+document.getElementById('aeY').value;
+      document.getElementById('hm').textContent='Visão Acumulada — '+MO[sm]+'/'+sy+' a '+MO[em]+'/'+ey;
+    }else{
+      // First load
+      loadAccum();
+    }
+  }else{
+    activeView='monthly';
+    if(cache[key]){
+      document.getElementById('MV').style.display='block';
+      document.getElementById('FT').style.display='block';
+      destroyMonthlyCharts();
+      renderMonthly(cache[key]);
+    }
+  }
+}
+
+/* ========== FILTER LISTENERS ========== */
+['sP','fO','fS','fP'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el)el.addEventListener('change',()=>{
+    if(activeView==='monthly'&&curKey&&cache[curKey])renderMonthly(cache[curKey]);
+  });
+});
+
+/* ========== ACCUMULATED BUTTON ========== */
+document.getElementById('aBtnLoad').addEventListener('click',()=>{
+  acCache=null;acMonths=null;// force reload
+  loadAccum();
+});
+
+/* ========== BUILD TABS ========== */
+function buildTabs(){
+  const n=new Date(),tabsArr=[];
+  for(let off=1;off>=0;off--){
+    const d=new Date(n.getFullYear(),n.getMonth()-off,1);
+    tabsArr.push({m:d.getMonth(),y:d.getFullYear(),key:d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'),label:MO[d.getMonth()]+' '+d.getFullYear(),lock:off>0});
+  }
+  const c=document.getElementById('tabs');c.innerHTML='';
+  tabsArr.forEach(t=>{
+    const b=document.createElement('button');b.className='tab';b.dataset.key=t.key;
+    b.innerHTML=t.label+(t.lock?'<span class="tg tg-lock">Encerrado</span>':'<span class="tg tg-live">Ao vivo</span>');
+    b.onclick=()=>switchView(t.key);
+    c.appendChild(b);
+  });
+  // Accumulated tab
+  const ab=document.createElement('button');ab.className='tab';ab.dataset.key='acum';
+  ab.innerHTML='Visão Acumulada<span class="tg tg-acum">Histórico</span>';
+  ab.onclick=()=>switchView('acum');
+  c.appendChild(ab);
+  return tabsArr;
+}
+
+function initAccumSelectors(){
+  const n=new Date();
+  ['asM','aeM'].forEach(id=>{
+    const el=document.getElementById(id);
+    MO.forEach((m,i)=>{const o=document.createElement('option');o.value=i;o.textContent=m;el.appendChild(o)});
+  });
+  ['asY','aeY'].forEach(id=>{
+    const el=document.getElementById(id);
+    for(let y=2024;y<=2027;y++){const o=document.createElement('option');o.value=y;o.textContent=y;el.appendChild(o)}
+  });
+  const sd=new Date(n.getFullYear(),n.getMonth()-5,1);
+  document.getElementById('asM').value=sd.getMonth();
+  document.getElementById('asY').value=sd.getFullYear();
+  document.getElementById('aeM').value=n.getMonth();
+  document.getElementById('aeY').value=n.getFullYear();
+}
+
+/* ========== BOOT ========== */
+async function go(){
+  document.getElementById('LA').style.display='block';
+  document.getElementById('MV').style.display='none';
+  document.getElementById('AV').style.display='none';
+  document.getElementById('FT').style.display='none';
+  document.getElementById('EA').innerHTML='';
+
+  try{
+    document.getElementById('LM').textContent='Carregando projetos...';
+    await LP();
+    initAccumSelectors();
+    const tabs=buildTabs();
+
+    for(let i=0;i<tabs.length;i++){
+      document.getElementById('LM').textContent='Carregando '+tabs[i].label+'...';
+      await loadMonth(tabs[i]);
+    }
+
+    const now=new Date().toLocaleString('pt-BR');
+    document.getElementById('ts').textContent=now;
+    document.getElementById('fTs').textContent=now;
+    document.getElementById('LA').style.display='none';
+
+    // Show current month by default
+    switchView(tabs[1].key);
+  }catch(e){
+    document.getElementById('LA').style.display='none';
+    document.getElementById('EA').innerHTML='<div class="er">Erro na inicialização: '+(e.message||JSON.stringify(e))+'</div>';
+  }
+}
+go();
 </script>
 </body>
 </html>
