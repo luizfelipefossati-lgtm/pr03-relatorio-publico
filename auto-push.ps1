@@ -5,7 +5,9 @@
 # Idempotente: se nao tem nada novo, sai sem fazer nada.
 # =====================================================================
 
-$ErrorActionPreference = 'Stop'
+# Continue (nao Stop): mensagens de git no stderr (ex: "From https://...")
+# nao devem virar erro fatal. Tratamos falhas via $LASTEXITCODE manualmente.
+$ErrorActionPreference = 'Continue'
 $RepoPath = 'C:\Users\DELL\Documents\Claude\pr03-relatorio-publico'
 $LogPath  = Join-Path $RepoPath '.auto-push.log'
 
