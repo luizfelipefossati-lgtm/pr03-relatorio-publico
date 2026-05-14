@@ -3,7 +3,7 @@
 Snapshot publico do dashboard de OTD por EPICs do Jira (projetos Engeplus).
 Atualizado automaticamente pelo scheduled task "deploy-pr03-vercel".
 
-- **Ultima geracao:** 2026-05-14T13:39:36Z (14/05/2026 10:39 -03)
+- **Ultima geracao:** 2026-05-14T15:13:23Z (14/05/2026 12:13 -03)
 - **Periodo coberto:** Visao Mensal (Abr/Mai 2026) + Acumulado (Dez/2025 - Mai/2026)
 - **Fonte:** projetos-engeplus.atlassian.net (issuetype = Epic)
 - **Hospedagem:** Vercel (auto-deploy a partir deste repo)
@@ -25,4 +25,4 @@ requisicao ao vivo. Isso permite que a pagina rode em dominio publico sem
 acesso ao Jira.
 
 ---
-*Última atualização: 14/05/2026 10:39 (BRT)*
+*Última atualização: 14/05/2026 12:13 (BRT)*
