@@ -4,7 +4,7 @@ Snapshot estático do dashboard PR.03 — Processo de Estudos e Projetos da Enge
 
 ## Última atualização
 
-**28/05/2026 17:01** (horário de Brasília)
+**28/05/2026 15:13** (horário de Brasília)
 
 ## Sobre
 
