@@ -3,7 +3,7 @@
 Snapshot estático do dashboard PR.03 (Engeplus — Estudos e Projetos).
 
 ## Última atualização
-**01/06/2026 09:00** (gerado automaticamente)
+**01/06/2026 09:06** (gerado automaticamente)
 
 ## Como funciona
 - Snapshot é gerado por um agente Claude (tarefa agendada `deploy-pr03-vercel`).
@@ -20,4 +20,4 @@ Snapshot estático do dashboard PR.03 (Engeplus — Estudos e Projetos).
 ## Geração
 - Artifact fonte: `Pr03 Relatorio Indicadores Epics` (Cowork)
 - Skill: `deploy-pr03-vercel`
-- Timestamp ISO: `2026-06-01T09:00:47-03:00`
+- Timestamp ISO: `2026-06-01T09:06:59-03:00`
