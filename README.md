@@ -2,7 +2,7 @@
 
 Snapshot estático do dashboard PR.03 com dados travados do Jira.
 
-- **Última atualização:** 01/06/2026 21:28 (BRT)
+- **Última atualização:** 02/06/2026 09:37 (BRT)
 - **Período monitorado:** Janeiro a Junho/2026
 - **Fonte:** projetos-engeplus.atlassian.net (issuetype = Epic)
 - **Publicação:** Vercel (auto-deploy via GitHub)
