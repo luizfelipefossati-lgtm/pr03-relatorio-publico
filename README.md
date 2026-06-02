@@ -1,17 +1,23 @@
-# PR.03 — Relatório de Indicadores de EPICs (Snapshot Público)
+# PR.03 — Relatório de Indicadores (Snapshot Público)
 
-Snapshot estático do dashboard PR.03 com dados travados do Jira.
+Snapshot estático do dashboard PR.03 de indicadores de EPICs do Jira (Engeplus).
 
-- **Última atualização:** 02/06/2026 09:37 (BRT)
-- **Período monitorado:** Janeiro a Junho/2026
-- **Fonte:** projetos-engeplus.atlassian.net (issuetype = Epic)
-- **Publicação:** Vercel (auto-deploy via GitHub)
+**Última atualização:** 02/06/2026 12:06 (BRT)
+**Gerado em:** 2026-06-02T12:06:59.139755-03:00
 
-## Como funciona
+## Visão geral
 
-Este arquivo `index.html` é regenerado automaticamente pelo Cowork a cada execução da tarefa
-agendada `deploy-pr03-vercel`. O HTML é estático: contém todos os dados embutidos em
-`window.__HISTORY__` e não faz chamadas ao Jira no navegador.
+- Snapshot estático (dados travados — a página não consulta o Jira ao vivo)
+- Aba "Maio 2026" — período encerrado (dados consolidados)
+- Aba "Junho 2026" — mês corrente no momento da geração
+- Aba "Visão Acumulada" — histórico de 6 meses (Jan–Jun 2026) por padrão
 
-A tarefa do Windows `PR03-Auto-Push-GitHub` (cron de 30 min) detecta mudanças e publica
-automaticamente em produção.
+## Atualização automática
+
+- Snapshot regenerado periodicamente por tarefa agendada (Cowork).
+- Push para o repositório feito por `PR03-Auto-Push-GitHub` (Windows Task Scheduler) a cada 30 min.
+- Deploy publicado no Vercel ~1 min após cada push.
+
+## Fonte
+
+JIRA — projetos-engeplus.atlassian.net (issuetype = Epic)
