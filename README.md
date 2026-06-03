@@ -1,18 +1,22 @@
-# PR.03 - Relatório de Indicadores de EPICs (Snapshot Público)
+# PR03 - Relatório de Indicadores de EPICs (Snapshot Público)
 
-Snapshot estático do dashboard **Pr03 Relatorio Indicadores Epics** do Jira da Engeplus.
+Snapshot estático gerado em **03/06/2026 09:21** (horário de Brasília).
 
-## Última atualização
+Os dados deste snapshot estão travados no momento da geração. A página
+não consulta o Jira ao vivo - é uma cópia somente-leitura para
+publicação pública via Vercel.
 
-**02/06/2026 21:09** (2026-06-02T21:09:16.663436)
+## Conteúdo
 
-## Sobre
+- **Visão Mensal:** Maio/2026 (encerrado) e Junho/2026 (ao vivo no momento da geração)
+- **Visão Acumulada:** Janeiro a Junho de 2026
+- **Projetos cobertos:** EG0239, EG0240, EG0256, EG0273, EG0274, EG0275, G0120, G0280 (entre outros)
 
-Este repositório contém uma cópia estática do Live Artifact gerado a partir de dados do Jira (projetos da Engeplus). A página é regenerada periodicamente por uma tarefa agendada e publicada automaticamente no Vercel.
+## Atualização
 
-- **Origem dos dados:** Jira Cloud (`projetos-engeplus.atlassian.net`)
-- **Geração:** scheduled task `deploy-pr03-vercel` (a cada 30 min)
-- **Push automático:** Windows Task Scheduler `PR03-Auto-Push-GitHub` (a cada 30 min)
-- **Deploy:** Vercel (gatilho em push para `main`)
+O snapshot é regenerado pela tarefa agendada `deploy-pr03-vercel`. O push
+para o GitHub é feito automaticamente pela tarefa do Windows Task Scheduler
+`PR03-Auto-Push-GitHub` (a cada 30 minutos). O Vercel detecta o push e faz
+o deploy em ~1 minuto.
 
-Os dados estão travados no momento da geração — a página não consulta o Jira ao vivo.
+Última geração: 2026-06-03T09:21:44.381368-03:00
