@@ -1,22 +1,29 @@
-# PR03 - Relatório de Indicadores de EPICs (Snapshot Público)
+# PR03 - Relatório de Indicadores de EPICs
 
-Snapshot estático gerado em **03/06/2026 09:22** (horário de Brasília).
+Snapshot estático do dashboard PR.03 (Processo de Estudos e Projetos) da Engeplus, publicado automaticamente via Vercel.
 
-Os dados deste snapshot estão travados no momento da geração. A página
-não consulta o Jira ao vivo - é uma cópia somente-leitura para
-publicação pública via Vercel.
+## Última atualização
 
-## Conteúdo
+Gerado em **03/06/2026 12:16** (horário de Brasília).
 
-- **Visão Mensal:** Maio/2026 (encerrado) e Junho/2026 (ao vivo no momento da geração)
-- **Visão Acumulada:** Janeiro a Junho de 2026
-- **Projetos cobertos:** EG0239, EG0240, EG0256, EG0273, EG0274, EG0275, G0120, G0280 (entre outros)
+Os dados são travados no momento da geração e **não** consultam o Jira em tempo real. Para visualizar a versão ao vivo, abra o artifact original em Cowork:
+`pr03-relatorio-indicadores-epics`.
 
-## Atualização
+## Como funciona
 
-O snapshot é regenerado pela tarefa agendada `deploy-pr03-vercel`. O push
-para o GitHub é feito automaticamente pela tarefa do Windows Task Scheduler
-`PR03-Auto-Push-GitHub` (a cada 30 minutos). O Vercel detecta o push e faz
-o deploy em ~1 minuto.
+- Uma tarefa agendada do Cowork (`deploy-pr03-vercel`) executa a cada 30 minutos:
+  - Lê o artifact ao vivo (`%USERPROFILE%\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics\index.html`).
+  - Pré-busca os dados do Jira via MCP (mês corrente + mês anterior + últimos 6 meses).
+  - Gera um HTML estático com `window.__HISTORY__` e `window.__SNAPSHOT__`, sobrescrevendo `window.cowork.callMcpTool` para não fazer chamadas externas.
+  - Salva em `index.html` (este diretório).
+- Em seguida, uma tarefa do Windows Task Scheduler (`PR03-Auto-Push-GitHub`) detecta mudanças e faz `git commit + push` para o repositório.
+- O Vercel detecta o push e publica a nova versão em ~1 min.
 
-Última geração: 2026-06-03T09:22:30.747089-03:00
+## Período coberto no snapshot
+
+- **Visão mensal:** mês anterior (Maio 2026, encerrado) e mês corrente (Junho 2026).
+- **Visão acumulada:** Janeiro a Junho 2026.
+
+## Privacidade
+
+Os dados publicados incluem nomes de Epics, números de issue, datas de vencimento, status e nomes de projetos. Aprovado pelo usuário para publicação.
