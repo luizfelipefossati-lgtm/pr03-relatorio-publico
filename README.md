@@ -4,7 +4,7 @@ Snapshot estático do dashboard PR.03 (Processo de Estudos e Projetos) da Engepl
 
 ## Última atualização
 
-Gerado em **03/06/2026 12:16** (horário de Brasília).
+Gerado em **05/06/2026 08:30** (horário de Brasília).
 
 Os dados são travados no momento da geração e **não** consultam o Jira em tempo real. Para visualizar a versão ao vivo, abra o artifact original em Cowork:
 `pr03-relatorio-indicadores-epics`.
