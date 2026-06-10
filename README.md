@@ -1,29 +1,20 @@
-# PR03 - Relatório de Indicadores de EPICs
+# PR.03 - Relatório de Indicadores de EPICs (snapshot público)
 
-Snapshot estático do dashboard PR.03 (Processo de Estudos e Projetos) da Engeplus, publicado automaticamente via Vercel.
+Snapshot **estático** do dashboard PR.03 (Processo de Estudos e Projetos), gerado
+automaticamente a partir do Live Artifact "Pr03 Relatorio Indicadores Epics".
 
-## Última atualização
-
-Gerado em **05/06/2026 15:48** (horário de Brasília).
-
-Os dados são travados no momento da geração e **não** consultam o Jira em tempo real. Para visualizar a versão ao vivo, abra o artifact original em Cowork:
-`pr03-relatorio-indicadores-epics`.
-
-## Como funciona
-
-- Uma tarefa agendada do Cowork (`deploy-pr03-vercel`) executa a cada 30 minutos:
-  - Lê o artifact ao vivo (`%USERPROFILE%\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics\index.html`).
-  - Pré-busca os dados do Jira via MCP (mês corrente + mês anterior + últimos 6 meses).
-  - Gera um HTML estático com `window.__HISTORY__` e `window.__SNAPSHOT__`, sobrescrevendo `window.cowork.callMcpTool` para não fazer chamadas externas.
-  - Salva em `index.html` (este diretório).
-- Em seguida, uma tarefa do Windows Task Scheduler (`PR03-Auto-Push-GitHub`) detecta mudanças e faz `git commit + push` para o repositório.
-- O Vercel detecta o push e publica a nova versão em ~1 min.
-
-## Período coberto no snapshot
-
-- **Visão mensal:** mês anterior (Maio 2026, encerrado) e mês corrente (Junho 2026).
-- **Visão acumulada:** Janeiro a Junho 2026.
+- **Última geração:** 10/06/2026 08:27 (America/Sao_Paulo)
+- **Fonte:** Jira (projetos-engeplus.atlassian.net), issuetype = Epic
+- **Conteúdo:** os dados estão *travados* no momento da geração — a página publicada
+  não consulta o Jira ao vivo. As chamadas dinâmicas foram substituídas por dados
+  pré-buscados (`window.__SNAPSHOT__`).
+- **Abas incluídas:** mês corrente (Junho/2026), mês anterior (Maio/2026) e Visão
+  Acumulada (Jan–Jun 2026).
 
 ## Privacidade
+Os dados publicados incluem nomes de epics e podem incluir nome de responsáveis via
+status. accountIds, avatares e e-mails foram removidos.
 
-Os dados publicados incluem nomes de Epics, números de issue, datas de vencimento, status e nomes de projetos. Aprovado pelo usuário para publicação.
+## Deploy
+O push para o GitHub é feito automaticamente pela tarefa do Windows Task Scheduler
+`PR03-Auto-Push-GitHub` (a cada 30 min). O deploy no Vercel ocorre ~1 min após o push.
