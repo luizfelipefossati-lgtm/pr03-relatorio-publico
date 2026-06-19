@@ -2,7 +2,7 @@
 
 Snapshot estático do dashboard de indicadores de epics do PR.03 — Engeplus Engenharia e Consultoria.
 
-**Última geração:** 2026-06-19T00:00:00-03:00  
+**Última geração:** 2026-06-19T17:26:04Z (14:26 BRT)  
 **Período congelado:** Junho 2026  
 **Fonte:** Jira (projetos-engeplus.atlassian.net)
 
