@@ -1,9 +1,15 @@
-# PR.03 - Relatório de Indicadores de EPICs (Snapshot Público)
+# Relatório Público PR.03 — Indicadores de EPICs
 
-Snapshot estático do dashboard PR.03 (indicadores de EPICs do Jira - Estudos e Projetos / Engeplus).
-Os dados são congelados no momento da geração; a página publicada **não** consulta o Jira ao vivo.
+Snapshot estático (dados travados) do dashboard PR.03 — Indicadores de EPICs do Jira do time de Estudos e Projetos da Engeplus. Os dados são pré-buscados do Jira no momento da geração e embutidos no HTML; a página não consulta o Jira ao vivo. É atualizada automaticamente em intervalos regulares.
 
-- **Última geração:** 2026-06-29T21:08:31Z (29/06/2026 18:08 BRT)
-- **Projetos monitorados:** EG0240, EG0256, EG0273, EG0274, G0280 (entre outros)
-- **Abas:** mês corrente (Junho/2026), mês anterior (Maio/2026, encerrado), Visão Acumulada
-- **Atualização:** gerado por tarefa agendada; publicação automática via Vercel após push do Windows Task Scheduler (PR03-Auto-Push-GitHub, a cada 30 min)
+**Última geração:** 04/07/2026 11:14 (horário de Brasília)
+
+## Sobre
+- Mês ao vivo capturado: **Julho/2026** (congelado) — OTD 12% (2/17 entregues)
+- Mês encerrado: **Junho/2026** (congelado)
+- Visão acumulada padrão: **Fevereiro/2026 a Julho/2026**
+- Projetos monitorados: 17
+- Chamadas dinâmicas resolvidas nesta geração: 9 (1 lista de projetos + 6 queries de Julho + planned de Fev e Mar)
+
+## Deploy
+Publicado via Vercel. O push para o GitHub é feito automaticamente pela tarefa `PR03-Auto-Push-GitHub` (Windows Task Scheduler, a cada 30 min).
