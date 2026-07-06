@@ -2,7 +2,7 @@
 
 Snapshot estático (dados travados) do dashboard PR.03 — Indicadores de EPICs do Jira do time de Estudos e Projetos da Engeplus. Os dados são pré-buscados do Jira no momento da geração e embutidos no HTML; a página não consulta o Jira ao vivo. É atualizada automaticamente em intervalos regulares.
 
-**Última geração:** 06/07/2026 09:04 (horário de Brasília)
+**Última geração:** 06/07/2026 10:12 (horário de Brasília)
 
 ## Sobre
 - Mês ao vivo capturado: **Julho/2026** (congelado) — OTD 12% (2/17 entregues)
