@@ -1,15 +1,14 @@
-# Relatório Público PR.03 — Indicadores de EPICs
+# PR.03 - Relatório de Indicadores de EPICs (Snapshot Público)
 
-Snapshot estático (dados travados) do dashboard PR.03 — Indicadores de EPICs do Jira do time de Estudos e Projetos da Engeplus. Os dados são pré-buscados do Jira no momento da geração e embutidos no HTML; a página não consulta o Jira ao vivo. É atualizada automaticamente em intervalos regulares.
+Snapshot estático do dashboard PR.03 (Estudos e Projetos) gerado a partir do Live Artifact
+**Pr03 Relatorio Indicadores Epics**, com dados do Jira (projetos-engeplus.atlassian.net) travados no momento da geração.
 
-**Última geração:** 07/07/2026 14:06 (horário de Brasília)
+- **Última atualização:** 08/07/2026 11:05 (horário de Brasília)
+- **Timestamp ISO:** 2026-07-08T11:05:00-03:00
+- **Fonte:** JIRA — issuetype = Epic
+- **Abas:** Junho 2026 (encerrado), Julho 2026 (mês corrente na geração) e Visão Acumulada (Fev–Jul 2026)
 
-## Sobre
-- Mês ao vivo capturado: **Julho/2026** (congelado) — OTD 12% (2/17 entregues)
-- Mês encerrado: **Junho/2026** (congelado)
-- Visão acumulada padrão: **Fevereiro/2026 a Julho/2026**
-- Projetos monitorados: 17
-- Chamadas dinâmicas resolvidas nesta geração: 9 (1 lista de projetos + 6 queries de Julho + planned de Fevereiro e Março)
+A página não consulta o Jira ao vivo — todos os dados estão embutidos em `window.__SNAPSHOT__`.
+Atualização automática do repositório a cada 30 min via tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler.
 
-## Deploy
-Publicado via Vercel. O push para o GitHub é feito automaticamente pela tarefa `PR03-Auto-Push-GitHub` (Windows Task Scheduler, a cada 30 min).
+_Publicação de nomes de epics e responsáveis autorizada pelo usuário._
