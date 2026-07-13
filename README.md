@@ -3,8 +3,8 @@
 Snapshot estático do dashboard PR.03 (Estudos e Projetos) gerado a partir do Live Artifact
 **Pr03 Relatorio Indicadores Epics**, com dados do Jira (projetos-engeplus.atlassian.net) travados no momento da geração.
 
-- **Última atualização:** 13/07/2026 13:58 (horário de Brasília)
-- **Timestamp ISO:** 2026-07-13T13:58:06-03:00
+- **Última atualização:** 13/07/2026 15:11 (horário de Brasília)
+- **Timestamp ISO:** 2026-07-13T15:11:19-03:00
 - **Fonte:** JIRA — issuetype = Epic
 - **Abas:** Junho 2026 (encerrado), Julho 2026 (mês corrente na geração) e Visão Acumulada (Fev–Jul 2026)
 
