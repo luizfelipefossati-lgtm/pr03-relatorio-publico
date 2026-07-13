@@ -815,3 +815,6 @@
 2026-07-13 17:04:43  === Watchdog iniciando ===
 2026-07-13 17:04:45  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'True' | lock: 'False' | index quebrado: 'False'
 2026-07-13 17:04:45  === Watchdog iniciando ===
+2026-07-13 17:04:45  Commit OK: 28ede62ef125fb75af41395f4ce1d5d8995a577e
+2026-07-13 17:04:45  Empurrando para origin/main...
+2026-07-13 17:04:47  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'True' | lock: 'False' | index quebrado: 'False'
