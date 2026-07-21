@@ -1,17 +1,10 @@
-# PR.03 - Relatório de Indicadores de EPICs (Snapshot Público)
+# PR.03 - Relatorio de Indicadores de EPICs (Snapshot Publico)
 
-Snapshot estático do dashboard PR.03 (Estudos e Projetos) gerado a partir do Live Artifact
-**Pr03 Relatorio Indicadores Epics**, com dados do Jira (projetos-engeplus.atlassian.net) travados no momento da geração.
+Snapshot estatico gerado automaticamente a partir do Live Artifact "Pr03 Relatorio Indicadores Epics".
 
-- **Última atualização:** 21/07/2026 09:16 (horário local da geração)
-- **Timestamp ISO:** 2026-07-21T09:16:57-03:00
-- **Fonte:** JIRA — issuetype = Epic (todos os projetos, sem filtro por chave)
-- **Abas:** Junho 2026 (encerrado), Julho 2026 (mês corrente na geração) e Visão Acumulada (Fev–Jul 2026)
+- **Ultima geracao:** 2026-07-21T12:47:49.904565-03:00 (America/Sao_Paulo)
+- **Fonte:** Jira Cloud (projetos-engeplus.atlassian.net) via MCP Atlassian
+- **Mes ao vivo capturado:** Julho/2026 (mes corrente na geracao)
+- **Visao acumulada:** Fevereiro/2026 a Julho/2026
 
-As consultas JQL não filtram por projeto (só `issuetype = Epic` + `duedate`), portanto todos os projetos são sempre baixados e novos projetos entram automaticamente. O seletor de projetos é populado dinamicamente por `getVisibleJiraProjects` (17 projetos nesta geração). Um projeto só não aparece nos dados de um mês quando não possui epic com `duedate` naquele período.
-
-A página não consulta o Jira ao vivo — todos os dados estão embutidos em `window.__HISTORY__` (Abr, Mai e Jun/2026 já congelados no fechamento de cada período) e `window.__SNAPSHOT__` (Julho corrente + Fev/Mar do acumulado); `window.cowork.callMcpTool` é sobrescrito para devolvê-los offline. Consultas ao vivo resolvidas nesta geração: 1× `getVisibleJiraProjects` + 8 JQL. Julho (corrente): planned 17, overdue 4, lookahead 6, sent 2, resolved 5 (união dedup = 5), rework 2. Visão acumulada ao vivo: Fev 1, Mar 5 (Abr, Mai e Jun vêm do `window.__HISTORY__`).
-
-Atualização automática do repositório a cada 30 min via tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler.
-
-_Publicação de nomes de epics e responsáveis autorizada pelo usuário._
+Os dados estao congelados no momento da geracao; a pagina NAO consulta o Jira ao vivo. O deploy no Vercel e atualizado automaticamente apos o push do repositorio (tarefa PR03-Auto-Push-GitHub, a cada 30 min).
