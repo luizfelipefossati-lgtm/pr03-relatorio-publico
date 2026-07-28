@@ -2,7 +2,7 @@
 
 Snapshot estatico gerado automaticamente a partir do Live Artifact "Pr03 Relatorio Indicadores Epics".
 
-- **Ultima geracao:** 2026-07-28T10:10:50-03:00 (America/Sao_Paulo)
+- **Ultima geracao:** 2026-07-28T11:11:52-03:00 (America/Sao_Paulo)
 - **Fonte:** Jira Cloud (projetos-engeplus.atlassian.net) via MCP Atlassian
 - **Mes ao vivo capturado:** Julho/2026 (mes corrente na geracao)
 - **Mes encerrado (congelado no artifact):** Junho/2026
