@@ -4,8 +4,8 @@ Snapshot estático do dashboard **Estudos e Projetos — Relatório de Indicador
 
 Os dados são congelados no momento da geração; a página **não** consulta o Jira ao vivo.
 
-- Última atualização: **29/07/2026 09:26** (America/Sao_Paulo)
-- Timestamp ISO: `2026-07-29T09:26:43-03:00`
+- Última atualização: **29/07/2026 10:10** (America/Sao_Paulo)
+- Timestamp ISO: `2026-07-29T10:10:30-03:00`
 - Projetos monitorados: EG0239, EG0240, EG0241, EG0256, EG0273, EG0274, EG0275, EG0285, EG0286, EG0287, G0280 e demais projetos visíveis no site.
 - Abas: mês anterior (Junho/2026 — encerrado), mês corrente (Julho/2026) e Visão Acumulada (últimos 6 meses).
 
