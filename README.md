@@ -3,8 +3,8 @@
 Snapshot **estático** do painel PR.03 (Estudos e Projetos / Engeplus), publicado via Vercel.
 Os dados são congelados no momento da geração — a página **não** consulta o Jira ao vivo.
 
-- **Última geração:** 31/07/2026 16:04 (America/Sao_Paulo)
-- **Timestamp ISO:** 2026-07-31T16:04:47-0300
+- **Última geração:** 31/07/2026 16:17 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-07-31T16:17:47-03:00
 - **Período corrente:** Julho/2026 (ao vivo no momento da captura) · Junho/2026 (encerrado)
 - **Projetos monitorados:** 17 (Jira cloud ead785de-…)
 - **Chamadas dinâmicas resolvidas:** getVisibleJiraProjects + JQL (planned/overdue/lookahead/sent/resolved/rework de jul/2026 e planned acumulado fev–jul/2026)
