@@ -1,16 +1,12 @@
-# PR.03 — Relatório de Indicadores de EPICs (snapshot público)
+# PR.03 — Relatório de Indicadores de EPICs (Snapshot Público)
 
-Snapshot **estático** do painel PR.03 (Estudos e Projetos / Engeplus), publicado via Vercel.
-Os dados são congelados no momento da geração — a página **não** consulta o Jira ao vivo.
+Página estática publicada a partir do Live Artifact **Pr03 Relatorio Indicadores Epics**.
+Os dados são um *snapshot* congelado do Jira: a página publicada **não** consulta o Jira ao vivo.
 
-- **Última geração:** 03/08/2026 16:18 (America/Sao_Paulo)
-- **Timestamp ISO:** 2026-08-03T16:18:09-03:00
-- **Mês corrente (ao vivo, capturado nesta geração):** Agosto/2026 — 16 EPICs previstos, 3 em atraso acumulado, 28 no lookahead (set–out), 0 enviados/resolvidos/retrabalho no mês até a captura
-- **Mês anterior (encerrado, congelado nesta geração):** Julho/2026 — 10 EPICs previstos, 1 em atraso, 11 enviados/resolvidos (4 com retrabalho), 28 no lookahead (ago–set)
-- **Visão acumulada:** Março–Agosto/2026 (mar e ago buscados nesta geração; abr/mai/jun do histórico embutido; jul congelado nesta geração)
-- **Projetos monitorados:** 17 (Jira cloud ead785de-…)
-- **Chamadas dinâmicas resolvidas:** `getVisibleJiraProjects` + 13 consultas JQL (planned/overdue/lookahead/sent/resolved/rework de ago e jul/2026 + planned de mar/2026 para o acumulado)
+- **Última geração do snapshot:** 03/08/2026 17:13 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-03T17:13:53.834366-03:00
+- **Meses congelados neste build:** Março, Julho e Agosto/2026 (Abril–Junho/2026 já vinham congelados no artifact).
+- **Projetos monitorados:** EG0239, EG0240, EG0241, EG0256, EG0273, EG0274, EG0275, EG0285, EG0286, EG0287, G0280 e demais visíveis no board.
 
-> Observação: tanto Agosto (aba "ao vivo") quanto Julho (encerrado) exibem dados completos e congelados nas abas mensais; os EPICs previstos de mar/jul/ago também alimentam a visão acumulada.
-
-> Atualização automática: o snapshot é regenerado periodicamente e o push para o GitHub é feito pela tarefa `PR03-Auto-Push-GitHub` (Windows Task Scheduler, a cada 30 min). O deploy no Vercel ocorre ~1 min após o push.
+## Como é gerado
+Uma tarefa agendada regenera este `index.html` a partir do artifact, injetando os dados pré-buscados (`window.__SNAPSHOT__` / `window.__HISTORY__`) e substituindo as chamadas MCP por respostas locais. O commit/push para o GitHub é feito automaticamente pela tarefa `PR03-Auto-Push-GitHub` (Windows Task Scheduler, a cada 30 min); o deploy é feito pela Vercel.
