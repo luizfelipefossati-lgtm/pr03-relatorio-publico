@@ -3,8 +3,8 @@
 Snapshot **estático** do painel PR.03 (Estudos e Projetos / Engeplus), publicado via Vercel.
 Os dados são congelados no momento da geração — a página **não** consulta o Jira ao vivo.
 
-- **Última geração:** 03/08/2026 10:11 (America/Sao_Paulo)
-- **Timestamp ISO:** 2026-08-03T10:11:19-03:00
+- **Última geração:** 03/08/2026 11:05 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-03T11:05:16-03:00
 - **Mês corrente (capturado ao vivo):** Agosto/2026 — 16 EPICs previstos, 3 em atraso acumulado, 28 no lookahead (set–out), 0 enviados/resolvidos/retrabalho no mês até a captura
 - **Visão acumulada congelada:** Março–Agosto/2026 (mar e jul buscados nesta geração; abr/mai/jun do histórico embutido)
 - **Projetos monitorados:** 17 (Jira cloud ead785de-…)
