@@ -3,8 +3,8 @@
 Página estática publicada a partir do Live Artifact **Pr03 Relatorio Indicadores Epics**.
 Os dados são um *snapshot* congelado do Jira: a página publicada **não** consulta o Jira ao vivo.
 
-- **Última geração do snapshot:** 04/08/2026 13:15 (America/Sao_Paulo)
-- **Timestamp ISO:** 2026-08-04T13:15:03
+- **Última geração do snapshot:** 04/08/2026 14:16 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-04T14:16:03-03:00
 - **Meses congelados neste build:** Março, Julho e Agosto/2026 (Abril–Junho/2026 já vinham congelados no artifact).
 - **Projetos monitorados:** EG0239, EG0240, EG0241, EG0256, EG0273, EG0274, EG0275, EG0285, EG0286, EG0287, G0280 e demais visíveis no board.
 
