@@ -2,7 +2,7 @@
 
 Snapshot **estático** do Live Artifact "Pr03 Relatorio Indicadores Epics" (dashboard de OTD / indicadores de EPICs do Jira da Engeplus).
 
-- **Última geração:** 05/08/2026 12:11 (BRT)
+- **Última geração:** 05/08/2026 13:11 (BRT)
 - **Origem dos dados:** Jira Cloud (projetos-engeplus.atlassian.net)
 - **Natureza:** página offline — os dados estão congelados no momento da geração e **não** consultam o Jira ao vivo.
 
