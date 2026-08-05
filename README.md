@@ -2,13 +2,13 @@
 
 Snapshot **estático** do Live Artifact "Pr03 Relatorio Indicadores Epics" (dashboard de OTD / indicadores de EPICs do Jira da Engeplus).
 
-- **Última geração:** 05/08/2026 14:11 (BRT)
+- **Última geração:** 05/08/2026 15:12 (BRT)
 - **Origem dos dados:** Jira Cloud (projetos-engeplus.atlassian.net)
 - **Natureza:** página offline — os dados estão congelados no momento da geração e **não** consultam o Jira ao vivo.
 
 ## Meses incluídos
-- **Agosto/2026** (mês corrente / "ao vivo") — dados pré-buscados e congelados neste snapshot
-- **Julho/2026** (mês anterior / "encerrado") — período fechado ainda não congelado no `window.__HISTORY__` do artifact; a aba exibe o aviso "Período encerrado sem snapshot" (mesmo comportamento da versão ao vivo)
+- **Agosto/2026** (mês corrente / "ao vivo") — dados pré-buscados e congelados neste snapshot (16 previstos, 3 em atraso acumulado, 0 enviados no mês)
+- **Julho/2026** (mês anterior / "encerrado") — dados pré-buscados e congelados neste snapshot (10 previstos, 1 em atraso, 11 enviados / 4 retrabalho)
 - **Visão Acumulada** — Março a Agosto/2026 (Mar/Jul/Ago pré-buscados neste snapshot; Abr/Mai/Jun já congelados no próprio artifact)
 
 ## Como é atualizado
@@ -17,3 +17,8 @@ pré-buscados no HTML (`window.__HISTORY__` + `window.__SNAPSHOT__`) e sobrescre
 `window.cowork.callMcpTool` para nunca consultar o Jira ao vivo. O `git commit + push` é feito
 separadamente pela tarefa do Windows Task Scheduler `PR03-Auto-Push-GitHub` (a cada 30 min),
 e o deploy é publicado pelo Vercel.
+
+## Privacidade
+Os dados publicados incluem apenas: chave do epic, título, status, projeto, due date, data de
+resolução e data de atualização. `accountId`, e-mails e avatares dos responsáveis são removidos
+na geração do snapshot.
