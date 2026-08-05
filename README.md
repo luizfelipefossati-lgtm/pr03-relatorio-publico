@@ -2,14 +2,14 @@
 
 Snapshot **estático** do Live Artifact "Pr03 Relatorio Indicadores Epics" (dashboard de OTD / indicadores de EPICs do Jira da Engeplus).
 
-- **Última geração:** 04/08/2026 18:13 (BRT)
+- **Última geração:** 05/08/2026 09:15 (BRT)
 - **Origem dos dados:** Jira Cloud (projetos-engeplus.atlassian.net)
 - **Natureza:** página offline — os dados estão congelados no momento da geração e **não** consultam o Jira ao vivo.
 
 ## Meses incluídos
-- **Agosto/2026** (mês corrente) — congelado
-- **Julho/2026** (mês anterior) — congelado
-- **Visão Acumulada** — Março a Agosto/2026 (dados pré-buscados)
+- **Agosto/2026** (mês corrente / "ao vivo") — dados pré-buscados e congelados
+- **Julho/2026** (mês anterior / "encerrado") — sem snapshot congelado no artifact; a aba exibe o aviso "Período encerrado sem snapshot"
+- **Visão Acumulada** — Março a Agosto/2026 (Mar/Jul/Ago pré-buscados; Abr/Mai/Jun já congelados no próprio artifact)
 
 ## Como é atualizado
 Um snapshot novo é gerado periodicamente por uma tarefa automatizada, que injeta os dados
