@@ -2,16 +2,16 @@
 
 Snapshot **estático** do dashboard PR.03 (indicadores de EPICs do Jira Engeplus), publicado via Vercel.
 
-- **Última geração:** 06/08/2026 09:34 (America/Sao_Paulo)
-- **Timestamp ISO:** 2026-08-06T09:34:50-03:00
+- **Última geração:** 06/08/2026 10:12 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-06T10:12:26-03:00
 - **Origem:** Live Artifact `pr03-relatorio-indicadores-epics`
 - **Dados:** travados no momento da geração — a página **não** consulta o Jira ao vivo.
 
 ## Cobertura de dados
 
-- Meses congelados no artifact (`__HISTORY__`): Abril, Maio e Junho/2026.
-- Consultas ao vivo resolvidas neste snapshot: Agosto/2026 (previstos, atrasados, próximos, enviados, resolvidos, retrabalho) e previstos de Julho/2026 e Março/2026 (visão acumulada).
-- Aba Julho/2026 (mensal): período encerrado sem snapshot congelado — exibe aviso.
+- Meses congelados originalmente no artifact (`__HISTORY__`): Abril, Maio e Junho/2026.
+- Meses congelados neste snapshot: Agosto/2026 (mês corrente) e Julho/2026 (mês anterior), ambos com o conjunto completo — previstos, atrasados, próximos, enviados, resolvidos e retrabalho — além de previstos de Março/2026 (visão acumulada, últimos 6 meses).
+- Ambas as abas mensais (Julho e Agosto/2026) exibem dados reais congelados; a lista de projetos vem embutida (18 projetos). Nenhuma consulta ao Jira ao vivo é feita.
 
 ## Atualização
 
