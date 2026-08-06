@@ -2,8 +2,8 @@
 
 Snapshot **estático** do dashboard PR.03 (indicadores de EPICs do Jira Engeplus), publicado via Vercel.
 
-- **Última geração:** 06/08/2026 15:48 (America/Sao_Paulo)
-- **Timestamp ISO:** 2026-08-06T15:48:50-03:00
+- **Última geração:** 06/08/2026 16:19 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-06T16:19:38-03:00
 - **Origem:** Live Artifact `pr03-relatorio-indicadores-epics`
 - **Dados:** travados no momento da geração — a página **não** consulta o Jira ao vivo.
 
