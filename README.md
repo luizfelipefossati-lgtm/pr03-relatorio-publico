@@ -2,16 +2,22 @@
 
 Snapshot **estático** do dashboard PR.03 (indicadores de EPICs do Jira Engeplus), publicado via Vercel.
 
-- **Última geração:** 06/08/2026 10:12 (America/Sao_Paulo)
-- **Timestamp ISO:** 2026-08-06T10:12:26-03:00
+- **Última geração:** 06/08/2026 11:46 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-06T11:46:59-03:00
 - **Origem:** Live Artifact `pr03-relatorio-indicadores-epics`
 - **Dados:** travados no momento da geração — a página **não** consulta o Jira ao vivo.
 
 ## Cobertura de dados
 
-- Meses congelados originalmente no artifact (`__HISTORY__`): Abril, Maio e Junho/2026.
-- Meses congelados neste snapshot: Agosto/2026 (mês corrente) e Julho/2026 (mês anterior), ambos com o conjunto completo — previstos, atrasados, próximos, enviados, resolvidos e retrabalho — além de previstos de Março/2026 (visão acumulada, últimos 6 meses).
-- Ambas as abas mensais (Julho e Agosto/2026) exibem dados reais congelados; a lista de projetos vem embutida (18 projetos). Nenhuma consulta ao Jira ao vivo é feita.
+- Meses já congelados no artifact (`__HISTORY__`): Abril, Maio e Junho/2026.
+- Congelados neste snapshot: **Agosto/2026** (mês corrente) e **Julho/2026** (mês anterior), ambos com o conjunto completo — previstos, atrasados, próximos (lookahead), enviados, resolvidos e retrabalho — além dos **previstos de Março/2026** (necessários para a visão acumulada dos últimos 6 meses).
+- Julho/2026 é injetado em `__HISTORY__` como período fechado; Agosto/2026 é servido por um override de `callMcpTool` que devolve os dados pré-buscados conforme o padrão da consulta JQL. A lista de 18 projetos vem embutida. Nenhuma consulta ao Jira ao vivo é feita.
+
+## Indicadores (no momento da geração)
+
+- **Julho/2026:** 10 previstos, OTD 80% · 1 em atraso · 11 enviados (4 retrabalho).
+- **Agosto/2026:** 16 previstos, OTD 0% (mês em curso) · 3 em atraso acumulado · 28 próximos (set–out).
+- **Acumulado Mar–Ago/2026:** 69 previstos, 32 entregues, OTD 46%.
 
 ## Atualização
 
