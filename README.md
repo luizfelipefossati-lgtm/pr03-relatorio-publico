@@ -1,24 +1,20 @@
-# PR.03 — Relatório de Indicadores de EPICs
+# PR.03 — Relatório de Indicadores de EPICs (snapshot público)
 
-Snapshot **estático** do Live Artifact "Pr03 Relatorio Indicadores Epics" (dashboard de OTD / indicadores de EPICs do Jira da Engeplus).
+Snapshot **estático** do dashboard PR.03 (indicadores de EPICs do Jira Engeplus), publicado via Vercel.
 
-- **Última geração:** 05/08/2026 16:10 (BRT)
-- **Origem dos dados:** Jira Cloud (projetos-engeplus.atlassian.net)
-- **Natureza:** página offline — os dados estão congelados no momento da geração e **não** consultam o Jira ao vivo.
+- **Última geração:** 06/08/2026 09:06 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-06T09:06:47.087285-03:00
+- **Origem:** Live Artifact `pr03-relatorio-indicadores-epics`
+- **Dados:** travados no momento da geração — a página **não** consulta o Jira ao vivo.
 
-## Meses incluídos
-- **Agosto/2026** (mês corrente / "ao vivo") — dados pré-buscados e congelados neste snapshot (16 previstos, 3 em atraso acumulado, 0 enviados no mês)
-- **Julho/2026** (mês anterior / "encerrado") — dados pré-buscados e congelados neste snapshot (10 previstos, 1 em atraso, 11 enviados / 4 retrabalho)
-- **Visão Acumulada** — Março a Agosto/2026 (Mar/Jul/Ago pré-buscados neste snapshot; Abr/Mai/Jun já congelados no próprio artifact)
+## Cobertura de dados
 
-## Como é atualizado
-Um snapshot novo é gerado periodicamente por uma tarefa automatizada, que injeta os dados
-pré-buscados no HTML (`window.__HISTORY__` + `window.__SNAPSHOT__`) e sobrescreve
-`window.cowork.callMcpTool` para nunca consultar o Jira ao vivo. O `git commit + push` é feito
-separadamente pela tarefa do Windows Task Scheduler `PR03-Auto-Push-GitHub` (a cada 30 min),
-e o deploy é publicado pelo Vercel.
+- Meses congelados no artifact (`__HISTORY__`): Abril, Maio e Junho/2026.
+- Consultas ao vivo resolvidas neste snapshot: Agosto/2026 (previstos, atrasados, próximos, enviados, resolvidos, retrabalho) e previstos de Julho/2026 e Março/2026 (visão acumulada).
+- Aba Julho/2026 (mensal): período encerrado sem snapshot congelado — exibe aviso.
 
-## Privacidade
-Os dados publicados incluem apenas: chave do epic, título, status, projeto, due date, data de
-resolução e data de atualização. `accountId`, e-mails e avatares dos responsáveis são removidos
-na geração do snapshot.
+## Atualização
+
+Gerado automaticamente por tarefa agendada. O push para o GitHub é feito pela tarefa `PR03-Auto-Push-GitHub` (Windows Task Scheduler, a cada 30 min). O deploy no Vercel ocorre ~1 min após o push.
+
+> Privacidade: os dados publicados incluem chaves e títulos de epics e nomes de status. Aprovado pelo usuário para publicação.
