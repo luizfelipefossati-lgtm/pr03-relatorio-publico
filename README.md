@@ -2,8 +2,8 @@
 
 Snapshot **estático** do dashboard PR.03 (indicadores de EPICs do Jira Engeplus), publicado via Vercel.
 
-- **Última geração:** 06/08/2026 13:17 (America/Sao_Paulo)
-- **Timestamp ISO:** 2026-08-06T13:17:25-03:00
+- **Última geração:** 06/08/2026 14:15 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-06T14:15:45-03:00
 - **Origem:** Live Artifact `pr03-relatorio-indicadores-epics`
 - **Dados:** travados no momento da geração — a página **não** consulta o Jira ao vivo.
 
@@ -17,7 +17,7 @@ Snapshot **estático** do dashboard PR.03 (indicadores de EPICs do Jira Engeplus
 
 - **Julho/2026:** 10 previstos, OTD 80% · 1 em atraso · 11 enviados (4 retrabalho).
 - **Agosto/2026:** 16 previstos, OTD 0% (mês em curso) · 3 em atraso acumulado · 28 próximos (set–out).
-- **Acumulado Mar–Ago/2026:** 56 previstos, 26 entregues, OTD 46%.
+- **Acumulado Mar–Ago/2026:** 69 previstos, 32 entregues, OTD 46%.
 
 ## Atualização
 
