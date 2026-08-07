@@ -2,7 +2,7 @@
 
 Snapshot estático do dashboard PR.03 (Estudos e Projetos), gerado automaticamente a partir do Jira.
 
-**Última atualização:** 07/08/2026 12:12 (2026-08-07T12:12:50-03:00)
+**Última atualização:** 07/08/2026 13:17 (2026-08-07T13:17:47-03:00)
 
 Os dados são congelados no momento da geração — a página publicada não consulta o Jira ao vivo. Meses cobertos no snapshot: Março a Agosto/2026 (visão acumulada) e abas mensais de Julho e Agosto/2026.
 
