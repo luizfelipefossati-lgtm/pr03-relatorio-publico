@@ -1,14 +1,11 @@
-# PR.03 - Relatorio de Indicadores de EPICs (Snapshot Publico)
+# PR.03 — Relatório Público de Indicadores de EPICs
 
-Snapshot estatico gerado automaticamente a partir do Live Artifact
-"Pr03 Relatorio Indicadores Epics" (dados do Jira Engeplus).
+Snapshot estático do dashboard PR.03 (Estudos e Projetos), gerado automaticamente a partir do Jira.
 
-- **Ultima atualizacao:** 07/08/2026 09:23
-- **Fonte:** Jira Cloud (projetos EG02xx / G0280 / EG028x)
-- **Natureza:** pagina estatica; NAO consulta o Jira ao vivo. Os dados ficam
-  congelados no momento da geracao.
-- Abas: mes corrente (Agosto/2026 - ao vivo no artifact, travado aqui),
-  mes anterior (Julho/2026 - encerrado) e Visao Acumulada (Mar-Ago/2026).
+**Última atualização:** 07/08/2026 09:34 (2026-08-07T09:34:22.044165-03:00)
 
-Publicacao automatica via Vercel; commit/push a cada 30 min pela tarefa
-`PR03-Auto-Push-GitHub` (Windows Task Scheduler).
+Os dados são congelados no momento da geração — a página publicada não consulta o Jira ao vivo. Meses cobertos no snapshot: Março a Agosto/2026 (visão acumulada) e abas mensais de Julho e Agosto/2026.
+
+Projetos monitorados: EG0239, EG0240, EG0241, EG0256, EG0273, EG0274, EG0275, EG0285, EG0286, EG0287, EG0280 (G0280).
+
+Publicação: deploy automático via Vercel após push do repositório (tarefa `PR03-Auto-Push-GitHub`).
