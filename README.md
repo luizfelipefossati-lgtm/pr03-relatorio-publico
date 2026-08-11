@@ -2,11 +2,11 @@
 
 Snapshot estático do dashboard PR.03 (Estudos e Projetos), gerado automaticamente a partir do Jira.
 
-**Última atualização:** 11/08/2026 10:14 (2026-08-11T10:14:14-03:00)
+**Última atualização:** 11/08/2026 11:15 (2026-08-11T11:15:45-03:00)
 
 Os dados são congelados no momento da geração — a página publicada não consulta o Jira ao vivo. Um script injetado sobrescreve `window.cowork.callMcpTool`, devolvendo os dados pré-buscados conforme o padrão da consulta JQL, e adiciona os meses corrente e anterior ao histórico interno do artifact. Conteúdo do snapshot:
 
-- **Aba mensal Agosto/2026 (mês corrente):** dados reais buscados no Jira e congelados — 16 EPICs previstos (todos ainda em andamento, 0 entregues até a geração), 3 em atraso acumulado, 28 no look-ahead (Set–Out/2026); nenhum envio, entrega ou retrabalho registrado no mês.
+- **Aba mensal Agosto/2026 (mês corrente):** dados reais buscados no Jira e congelados — 16 EPICs previstos, 3 em atraso acumulado, 28 no look-ahead (Set–Out/2026); nenhum envio, entrega ou retrabalho registrado no mês.
 - **Aba mensal Julho/2026 (mês anterior):** congelada neste snapshot — 10 EPICs previstos, 1 em atraso acumulado, 11 enviados (4 com retrabalho), 28 no look-ahead (Ago–Set/2026). Exibe dados reais em vez do aviso de período sem snapshot.
 - **Visão Acumulada (padrão Março–Agosto/2026):** Abril, Maio e Junho vêm dos dados históricos já congelados no artifact; Março (7 EPICs previstos), Julho (10) e Agosto (16) foram buscados no Jira e congelados neste snapshot.
 
