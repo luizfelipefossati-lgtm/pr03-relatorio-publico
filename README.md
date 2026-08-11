@@ -2,7 +2,7 @@
 
 Snapshot estático do dashboard PR.03 (Estudos e Projetos), gerado automaticamente a partir do Jira.
 
-**Última atualização:** 11/08/2026 09:34 (2026-08-11T09:34:52-03:00)
+**Última atualização:** 11/08/2026 09:47 (2026-08-11T09:47:57-03:00)
 
 Os dados são congelados no momento da geração — a página publicada não consulta o Jira ao vivo. Um script injetado sobrescreve `window.cowork.callMcpTool`, devolvendo os dados pré-buscados conforme o padrão da consulta JQL, e adiciona os meses corrente e anterior ao histórico interno do artifact. Conteúdo do snapshot:
 
