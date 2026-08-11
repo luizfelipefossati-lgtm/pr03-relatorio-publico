@@ -2,13 +2,13 @@
 
 Snapshot estático do dashboard PR.03 (Estudos e Projetos), gerado automaticamente a partir do Jira.
 
-**Última atualização:** 11/08/2026 15:17 (2026-08-11T15:17:21-03:00)
+**Última atualização:** 11/08/2026 16:15 (2026-08-11T16:15:10-03:00)
 
-Os dados são congelados no momento da geração — a página publicada não consulta o Jira ao vivo. Um script injetado sobrescreve `window.cowork.callMcpTool`, devolvendo os dados pré-buscados conforme o padrão da consulta JQL, e adiciona os meses corrente e anterior ao histórico interno do artifact (`window.__HISTORY__`). Conteúdo do snapshot:
+Os dados são congelados no momento da geração — a página publicada não consulta o Jira ao vivo. Um script injetado sobrescreve `window.cowork.callMcpTool` (devolvendo a lista de projetos e vazio para qualquer JQL não coberta) e adiciona os meses corrente e anterior, mais Março/2026, ao histórico interno do artifact (`window.__HISTORY__`). Conteúdo do snapshot:
 
-- **Aba mensal Agosto/2026 (mês corrente):** dados reais buscados no Jira e congelados — 15 EPICs previstos, 3 em atraso acumulado, 2 entregues no mês, 29 no look-ahead (Set–Out/2026); nenhum envio ou retrabalho registrado no mês.
-- **Aba mensal Julho/2026 (mês anterior):** congelada neste snapshot — 10 EPICs previstos, 1 em atraso acumulado, 11 enviados (5 com retrabalho), 8 concluídos, 28 no look-ahead (Ago–Set/2026). Exibe dados reais em vez do aviso de período sem snapshot.
-- **Visão Acumulada (padrão Março–Agosto/2026):** os seis meses foram buscados no Jira e congelados neste snapshot — Março (7 EPICs previstos), Abril (15), Maio (7), Junho (1), Julho (10) e Agosto (15).
+- **Aba mensal Agosto/2026 (mês corrente):** dados reais buscados no Jira e congelados — 15 EPICs previstos (1 entregue até a data), 3 em atraso acumulado, 2 enviados/concluídos no mês (0 retrabalho), 29 no look-ahead (Set–Out/2026).
+- **Aba mensal Julho/2026 (mês anterior):** congelada neste snapshot — 10 EPICs previstos (8 concluídos), 1 em atraso acumulado, 11 enviados (5 com retrabalho), 28 no look-ahead (Ago–Set/2026). Exibe dados reais em vez do aviso de período sem snapshot.
+- **Visão Acumulada (padrão Março–Agosto/2026):** os seis meses ficam congelados no snapshot — Março (7 EPICs previstos, 6 entregues), Abril (15), Maio (7), Junho (1), Julho (10) e Agosto (15).
 
 Projetos monitorados (visíveis no Jira, 19): CREA, EG0232, EG0235, EG0239, EG0240, EG0241, EG0256, EG0257, EG0272, EG0273, EG0274, EG0275, EG0285, EG0286, EG0287, EG0292, G0120, G0280, PE.
 
