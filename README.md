@@ -2,13 +2,13 @@
 
 Snapshot estático do dashboard PR.03 (Estudos e Projetos), gerado automaticamente a partir do Jira.
 
-**Última atualização:** 11/08/2026 21:18 (2026-08-11T21:18:48-03:00)
+**Última atualização:** 11/08/2026 22:16 (2026-08-11T22:16:43-03:00)
 
 Os dados são congelados no momento da geração — a página publicada não consulta o Jira ao vivo. Um script injetado sobrescreve `window.cowork.callMcpTool` (devolvendo a lista de projetos e classificando cada JQL por padrão para servir os dados pré-buscados; JQL não coberta retorna vazio) e adiciona os meses corrente e anterior (Agosto e Julho/2026) mais Março/2026 ao histórico interno do artifact (`window.__HISTORY__`). Conteúdo do snapshot:
 
-- **Aba mensal Agosto/2026 (mês corrente):** dados reais buscados no Jira e congelados — 8 EPICs previstos (1 entregue até a data, OTD 13%), 3 em atraso acumulado, 1 enviado/concluído no mês (0 retrabalho), 19 no look-ahead (Set–Out/2026).
-- **Aba mensal Julho/2026 (mês anterior):** congelada neste snapshot — 9 EPICs previstos (7 concluídos, OTD 78%), 1 em atraso acumulado, 9 enviados (3 com retrabalho), 18 no look-ahead (Ago–Set/2026). Exibe dados reais em vez do aviso de período sem snapshot.
-- **Visão Acumulada (padrão Março–Agosto/2026):** os seis meses ficam congelados — Março (5 previstos, 3 entregues), Abril (19 previstos, 16 entregues), Maio (15 previstos, 4 entregues), Junho (2 previstos, 1 entregue), Julho (9 previstos, 7 entregues) e Agosto (8 previstos, 1 entregue). OTD acumulado: 32/58 = 55%.
+- **Aba mensal Agosto/2026 (mês corrente):** dados reais buscados no Jira e congelados — 15 EPICs previstos (1 entregue até a data, OTD 7%), 3 em atraso acumulado, 2 enviados/concluídos no mês (0 retrabalho), 29 no look-ahead (Set–Out/2026).
+- **Aba mensal Julho/2026 (mês anterior):** congelada neste snapshot — 10 EPICs previstos (8 concluídos, OTD 80%), 1 em atraso acumulado, 11 enviados/concluídos (5 com retrabalho), 28 no look-ahead (Ago–Set/2026). Exibe dados reais em vez do aviso de período sem snapshot.
+- **Visão Acumulada (padrão Março–Agosto/2026):** os seis meses ficam congelados — Março (7 previstos, 3 entregues, 43%), Abril (19 previstos, 16 entregues, 84%), Maio (15 previstos, 4 entregues, 27%), Junho (2 previstos, 1 entregue, 50%), Julho (10 previstos, 8 entregues, 80%) e Agosto (15 previstos, 1 entregue, 7%). OTD acumulado: 33/68 = 49%.
 
 Projetos monitorados (visíveis no Jira, 19): CREA, EG0232, EG0235, EG0239, EG0240, EG0241, EG0256, EG0257, EG0272, EG0273, EG0274, EG0275, EG0285, EG0286, EG0287, EG0292, G0120, G0280, PE.
 
