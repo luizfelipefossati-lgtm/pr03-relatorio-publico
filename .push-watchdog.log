@@ -1430,3 +1430,6 @@
 2026-08-21 14:33:14  ERRO: git commit falhou (exit 128): fatal: cannot lock ref 'HEAD': unable to resolve reference 'refs/heads/main': reference broken
 2026-08-21 14:34:29  === Watchdog iniciando ===
 2026-08-21 14:34:32  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'True' | lock: 'False' | index quebrado: 'False'
+2026-08-21 14:34:33  ERRO: git commit falhou (exit 128): fatal: cannot lock ref 'HEAD': unable to resolve reference 'refs/heads/main': reference broken
+2026-08-21 14:44:30  === Watchdog iniciando ===
+2026-08-21 14:44:31  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'False' | lock: 'False' | index quebrado: 'False'
