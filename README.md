@@ -2,7 +2,7 @@
 
 Página estática publicada automaticamente a partir do Live Artifact **"Pr03 Relatorio Indicadores Epics"** (dashboard Jira da Engeplus Engenharia).
 
-- **Última atualização (snapshot):** 21/08/2026 14:18
+- **Última atualização (snapshot):** 21/08/2026 16:14
 - **Origem dos dados:** Jira Cloud (projetos de Estudos e Projetos)
 - **Natureza:** dados **travados** no momento da geração — a página não consulta o Jira ao vivo.
 
@@ -19,6 +19,7 @@ Página estática publicada automaticamente a partir do Live Artifact **"Pr03 Re
 - Próximos 2 meses (**Set–Out 2026**): 29 epics com vencimento previsto (lookahead de agosto).
 - Visão **Acumulada** dos últimos 6 meses (Março–Agosto 2026): Mar 7, Abr 15, Mai 7, Jun 1, Jul 10 e Ago 14 epics previstos.
 - Indicadores: OTD, previstos/entregues/pendentes, retrabalho e lookahead.
+- Tipos de issue de nível Epic detectados no Jira: `Epic` e `Fluxo de trabalho` (19 projetos visíveis).
 
 ## Privacidade
 
