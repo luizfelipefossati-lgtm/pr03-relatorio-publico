@@ -1,19 +1,27 @@
-# PR.03 — Relatório Público de Indicadores de EPICs
+# PR.03 - Relatório de Indicadores de EPICs (Snapshot Público)
 
-Snapshot estático do dashboard PR.03 (Estudos e Projetos), gerado automaticamente a partir do Jira.
+Página estática publicada automaticamente a partir do Live Artifact **"Pr03 Relatorio Indicadores Epics"** (dashboard Jira da Engeplus Engenharia).
 
-**Última atualização:** 13/08/2026 13:25 (2026-08-13T13:25:24-0300)
+- **Última atualização (snapshot):** 21/08/2026 14:18
+- **Origem dos dados:** Jira Cloud (projetos de Estudos e Projetos)
+- **Natureza:** dados **travados** no momento da geração — a página não consulta o Jira ao vivo.
 
-Os dados são congelados no momento da geração — a página publicada não consulta o Jira ao vivo. Um script injetado adiciona os meses corrente e anterior (Agosto e Julho/2026), além de Março/2026, ao histórico interno do artifact (`window.__HISTORY__`) e sobrescreve `window.cowork.callMcpTool`, devolvendo a lista de projetos visíveis e retornando vazio para qualquer consulta JQL (todos os períodos exibidos já estão congelados no histórico). Conteúdo do snapshot:
+## Como funciona a automação
 
-- **Aba mensal Agosto/2026 (mês corrente):** dados reais buscados no Jira e congelados — 15 EPICs previstos (1 entregue até a data, OTD 7%), 3 em atraso acumulado, 2 enviados/concluídos no mês (0 retrabalho) e 29 no look-ahead (Set–Out/2026).
-- **Aba mensal Julho/2026 (mês anterior):** capturada integralmente — 10 EPICs previstos, 8 concluídos (OTD 80%), 1 em atraso acumulado, 11 enviados/concluídos no mês (5 com retrabalho) e 28 no look-ahead (Ago–Set/2026).
-- **Visão Acumulada (padrão Março–Agosto/2026):** os seis meses ficam congelados — Março (7 previstos, 3 entregues, 43%), Abril (19 previstos, 16 entregues, 84%), Maio (15 previstos, 4 entregues, 27%), Junho (2 previstos, 1 entregue, 50%), Julho (10 previstos, 8 entregues, 80%) e Agosto (15 previstos, 1 entregue, 7%). OTD acumulado: 33/68 = 49%.
+1. Uma tarefa agendada gera este snapshot estático, pré-buscando via MCP os dados do mês corrente, mês anterior e visão acumulada. As entradas completas dos dois meses recentes e os meses acumulados são congelados em `window.__HISTORY__`, e `window.__SNAPSHOT__` + a sobrescrita de `window.cowork.callMcpTool` servem `getVisibleJiraProjects` e qualquer consulta residual offline.
+2. A tarefa `PR03-Auto-Push-GitHub` (Windows Task Scheduler, a cada 30 min) detecta as mudanças no working tree e faz `git commit + push` automaticamente.
+3. O Vercel publica o novo `index.html` cerca de 1 minuto após o push.
 
-Projetos monitorados (visíveis no Jira, 19): CREA, EG0232, EG0235, EG0239, EG0240, EG0241, EG0256, EG0257, EG0272, EG0273, EG0274, EG0275, EG0285, EG0286, EG0287, EG0292, G0120, G0280, PE.
+## Conteúdo capturado neste snapshot
 
-Tipos de nível Epic detectados dinamicamente: "Epic" e "Fluxo de trabalho" (este último nos projetos team-managed — CREA, EG0285, EG0286, EG0287, EG0292 — incluído na apuração).
+- Aba mensal **Agosto 2026** (mês corrente, ao vivo → congelado): 14 epics previstos, 2 em atraso acumulado, 4 enviados/resolvidos para análise no período (2 com retrabalho).
+- Aba mensal **Julho 2026** (mês anterior): congelado como entrada completa em `window.__HISTORY__` — 10 epics previstos, 1 em atraso acumulado, 11 enviados/resolvidos no período (5 com retrabalho), 27 no lookahead.
+- Próximos 2 meses (**Set–Out 2026**): 29 epics com vencimento previsto (lookahead de agosto).
+- Visão **Acumulada** dos últimos 6 meses (Março–Agosto 2026): Mar 7, Abr 15, Mai 7, Jun 1, Jul 10 e Ago 14 epics previstos.
+- Indicadores: OTD, previstos/entregues/pendentes, retrabalho e lookahead.
 
-Privacidade: os dados publicados incluem chaves e títulos de EPICs e podem conter nomes de status; accountIds, avatares e e-mails são removidos. Publicação aprovada pelo usuário.
+## Privacidade
 
-Publicação: deploy automático via Vercel após push do repositório (tarefa do Windows `PR03-Auto-Push-GitHub`, a cada 30 min).
+Os dados publicados incluem chaves e títulos de epics e nomes de status. Os JSONs de origem já excluem `accountId`, e-mails e avatares. Publicação aprovada pelo usuário.
+
+_Gerado automaticamente. Não editar manualmente — as alterações são sobrescritas no próximo ciclo._
