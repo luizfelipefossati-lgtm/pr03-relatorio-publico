@@ -1,47 +1,40 @@
-# PR.03 - Relatório de Indicadores de EPICs (Snapshot Público)
+# PR.03 - Relatorio de Indicadores de EPICs (Engeplus)
 
-Página estática publicada automaticamente a partir do Live Artifact **"Pr03 Relatorio Indicadores Epics"** (dashboard Jira da Engeplus Engenharia).
+Snapshot estatico publico do dashboard **PR.03 - Estudos e Projetos / Relatorio de Indicadores**,
+gerado a partir do Live Artifact `pr03-relatorio-indicadores-epics` com dados do Jira
+(`projetos-engeplus.atlassian.net`).
 
-- **Última atualização (snapshot):** 22/08/2026 13:09
-- **Origem dos dados:** Jira Cloud (projetos de Estudos e Projetos)
-- **Natureza:** dados **travados** no momento da geração — a página não consulta o Jira ao vivo.
+**Ultima atualizacao: 22/08/2026 14:25 (America/Sao_Paulo)**
 
-## Como funciona a automação
+## O que e
 
-1. Uma tarefa agendada gera este snapshot estático, pré-buscando via MCP os dados do mês corrente, do mês anterior e da visão acumulada. Os meses são injetados em `window.__HISTORY__` por `window.__SNAPSHOT__`, e a sobrescrita de `window.cowork.callMcpTool` serve `getVisibleJiraProjects` e qualquer consulta JQL residual offline (roteamento por padrão de JQL: planned, overdue, lookahead, sent/rework e resolved; vazio quando não houver dado pré-buscado).
-2. O relógio da página é **congelado** no instante da geração. Sem isso, o navegador de quem abre a página recalcularia as abas e o lookahead pela data atual do visitante e, ao virar o mês, o relatório apareceria vazio. As abas ficam fixas em Julho/Agosto 2026 e o acumulado em Março–Agosto 2026.
-3. A tarefa `PR03-Auto-Push-GitHub` (Windows Task Scheduler, a cada 30 min) detecta as mudanças no working tree e faz `git commit + push` automaticamente.
-4. O Vercel publica o novo `index.html` cerca de 1 minuto após o push.
+`index.html` e uma pagina autocontida. Todos os dados do Jira foram pre-buscados no
+momento da geracao e injetados em `window.__SNAPSHOT__` / `window.__HISTORY__`.
+A pagina **nao** consulta o Jira ao vivo - `window.cowork.callMcpTool` e substituido
+por um stub que devolve os dados congelados conforme o padrao da query JQL.
 
-## Conteúdo capturado neste snapshot
+## Conteudo do snapshot
 
-- Aba mensal **Agosto 2026** (mês corrente): 14 epics previstos, 2 entregues (ambos com pequeno atraso), 12 pendentes, 2 em atraso acumulado, 4 enviados/resolvidos no período (2 com retrabalho), 29 no lookahead. **OTD 14%** — mês em curso, 7 dos 14 vencem em 31/08.
-- Aba mensal **Julho 2026** (mês anterior, encerrado): 10 epics previstos, 8 entregues (5 no prazo, 3 com pequeno atraso), 2 pendentes, 1 em atraso acumulado, 11 enviados/resolvidos no período (5 com retrabalho), 27 no lookahead. **OTD 80%**.
-- Próximos 2 meses (**Set–Out 2026**): 29 epics com vencimento previsto (lookahead de agosto).
-- Visão **Acumulada** dos últimos 6 meses (Março–Agosto 2026): Mar 7 (OTD 43%), Abr 19 (84%), Mai 15 (27%), Jun 2 (50%), Jul 10 (80%) e Ago 14 (14%) epics previstos — **67 previstos e 34 entregues** no período (OTD acumulado **51%**).
-- Projetos com epics previstos em agosto: EG0239, EG0240, EG0241, EG0275, EG0286 e EG0280 (`G0280`).
-- Indicadores: OTD, previstos/entregues/pendentes, retrabalho e lookahead.
-- Tipos de issue de nível Epic detectados no Jira: `Epic` e `Fluxo de trabalho` (19 projetos visíveis).
+| Aba | Periodo | Origem dos dados |
+|---|---|---|
+| Julho 2026 (Encerrado) | 01-31/07/2026 | congelado em `__HISTORY__["2026-07"]` |
+| Agosto 2026 | 01-31/08/2026 | congelado via `__SNAPSHOT__.queries` |
+| Visao Acumulada | Mar-Ago/2026 | `__HISTORY__` (04,05,06,07) + `__SNAPSHOT__` (03,08) |
 
-## Notas deste ciclo
+Metricas: OTD (On Time Delivery), previstos/entregues/pendentes, atrasos acumulados,
+retrabalho (reenvios), heatmap por projeto e lookahead de 2 meses.
 
-- Os meses encerrados **Abril, Maio e Junho de 2026** são preservados congelados do artifact de origem (Abr 19, Mai 15 e Jun 2 epics previstos) e **não** são re-consultados ao vivo — períodos fechados não devem mudar. **Julho 2026** também é preservado do snapshot anterior, com corte histórico em 31/07 (`resolutiondate <= 31/07`), de modo que alterações posteriores no Jira não deslocam o OTD já fechado.
-- Nesta execução foram consultados ao vivo apenas o mês corrente e o cadastro de projetos: 6 queries JQL de **Agosto 2026** (`planned`, `overdue`, `lookahead`, `sent`, `resolved`, `rework`) e 1 `getVisibleJiraProjects`. As demais séries vêm do histórico congelado, conforme a premissa "período encerrado = dado travado".
-- Os dados de agosto não sofreram alteração em relação ao ciclo das 12:20 — mesmas 14 previstas, 2 entregues, 2 em atraso acumulado, 4 enviados/resolvidos e 29 no lookahead. O que muda nesta publicação é o carimbo de geração.
-- Verificação pós-geração: todas as chamadas dinâmicas da página (2 abas mensais + acumulado de 6 meses + projetos) foram reexecutadas contra o snapshot e resolveram offline, sem nenhum retorno vazio — nenhuma requisição ao Jira permanece na página publicada. Os indicadores foram recalculados com a mesma lógica de `resolutiondate`/corte do artifact e conferem com os números listados acima (67 previstos, 34 entregues, OTD 51%).
-- A página foi reconstruída por *patch* sobre o snapshot anterior: `diff` confirma que apenas o bloco de dados e os dois carimbos de data mudaram, com o restante do artifact idêntico byte a byte (947 linhas de origem preservadas).
-- `EG0274-38` ("Estudos de Tráfego") teve a due date reprogramada de 11/08/2025 para 17/07/2026 e por isso passa a figurar no atraso acumulado de agosto.
+## Publicacao
 
-## Limitações herdadas do artifact (não alteradas aqui)
-
-- As consultas de enviados/retrabalho filtram pela grafia exata `Enviado - Aguardando Análise`. Existem no Jira as variantes `Enviado- Aguardando Análise` (EG0285) e `Enviado - Aguardando Análise1` (EG0239, EG0256, EG0273), que ficam fora dessas duas métricas — os epics correspondentes ainda são contados como entregues via `statusCategory=Done`. Padronizar os nomes de status no Jira resolveria a divergência.
-- Nos dois meses consultados, a consulta de retrabalho retornou **exatamente o mesmo conjunto** da consulta de enviados (5/5 em julho, 2/2 em agosto). A cláusula `status changed from "Enviado - Aguardando Análise"` não discrimina nada nesses períodos, porque todo epic que entrou nesse status também registrou saída dele no histórico. A taxa de retrabalho, portanto, está superestimada e deve ser lida com reserva até que a regra seja revista no artifact.
-- O status `Enviado - Aguardando Análise` tem `statusCategory = done`, ou seja, epics aguardando análise do cliente são contados como entregues no OTD.
+- Repositorio local: `C:\\Users\\DELL\\Documents\\Claude\\pr03-relatorio-publico`
+- `git commit + push` automatico pela tarefa do Windows Task Scheduler `PR03-Auto-Push-GitHub` (a cada 30 min)
+- Deploy no Vercel disparado pelo push (~1 min)
 
 ## Privacidade
 
-Os dados publicados incluem chaves e títulos de epics e nomes de status. Os JSONs de origem já excluem `accountId`, e-mails e avatares — verificado neste ciclo (0 ocorrências de `accountId`, `avatarUrl`, `emailAddress`, `displayName`, `self` e URLs de avatar no payload). Publicação aprovada pelo usuário.
+Os dados publicados contem chaves e titulos de epics, nomes de projetos, datas e status.
+Nao contem accountIds, e-mails, avatares nem descricoes/comentarios das issues.
+Nomes de pessoas podem aparecer apenas se estiverem escritos no titulo de um epic.
 
-> Nota de qualidade de dado: os status `Em Revisã` (EG0275-6) e `Enviado - Aguardando Análise1` são os nomes reais cadastrados no Jira — não são truncamentos nem erros do snapshot.
-
-_Gerado automaticamente. Não editar manualmente — as alterações são sobrescritas no próximo ciclo._
+---
+Gerado automaticamente pela tarefa agendada `deploy-pr03-vercel`. Nao editar `index.html` a mao.
