@@ -3,7 +3,7 @@
 Publicacao estatica do dashboard **Estudos e Projetos - Relatorio de Indicadores**
 (Engeplus Engenharia), gerado a partir do Live Artifact `pr03-relatorio-indicadores-epics`.
 
-- **Ultima atualizacao:** 22/08/2026 16:11
+- **Ultima atualizacao:** 22/08/2026 17:11
 - **Fonte:** Jira Cloud (projetos EG####) - dados congelados no momento da geracao
 - **Abas:** Julho 2026 (encerrado), Agosto 2026 (mes corrente), Visao Acumulada (Mar-Ago/2026)
 
@@ -25,7 +25,14 @@ ao vivo** e pode ser publicada sem credenciais.
 | Retrabalho Ago/2026 | 2 |
 | Look-ahead Set-Out/2026 | 29 |
 | Previstos Jul/2026 (congelado) | 10 |
+| Em atraso acumulado (< Jul/2026) | 1 |
+| Enviados + Resolvidos Jul/2026 | 11 |
+| Retrabalho Jul/2026 | 5 |
+| Look-ahead Ago-Set/2026 (aba Jul) | 27 |
 | Previstos Mar/2026 (acumulado) | 7 |
+
+Abr/2026, Mai/2026 e Jun/2026 da Visao Acumulada vem do bloco `window.__HISTORY__`
+ja embutido no artifact de origem.
 
 ## Publicacao
 
