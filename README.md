@@ -1,41 +1,39 @@
 # PR.03 - Relatorio de Indicadores de EPICs
 
-Publicacao estatica do dashboard **Estudos e Projetos - Relatorio de Indicadores**
-(Engeplus Engenharia), gerado a partir do Live Artifact `pr03-relatorio-indicadores-epics`.
+Snapshot estatico publico do dashboard **Estudos e Projetos - Relatorio de Indicadores** (Engeplus Engenharia).
 
-- **Ultima atualizacao:** 22/08/2026 17:11
-- **Fonte:** Jira Cloud (projetos EG####) - dados congelados no momento da geracao
-- **Abas:** Julho 2026 (encerrado), Agosto 2026 (mes corrente), Visao Acumulada (Mar-Ago/2026)
+- **Ultima atualizacao:** 22/08/2026 18:12 (2026-08-22T18:12:38-03:00)
+- **Fonte:** Jira Cloud - projetos-engeplus.atlassian.net
+- **Escopo:** issues de nivel Epic (`Epic` e `Fluxo de trabalho`) dos projetos visiveis no site
+- **Natureza dos dados:** congelados no momento da geracao. A pagina **nao** consulta o Jira ao vivo.
 
-## Como funciona
+## Abas
 
-O `index.html` e uma copia do artifact com um bloco `window.__SNAPSHOT__` injetado.
-Esse bloco substitui `window.cowork.callMcpTool`, devolvendo os resultados JQL
-pre-buscados em vez de consultar o Jira. A pagina, portanto, **nao acessa o Jira
-ao vivo** e pode ser publicada sem credenciais.
+| Aba | Periodo | Origem dos dados |
+| --- | --- | --- |
+| Julho 2026 | 01/07 a 31/07/2026 | congelado neste snapshot |
+| Agosto 2026 | 01/08 a 31/08/2026 | congelado neste snapshot |
+| Visao Acumulada | ultimos 6 meses (Mar a Ago/2026) | historico embutido + snapshot |
 
-## Dados consolidados neste snapshot
+## Indicadores
 
-| Consulta | Registros |
-|---|---|
-| Previstos Ago/2026 | 14 |
-| Em atraso acumulado (< Ago/2026) | 2 |
-| Enviados Ago/2026 | 2 |
-| Resolvidos Ago/2026 | 4 |
-| Retrabalho Ago/2026 | 2 |
-| Look-ahead Set-Out/2026 | 29 |
-| Previstos Jul/2026 (congelado) | 10 |
-| Em atraso acumulado (< Jul/2026) | 1 |
-| Enviados + Resolvidos Jul/2026 | 11 |
-| Retrabalho Jul/2026 | 5 |
-| Look-ahead Ago-Set/2026 (aba Jul) | 27 |
-| Previstos Mar/2026 (acumulado) | 7 |
-
-Abr/2026, Mai/2026 e Jun/2026 da Visao Acumulada vem do bloco `window.__HISTORY__`
-ja embutido no artifact de origem.
+- **OTD (On Time Delivery)** - percentual de epics previstos no mes que foram entregues.
+- **Pendentes do mes** - previstos e nao entregues dentro do proprio mes.
+- **Em atraso (acumulado)** - epics de meses anteriores com `duedate` vencido e status diferente de concluido.
+- **Retrabalho** - epics que sairam do status "Enviado - Aguardando Analise" apos terem entrado nele.
 
 ## Publicacao
 
-Commit e push sao feitos automaticamente pela tarefa do Windows Task Scheduler
-`PR03-Auto-Push-GitHub` (a cada 30 minutos). O deploy no Vercel ocorre cerca de
-1 minuto apos o push.
+O commit e o push para o GitHub sao feitos automaticamente pela tarefa
+`PR03-Auto-Push-GitHub` do Windows Task Scheduler (a cada 30 minutos).
+O deploy no Vercel ocorre cerca de 1 minuto depois do push.
+
+## Observacoes
+
+- Existem variantes ortograficas do status de envio no Jira ("Enviado - Aguardando Analise",
+  "Enviado- Aguardando Analise", "Enviado - Aguardando Analise1"). As metricas de envio e
+  retrabalho usam a grafia padrao, portanto podem subestimar o total em projetos que adotaram
+  as variantes.
+- O projeto EG0280 - DMAE tem chave `G0280` no Jira.
+- Os dados publicados contem chaves e titulos de epics, nomes de projetos e nomes de status.
+  Nao contem e-mails, identificadores de conta nem avatares.

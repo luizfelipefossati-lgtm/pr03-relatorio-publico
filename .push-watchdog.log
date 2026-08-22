@@ -1837,3 +1837,13 @@
 2026-08-22 17:54:34  === Watchdog concluido com sucesso ===
 2026-08-22 18:04:32  === Watchdog iniciando ===
 2026-08-22 18:04:39  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'False' | lock: 'False' | index quebrado: 'False'
+2026-08-22 18:04:40  Commit OK: 83565f00716972b1c5f8c2344ecdd7d73a02a420
+2026-08-22 18:04:40  Empurrando para origin/main...
+2026-08-22 18:04:47  Push OK e VERIFICADO: HEAD sincronizado com origin/main. Vercel deploya em ~1 min.
+2026-08-22 18:04:47  === Watchdog concluido com sucesso ===
+2026-08-22 18:14:29  === Watchdog iniciando ===
+2026-08-22 18:14:31  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'False' | lock: 'True' | index quebrado: 'False'
+2026-08-22 18:14:31  Lock recente (1.1 min < 3). Pode ser commit em andamento; espero proxima execucao.
+2026-08-22 18:24:29  === Watchdog iniciando ===
+2026-08-22 18:24:30  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'False' | lock: 'True' | index quebrado: 'False'
+2026-08-22 18:24:30  Lock orfao (11.1 min). Removendo...
