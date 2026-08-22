@@ -1,39 +1,34 @@
-# PR.03 - Relatorio de Indicadores de EPICs
+# PR.03 — Relatório de Indicadores de EPICs
 
-Snapshot estatico publico do dashboard **Estudos e Projetos - Relatorio de Indicadores** (Engeplus Engenharia).
+Snapshot estático público do dashboard **Estudos e Projetos — Relatório de Indicadores** (Engeplus Engenharia e Consultoria).
 
-- **Ultima atualizacao:** 22/08/2026 18:12 (2026-08-22T18:12:38-03:00)
-- **Fonte:** Jira Cloud - projetos-engeplus.atlassian.net
-- **Escopo:** issues de nivel Epic (`Epic` e `Fluxo de trabalho`) dos projetos visiveis no site
-- **Natureza dos dados:** congelados no momento da geracao. A pagina **nao** consulta o Jira ao vivo.
+- **Última atualização:** 22/08/2026 19:13 (America/Sao_Paulo)
+- **Fonte:** Jira — `projetos-engeplus.atlassian.net` (issuetype de nível Epic)
+- **Deploy:** Vercel (publicado a partir deste repositório)
 
-## Abas
+## Como funciona
 
-| Aba | Periodo | Origem dos dados |
-| --- | --- | --- |
-| Julho 2026 | 01/07 a 31/07/2026 | congelado neste snapshot |
-| Agosto 2026 | 01/08 a 31/08/2026 | congelado neste snapshot |
-| Visao Acumulada | ultimos 6 meses (Mar a Ago/2026) | historico embutido + snapshot |
+O `index.html` é uma cópia estática do Live Artifact `pr03-relatorio-indicadores-epics`. Todas as chamadas ao Jira foram
+pré-resolvidas e embutidas na página (`window.__SNAPSHOT__`), portanto **a página não consulta o Jira ao vivo** — os dados
+ficam travados no momento da geração.
 
-## Indicadores
+## Conteúdo deste snapshot
 
-- **OTD (On Time Delivery)** - percentual de epics previstos no mes que foram entregues.
-- **Pendentes do mes** - previstos e nao entregues dentro do proprio mes.
-- **Em atraso (acumulado)** - epics de meses anteriores com `duedate` vencido e status diferente de concluido.
-- **Retrabalho** - epics que sairam do status "Enviado - Aguardando Analise" apos terem entrado nele.
+| Aba | Período | Dados |
+|---|---|---|
+| Julho 2026 | encerrado | congelado (`window.__HISTORY__["2026-07"]`) |
+| Agosto 2026 | mês corrente | previstos, em atraso, look-ahead, enviados, resolvidos, retrabalho |
+| Visão Acumulada | mar/2026 – ago/2026 | previstos por mês |
 
-## Publicacao
+Chamadas dinâmicas resolvidas neste snapshot: **13 queries JQL + 1 listagem de projetos (19 projetos)**.
 
-O commit e o push para o GitHub sao feitos automaticamente pela tarefa
-`PR03-Auto-Push-GitHub` do Windows Task Scheduler (a cada 30 minutos).
-O deploy no Vercel ocorre cerca de 1 minuto depois do push.
+## Privacidade
 
-## Observacoes
+Os dados publicados contêm apenas: chave do EPIC, título, status, projeto, data prevista, data de resolução e data de
+atualização. Não são publicados responsáveis, e-mails, `accountId`, avatares ou descrições de tickets.
 
-- Existem variantes ortograficas do status de envio no Jira ("Enviado - Aguardando Analise",
-  "Enviado- Aguardando Analise", "Enviado - Aguardando Analise1"). As metricas de envio e
-  retrabalho usam a grafia padrao, portanto podem subestimar o total em projetos que adotaram
-  as variantes.
-- O projeto EG0280 - DMAE tem chave `G0280` no Jira.
-- Os dados publicados contem chaves e titulos de epics, nomes de projetos e nomes de status.
-  Nao contem e-mails, identificadores de conta nem avatares.
+## Atualização automática
+
+1. Uma tarefa agendada do Cowork regenera este `index.html` a partir do artifact e dos dados do Jira.
+2. A tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler detecta mudanças a cada 30 minutos e faz `commit` + `push`.
+3. O Vercel publica automaticamente cerca de 1 minuto após o push.
