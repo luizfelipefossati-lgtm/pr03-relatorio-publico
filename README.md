@@ -2,7 +2,7 @@
 
 Snapshot estático público do dashboard **Estudos e Projetos — Relatório de Indicadores** (Engeplus Engenharia e Consultoria).
 
-- **Última atualização:** 22/08/2026 19:13 (America/Sao_Paulo)
+- **Última atualização:** 22/08/2026 20:16 (America/Sao_Paulo)
 - **Fonte:** Jira — `projetos-engeplus.atlassian.net` (issuetype de nível Epic)
 - **Deploy:** Vercel (publicado a partir deste repositório)
 
@@ -16,8 +16,8 @@ ficam travados no momento da geração.
 
 | Aba | Período | Dados |
 |---|---|---|
-| Julho 2026 | encerrado | congelado (`window.__HISTORY__["2026-07"]`) |
-| Agosto 2026 | mês corrente | previstos, em atraso, look-ahead, enviados, resolvidos, retrabalho |
+| Julho 2026 | encerrado | congelado (`window.__HISTORY__["2026-07"]`) — 10 previstos, 11 enviados (5 c/ retrabalho) |
+| Agosto 2026 | mês corrente | 14 previstos, 2 em atraso, 29 no look-ahead, 2 enviados, 4 resolvidos, 2 c/ retrabalho |
 | Visão Acumulada | mar/2026 – ago/2026 | previstos por mês |
 
 Chamadas dinâmicas resolvidas neste snapshot: **13 queries JQL + 1 listagem de projetos (19 projetos)**.
