@@ -4,7 +4,7 @@ Snapshot estatico publico do dashboard **PR.03 - Estudos e Projetos / Relatorio 
 gerado a partir do Live Artifact `pr03-relatorio-indicadores-epics` com dados do Jira
 (`projetos-engeplus.atlassian.net`).
 
-**Ultima atualizacao: 22/08/2026 14:25 (America/Sao_Paulo)**
+**Ultima atualizacao: 22/08/2026 15:11 (America/Sao_Paulo)**
 
 ## O que e
 
@@ -20,6 +20,10 @@ por um stub que devolve os dados congelados conforme o padrao da query JQL.
 | Julho 2026 (Encerrado) | 01-31/07/2026 | congelado em `__HISTORY__["2026-07"]` |
 | Agosto 2026 | 01-31/08/2026 | congelado via `__SNAPSHOT__.queries` |
 | Visao Acumulada | Mar-Ago/2026 | `__HISTORY__` (04,05,06,07) + `__SNAPSHOT__` (03,08) |
+
+Volumes desta geracao: julho/2026 - 10 previstos, 1 em atraso acumulado, 11 enviados
+(5 com retrabalho), 27 no lookahead; agosto/2026 - 14 previstos, 2 em atraso acumulado,
+2 enviados, 4 resolvidos, 29 no lookahead; marco/2026 - 7 previstos (serie acumulada).
 
 Metricas: OTD (On Time Delivery), previstos/entregues/pendentes, atrasos acumulados,
 retrabalho (reenvios), heatmap por projeto e lookahead de 2 meses.
