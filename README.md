@@ -2,7 +2,7 @@
 
 Página estática publicada automaticamente a partir do Live Artifact **"Pr03 Relatorio Indicadores Epics"** (dashboard Jira da Engeplus Engenharia).
 
-- **Última atualização (snapshot):** 22/08/2026 12:20
+- **Última atualização (snapshot):** 22/08/2026 13:09
 - **Origem dos dados:** Jira Cloud (projetos de Estudos e Projetos)
 - **Natureza:** dados **travados** no momento da geração — a página não consulta o Jira ao vivo.
 
@@ -25,10 +25,11 @@ Página estática publicada automaticamente a partir do Live Artifact **"Pr03 Re
 
 ## Notas deste ciclo
 
-- Os meses encerrados **Abril, Maio e Junho de 2026** são preservados congelados do artifact de origem (Abr 19, Mai 15 e Jun 2 epics previstos) e **não** são re-consultados ao vivo — períodos fechados não devem mudar.
-- Correção em relação ao ciclo anterior: o snapshot de 11:14 havia **sobrescrito** o bloco `window.__HISTORY__` do artifact, descartando Abril/Maio/Junho e deixando a visão acumulada dependente de re-consulta. Este ciclo reconstrói a página a partir do artifact de origem, mantendo os três meses congelados intactos e verificados (contagens e `_frozen_at` conferidos item a item).
-- **Julho 2026** e **Agosto 2026** foram consultados nesta execução (12 queries JQL) mais 8 queries `planned` de apoio ao acumulado e 1 `getVisibleJiraProjects`. Julho usa corte histórico em 31/07 (`resolutiondate <= 31/07`), de modo que alterações posteriores no Jira não deslocam o OTD já fechado.
-- Verificação pós-geração: as 24 chamadas dinâmicas da página foram reexecutadas contra o snapshot e todas resolveram offline, com as contagens esperadas — nenhuma requisição ao Jira permanece na página publicada.
+- Os meses encerrados **Abril, Maio e Junho de 2026** são preservados congelados do artifact de origem (Abr 19, Mai 15 e Jun 2 epics previstos) e **não** são re-consultados ao vivo — períodos fechados não devem mudar. **Julho 2026** também é preservado do snapshot anterior, com corte histórico em 31/07 (`resolutiondate <= 31/07`), de modo que alterações posteriores no Jira não deslocam o OTD já fechado.
+- Nesta execução foram consultados ao vivo apenas o mês corrente e o cadastro de projetos: 6 queries JQL de **Agosto 2026** (`planned`, `overdue`, `lookahead`, `sent`, `resolved`, `rework`) e 1 `getVisibleJiraProjects`. As demais séries vêm do histórico congelado, conforme a premissa "período encerrado = dado travado".
+- Os dados de agosto não sofreram alteração em relação ao ciclo das 12:20 — mesmas 14 previstas, 2 entregues, 2 em atraso acumulado, 4 enviados/resolvidos e 29 no lookahead. O que muda nesta publicação é o carimbo de geração.
+- Verificação pós-geração: todas as chamadas dinâmicas da página (2 abas mensais + acumulado de 6 meses + projetos) foram reexecutadas contra o snapshot e resolveram offline, sem nenhum retorno vazio — nenhuma requisição ao Jira permanece na página publicada. Os indicadores foram recalculados com a mesma lógica de `resolutiondate`/corte do artifact e conferem com os números listados acima (67 previstos, 34 entregues, OTD 51%).
+- A página foi reconstruída por *patch* sobre o snapshot anterior: `diff` confirma que apenas o bloco de dados e os dois carimbos de data mudaram, com o restante do artifact idêntico byte a byte (947 linhas de origem preservadas).
 - `EG0274-38` ("Estudos de Tráfego") teve a due date reprogramada de 11/08/2025 para 17/07/2026 e por isso passa a figurar no atraso acumulado de agosto.
 
 ## Limitações herdadas do artifact (não alteradas aqui)
