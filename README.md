@@ -2,8 +2,8 @@
 
 Snapshot estático publicado do dashboard **Pr03 Relatorio Indicadores Epics** (Engeplus Engenharia — Estudos e Projetos).
 
-- **Última atualização:** 24/08/2026 16:09 (America/Sao_Paulo)
-- **Timestamp ISO:** `2026-08-24T16:09:20-03:00`
+- **Última atualização:** 24/08/2026 17:12 (America/Sao_Paulo)
+- **Timestamp ISO:** `2026-08-24T17:12:05-03:00`
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Tipos de issue tratados como EPIC:** `Epic`, `Fluxo de trabalho` (hierarchyLevel = 1)
 - **Projetos visíveis:** 19
@@ -23,28 +23,31 @@ coletados nesta execução.
 
 ## Dados congelados neste snapshot
 
-| Mês | Previstos | Entregues | No prazo | Peq. atraso | Pendentes | Atrasados (acum.) | Lookahead | Enviados | Retrabalho | Origem |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Março/2026 | 7 | — | — | — | — | — | — | — | — | `planned` desta execução |
-| Abril/2026 | 19 | — | — | — | — | 1 | 36 | 20 | 18 | congelado no artifact |
-| Maio/2026 | 15 | — | — | — | — | 6 | 18 | 3 | 1 | congelado no artifact |
-| Junho/2026 | 2 | — | — | — | — | 2 | — | 7 | 0 | congelado no artifact |
-| Julho/2026 | 10 | 10 | 7 | 3 | 0 | 1 | 27 | 11 | 7 | snapshot desta execução |
-| Agosto/2026 | 14 | 2 | 0 | 2 | 12 | 1 | 29 | 5 | 2 | snapshot desta execução |
+| Mês | Previstos | Entregues | No prazo | Peq. atraso | Pendentes | Atrasados (acum.) | Lookahead | Enviados | Retrabalho | OTD | Origem |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Março/2026 | 7 | — | — | — | — | — | — | — | — | — | `planned` desta execução |
+| Abril/2026 | 19 | — | — | — | — | 1 | 36 | 20 | 18 | — | congelado no artifact |
+| Maio/2026 | 15 | — | — | — | — | 6 | 18 | 3 | 1 | — | congelado no artifact |
+| Junho/2026 | 2 | — | — | — | — | 2 | — | 7 | 0 | — | congelado no artifact |
+| Julho/2026 | 10 | 8 | 5 | 3 | 2 | 1 | 27 | 11 | 5 | 80% | snapshot desta execução |
+| Agosto/2026 | 14 | 2 | 0 | 2 | 12 | 1 | 29 | 5 | 3 | 14% | snapshot desta execução |
 
 - **Julho e Agosto/2026** (abas mensais) têm o conjunto completo de indicadores: `planned`,
   `overdue`, `lookahead`, `sent`, `resolved` e `rework`.
 - **Março/2026** tem apenas `planned`, usado pela Visão Acumulada.
 - **Abril, Maio e Junho/2026** vêm do `__HISTORY__` embutido no artifact (premissa do relatório:
   período encerrado = dado congelado, nunca reconsultado).
+- Julho/2026 é aba **encerrada**: o OTD usa como corte a data `2026-07-31`. Dois EPICs previstos para
+  julho (`EG0274-43` e `EG0274-38`) só foram resolvidos em agosto, portanto contam como pendentes no
+  fechamento de julho — é o comportamento correto da regra `dnAt(issue, fim do período)`.
 - Os percentuais de OTD e de retrabalho são calculados na própria página a partir destes números.
 
 ## Consultas resolvidas offline
 
 13 entradas JQL no índice de `window.__SNAPSHOT__.jql`:
 
-- Julho/2026 — `planned` (10), `overdue` (1), `lookahead` ago–set (27), `sent` (5), `resolved` (8), `rework` (7)
-- Agosto/2026 — `planned` (14), `overdue` (1), `lookahead` set–out (29), `sent` (3), `resolved` (5), `rework` (2)
+- Julho/2026 — `planned` (10), `overdue` (1), `lookahead` ago–set (27), `sent` (5), `resolved` (8), `rework` (5)
+- Agosto/2026 — `planned` (14), `overdue` (1), `lookahead` set–out (29), `sent` (3), `resolved` (5), `rework` (3)
 - Março/2026 — `planned` (7)
 
 Mais 1 chamada de `getVisibleJiraProjects` (19 projetos), também resolvida pelo bloco estático.
