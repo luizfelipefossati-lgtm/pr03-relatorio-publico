@@ -2,10 +2,10 @@
 
 Snapshot estático publicado do dashboard **Pr03 Relatorio Indicadores Epics** (Engeplus Engenharia — Estudos e Projetos).
 
-- **Última atualização:** 24/08/2026 11:49 (America/Sao_Paulo)
-- **Timestamp ISO:** `2026-08-24T11:49:00-03:00`
+- **Última atualização:** 24/08/2026 12:15 (America/Sao_Paulo)
+- **Timestamp ISO:** `2026-08-24T12:15:03-03:00`
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
-- **Tipos de issue tratados como EPIC:** Epic, Fluxo de trabalho
+- **Tipos de issue tratados como EPIC:** `Epic`, `Fluxo de trabalho` (hierarchyLevel = 1)
 - **Projetos visíveis:** 19
 
 ## O que é isto
@@ -19,7 +19,7 @@ Consultas fora do período congelado retornam vazio e registram aviso no console
 
 | Mês | Previstos | Entregues | OTD | Atrasados (acum.) | Lookahead | Enviados | Retrabalho | Origem |
 |---|---|---|---|---|---|---|---|---|
-| Março/2026 | 7 | — | — | 0 | — | — | — | snapshot desta execução |
+| Março/2026 | 7 | — | — | — | — | — | — | snapshot desta execução |
 | Abril/2026 | 19 | — | — | 1 | 36 | 20 | 18 | congelado no artifact |
 | Maio/2026 | 15 | — | — | 6 | 18 | 3 | 1 | congelado no artifact |
 | Junho/2026 | 2 | — | — | 2 | — | 7 | 0 | congelado no artifact |
@@ -29,47 +29,42 @@ Consultas fora do período congelado retornam vazio e registram aviso no console
 - **Julho e Agosto/2026** (abas mensais) têm o conjunto completo de indicadores: `planned`,
   `overdue`, `lookahead`, `sent`, `resolved` e `rework`.
 - **Março/2026** é o mês inicial da **Visão Acumulada** (padrão: últimos 6 meses); a visão
-  acumulada usa apenas a série `planned`, que foi buscada nesta execução (`overdue` de março
-  retornou 0 registros).
-- **Abril a Junho/2026** são períodos encerrados cujos dados já vêm congelados no próprio artifact
-  (`window.__HISTORY__`); esta execução **não** os sobrescreve, preservando o fechamento original.
-- A coluna **Enviados** é o total após unir `sent` (transições de status) com `resolved`
-  (concluídos no mês), exatamente como o artifact faz.
+  acumulada usa apenas a série `planned`, que foi buscada nesta execução.
+- **Abril a Junho/2026** são períodos encerrados cujos dados já vêm congelados no próprio
+  artifact (`window.__HISTORY__`) e não são reconsultados.
+- "Enviados" combina as séries `sent` e `resolved` do mês, deduplicadas por chave de issue —
+  mesma regra usada pelo dashboard ao vivo.
 
-## Observações sobre os dados (Jira)
+## Consultas resolvidas nesta execução
 
-- **Agosto/2026 tem OTD de 14% (2 de 14 EPICs entregues)** — o mês ainda estava em curso na data
-  da geração, com vencimentos concentrados em 31/08. A leitura de OTD só fecha ao fim do período.
-- **EG0286 - DNIT/AC** responde por 7 dos 14 EPICs previstos em agosto e usa o tipo de issue
-  **"Fluxo de trabalho"** (projeto team-managed) em vez de "Epic" — por isso o dashboard descobre
-  os tipos de nível 1 dinamicamente em `getVisibleJiraProjects`.
-- Existem **variantes do nome do status "enviado"** entre projetos — `Enviado - Aguardando Análise`
-  e `Enviado - Aguardando Análise1`. As consultas de `sent`/`rework` filtram pelo nome exato e por
-  isso **subcontam**: em agosto, `sent` retorna 2 registros contra 4 em `resolved`. A padronização
-  dos nomes de status no Jira eliminaria a divergência.
-- A consulta de `rework` do artifact (`status changed to "Enviado - Aguardando Análise" DURING (...)
-  AND status changed from "Enviado - Aguardando Análise"`) retornou **o mesmo conjunto** que a
-  consulta `sent` em julho e agosto — a cláusula `changed from` sem janela de data praticamente não
-  filtra, inflando o retrabalho. O snapshot reproduz fielmente o comportamento do artifact;
-  corrigir o indicador exige ajustar a JQL no artifact, não neste repositório.
-- **Atrasos acumulados persistentes:** `EG0274-41` (Estudos Geotécnicos, vencido em 25/03/2026) e
-  `EG0274-38` (Estudos de Tráfego, vencido em 17/07/2026), ambos do EG0274 - DNIT.
-- O projeto DMAE usa a chave `G0280` embora o nome exibido seja `EG0280 - DMAE`.
+| Chave | Registros |
+|---|---|
+| `planned\|2026-03` | 7 |
+| `planned\|2026-07` | 10 |
+| `overdue\|2026-07` | 1 |
+| `look\|2026-07` | 27 |
+| `sent\|2026-07` | 5 |
+| `resolved\|2026-07` | 8 |
+| `rework\|2026-07` | 5 |
+| `planned\|2026-08` | 14 |
+| `overdue\|2026-08` | 2 |
+| `look\|2026-08` | 29 |
+| `sent\|2026-08` | 2 |
+| `resolved\|2026-08` | 4 |
+| `rework\|2026-08` | 2 |
 
-## Estrutura
-
-- `index.html` — dashboard completo e autocontido (cópia do artifact + injeção do snapshot)
-- `vercel.json` — configuração de deploy
-- `snapshot-data.js` — **legado**, não é mais referenciado pelo `index.html` (dados agora inline)
-
-## Atualização
-
-1. A tarefa agendada `deploy-pr03-vercel` regenera `index.html` e este `README.md`.
-2. A tarefa do Windows Task Scheduler `PR03-Auto-Push-GitHub` (a cada 30 min) faz `git add/commit/push`.
-3. O Vercel publica automaticamente ~1 min após o push.
+Mais 1 chamada `getVisibleJiraProjects` (19 projetos) — total de **14 chamadas MCP** resolvidas.
 
 ## Privacidade
 
-Os dados publicados contêm chaves e resumos de EPICs, nomes de projeto, datas e status.
-Verificado nesta geração: **não** contêm `accountId`, `emailAddress`, `avatarUrls`, URLs de
-gravatar, `iconUrl` nem descrições de issues.
+Os JSONs embutidos contêm apenas `key`, `summary`, `status.name`, `status.statusCategory.key`,
+`project.key`, `project.name`, `duedate`, `resolutiondate` e `updated`. Não há `accountId`,
+avatares, e-mails, descrições (ADF) nem comentários. A publicação deste conteúdo foi
+aprovada pelo responsável pelo repositório.
+
+## Publicação
+
+- `index.html` é servido estaticamente (Vercel, config em `vercel.json`).
+- O commit e o push são feitos automaticamente pela tarefa do Windows Task Scheduler
+  `PR03-Auto-Push-GitHub`, que roda a cada 30 minutos. A geração do snapshot **não** executa
+  operações de git.
