@@ -2,8 +2,8 @@
 
 Snapshot estático publicado do dashboard **Pr03 Relatorio Indicadores Epics** (Engeplus Engenharia — Estudos e Projetos).
 
-- **Última atualização:** 24/08/2026 09:11 (America/Sao_Paulo)
-- **Timestamp ISO:** `2026-08-24T09:11:04-03:00`
+- **Última atualização:** 24/08/2026 09:21 (America/Sao_Paulo)
+- **Timestamp ISO:** `2026-08-24T09:21:23-03:00`
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Tipos de issue tratados como EPIC:** Epic, Fluxo de trabalho
 - **Projetos visíveis:** 19
@@ -41,6 +41,11 @@ Consultas fora do período congelado retornam vazio e registram aviso no console
   eliminaria a divergência.
 - O status de `EG0275-6` está gravado como `Em Revisã` (truncado no próprio Jira).
 - O projeto DMAE usa a chave `G0280` embora o nome exibido seja `EG0280 - DMAE`.
+- A consulta de `rework` do artifact (`status changed to "Enviado - Aguardando Análise" DURING (...)
+  AND status changed from "Enviado - Aguardando Análise"`) retornou **o mesmo conjunto** que a
+  consulta `sent` em julho e agosto — a cláusula `changed from` sem janela de data não filtra nada,
+  produzindo retrabalho de 100% sobre os enviados. O snapshot reproduz fielmente o comportamento do
+  artifact; corrigir o indicador exige ajustar a JQL no artifact, não neste repositório.
 
 ## Estrutura
 
