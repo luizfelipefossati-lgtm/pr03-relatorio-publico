@@ -4,3 +4,6 @@
 
 # Backup file que ficou de uma execucao antiga
 index.html.html
+
+# Fonte pristina do artifact reconstruida em runtime pelo gerador de snapshot
+_artifact_src.html
