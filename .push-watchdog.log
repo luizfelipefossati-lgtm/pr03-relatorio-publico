@@ -2375,3 +2375,9 @@
 2026-08-24 11:14:31  ERRO: push falhou (exit -1073741205): 
 2026-08-24 11:24:30  === Watchdog iniciando ===
 2026-08-24 11:24:33  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'True' | lock: 'False' | index quebrado: 'False'
+2026-08-24 11:24:33  Commit OK: 2e7f5ba22bb31b516931e5725e3e1f17b431ed84
+2026-08-24 11:24:33  Empurrando para origin/main...
+2026-08-24 11:24:37  Push OK e VERIFICADO: HEAD sincronizado com origin/main. Vercel deploya em ~1 min.
+2026-08-24 11:24:37  === Watchdog concluido com sucesso ===
+2026-08-24 11:34:30  === Watchdog iniciando ===
+2026-08-24 11:34:33  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'False' | lock: 'False' | index quebrado: 'False'
