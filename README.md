@@ -2,8 +2,8 @@
 
 Snapshot estático publicado do dashboard **Pr03 Relatorio Indicadores Epics** (Engeplus Engenharia — Estudos e Projetos).
 
-- **Última atualização:** 24/08/2026 12:15 (America/Sao_Paulo)
-- **Timestamp ISO:** `2026-08-24T12:15:03-03:00`
+- **Última atualização:** 24/08/2026 14:13 (America/Sao_Paulo)
+- **Timestamp ISO:** `2026-08-24T14:13:09-03:00`
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Tipos de issue tratados como EPIC:** `Epic`, `Fluxo de trabalho` (hierarchyLevel = 1)
 - **Projetos visíveis:** 19
@@ -24,7 +24,7 @@ Consultas fora do período congelado retornam vazio e registram aviso no console
 | Maio/2026 | 15 | — | — | 6 | 18 | 3 | 1 | congelado no artifact |
 | Junho/2026 | 2 | — | — | 2 | — | 7 | 0 | congelado no artifact |
 | Julho/2026 | 10 | 8 | 80% | 1 | 27 | 11 | 5 | snapshot desta execução |
-| Agosto/2026 | 14 | 2 | 14% | 2 | 29 | 4 | 2 | snapshot desta execução |
+| Agosto/2026 | 14 | 2 | 14% | 1 | 29 | 5 | 3 | snapshot desta execução |
 
 - **Julho e Agosto/2026** (abas mensais) têm o conjunto completo de indicadores: `planned`,
   `overdue`, `lookahead`, `sent`, `resolved` e `rework`.
@@ -34,6 +34,8 @@ Consultas fora do período congelado retornam vazio e registram aviso no console
   artifact (`window.__HISTORY__`) e não são reconsultados.
 - "Enviados" combina as séries `sent` e `resolved` do mês, deduplicadas por chave de issue —
   mesma regra usada pelo dashboard ao vivo.
+- OTD e "Entregues" usam o corte de resolução no último dia do mês (`resolutiondate <= fim do
+  período`), idêntico ao cálculo do dashboard ao vivo.
 
 ## Consultas resolvidas nesta execução
 
@@ -47,13 +49,17 @@ Consultas fora do período congelado retornam vazio e registram aviso no console
 | `resolved\|2026-07` | 8 |
 | `rework\|2026-07` | 5 |
 | `planned\|2026-08` | 14 |
-| `overdue\|2026-08` | 2 |
+| `overdue\|2026-08` | 1 |
 | `look\|2026-08` | 29 |
-| `sent\|2026-08` | 2 |
-| `resolved\|2026-08` | 4 |
-| `rework\|2026-08` | 2 |
+| `sent\|2026-08` | 3 |
+| `resolved\|2026-08` | 5 |
+| `rework\|2026-08` | 3 |
 
 Mais 1 chamada `getVisibleJiraProjects` (19 projetos) — total de **14 chamadas MCP** resolvidas.
+
+Observação: nas séries `sent` e `resolved` de Julho/2026 os campos `resolutiondate` e `updated`
+ficaram nulos (não retornados pela consulta). Esses campos não são consumidos pelo dashboard —
+as séries alimentam apenas a contagem de enviados/retrabalho, cujos totais estão corretos.
 
 ## Privacidade
 
