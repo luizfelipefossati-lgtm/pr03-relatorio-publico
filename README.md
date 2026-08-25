@@ -1,66 +1,40 @@
-# PR.03 — Relatório de Indicadores de EPICs
+# PR.03 - Relatório de Indicadores de EPICs
 
-Snapshot estático publicado do dashboard **Pr03 Relatorio Indicadores Epics** (Engeplus Engenharia — Estudos e Projetos).
+Snapshot estático publicado do dashboard **Estudos e Projetos — Relatório de Indicadores** (Engeplus Engenharia).
 
-- **Última atualização:** 24/08/2026 17:12 (America/Sao_Paulo)
-- **Timestamp ISO:** `2026-08-24T17:12:05-03:00`
+- **Última atualização:** 25/08/2026 09:15 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-25T09:15:00-03:00
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
-- **Tipos de issue tratados como EPIC:** `Epic`, `Fluxo de trabalho` (hierarchyLevel = 1)
-- **Projetos visíveis:** 19
-- **Filtro base (ETQ):** `issuetype in ("Epic","Fluxo de trabalho")`
+- **Publicação:** Vercel (deploy automático a cada push)
 
-## O que é isto
+## O que é este arquivo
 
-Cópia estática (dados congelados) do Live Artifact. A página **não** consulta o Jira ao vivo:
-um bloco `<script>` injetado antes do script principal define `window.__SNAPSHOT__` e substitui
-`window.cowork.callMcpTool` por um resolvedor local que devolve os dados pré-buscados a partir do
-texto exato da consulta JQL. Consultas fora do período congelado retornam vazio e registram aviso
-no console — nunca vão à rede.
+`index.html` é uma cópia **estática** do Live Artifact `pr03-relatorio-indicadores-epics`.
+Todas as chamadas dinâmicas ao Jira foram pré-resolvidas e congeladas em `window.__SNAPSHOT__`.
+A página **não consulta o Jira ao vivo** — o banner no rodapé indica a data de congelamento.
 
-Além disso, o snapshot faz `Object.assign` em `window.__HISTORY__`, **preservando** os períodos que
-já estavam congelados dentro do próprio artifact (Abril, Maio e Junho/2026) e acrescentando os meses
-coletados nesta execução.
+## Períodos congelados
 
-## Dados congelados neste snapshot
+| Aba | Período | Origem |
+|---|---|---|
+| Julho 2026 | 01/07 a 31/07/2026 | snapshot desta execução |
+| Agosto 2026 | 01/08 a 31/08/2026 | snapshot desta execução |
+| Visão Acumulada | Mar/2026 a Ago/2026 | Mar, Jul e Ago desta execução; Abr–Jun do histórico embutido |
 
-| Mês | Previstos | Entregues | No prazo | Peq. atraso | Pendentes | Atrasados (acum.) | Lookahead | Enviados | Retrabalho | OTD | Origem |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| Março/2026 | 7 | — | — | — | — | — | — | — | — | — | `planned` desta execução |
-| Abril/2026 | 19 | — | — | — | — | 1 | 36 | 20 | 18 | — | congelado no artifact |
-| Maio/2026 | 15 | — | — | — | — | 6 | 18 | 3 | 1 | — | congelado no artifact |
-| Junho/2026 | 2 | — | — | — | — | 2 | — | 7 | 0 | — | congelado no artifact |
-| Julho/2026 | 10 | 8 | 5 | 3 | 2 | 1 | 27 | 11 | 5 | 80% | snapshot desta execução |
-| Agosto/2026 | 14 | 2 | 0 | 2 | 12 | 1 | 29 | 5 | 3 | 14% | snapshot desta execução |
+## Consultas resolvidas nesta geração
 
-- **Julho e Agosto/2026** (abas mensais) têm o conjunto completo de indicadores: `planned`,
-  `overdue`, `lookahead`, `sent`, `resolved` e `rework`.
-- **Março/2026** tem apenas `planned`, usado pela Visão Acumulada.
-- **Abril, Maio e Junho/2026** vêm do `__HISTORY__` embutido no artifact (premissa do relatório:
-  período encerrado = dado congelado, nunca reconsultado).
-- Julho/2026 é aba **encerrada**: o OTD usa como corte a data `2026-07-31`. Dois EPICs previstos para
-  julho (`EG0274-43` e `EG0274-38`) só foram resolvidos em agosto, portanto contam como pendentes no
-  fechamento de julho — é o comportamento correto da regra `dnAt(issue, fim do período)`.
-- Os percentuais de OTD e de retrabalho são calculados na própria página a partir destes números.
-
-## Consultas resolvidas offline
-
-13 entradas JQL no índice de `window.__SNAPSHOT__.jql`:
-
-- Julho/2026 — `planned` (10), `overdue` (1), `lookahead` ago–set (27), `sent` (5), `resolved` (8), `rework` (5)
-- Agosto/2026 — `planned` (14), `overdue` (1), `lookahead` set–out (29), `sent` (3), `resolved` (5), `rework` (3)
-- Março/2026 — `planned` (7)
-
-Mais 1 chamada de `getVisibleJiraProjects` (19 projetos), também resolvida pelo bloco estático.
+- 1x `getVisibleJiraProjects` (19 projetos)
+- Julho/2026: planned, overdue, lookahead, sent, resolved, rework
+- Agosto/2026: planned, overdue, lookahead, sent, resolved, rework
+- Março/2026: planned (visão acumulada)
 
 ## Privacidade
 
-Os JSONs embutidos foram reduzidos aos campos `key`, `summary`, `status`, `project`, `duedate`,
-`resolutiondate` e `updated`. Não há `accountId`, e-mail, avatar, descrição de issue nem qualquer
-outro metadado do Jira. Nomes de pessoas só apareceriam se estivessem escritos no título do epic ou
-no nome do status.
+Os dados publicados contêm apenas chave do epic, resumo, status, projeto e datas.
+Não há `accountId`, e-mail, avatar ou qualquer identificador pessoal de usuário do Jira.
 
-## Publicação
+## Pipeline
 
-O arquivo `index.html` é servido pela Vercel. O commit e o push são feitos automaticamente pela
-tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler, que roda a cada 30 minutos e detecta
-mudanças no working tree. O deploy sai cerca de 1 minuto depois do push.
+1. Tarefa agendada do Cowork gera o snapshot e grava `index.html` + `README.md`.
+2. Tarefa `PR03-Auto-Push-GitHub` (Windows Task Scheduler, a cada 30 min) faz `git add/commit/push`.
+3. Vercel publica automaticamente ~1 min após o push.
