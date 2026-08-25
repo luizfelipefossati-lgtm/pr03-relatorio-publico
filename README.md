@@ -2,8 +2,8 @@
 
 Snapshot estático publicado do dashboard **Estudos e Projetos — Relatório de Indicadores** (Engeplus Engenharia).
 
-- **Última atualização:** 25/08/2026 15:12 (America/Sao_Paulo)
-- **Timestamp ISO:** 2026-08-25T15:12:36-03:00
+- **Última atualização:** 25/08/2026 16:13 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-25T16:13:15-03:00
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Publicação:** Vercel (deploy automático a cada push)
 
@@ -26,7 +26,7 @@ A página **não consulta o Jira ao vivo** — o banner no rodapé indica a data
 
 - 1x `getVisibleJiraProjects` (19 projetos; tipos de nível Epic: `Epic`, `Fluxo de trabalho`)
 - **Julho 2026:** planned 10 · overdue 1 · lookahead 27 · sent 9 + resolved 8 = 11 consolidados · retrabalho 6
-- **Agosto 2026:** planned 14 · overdue 1 · lookahead 29 · sent 4 + resolved 5 = 5 consolidados · retrabalho 4
+- **Agosto 2026:** planned 14 · overdue 1 · lookahead 29 · sent 4 + resolved 5 = 5 consolidados · retrabalho 3
 - **Março 2026:** planned 7 — visão acumulada
 - Total de **13 padrões JQL** mapeados em `window.__SNAPSHOT__.jql`
 
@@ -37,11 +37,16 @@ O site possui variantes do status de envio (`Enviado - Aguardando Análise`,
 O JQL agrupa essas variantes. O indicador de retrabalho deve ser lido considerando
 essa particularidade da configuração de workflow do site.
 
+Há também duas grafias do status de revisão (`Em Revisão` e o truncado `Em Revisã`)
+e a chave de projeto `G0280` com nome `EG0280 - DMAE` (inconsistência de origem no
+próprio Jira). Ambas foram preservadas verbatim no snapshot.
+
 ## Privacidade
 
 Os JSONs congelados contêm apenas `key`, `summary`, `status.name`, `statusCategory.key`,
 `project.key`, `project.name`, `duedate`, `resolutiondate` e `updated`.
-Não há `accountId`, e-mails, avatares nem conteúdo de descrição/comentários.
+Não há `accountId`, e-mails, avatares nem conteúdo de descrição/comentários
+(verificado por varredura automática nesta geração).
 
 ## Publicação
 
