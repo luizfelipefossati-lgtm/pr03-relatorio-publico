@@ -2,8 +2,8 @@
 
 Snapshot estático publicado do dashboard **Estudos e Projetos — Relatório de Indicadores** (Engeplus Engenharia).
 
-- **Última atualização:** 25/08/2026 12:12 (America/Sao_Paulo)
-- **Timestamp ISO:** 2026-08-25T12:12:55-03:00
+- **Última atualização:** 25/08/2026 13:14 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-25T13:14:22-03:00
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Publicação:** Vercel (deploy automático a cada push)
 
@@ -18,37 +18,35 @@ A página **não consulta o Jira ao vivo** — o banner no rodapé indica a data
 
 | Aba | Período | Origem |
 |---|---|---|
-| Julho 2026 | 01/07 a 31/07/2026 | snapshot desta execução |
-| Agosto 2026 | 01/08 a 31/08/2026 | snapshot desta execução |
+| Julho 2026 | 2026-07-01 a 2026-07-31 | snapshot desta execução |
+| Agosto 2026 | 2026-08-01 a 2026-08-31 | snapshot desta execução |
 | Visão Acumulada | Mar/2026 a Ago/2026 | Mar, Jul e Ago desta execução; Abr–Jun do histórico embutido no artifact |
 
 ## Consultas resolvidas nesta geração
 
-- 1x `getVisibleJiraProjects` (19 projetos; tipos de nível Epic: `Epic`, `Fluxo de trabalho`)
-- **Julho/2026:** planned 10 · overdue 1 · lookahead 27 (ago–set) · sent 5 + resolved 8 = 11 consolidados · retrabalho 5
-- **Agosto/2026:** planned 14 · overdue 1 · lookahead 29 (set–out) · sent 3 + resolved 5 = 5 consolidados · retrabalho 3
-- **Março/2026:** planned 7 — visão acumulada
+- 1x `getVisibleJiraProjects` (19 projetos; tipos de nível Epic: `Fluxo de trabalho`, `Epic`)
+- **Julho 2026:** planned 10 · overdue 1 · lookahead 27 · sent 5 + resolved 8 = 11 consolidados · retrabalho 5
+- **Agosto 2026:** planned 14 · overdue 1 · lookahead 29 · sent 3 + resolved 5 = 5 consolidados · retrabalho 3
+- **Março 2026:** planned 7 — visão acumulada
 - Total de **13 padrões JQL** mapeados em `window.__SNAPSHOT__.jql`
 
 ## Observação sobre variantes de status
 
 O site possui variantes do status de envio (`Enviado - Aguardando Análise`,
 `Enviado- Aguardando Análise`, `Enviado - Aguardando Análise1`) com IDs distintos.
-O JQL agrupa essas variantes, e nesta geração a consulta de retrabalho
-(`status changed to ... AND status changed from ...`) retornou o mesmo conjunto da
-consulta `sent` em ambos os meses — ou seja, todo epic enviado no período já havia
-saído do status de envio em algum momento anterior. O indicador de retrabalho deve
-ser lido com essa ressalva. O snapshot reproduz fielmente o cálculo do artifact ao vivo,
-sem correção manual.
+O JQL agrupa essas variantes. O indicador de retrabalho deve ser lido considerando
+essa particularidade da configuração de workflow do site.
 
 ## Privacidade
 
-Os dados publicados contêm apenas chave do epic, resumo, status, projeto e datas.
-Não há `accountId`, e-mail, avatar ou qualquer identificador pessoal de usuário do Jira
-(verificado programaticamente na geração).
+Os JSONs congelados contêm apenas: chave do epic, resumo, nome/categoria do status,
+chave e nome do projeto, due date, data de resolução e data de atualização.
+**Não** contêm accountIds, e-mails, avatares nem corpo de descrição/comentários.
 
-## Pipeline
+## Automação
 
-1. Tarefa agendada do Cowork gera o snapshot e grava `index.html` + `README.md`.
-2. Tarefa `PR03-Auto-Push-GitHub` (Windows Task Scheduler, a cada 30 min) faz `git add/commit/push`.
-3. Vercel publica automaticamente ~1 min após o push.
+| Etapa | Responsável | Frequência |
+|---|---|---|
+| Gerar `index.html` + `README.md` | tarefa agendada `deploy-pr03-vercel` (Cowork) | conforme agendamento |
+| `git add/commit/push` | Windows Task Scheduler `PR03-Auto-Push-GitHub` | a cada 30 min |
+| Deploy | Vercel (hook de push) | ~1 min após o push |
