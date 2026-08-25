@@ -2,8 +2,8 @@
 
 Snapshot estático publicado do dashboard **Estudos e Projetos — Relatório de Indicadores** (Engeplus Engenharia).
 
-- **Última atualização:** 25/08/2026 11:17 (America/Sao_Paulo)
-- **Timestamp ISO:** 2026-08-25T11:16:02-03:00
+- **Última atualização:** 25/08/2026 12:12 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-25T12:12:55-03:00
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Publicação:** Vercel (deploy automático a cada push)
 
@@ -25,8 +25,8 @@ A página **não consulta o Jira ao vivo** — o banner no rodapé indica a data
 ## Consultas resolvidas nesta geração
 
 - 1x `getVisibleJiraProjects` (19 projetos; tipos de nível Epic: `Epic`, `Fluxo de trabalho`)
-- **Julho/2026:** planned 10 · overdue 1 · lookahead 27 (ago–set) · sent 11 consolidados · retrabalho 5
-- **Agosto/2026:** planned 14 · overdue 1 · lookahead 29 (set–out) · sent 5 consolidados · retrabalho 3
+- **Julho/2026:** planned 10 · overdue 1 · lookahead 27 (ago–set) · sent 5 + resolved 8 = 11 consolidados · retrabalho 5
+- **Agosto/2026:** planned 14 · overdue 1 · lookahead 29 (set–out) · sent 3 + resolved 5 = 5 consolidados · retrabalho 3
 - **Março/2026:** planned 7 — visão acumulada
 - Total de **13 padrões JQL** mapeados em `window.__SNAPSHOT__.jql`
 
@@ -34,9 +34,12 @@ A página **não consulta o Jira ao vivo** — o banner no rodapé indica a data
 
 O site possui variantes do status de envio (`Enviado - Aguardando Análise`,
 `Enviado- Aguardando Análise`, `Enviado - Aguardando Análise1`) com IDs distintos.
-As consultas `sent`/`rework` usam o nome canônico, então itens nas variantes entram
-no indicador apenas via `resolved` (`statusCategory=Done`). O total de envios já
-consolida `sent` + `resolved` para compensar.
+O JQL agrupa essas variantes, e nesta geração a consulta de retrabalho
+(`status changed to ... AND status changed from ...`) retornou o mesmo conjunto da
+consulta `sent` em ambos os meses — ou seja, todo epic enviado no período já havia
+saído do status de envio em algum momento anterior. O indicador de retrabalho deve
+ser lido com essa ressalva. O snapshot reproduz fielmente o cálculo do artifact ao vivo,
+sem correção manual.
 
 ## Privacidade
 
