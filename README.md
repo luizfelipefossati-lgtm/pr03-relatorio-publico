@@ -4,8 +4,8 @@ Publicação estática do painel **PR.03 — Estudos e Projetos / Relatório de 
 
 ## Última atualização
 
-- **Gerado em:** 26/08/2026 11:01 (America/São_Paulo)
-- **Timestamp ISO:** `2026-08-26T11:01:12-03:00`
+- **Gerado em:** 26/08/2026 11:14 (America/São_Paulo)
+- **Timestamp ISO:** `2026-08-26T11:14:54-03:00`
 - **Fonte:** Jira Cloud `ead785de-33f3-4746-9bdb-a2a58cf5213b` (projetos-engeplus)
 - **Projetos visíveis:** 19
 - **Tipos de issue de nível Epic:** Epic, Fluxo de trabalho
@@ -34,7 +34,11 @@ planned_2026-07=10, planned_2026-08=13, resolved_2026-07=8, resolved_2026-08=5,
 rework_2026-07=5, rework_2026-08=3, sent_2026-07=5, sent_2026-08=3
 ```
 
-16 conjuntos de dados / 18 padrões de consulta resolvidos + 1 chamada de projetos.
+16 conjuntos de dados / 16 padrões de consulta resolvidos + 1 chamada de projetos
+(17 chamadas dinâmicas do artifact no total).
+
+Totais de "enviados" exibidos no painel (união de `sent` + `resolved`, sem duplicatas):
+**Julho 2026 = 11** (5 em retrabalho) e **Agosto 2026 = 5** (3 em retrabalho).
 
 ## Observações sobre os dados desta geração
 
@@ -43,17 +47,26 @@ rework_2026-07=5, rework_2026-08=3, sent_2026-07=5, sent_2026-08=3
   hífen) e `Enviado - Aguardando Análise1`. As consultas `sent` / `rework` usam o nome
   literal, então itens com as variantes aparecem apenas em `resolved`. O painel une
   `sent` + `resolved` para o total de enviados, o que compensa a diferença.
-- **Retrabalho em 100%.** Nos dois meses o conjunto `rework` coincide com o `sent`
-  (a cláusula `status changed from` não filtrou nada), provavelmente porque as
-  transições registradas foram reentradas no status e não primeiros envios.
+  Há também `Em Revisão` convivendo com `Em Revisã` (sem o "o").
+- **Retrabalho alto.** Em julho o conjunto `rework` coincide integralmente com o `sent`
+  e em agosto cobre os 3 itens de `sent`. A cláusula `status changed from` não carrega
+  janela `DURING`, portanto casa com qualquer transição histórica de saída daquele
+  status — o indicador tende a superestimar o retrabalho.
+- **Atrasos acumulados.** Nos dois meses o único epic não concluído com vencimento
+  passado é `EG0274-41` (Estudos Geotécnicos, vencido em 25/03/2026, "Em andamento").
 - **Chave de projeto `G0280`.** O projeto exibido como `EG0280 - DMAE` tem chave real
   `G0280` (sem o "E"), portanto suas issues aparecem como `G0280-51` etc.
+- **Fora da faixa congelada.** Se o seletor da Visão Acumulada for movido para meses
+  anteriores a Março/2026 ou posteriores a Agosto/2026, o painel exibirá zero — esses
+  períodos não foram pré-buscados neste snapshot.
 
 ## Privacidade
 
 Os JSONs embutidos passam por uma limpeza que remove `accountId`, e-mails,
 avatares, ícones e conteúdo ADF. Permanecem apenas: chave da issue, resumo,
 status, projeto, data de vencimento, data de resolução e data de atualização.
+Verificado nesta geração: 0 ocorrências de `accountId`, `avatarUrl`,
+`emailAddress`, `iconUrl` ou `displayName` no `index.html`.
 
 ## Publicação
 
