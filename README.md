@@ -4,11 +4,11 @@ Publicação estática do painel **PR.03 — Estudos e Projetos / Relatório de 
 
 ## Última atualização
 
-- **Gerado em:** 26/08/2026 02:15 (America/São_Paulo)
-- **Timestamp ISO:** `2026-08-26T02:15:46-03:00`
+- **Gerado em:** 26/08/2026 11:01 (America/São_Paulo)
+- **Timestamp ISO:** `2026-08-26T11:01:12-03:00`
 - **Fonte:** Jira Cloud `ead785de-33f3-4746-9bdb-a2a58cf5213b` (projetos-engeplus)
 - **Projetos visíveis:** 19
-- **Tipos de issue de nível Epic:** Fluxo de trabalho, Epic
+- **Tipos de issue de nível Epic:** Epic, Fluxo de trabalho
 
 ## O que é isto
 
@@ -21,15 +21,33 @@ offline e pode ser publicada sem expor credenciais.
 
 | Aba | Conteúdo |
 |---|---|
-| 2026-07 | Mês encerrado — planejado, atrasados, enviados, retrabalho, look-ahead |
-| 2026-08 | Mês corrente — mesmos indicadores |
-| Visão Acumulada | Histórico (padrão: últimos 6 meses) |
+| Julho 2026 | Mês encerrado — planejado, atrasados, enviados, retrabalho, look-ahead (congelado em `window.__HISTORY__`) |
+| Agosto 2026 | Mês corrente — mesmos indicadores |
+| Visão Acumulada | Histórico (padrão: últimos 6 meses, Março–Agosto 2026) |
 
 ## Conjuntos de dados congelados
 
 ```
-look_2026-08_2026-09=27, look_2026-09_2026-10=29, overdue_2026-07=1, overdue_2026-08=1, planned_2026-03=7, planned_2026-04=15, planned_2026-05=7, planned_2026-06=1, planned_2026-07=10, planned_2026-08=14, resolved_2026-07=8, resolved_2026-08=5, rework_2026-07=5, rework_2026-08=3, sent_2026-07=5, sent_2026-08=3
+lookahead_2026-07=27, lookahead_2026-08=30, overdue_2026-07=1, overdue_2026-08=1,
+planned_2026-03=7, planned_2026-04=15, planned_2026-05=7, planned_2026-06=1,
+planned_2026-07=10, planned_2026-08=13, resolved_2026-07=8, resolved_2026-08=5,
+rework_2026-07=5, rework_2026-08=3, sent_2026-07=5, sent_2026-08=3
 ```
+
+16 conjuntos de dados / 18 padrões de consulta resolvidos + 1 chamada de projetos.
+
+## Observações sobre os dados desta geração
+
+- **Variações no nome do status.** O site possui status quase homônimos —
+  `Enviado - Aguardando Análise`, `Enviado- Aguardando Análise` (sem espaço antes do
+  hífen) e `Enviado - Aguardando Análise1`. As consultas `sent` / `rework` usam o nome
+  literal, então itens com as variantes aparecem apenas em `resolved`. O painel une
+  `sent` + `resolved` para o total de enviados, o que compensa a diferença.
+- **Retrabalho em 100%.** Nos dois meses o conjunto `rework` coincide com o `sent`
+  (a cláusula `status changed from` não filtrou nada), provavelmente porque as
+  transições registradas foram reentradas no status e não primeiros envios.
+- **Chave de projeto `G0280`.** O projeto exibido como `EG0280 - DMAE` tem chave real
+  `G0280` (sem o "E"), portanto suas issues aparecem como `G0280-51` etc.
 
 ## Privacidade
 
