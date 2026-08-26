@@ -4,8 +4,8 @@ Publicação estática do painel **PR.03 — Estudos e Projetos / Relatório de 
 
 ## Última atualização
 
-- **Gerado em:** 26/08/2026 13:12 (America/São_Paulo)
-- **Timestamp ISO:** `2026-08-26T13:12:20-03:00`
+- **Gerado em:** 26/08/2026 14:13 (America/São_Paulo)
+- **Timestamp ISO:** `2026-08-26T14:13:13-03:00`
 - **Fonte:** Jira Cloud `ead785de-33f3-4746-9bdb-a2a58cf5213b` (projetos-engeplus)
 - **Projetos visíveis:** 19
 - **Tipos de issue de nível Epic:** Epic, Fluxo de trabalho
@@ -62,30 +62,30 @@ cairia no conjunto de enviados).
   como no fechamento do período e receberam a marcação `_frozen_at`. Alterações
   feitas no Jira após 31/07/2026 não afetam a aba de julho — apenas os meses
   abertos são reconsultados a cada geração.
-- **Abril, maio e junho vêm do histórico do artifact.** Esses meses já estavam
-  congelados em `window.__HISTORY__` na origem e não são sobrescritos por esta
-  geração; os valores reconsultados (por exemplo, `planned_2026-04=15` contra 19 no
-  histórico) ficam apenas como reserva e não alteram o que o painel exibe.
-- **EG0286 - DNIT/AC entrou no relatório.** O projeto passou a ter epics
-  (tipo "Fluxo de trabalho") e responde por 6 dos 13 epics previstos em agosto,
-  além de 10 dos 30 itens no look-ahead.
+- **Março a junho reconsultados nesta geração.** Nesta versão apenas julho entra em
+  `window.__HISTORY__`; os meses de março a junho da Visão Acumulada são servidos
+  pelos conjuntos `planned_*` recém-buscados, então os valores acima são exatamente
+  os que o painel exibe.
+- **EG0286 - DNIT/AC no relatório.** O projeto tem epics do tipo "Fluxo de trabalho"
+  e responde por parte relevante dos 13 epics previstos em agosto e dos 30 itens do
+  look-ahead.
 - **Variações no nome do status.** O site possui status quase homônimos —
   `Enviado - Aguardando Análise`, `Enviado- Aguardando Análise` (sem espaço antes do
-  hífen, em EG0285-8) e `Enviado - Aguardando Análise1` (em EG0239-28). As consultas
-  `sent` / `rework` usam o nome literal, então itens com as variantes aparecem apenas
-  em `resolved`. O painel une `sent` + `resolved` para o total de enviados, o que
-  compensa a diferença.
-- **Retrabalho alto.** Em agosto o conjunto `rework` coincide integralmente com o
-  `sent` (3 de 3). A cláusula `status changed from` não carrega janela `DURING`,
-  portanto casa com qualquer transição histórica de saída daquele status — o
-  indicador tende a superestimar o retrabalho.
-- **Atrasos acumulados.** O único epic não concluído com vencimento anterior a
-  01/08/2026 é `EG0274-41` (Estudos Geotécnicos, vencido em 25/03/2026, "Em andamento").
-- **Entrega fora do período.** `EG0285-8` (ESTUDOS DE CONCEPÇÃO E VIABILIDADE) foi
-  resolvido em agosto, mas tem vencimento em 03/11/2026 — entra em `resolved` sem
-  entrar em `planned` do mês.
+  hífen, em EG0285-8) e `Enviado - Aguardando Análise1` (em EG0239-28 e EG0256-25/26/27).
+  As consultas `sent` / `rework` usam o nome literal, então itens com as variantes
+  aparecem apenas em `resolved`. O painel une `sent` + `resolved` para o total de
+  enviados, o que compensa a diferença.
+- **Retrabalho superestimado.** Em julho o conjunto `rework` coincide integralmente
+  com o `sent` (5 de 5) e em agosto também (3 de 3). A cláusula `status changed from`
+  não carrega janela `DURING`, portanto casa com qualquer transição histórica de saída
+  daquele status — o indicador tende a superestimar o retrabalho.
+- **Atrasos acumulados.** Há 1 epic não concluído com vencimento anterior a
+  01/08/2026 (`overdue_2026-08=1`).
 - **Chave de projeto `G0280`.** O projeto exibido como `EG0280 - DMAE` tem chave real
-  `G0280` (sem o "E"), portanto suas issues aparecem como `G0280-51` etc.
+  `G0280` (sem o "E"), portanto suas issues aparecem como `G0280-51` etc. O mesmo vale
+  para `EG0120 - DAER`, cuja chave é `G0120`.
+- **Sem epics.** `EG0232 - EMBASA` e `Projetos - Engenharia` (PE) não possuem tipo de
+  issue de nível Epic e por isso não aparecem nos indicadores.
 - **Fora da faixa congelada.** Se o seletor da Visão Acumulada for movido para meses
   anteriores a Março/2026 ou posteriores a Agosto/2026, o painel exibirá zero — esses
   períodos não foram pré-buscados neste snapshot.
