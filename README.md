@@ -4,12 +4,12 @@ Publicação estática do painel **PR.03 — Estudos e Projetos / Relatório de 
 
 ## Última atualização
 
-- **Gerado em:** 26/08/2026 17:12 (America/São_Paulo)
-- **Timestamp ISO:** `2026-08-26T17:12:12-03:00`
+- **Gerado em:** 26/08/2026 18:10 (America/São_Paulo)
+- **Timestamp ISO:** `2026-08-26T18:10:32-03:00`
 - **Fonte:** Jira Cloud `ead785de-33f3-4746-9bdb-a2a58cf5213b` (projetos-engeplus)
 - **Projetos visíveis:** 19
 - **Tipos de issue de nível Epic:** Epic, Fluxo de trabalho
-- **Tamanho do `index.html`:** 140,7 KB
+- **Tamanho do `index.html`:** 140,5 KB
 
 ## O que é isto
 
