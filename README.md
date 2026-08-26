@@ -2,8 +2,8 @@
 
 Snapshot estático publicado do dashboard **Estudos e Projetos — Relatório de Indicadores** (Engeplus Engenharia).
 
-- **Última atualização:** 26/08/2026 00:16 (America/Sao_Paulo)
-- **Timestamp ISO:** 2026-08-26T00:16:29-03:00
+- **Última atualização:** 26/08/2026 01:14 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-26T01:14:49-03:00
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Publicação:** Vercel (deploy automático a cada push)
 
