@@ -4,8 +4,8 @@ Publicação estática do painel **PR.03 — Estudos e Projetos / Relatório de 
 
 ## Última atualização
 
-- **Gerado em:** 26/08/2026 12:12 (America/São_Paulo)
-- **Timestamp ISO:** `2026-08-26T12:12:00-03:00`
+- **Gerado em:** 26/08/2026 13:12 (America/São_Paulo)
+- **Timestamp ISO:** `2026-08-26T13:12:20-03:00`
 - **Fonte:** Jira Cloud `ead785de-33f3-4746-9bdb-a2a58cf5213b` (projetos-engeplus)
 - **Projetos visíveis:** 19
 - **Tipos de issue de nível Epic:** Epic, Fluxo de trabalho
@@ -44,15 +44,17 @@ Totais de "enviados" exibidos no painel (união de `sent` + `resolved`, sem dupl
 
 Antes da publicação, o snapshot passou por teste funcional automatizado que
 reexecuta em Node.js **todas** as consultas JQL que o artifact monta em tempo de
-execução (2 abas mensais × 6 consultas + 6 meses da visão acumulada + projetos):
+execução (2 abas mensais × 6 consultas + 4 meses adicionais da visão acumulada + projetos):
 
 ```
-22/22 checks OK, 0 falhas, 0 JQL sem correspondência no snapshot
+17/17 checks OK, 0 falhas, 0 JQL sem correspondência no snapshot
 ```
 
 Também verificado: sintaxe JavaScript válida (`node --check`), execução limpa do
-shim embutido e ordem correta dos padrões (`rework` é avaliado antes de `sent`,
-caso contrário a consulta de retrabalho cairia no conjunto de enviados).
+shim embutido, integridade do HTML (5 blocos `<script>` abertos e fechados, banner
+antes de `</body>`, bloco do snapshot antes do script principal) e ordem correta dos
+padrões (`rework` é avaliado antes de `sent`, caso contrário a consulta de retrabalho
+cairia no conjunto de enviados).
 
 ## Observações sobre os dados desta geração
 
@@ -60,17 +62,19 @@ caso contrário a consulta de retrabalho cairia no conjunto de enviados).
   como no fechamento do período e receberam a marcação `_frozen_at`. Alterações
   feitas no Jira após 31/07/2026 não afetam a aba de julho — apenas os meses
   abertos são reconsultados a cada geração.
+- **Abril, maio e junho vêm do histórico do artifact.** Esses meses já estavam
+  congelados em `window.__HISTORY__` na origem e não são sobrescritos por esta
+  geração; os valores reconsultados (por exemplo, `planned_2026-04=15` contra 19 no
+  histórico) ficam apenas como reserva e não alteram o que o painel exibe.
 - **EG0286 - DNIT/AC entrou no relatório.** O projeto passou a ter epics
   (tipo "Fluxo de trabalho") e responde por 6 dos 13 epics previstos em agosto,
-  além de 10 dos 30 itens no look-ahead. É a principal diferença em relação aos
-  meses anteriores.
+  além de 10 dos 30 itens no look-ahead.
 - **Variações no nome do status.** O site possui status quase homônimos —
   `Enviado - Aguardando Análise`, `Enviado- Aguardando Análise` (sem espaço antes do
   hífen, em EG0285-8) e `Enviado - Aguardando Análise1` (em EG0239-28). As consultas
   `sent` / `rework` usam o nome literal, então itens com as variantes aparecem apenas
   em `resolved`. O painel une `sent` + `resolved` para o total de enviados, o que
-  compensa a diferença. Há também `Em Revisão` convivendo com `Em Revisã` (sem o "o",
-  em EG0275-6).
+  compensa a diferença.
 - **Retrabalho alto.** Em agosto o conjunto `rework` coincide integralmente com o
   `sent` (3 de 3). A cláusula `status changed from` não carrega janela `DURING`,
   portanto casa com qualquer transição histórica de saída daquele status — o
@@ -91,9 +95,9 @@ caso contrário a consulta de retrabalho cairia no conjunto de enviados).
 Os JSONs embutidos passam por uma limpeza que remove `accountId`, e-mails,
 avatares, ícones, URLs internas (`self`) e conteúdo ADF. Permanecem apenas: chave
 da issue, resumo, status, projeto, data de vencimento, data de resolução e data de
-atualização. Verificado nesta geração: **0 ocorrências** de `accountId`,
-`avatarUrl`, `emailAddress`, `iconUrl` ou `displayName` no `index.html`
-(a única correspondência textual é a própria nota do cabeçalho do script).
+atualização. Verificado nesta geração no `index.html`: **0 ocorrências** de
+`avatarUrl`, `emailAddress`, `iconUrl` e `displayName`; a única correspondência de
+`accountId` é a própria nota do cabeçalho do script.
 
 ## Publicação
 
