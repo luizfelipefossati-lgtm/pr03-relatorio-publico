@@ -4,8 +4,8 @@ Publicação estática do painel **PR.03 — Estudos e Projetos / Relatório de 
 
 ## Última atualização
 
-- **Gerado em:** 26/08/2026 11:14 (America/São_Paulo)
-- **Timestamp ISO:** `2026-08-26T11:14:54-03:00`
+- **Gerado em:** 26/08/2026 12:12 (America/São_Paulo)
+- **Timestamp ISO:** `2026-08-26T12:12:00-03:00`
 - **Fonte:** Jira Cloud `ead785de-33f3-4746-9bdb-a2a58cf5213b` (projetos-engeplus)
 - **Projetos visíveis:** 19
 - **Tipos de issue de nível Epic:** Epic, Fluxo de trabalho
@@ -40,20 +40,46 @@ rework_2026-07=5, rework_2026-08=3, sent_2026-07=5, sent_2026-08=3
 Totais de "enviados" exibidos no painel (união de `sent` + `resolved`, sem duplicatas):
 **Julho 2026 = 11** (5 em retrabalho) e **Agosto 2026 = 5** (3 em retrabalho).
 
+## Verificação desta geração
+
+Antes da publicação, o snapshot passou por teste funcional automatizado que
+reexecuta em Node.js **todas** as consultas JQL que o artifact monta em tempo de
+execução (2 abas mensais × 6 consultas + 6 meses da visão acumulada + projetos):
+
+```
+22/22 checks OK, 0 falhas, 0 JQL sem correspondência no snapshot
+```
+
+Também verificado: sintaxe JavaScript válida (`node --check`), execução limpa do
+shim embutido e ordem correta dos padrões (`rework` é avaliado antes de `sent`,
+caso contrário a consulta de retrabalho cairia no conjunto de enviados).
+
 ## Observações sobre os dados desta geração
 
+- **Julho encerrado e congelado.** Os dados de julho foram preservados exatamente
+  como no fechamento do período e receberam a marcação `_frozen_at`. Alterações
+  feitas no Jira após 31/07/2026 não afetam a aba de julho — apenas os meses
+  abertos são reconsultados a cada geração.
+- **EG0286 - DNIT/AC entrou no relatório.** O projeto passou a ter epics
+  (tipo "Fluxo de trabalho") e responde por 6 dos 13 epics previstos em agosto,
+  além de 10 dos 30 itens no look-ahead. É a principal diferença em relação aos
+  meses anteriores.
 - **Variações no nome do status.** O site possui status quase homônimos —
   `Enviado - Aguardando Análise`, `Enviado- Aguardando Análise` (sem espaço antes do
-  hífen) e `Enviado - Aguardando Análise1`. As consultas `sent` / `rework` usam o nome
-  literal, então itens com as variantes aparecem apenas em `resolved`. O painel une
-  `sent` + `resolved` para o total de enviados, o que compensa a diferença.
-  Há também `Em Revisão` convivendo com `Em Revisã` (sem o "o").
-- **Retrabalho alto.** Em julho o conjunto `rework` coincide integralmente com o `sent`
-  e em agosto cobre os 3 itens de `sent`. A cláusula `status changed from` não carrega
-  janela `DURING`, portanto casa com qualquer transição histórica de saída daquele
-  status — o indicador tende a superestimar o retrabalho.
-- **Atrasos acumulados.** Nos dois meses o único epic não concluído com vencimento
-  passado é `EG0274-41` (Estudos Geotécnicos, vencido em 25/03/2026, "Em andamento").
+  hífen, em EG0285-8) e `Enviado - Aguardando Análise1` (em EG0239-28). As consultas
+  `sent` / `rework` usam o nome literal, então itens com as variantes aparecem apenas
+  em `resolved`. O painel une `sent` + `resolved` para o total de enviados, o que
+  compensa a diferença. Há também `Em Revisão` convivendo com `Em Revisã` (sem o "o",
+  em EG0275-6).
+- **Retrabalho alto.** Em agosto o conjunto `rework` coincide integralmente com o
+  `sent` (3 de 3). A cláusula `status changed from` não carrega janela `DURING`,
+  portanto casa com qualquer transição histórica de saída daquele status — o
+  indicador tende a superestimar o retrabalho.
+- **Atrasos acumulados.** O único epic não concluído com vencimento anterior a
+  01/08/2026 é `EG0274-41` (Estudos Geotécnicos, vencido em 25/03/2026, "Em andamento").
+- **Entrega fora do período.** `EG0285-8` (ESTUDOS DE CONCEPÇÃO E VIABILIDADE) foi
+  resolvido em agosto, mas tem vencimento em 03/11/2026 — entra em `resolved` sem
+  entrar em `planned` do mês.
 - **Chave de projeto `G0280`.** O projeto exibido como `EG0280 - DMAE` tem chave real
   `G0280` (sem o "E"), portanto suas issues aparecem como `G0280-51` etc.
 - **Fora da faixa congelada.** Se o seletor da Visão Acumulada for movido para meses
@@ -63,10 +89,11 @@ Totais de "enviados" exibidos no painel (união de `sent` + `resolved`, sem dupl
 ## Privacidade
 
 Os JSONs embutidos passam por uma limpeza que remove `accountId`, e-mails,
-avatares, ícones e conteúdo ADF. Permanecem apenas: chave da issue, resumo,
-status, projeto, data de vencimento, data de resolução e data de atualização.
-Verificado nesta geração: 0 ocorrências de `accountId`, `avatarUrl`,
-`emailAddress`, `iconUrl` ou `displayName` no `index.html`.
+avatares, ícones, URLs internas (`self`) e conteúdo ADF. Permanecem apenas: chave
+da issue, resumo, status, projeto, data de vencimento, data de resolução e data de
+atualização. Verificado nesta geração: **0 ocorrências** de `accountId`,
+`avatarUrl`, `emailAddress`, `iconUrl` ou `displayName` no `index.html`
+(a única correspondência textual é a própria nota do cabeçalho do script).
 
 ## Publicação
 
