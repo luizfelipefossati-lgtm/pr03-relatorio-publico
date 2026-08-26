@@ -2,8 +2,8 @@
 
 Snapshot estático publicado do dashboard **Estudos e Projetos — Relatório de Indicadores** (Engeplus Engenharia).
 
-- **Última atualização:** 25/08/2026 22:50 (America/Sao_Paulo)
-- **Timestamp ISO:** 2026-08-25T22:50:50-03:00
+- **Última atualização:** 25/08/2026 23:04 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-25T23:04:33-03:00
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Publicação:** Vercel (deploy automático a cada push)
 
@@ -18,7 +18,7 @@ A página **não consulta o Jira ao vivo** — o banner no rodapé indica a data
 
 | Aba | Período | Origem |
 |---|---|---|
-| Julho 2026 | 2026-07-01 a 2026-07-31 | snapshot desta execução |
+| Julho 2026 | 2026-07-01 a 2026-07-31 | snapshot desta execução (mesclado em `window.__HISTORY__`) |
 | Agosto 2026 | 2026-08-01 a 2026-08-31 | snapshot desta execução |
 | Visão Acumulada | Mar/2026 a Ago/2026 | Mar, Jul e Ago desta execução; Abr–Jun do histórico embutido no artifact |
 
@@ -28,13 +28,15 @@ A página **não consulta o Jira ao vivo** — o banner no rodapé indica a data
 - **Julho 2026:** planned 10 · overdue 1 · lookahead 27 · sent 5 + resolved 8 = 11 consolidados · retrabalho 5
 - **Agosto 2026:** planned 14 · overdue 1 · lookahead 29 · sent 3 + resolved 5 = 5 consolidados · retrabalho 3
 - **Março 2026:** planned 7 — visão acumulada
-- **13 padrões JQL** mapeados no interceptador do snapshot, todos validados contra as consultas
-  que o artifact emite (teste automatizado nesta geração: 13/13 OK)
+- **13 padrões JQL** mapeados no interceptador do snapshot, validados contra as consultas que o
+  artifact realmente emite (teste automatizado nesta geração: 8/8 casos executados, 13/13 datasets
+  íntegros, nenhum aviso de "JQL sem correspondência")
 
 ## Indicadores desta geração
 
 | Período | Epics planejados | Concluídos (statusCategory=done) | OTD bruto |
 |---|---|---|---|
+| Março 2026 | 7 | 6 | 86% |
 | Julho 2026 | 10 | 10 | 100% |
 | Agosto 2026 | 14 | 2 | 14% |
 
@@ -51,16 +53,16 @@ Nesta geração o retrabalho ficou em 5/5 dos envios de julho e 3/3 dos de agost
 consolidados (envios + resolvidos) isso equivale a 5/11 e 3/5. **O percentual de retrabalho deve
 ser lido com essa ressalva** até que a consulta seja ajustada no artifact.
 
-**Correção aplicada nesta execução:** a consulta de retrabalho de julho retornou `EG0239-27`, que
-não consta do conjunto de envios do mesmo período. Como retrabalho é, por definição, subconjunto de
-envios, o item foi descartado. A contagem oficial do Jira (`searchResultMode: count`) confirma 5
-para ambas as consultas de julho.
+Diferente da geração anterior, nesta execução o conjunto de retrabalho é subconjunto exato do
+conjunto de envios em ambos os meses — nenhum item precisou ser descartado.
 
 ## Outras particularidades preservadas verbatim
 
-- `resolved<="2026-07-31"` é interpretado pelo Jira como `2026-07-31 00:00`, de modo que
+- `resolved<="2026-08-31"` é interpretado pelo Jira como `2026-08-31 00:00`, de modo que
   itens resolvidos no próprio dia 31 ficam fora do conjunto `resolved` do mês.
   Comportamento idêntico ao do dashboard ao vivo.
+- Três grafias do status de envio: `Enviado - Aguardando Análise`,
+  `Enviado - Aguardando Análise1` e `Enviado- Aguardando Análise`.
 - Duas grafias do status de revisão: `Em Revisão` e o truncado `Em Revisã`.
 - A chave de projeto `G0280` tem nome `EG0280 - DMAE` (inconsistência de origem no próprio Jira).
 
@@ -69,7 +71,8 @@ para ambas as consultas de julho.
 Os JSONs congelados contêm apenas `key`, `summary`, `status.name`, `statusCategory.key`,
 `project.key`, `project.name`, `duedate`, `resolutiondate` e `updated`.
 Não há `accountId`, e-mails, avatares, `iconUrl` nem conteúdo de descrição/comentários
-(verificado por varredura automática nesta geração).
+(verificado por varredura automática nesta geração: 0 ocorrências de `accountId`, `avatarUrls`,
+`iconUrl`, `emailAddress` e `displayName` nos dados).
 
 ## Publicação
 
