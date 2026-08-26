@@ -2,8 +2,8 @@
 
 Snapshot estático publicado do dashboard **Estudos e Projetos — Relatório de Indicadores** (Engeplus Engenharia).
 
-- **Última atualização:** 25/08/2026 23:04 (America/Sao_Paulo)
-- **Timestamp ISO:** 2026-08-25T23:04:33-03:00
+- **Última atualização:** 25/08/2026 23:22 (America/Sao_Paulo)
+- **Timestamp ISO:** 2026-08-25T23:22:53-03:00
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Publicação:** Vercel (deploy automático a cada push)
 
@@ -19,52 +19,61 @@ A página **não consulta o Jira ao vivo** — o banner no rodapé indica a data
 | Aba | Período | Origem |
 |---|---|---|
 | Julho 2026 | 2026-07-01 a 2026-07-31 | snapshot desta execução (mesclado em `window.__HISTORY__`) |
-| Agosto 2026 | 2026-08-01 a 2026-08-31 | snapshot desta execução |
+| Agosto 2026 | 2026-08-01 a 2026-08-31 | snapshot desta execução (servido pelo interceptador de JQL) |
 | Visão Acumulada | Mar/2026 a Ago/2026 | Mar, Jul e Ago desta execução; Abr–Jun do histórico embutido no artifact |
 
 ## Consultas resolvidas nesta geração
 
-- 1x `getVisibleJiraProjects` (19 projetos; tipos de nível Epic: `Fluxo de trabalho`, `Epic`)
+- 1x `getVisibleJiraProjects` (19 projetos; tipos de nível Epic: `Epic`, `Fluxo de trabalho`)
 - **Julho 2026:** planned 10 · overdue 1 · lookahead 27 · sent 5 + resolved 8 = 11 consolidados · retrabalho 5
 - **Agosto 2026:** planned 14 · overdue 1 · lookahead 29 · sent 3 + resolved 5 = 5 consolidados · retrabalho 3
 - **Março 2026:** planned 7 — visão acumulada
-- **13 padrões JQL** mapeados no interceptador do snapshot, validados contra as consultas que o
-  artifact realmente emite (teste automatizado nesta geração: 8/8 casos executados, 13/13 datasets
-  íntegros, nenhum aviso de "JQL sem correspondência")
+- **16 padrões JQL** mapeados no interceptador (inclui `planned` de Abr–Jun derivado do histórico,
+  para que faixas mais largas na Visão Acumulada também resolvam offline).
+  Teste automatizado nesta geração: **11/11 casos OK, 16/16 datasets íntegros,
+  nenhum aviso de "JQL sem correspondência"**.
 
 ## Indicadores desta geração
 
 | Período | Epics planejados | Concluídos (statusCategory=done) | OTD bruto |
 |---|---|---|---|
-| Março 2026 | 7 | 6 | 86% |
-| Julho 2026 | 10 | 10 | 100% |
+| Março 2026 | 7 | 3 | 43% |
+| Abril 2026 | 19 | 16 | 84% |
+| Maio 2026 | 15 | 4 | 27% |
+| Junho 2026 | 2 | 1 | 50% |
+| Julho 2026 | 10 | 8 | 80% |
 | Agosto 2026 | 14 | 2 | 14% |
 
 O OTD de agosto é parcial: o mês ainda está em curso e a maior parte dos epics tem vencimento em 31/08.
+
+Julho fechou em 8/10 (e não 10/10) porque `EG0274-43` e `EG0274-38`, com vencimento em julho,
+só foram resolvidos em 21/08 e 24/08. Como julho é período encerrado, o dashboard aplica o corte
+por `resolutiondate <= 2026-07-31` (`dnAt`) e não os conta como entregues no mês.
 
 ## Observação sobre o indicador de retrabalho
 
 A consulta de retrabalho (`status changed from "Enviado - Aguardando Análise"`) **não é limitada
 ao período**, então qualquer saída histórica daquele status satisfaz o filtro. Somado aos status
-homônimos com IDs distintos por projeto (`Enviado- Aguardando Análise` sem espaço,
-`Enviado - Aguardando Análise1`), o conjunto de retrabalho tende a coincidir com o de envios.
+homônimos com IDs distintos por projeto (`Enviado - Aguardando Análise1`), o conjunto de
+retrabalho tende a coincidir com o de envios.
 
 Nesta geração o retrabalho ficou em 5/5 dos envios de julho e 3/3 dos de agosto — sobre os totais
 consolidados (envios + resolvidos) isso equivale a 5/11 e 3/5. **O percentual de retrabalho deve
 ser lido com essa ressalva** até que a consulta seja ajustada no artifact.
 
-Diferente da geração anterior, nesta execução o conjunto de retrabalho é subconjunto exato do
-conjunto de envios em ambos os meses — nenhum item precisou ser descartado.
+Em ambos os meses o conjunto de retrabalho é subconjunto exato do conjunto de envios
+(verificado nesta geração) — nenhum item precisou ser descartado.
 
 ## Outras particularidades preservadas verbatim
 
 - `resolved<="2026-08-31"` é interpretado pelo Jira como `2026-08-31 00:00`, de modo que
   itens resolvidos no próprio dia 31 ficam fora do conjunto `resolved` do mês.
   Comportamento idêntico ao do dashboard ao vivo.
-- Três grafias do status de envio: `Enviado - Aguardando Análise`,
-  `Enviado - Aguardando Análise1` e `Enviado- Aguardando Análise`.
+- Duas grafias do status de envio nos dados desta geração: `Enviado - Aguardando Análise`
+  e `Enviado - Aguardando Análise1`.
 - Duas grafias do status de revisão: `Em Revisão` e o truncado `Em Revisã`.
 - A chave de projeto `G0280` tem nome `EG0280 - DMAE` (inconsistência de origem no próprio Jira).
+- Nomes com espaço final preservados (`EG0286 - DNIT/AC `, `Estudos Hidrológicos `).
 
 ## Privacidade
 
