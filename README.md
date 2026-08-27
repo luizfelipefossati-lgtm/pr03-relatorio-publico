@@ -2,7 +2,7 @@
 
 Pagina estatica publicada a partir do artifact **Pr03 Relatorio Indicadores Epics**.
 
-- **Ultima atualizacao:** 27/08/2026 05:11 (2026-08-27T05:11:29-03:00)
+- **Ultima atualizacao:** 27/08/2026 06:15 (2026-08-27T06:15:28-03:00)
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Tipos de issue considerados como Epic:** Epic, Fluxo de trabalho
 - **Projetos visiveis no snapshot:** 19
@@ -19,8 +19,8 @@ O script injetado entra **depois** do bloco `window.__HISTORY__` proprio do arti
 conjuntos historicos coexistem em vez de um sobrescrever o outro.
 
 As 17 chamadas dinamicas do artifact (1x `getVisibleJiraProjects` + 16 consultas JQL)
-foram resolvidas e validadas uma a uma: cada JQL foi roteada para o dataset correto,
-sem colisao de padroes e sem dataset orfao.
+foram resolvidas e validadas uma a uma nesta geracao: cada JQL foi roteada para o dataset
+correto, sem colisao de padroes e sem dataset orfao.
 
 ## Conteudo do snapshot
 
@@ -43,9 +43,10 @@ sem colisao de padroes e sem dataset orfao.
 | `planned_2026-05` | 7 |
 | `planned_2026-06` | 1 |
 
-Mes encerrado de **Julho/2026** congelado em `window.__HISTORY__` para exibir os dados
-reais do periodo em vez do aviso de "sem snapshot" (11 enviados, 5 com retrabalho —
-`sent` e a uniao de `sent_2026-07` com `resolved_2026-07`, sem duplicatas).
+Mes encerrado de **Julho/2026** congelado em `window.__SNAPSHOT__.months` (que alimenta
+`window.__HISTORY__`) para exibir os dados reais do periodo em vez do aviso de "sem
+snapshot" (11 enviados, 5 com retrabalho — `sent` e a uniao de `sent_2026-07`
+com `resolved_2026-07`, sem duplicatas).
 
 Visao acumulada padrao: **Marco a Agosto/2026** (ultimos 6 meses). Marco e Agosto sao
 resolvidos via JQL embutida; Abril a Julho vem congelados de `window.__HISTORY__`.
@@ -61,9 +62,15 @@ Ressalva conhecida sobre `rework_*`: a clausula `status changed from "Enviado - 
 Analise"` nao tem janela temporal e casa com qualquer saida daquele status, inclusive a
 transicao normal rumo ao encerramento (ex.: "Medido e Faturado"). O indicador de retrabalho
 tende portanto a ser superestimado — nesta geracao os conjuntos `sent` e `rework`
-coincidiram integralmente nos dois meses (Agosto 3 e 3, Julho 5 e 5). Para medir devolucao
-real, a consulta precisaria restringir o destino da transicao (ex.: `... to "Em Revisao"`)
-e/ou limitar a janela.
+coincidiram integralmente nos dois meses (Agosto 3 e 3, Julho 5 e 5). Para medir
+devolucao real, a consulta precisaria restringir o destino da transicao (ex.: `... to "Em
+Revisao"`) e/ou limitar a janela.
+
+Ressalva sobre o limite superior de `resolved_*`: o Jira interpreta `resolved<="AAAA-MM-DD"`
+como meia-noite daquele dia, entao itens resolvidos ao longo do ultimo dia do mes ficam de
+fora do conjunto `resolved_*` (ex.: EG0274-44, resolvido em 31/07/2026 09:31, nao aparece em
+`resolved_2026-07`; ele entra no total de julho apenas porque tambem consta em `sent_2026-07`).
+Corrigir exigiria alterar o artifact para `resolved<"primeiro-dia-do-mes-seguinte"`.
 
 Ressalva sobre o congelamento de Julho: o mes encerrado e reconsultado a cada geracao do
 snapshot, portanto reflete o estado **atual** das issues com vencimento em Julho, e nao uma
