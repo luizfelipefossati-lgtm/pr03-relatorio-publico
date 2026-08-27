@@ -2,11 +2,11 @@
 
 Pagina estatica publicada a partir do artifact **Pr03 Relatorio Indicadores Epics**.
 
-- **Ultima atualizacao:** 27/08/2026 08:14 (2026-08-27T08:14:05-03:00)
+- **Ultima atualizacao:** 27/08/2026 09:12 (2026-08-27T09:12:20-03:00)
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Tipos de issue tratados como Epic:** Epic, Fluxo de trabalho
 - **Projetos visiveis no snapshot:** 19
-- **Tamanho de `index.html`:** 147.7 KB
+- **Tamanho de `index.html`:** 138.5 KB
 
 ## Como funciona
 
@@ -19,32 +19,33 @@ O script injetado entra **depois** do bloco `window.__HISTORY__` proprio do arti
 (que congela 2026-04 a 2026-06) e **antes** do script principal, de modo que os dois
 conjuntos historicos coexistem em vez de um sobrescrever o outro. Na pagina carregada,
 `window.__HISTORY__` fica com as chaves `2026-04`, `2026-05`, `2026-06` (nativas) e
-`2026-07` (do snapshot).
+`2026-07` (do snapshot). Ordem verificada nesta geracao: bloco nativo (offset 22.453)
+-> bloco do snapshot (53.537) -> script principal (107.146).
 
-O HTML base usado na geracao e o `_artifact_src.html` deste repositorio (948 linhas,
+O HTML base usado na geracao e o `_artifact_src.html` deste repositorio (947 linhas,
 md5 `6a2b6462a4efbec1890af4494a7f0b74`), verificado contra o artifact atual
-(`Artifacts\pr03-relatorio-indicadores-epics\index.html`) por contagem de linhas e
-comparacao de ancoras. Se o artifact for editado, `_artifact_src.html` precisa ser
-atualizado junto. Os pontos de injecao sao validados por assercao no gerador: `<head>`
-na linha 17, `window.__HISTORY__=` na 281, `</script>` na 282 e `<script>` na 283 —
-se o artifact mudar de forma a deslocar essas linhas, a geracao falha em vez de
-produzir um HTML corrompido.
+(`Artifacts\pr03-relatorio-indicadores-epics\index.html`) por contagem de linhas,
+posicao dos blocos `<script>` (1, 21, 280, 283) e comparacao de linhas-ancora
+(500-502, 700, 944-947), todas identicas. Se o artifact for editado,
+`_artifact_src.html` precisa ser atualizado junto.
 
 ## Verificacao desta geracao
 
-As 18 chamadas dinamicas do artifact (1x `getVisibleJiraProjects` + 17 consultas JQL)
-foram simuladas em Node contra o `index.html` gerado, reproduzindo a montagem de JQL do
+As 17 chamadas dinamicas do artifact (1x `getVisibleJiraProjects` + 16 consultas JQL)
+foram reproduzidas contra o `index.html` gerado, remontando a construcao de JQL do
 artifact para a data de referencia 27/08/2026:
 
-- **8** resolvidas via padrao JQL -> dataset embutido, todas para o dataset correto;
-- **10** servidas diretamente por `window.__HISTORY__`, sem gerar JQL;
+- **16** consultas JQL casaram com o padrao correto, cada uma apontando para o dataset
+  esperado (nenhum `JQL sem correspondencia`);
 - **1** `getVisibleJiraProjects`, devolvendo os 19 projetos;
-- **0** consultas sem correspondencia (nenhum aviso `JQL sem correspondencia`).
+- meses 2026-04 a 2026-07 continuam sendo servidos por `window.__HISTORY__` sem gerar
+  JQL na visao acumulada; os datasets equivalentes ficam embutidos como fallback.
 
 Tambem verificado: comentario de timestamp no topo do `<head>`, banner de aviso
-imediatamente antes de `</body>`, um unico override de `callMcpTool`, `<body>`/`<html>`
-bem formados, bloco do snapshot posicionado entre o `__HISTORY__` nativo e o script
-principal, e ausencia de `accountId` / `emailAddress` / `avatarUrls` nos dados embutidos.
+imediatamente antes de `</body>` (depois do `go();`), 5 tags `<script>` abertas e 5
+fechadas, `</html>` no final do arquivo, um unico override de `callMcpTool`, e ausencia
+de `accountId` / `emailAddress` / `avatarUrls` / `712020:` nos dados embutidos (a unica
+ocorrencia da string `accountIds` esta no comentario de privacidade do proprio bloco).
 
 ## Conteudo do snapshot
 
@@ -61,16 +62,19 @@ virar o mes e o artifact passar a consultar esses periodos por JQL, os dados ja 
 | `sent_2026-08` | 3 | ativo |
 | `resolved_2026-08` | 5 | ativo |
 | `rework_2026-08` | 3 | ativo |
-| `planned_2026-07` | 10 | fallback |
-| `overdue_2026-07` | 1 | fallback |
-| `lookahead_2026-07` | 27 | fallback |
-| `sent_2026-07` | 5 | fallback |
-| `resolved_2026-07` | 8 | fallback |
-| `rework_2026-07` | 5 | fallback |
+| `planned_2026-07` | 10 | ativo (aba de Julho) |
+| `overdue_2026-07` | 1 | ativo (aba de Julho) |
+| `lookahead_2026-07` | 27 | ativo (aba de Julho) |
+| `sent_2026-07` | 5 | ativo (aba de Julho) |
+| `resolved_2026-07` | 8 | ativo (aba de Julho) |
+| `rework_2026-07` | 5 | ativo (aba de Julho) |
 | `planned_2026-03` | 7 | ativo |
 | `planned_2026-04` | 15 | fallback |
 | `planned_2026-05` | 7 | fallback |
 | `planned_2026-06` | 1 | fallback |
+
+Todos os 16 conjuntos foram reconsultados no Jira nesta geracao e os totais coincidiram
+com a geracao anterior (27/08/2026 08:14), sem alteracao de volume.
 
 Mes encerrado de **Julho/2026** congelado em `window.__SNAPSHOT__.months` (que alimenta
 `window.__HISTORY__`) para exibir os dados reais do periodo em vez do aviso de "sem
@@ -83,11 +87,14 @@ resolvidos via JQL embutida; Abril a Julho vem congelados de `window.__HISTORY__
 ## Observacao sobre status
 
 O site usa variantes de nome quase identicas que caem na categoria `done`:
-`Enviado - Aguardando Analise`, `Enviado - Aguardando Analise1` e `Enviado- Aguardando Analise`.
-A clausula JQL `status changed to "Enviado - Aguardando Analise"` so casa com o nome exato,
-por isso `resolved_*` pode ser maior que `sent_*`. O relatorio une os dois conjuntos.
+`Enviado - Aguardando Analise`, `Enviado - Aguardando Analise1` e `Enviado- Aguardando Analise`
+(IDs distintos por projeto). A clausula JQL `status changed to "Enviado - Aguardando Analise"`
+depende do nome exato, por isso `resolved_*` pode ser maior que `sent_*` — em Agosto,
+5 contra 3. O relatorio une os dois conjuntos.
 
-Ha tambem um nome de status truncado no Jira, `Em Revisa` (EG0275-6), preservado como esta.
+Ha tambem nomes com ruido preservado fielmente do Jira: status truncado `Em Revisa`
+(EG0275-6), projeto com chave `G0280` e nome `EG0280 - DMAE`, e nomes com espaco final
+(`EG0286 - DNIT/AC `). Nada foi normalizado.
 
 ## Ressalvas conhecidas
 
@@ -100,17 +107,16 @@ restringir o destino da transicao (ex.: `... to "Em Revisao"`) e/ou limitar a ja
 
 **Limite superior de `resolved_*`.** O Jira interpreta `resolved<="AAAA-MM-DD"` como
 meia-noite daquele dia, entao itens resolvidos ao longo do ultimo dia do mes ficam de fora
-do conjunto `resolved_*` (ex.: EG0274-44, resolvido em 31/07/2026 09:31, nao aparece em
-`resolved_2026-07`; ele entra no total de julho apenas porque tambem consta em
-`sent_2026-07`). Corrigir exigiria alterar o artifact para
+do conjunto `resolved_*`. Corrigir exigiria alterar o artifact para
 `resolved<"primeiro-dia-do-mes-seguinte"`.
 
 **Congelamento de Julho nao e uma foto de 31/07.** O mes encerrado e reconsultado a cada
 geracao do snapshot, portanto reflete o estado **atual** das issues com vencimento em
 Julho. Alteracoes retroativas no Jira ainda afetam os numeros de Julho.
 
-**Abril a Junho vem do artifact, nao desta geracao.** Esses tres meses sao servidos pelo
-bloco `window.__HISTORY__` embutido no proprio artifact e nao sao atualizados aqui.
+**Abril a Junho vem do artifact, nao desta geracao.** Na visao acumulada esses tres meses
+sao servidos pelo bloco `window.__HISTORY__` embutido no proprio artifact; os datasets
+`planned_2026-04/05/06` reconsultados aqui ficam apenas como fallback.
 
 ## Privacidade
 
