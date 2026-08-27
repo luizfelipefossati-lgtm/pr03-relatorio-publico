@@ -2,7 +2,7 @@
 
 Pagina estatica publicada a partir do artifact **Pr03 Relatorio Indicadores Epics**.
 
-- **Ultima atualizacao:** 27/08/2026 02:11 (2026-08-27T02:11:18-03:00)
+- **Ultima atualizacao:** 27/08/2026 03:12 (2026-08-27T03:12:21-03:00)
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Tipos de issue considerados como Epic:** Epic, Fluxo de trabalho
 - **Projetos visiveis no snapshot:** 19
@@ -13,6 +13,10 @@ O `index.html` e uma copia do artifact com todos os dados do Jira **pre-buscados
 Um script injetado define `window.__SNAPSHOT__` e substitui `window.cowork.callMcpTool`,
 devolvendo os dados congelados conforme o padrao da consulta JQL. A pagina publicada
 **nao consulta o Jira ao vivo** e nao precisa de credenciais.
+
+O script injetado entra **depois** do bloco `window.__HISTORY__` proprio do artifact
+(que congela 2026-04 a 2026-06) e **antes** do script principal, de modo que os dois
+conjuntos historicos coexistem em vez de um sobrescrever o outro.
 
 ## Conteudo do snapshot
 
@@ -39,12 +43,20 @@ Mes encerrado de **Julho/2026** congelado em `window.__HISTORY__` para exibir os
 reais do periodo em vez do aviso de "sem snapshot" (11 enviados, 5 com retrabalho —
 `sent` e a uniao de `sent_2026-07` com `resolved_2026-07`, sem duplicatas).
 
+Visao acumulada padrao: **Marco a Agosto/2026** (ultimos 6 meses).
+
 ## Observacao sobre status
 
 O site usa variantes de nome quase identicas que caem na categoria `done`:
 `Enviado - Aguardando Analise`, `Enviado - Aguardando Analise1` e `Enviado- Aguardando Analise`.
 A clausula JQL `status changed to "Enviado - Aguardando Analise"` so casa com o nome exato,
 por isso `resolved_*` pode ser maior que `sent_*`. O relatorio une os dois conjuntos.
+
+Ressalva conhecida sobre `rework_*`: a clausula `status changed from "Enviado - Aguardando
+Analise"` nao tem janela temporal e casa com qualquer saida daquele status, inclusive a
+transicao normal rumo ao encerramento (ex.: "Medido e Faturado"). O indicador de retrabalho
+tende portanto a ser superestimado. Para medir devolucao real, a consulta precisaria
+restringir o destino da transicao (ex.: `... to "Em Revisao"`) e/ou limitar a janela.
 
 ## Privacidade
 
