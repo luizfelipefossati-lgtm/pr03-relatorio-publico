@@ -2,7 +2,7 @@
 
 Pagina estatica publicada a partir do artifact **Pr03 Relatorio Indicadores Epics**.
 
-- **Ultima atualizacao:** 27/08/2026 03:12 (2026-08-27T03:12:21-03:00)
+- **Ultima atualizacao:** 27/08/2026 04:12 (2026-08-27T04:12:19-03:00)
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Tipos de issue considerados como Epic:** Epic, Fluxo de trabalho
 - **Projetos visiveis no snapshot:** 19
@@ -17,6 +17,9 @@ devolvendo os dados congelados conforme o padrao da consulta JQL. A pagina publi
 O script injetado entra **depois** do bloco `window.__HISTORY__` proprio do artifact
 (que congela 2026-04 a 2026-06) e **antes** do script principal, de modo que os dois
 conjuntos historicos coexistem em vez de um sobrescrever o outro.
+
+As 16 consultas dinamicas do artifact (1x `getVisibleJiraProjects` + 15 JQL) foram
+resolvidas e validadas uma a uma contra os padroes de JQL embutidos.
 
 ## Conteudo do snapshot
 
@@ -55,8 +58,9 @@ por isso `resolved_*` pode ser maior que `sent_*`. O relatorio une os dois conju
 Ressalva conhecida sobre `rework_*`: a clausula `status changed from "Enviado - Aguardando
 Analise"` nao tem janela temporal e casa com qualquer saida daquele status, inclusive a
 transicao normal rumo ao encerramento (ex.: "Medido e Faturado"). O indicador de retrabalho
-tende portanto a ser superestimado. Para medir devolucao real, a consulta precisaria
-restringir o destino da transicao (ex.: `... to "Em Revisao"`) e/ou limitar a janela.
+tende portanto a ser superestimado — em Julho/2026 os conjuntos `sent` e `rework` coincidiram
+integralmente (5 e 5). Para medir devolucao real, a consulta precisaria restringir o destino
+da transicao (ex.: `... to "Em Revisao"`) e/ou limitar a janela.
 
 ## Privacidade
 
