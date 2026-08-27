@@ -2,11 +2,11 @@
 
 Pagina estatica publicada a partir do artifact **Pr03 Relatorio Indicadores Epics**.
 
-- **Ultima atualizacao:** 27/08/2026 10:12 (2026-08-27T10:12:34-03:00)
+- **Ultima atualizacao:** 27/08/2026 11:17 (2026-08-27T11:17:07-03:00)
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Tipos de issue tratados como Epic:** Fluxo de trabalho, Epic (descobertos por `hierarchyLevel === 1`)
 - **Projetos visiveis no snapshot:** 19
-- **Tamanho de `index.html`:** 147.6 KB (151.150 bytes, md5 `18e3596809796bf6a8ce30300f120af2`)
+- **Tamanho de `index.html`:** 148,2 KB (151.784 bytes, md5 `6c8bfc662ac09dd8bc2a5eb6ededf938`)
 
 ## Como funciona
 
@@ -15,32 +15,39 @@ Um script injetado define `window.__SNAPSHOT__` e substitui `window.cowork.callM
 devolvendo os dados congelados conforme o padrao da consulta JQL. A pagina publicada
 **nao consulta o Jira ao vivo** e nao precisa de credenciais.
 
-O script injetado entra **depois** do bloco `window.__HISTORY__` proprio do artifact
-(que congela 2026-04 a 2026-06) e **antes** do script principal, de modo que os dois
-conjuntos historicos coexistem em vez de um sobrescrever o outro. Na pagina carregada,
-`window.__HISTORY__` fica com as chaves `2026-04`, `2026-05`, `2026-06` (nativas) e
-`2026-07` (do snapshot). Ordem verificada nesta geracao: bloco nativo (offset 22.453)
--> bloco do snapshot (53.581) -> script principal (116.409).
+O artifact tem cinco blocos `<script>`. O bloco injetado entra **depois** do bloco nativo
+`window.__HISTORY__` (que congela 2026-04 a 2026-06) e **antes** do script principal, de
+modo que os dois conjuntos historicos coexistem. Offsets verificados nesta geracao:
+bloco nativo 22.453 -> bloco do snapshot 53.581 -> script principal 117.606.
 
 O HTML base usado na geracao e o `_artifact_src.html` deste repositorio (947 linhas,
-md5 `6a2b6462a4efbec1890af4494a7f0b74`), verificado contra o artifact atual
-(`Artifacts\pr03-relatorio-indicadores-epics\index.html`) por contagem de linhas,
-posicao dos blocos `<script>` (1, 21, 280, 283) e comparacao de linhas-ancora
-(1, 21, 280, 283-302, 500-502, 700, 944-947), todas identicas. Se o artifact for
+md5 `6a2b6462a4efbec1890af4494a7f0b74`). A pasta `Documents\Claude\Artifacts` e uma
+localizacao protegida e **nao pode ser montada** no sandbox, entao a comparacao com o
+artifact atual foi feita pela ferramenta de leitura de arquivos: contagem de linhas (947
+em ambos) e conferencia das linhas-ancora finais (935-947), identicas. Se o artifact for
 editado, `_artifact_src.html` precisa ser atualizado junto.
 
 ## Correcao aplicada nesta geracao
 
-Na geracao anterior (09:12), a entrada `2026-07` de `window.__HISTORY__` continha
-**apenas** a lista `planned`. Isso atendia a Visao Acumulada (que le
-`__HISTORY__[key].planned`), mas quebrava a aba mensal **Julho 2026**, porque
-`loadMonth()` devolve o objeto inteiro e `renderMonthly()` espera tambem
-`overdue`, `sent`, `look` e `period`.
+O script principal do artifact executa `window.__HISTORY__ = { ... }` — uma **atribuicao
+direta**, nao um merge. Qualquer chave gravada pelo snapshot antes desse ponto seria
+apagada, e a aba mensal do mes anterior cairia no ramo `info.lock` de `loadMonth()`,
+exibindo "Periodo encerrado sem snapshot" em vez dos dados.
 
-A entrada `2026-07` agora e um objeto de mes completo, montado com a mesma logica de
-`loadMonth()` (uniao de `sent` + `resolved` por chave, `rework` marcando `rw:true`,
-ordenacao com retrabalho primeiro), no mesmo formato das entradas nativas
-`2026-04`/`2026-05`/`2026-06`:
+Ate agora isso funcionava apenas porque o bloco injetado ficava posicionado depois da
+atribuicao nativa — uma dependencia fragil da ordem dos blocos `<script>` do artifact.
+Nesta geracao `window.__HISTORY__` passou a ser definido com `Object.defineProperty`, com
+um setter que **mescla** em vez de sobrescrever e da precedencia as chaves do snapshot.
+O posicionamento correto foi mantido; o accessor e a garantia caso a ordem mude.
+
+Teste de regressao executado: apos uma atribuicao tardia `window.__HISTORY__ = {...}`
+contendo uma chave conflitante (`2026-07`) e uma nova (`2026-01`), a entrada do snapshot
+permanece intacta e a chave nova e aceita.
+
+## Mes anterior congelado (`__HISTORY__["2026-07"]`)
+
+Montado com a mesma logica de `loadMonth()` (uniao de `sent` + `resolved` por chave,
+`rework` marcando `rw:true`, ordenacao com retrabalho primeiro):
 
 | Campo | Valor |
 |---|---|
@@ -51,11 +58,13 @@ ordenacao com retrabalho primeiro), no mesmo formato das entradas nativas
 | `sent.rework` | 5 |
 | `period` | `2026-07-01` a `2026-07-31` ("Julho 2026") |
 
-Os dados de julho foram **preservados** da geracao anterior (periodo encerrado =
-dados congelados, conforme a premissa do artifact); nenhuma reconsulta foi feita
-para julho.
+**Observacao:** julho foi reconsultado nesta geracao (as 5 consultas mensais foram
+executadas para o mes corrente e o anterior). A consulta `resolved` de julho retornou
+**7** epics, contra **8** na geracao anterior. `sent.total` permaneceu 11 porque o epic
+a menos ja entrava na uniao pela consulta `sent`. Nao ha indicio de perda de dado, mas a
+divergencia fica registrada — periodo encerrado nao deveria variar.
 
-## Chamadas dinamicas resolvidas
+## Chamadas dinamicas resolvidas (17)
 
 | # | Chamada | Dataset | Itens |
 |---|---|---|---|
@@ -70,47 +79,52 @@ para julho.
 | 9 | overdue Jul/2026 | `overdue_2026-07` | 1 |
 | 10 | lookahead Ago-Set/2026 | `lookahead_2026-07` | 27 |
 | 11 | sent Jul/2026 | `sent_2026-07` | 5 |
-| 12 | resolved Jul/2026 | `resolved_2026-07` | 8 |
+| 12 | resolved Jul/2026 | `resolved_2026-07` | 7 |
 | 13 | rework Jul/2026 | `rework_2026-07` | 5 |
 | 14 | planned Mar/2026 (acumulado) | `planned_2026-03` | 7 |
 | 15 | planned Abr/2026 (fallback) | `planned_2026-04` | 15 |
 | 16 | planned Mai/2026 (fallback) | `planned_2026-05` | 7 |
 | 17 | planned Jun/2026 (fallback) | `planned_2026-06` | 1 |
 
-Ago/2026 e o mes ao vivo (reconsultado agora). Jul/2026 e servido por
-`__HISTORY__`, mas os datasets ficam disponiveis como fallback caso a ordem dos
-scripts mude. Abr/Mai/Jun sao atendidos pelo `__HISTORY__` nativo do artifact;
-os datasets 15-17 existem apenas como fallback e nunca sao usados na pagina.
+Ago/2026 e o mes ao vivo. Jul/2026 e servido por `__HISTORY__`, mas os datasets ficam
+disponiveis como fallback. Abr/Mai/Jun sao atendidos pelo `__HISTORY__` nativo do
+artifact; os datasets 15-17 existem apenas como fallback.
+
+A Visao Acumulada abre por padrao em Mar/2026 a Ago/2026 (janela de 6 meses ancorada na
+data de geracao).
 
 ## Verificacao desta geracao
 
-**1. Casamento de JQL (18 consultas reproduzidas):** a construcao de JQL do artifact
-foi remontada para a data de referencia 27/08/2026 e cada consulta foi testada contra
-a tabela de padroes embutida. Resultado: **18/18 casaram** com o dataset esperado,
-**0** `JQL sem correspondencia`, **0** datasets orfaos.
+**1. Casamento de JQL (16 consultas reproduzidas):** a construcao de JQL do artifact foi
+remontada para a data de referencia 27/08/2026 — incluindo o `ETQ` dinamico
+`issuetype in ("Fluxo de trabalho","Epic")` — e cada consulta foi executada contra o
+`callMcpTool` substituido. Resultado: **16/16** devolveram exatamente o dataset esperado
+(comparacao por igualdade profunda, nao so por contagem), **0** avisos de
+`JQL sem correspondencia`, **0** datasets orfaos.
 
-**2. Renderizacao real (jsdom):** o `index.html` gerado foi carregado num DOM e os
-tres scripts inline foram executados na ordem, com o Chart.js stubado.
+Essa verificacao pegou um defeito real: as aspas internas dos padroes `DURING (...)`
+nao estavam escapadas para o literal JavaScript, o que gerava `SyntaxError` e derrubaria
+o script inteiro do snapshot na pagina publicada. Corrigido e reverificado.
 
-- Abas montadas: `Julho 2026 (Encerrado)`, `Agosto 2026 (Ao vivo)`, `Visao Acumulada`
-- **Agosto 2026:** OTD 15% | Previstos 13 | Entregues 2 | Pendentes do mes 11 |
-  Em atraso (acum.) 1 | Retrabalho 60% | 6 linhas em "OTD por Projeto" |
-  18 linhas em "Pendencias"
-- **Julho 2026:** OTD 80% | Previstos 10 | Entregues 8 | Retrabalho 45% |
-  **sem** o aviso "Periodo encerrado sem snapshot"
-- **Visao Acumulada** (Mar/2026 a Ago/2026, padrao de 6 meses): OTD acumulado 52%
-  (34 de 66 entregues), 32 pendentes, heatmap OTD por projeto x mes renderizado
-- `window.__HISTORY__` = `2026-04, 2026-05, 2026-06, 2026-07`
-- Banner de snapshot presente no fim do `<body>`
-- **0** `console.error`, **0** `console.warn`, **0** excecoes em todas as tres abas
+**2. `__HISTORY__` apos a execucao real dos blocos:** `2026-04` (planned 19), `2026-05`
+(15), `2026-06` (2) e `2026-07` (10), todos com `overdue`, `look`, `sent` e `period`
+presentes.
 
-**3. Privacidade:** `index.html` nao contem `avatarUrls`, `emailAddress` nem nenhum
-`accountId` (a unica ocorrencia da string "accountId" e o comentario
-"Nao contem accountIds..."). Os JSONs minimais guardam apenas
-`key`, `summary`, `duedate`, `resolutiondate`, `updated`, `project.key`,
-`project.name`, `status.name` e `status.statusCategory.key`.
+**3. Estrutura do HTML:** comentario `<!-- Snapshot gerado em ... -->` no inicio do
+`<head>`; ordem nativo -> snapshot -> principal confirmada; banner amarelo depois do
+ultimo `</script>` e antes de `</body>`.
+
+**4. Privacidade:** `index.html` nao contem `avatarUrls`, `emailAddress`, `accountId`
+nem `iconUrl` (0 ocorrencias de cada). Os JSONs minimais guardam apenas `key`, `summary`,
+`duedate`, `resolutiondate`, `updated`, `project.key`, `project.name`, `status.name` e
+`status.statusCategory.key` — validado campo a campo nos 16 arquivos.
 
 Nomes de epics e nomes de status sao publicados intencionalmente.
+
+**Nao verificado nesta geracao:** renderizacao real em DOM (jsdom). A instalacao do pacote
+travou no sandbox e foi abandonada para nao estourar o tempo da tarefa. As checagens
+acima cobrem a camada de dados e a estrutura do arquivo, mas nao os numeros finais
+exibidos nos graficos.
 
 ## Publicacao
 
