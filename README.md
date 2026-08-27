@@ -2,7 +2,7 @@
 
 Pagina estatica publicada a partir do artifact **Pr03 Relatorio Indicadores Epics**.
 
-- **Ultima atualizacao:** 27/08/2026 00:13 (2026-08-27T00:13:11-03:00)
+- **Ultima atualizacao:** 27/08/2026 01:12 (2026-08-27T01:12:34-03:00)
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Tipos de issue considerados como Epic:** Epic, Fluxo de trabalho
 - **Projetos visiveis no snapshot:** 19
@@ -36,7 +36,15 @@ devolvendo os dados congelados conforme o padrao da consulta JQL. A pagina publi
 | `planned_2026-06` | 1 |
 
 Mes encerrado de **Julho/2026** congelado em `window.__HISTORY__` para exibir os dados
-reais do periodo em vez do aviso de "sem snapshot".
+reais do periodo em vez do aviso de "sem snapshot" (11 enviados, 5 com retrabalho —
+`sent` e a uniao de `sent_2026-07` com `resolved_2026-07`, sem duplicatas).
+
+## Observacao sobre status
+
+O site usa variantes de nome quase identicas que caem na categoria `done`:
+`Enviado - Aguardando Analise`, `Enviado - Aguardando Analise1` e `Enviado- Aguardando Analise`.
+A clausula JQL `status changed to "Enviado - Aguardando Analise"` so casa com o nome exato,
+por isso `resolved_*` pode ser maior que `sent_*`. O relatorio une os dois conjuntos.
 
 ## Privacidade
 
