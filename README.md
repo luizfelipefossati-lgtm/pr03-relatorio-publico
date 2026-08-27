@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 27/08/2026 16:14** (`2026-08-27T16:14:35-03:00`)
+> **Última atualização do snapshot: 27/08/2026 17:13** (`2026-08-27T17:13:24-03:00`)
 
 ---
 
@@ -42,7 +42,7 @@ Projetos visíveis mapeados: **19**
 ### Períodos congelados
 
 - **Julho/2026** — período encerrado, dados travados no snapshot (10 previstos, 1 em atraso acumulado, 11 envios, 5 com retrabalho).
-- **Agosto/2026** — mês corrente, atualizado a cada geração do snapshot.
+- **Agosto/2026** — mês corrente, atualizado a cada geração do snapshot (13 previstos, 1 em atraso acumulado, 5 envios, 3 com retrabalho, 30 entregas nos próximos 60 dias).
 - **Visão acumulada** — março a agosto/2026.
 
 ## Privacidade
@@ -63,6 +63,7 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 | `_artifact_src.html` | Cópia do artifact original, sem os dados |
 | `_projects_min.json` | Lista minimizada de projetos e tipos de issue |
 | `_snap/` | JSONs minimais por consulta (insumo da geração) |
+| `_gen_snapshot.py` | Gerador do snapshot (`_artifact_src.html` + `_snap/` → `index.html`) |
 | `vercel.json` | Configuração de deploy |
 | `auto-push.ps1`, `pr03-push-watchdog.ps1` | Automação de commit/push no Windows |
 
@@ -73,3 +74,13 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 3. O **Vercel** publica automaticamente cerca de 1 minuto após o push.
 
 A geração do snapshot e o push são etapas independentes: o agente nunca executa operações de git nem autentica no GitHub.
+
+## Verificação da geração
+
+Cada execução valida, antes de publicar:
+
+- sintaxe do bloco `snapshot-data.js` (`node --check`);
+- resolução das 16 consultas JQL pelo interceptador `window.cowork.callMcpTool` (cada JQL do artifact precisa cair no dataset correto);
+- preservação dos meses congelados contra a sobrescrita de `window.__HISTORY__` feita pelo artifact;
+- ausência de `accountId`, e-mails, avatares e `iconUrl` no HTML final;
+- posição do banner de snapshot (imediatamente antes de `</body>`).
