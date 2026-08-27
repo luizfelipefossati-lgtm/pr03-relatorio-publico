@@ -2,7 +2,7 @@
 
 Pagina estatica publicada a partir do artifact **Pr03 Relatorio Indicadores Epics**.
 
-- **Ultima atualizacao:** 27/08/2026 06:15 (2026-08-27T06:15:28-03:00)
+- **Ultima atualizacao:** 27/08/2026 07:15 (2026-08-27T07:15:33-03:00)
 - **Fonte:** Jira Cloud `projetos-engeplus` (cloudId `ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 - **Tipos de issue considerados como Epic:** Epic, Fluxo de trabalho
 - **Projetos visiveis no snapshot:** 19
@@ -21,6 +21,12 @@ conjuntos historicos coexistem em vez de um sobrescrever o outro.
 As 17 chamadas dinamicas do artifact (1x `getVisibleJiraProjects` + 16 consultas JQL)
 foram resolvidas e validadas uma a uma nesta geracao: cada JQL foi roteada para o dataset
 correto, sem colisao de padroes e sem dataset orfao.
+
+O HTML base usado na geracao e o `_artifact_src.html` deste repositorio (948 linhas,
+md5 `6a2b6462a4efbec1890af4494a7f0b74`), verificado como identico ao artifact atual
+(`Artifacts\pr03-relatorio-indicadores-epics\index.html`) por comparacao de ancoras e
+numeracao de linhas. Se o artifact for editado, `_artifact_src.html` precisa ser
+atualizado junto.
 
 ## Conteudo do snapshot
 
