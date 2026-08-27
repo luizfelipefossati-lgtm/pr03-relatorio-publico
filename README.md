@@ -4,12 +4,13 @@ Publicação estática do painel **PR.03 — Estudos e Projetos / Relatório de 
 
 ## Última atualização
 
-- **Gerado em:** 26/08/2026 18:10 (America/São_Paulo)
-- **Timestamp ISO:** `2026-08-26T18:10:32-03:00`
+- **Gerado em:** 26/08/2026 23:22 (America/São_Paulo)
+- **Timestamp ISO:** `2026-08-26T23:22:15-03:00`
 - **Fonte:** Jira Cloud `ead785de-33f3-4746-9bdb-a2a58cf5213b` (projetos-engeplus)
 - **Projetos visíveis:** 19
 - **Tipos de issue de nível Epic:** Epic, Fluxo de trabalho
 - **Tamanho do `index.html`:** 140,5 KB
+- **Chamadas dinâmicas resolvidas:** 14 (1× `getVisibleJiraProjects` + 13 consultas JQL)
 
 ## O que é isto
 
@@ -48,6 +49,15 @@ Abril, Maio e Junho de 2026 já vêm congelados dentro do próprio artifact
 (`window.__HISTORY__`), com 19, 15 e 2 epics planejados respectivamente, e não
 são reconsultados. Julho de 2026 foi congelado nesta geração (11 entregas
 enviadas/resolvidas no período, 5 com retrabalho).
+
+## Observação sobre o indicador de retrabalho
+
+A consulta de "enviados" usa a string literal `"Enviado - Aguardando Análise"`.
+Alguns projetos usam variantes do nome do status — `Enviado - Aguardando Análise1`
+(EG0239, EG0256, EG0273) e `Enviado- Aguardando Análise` (EG0285, sem espaço antes
+do hífen). Esses itens entram em `resolved_*` mas não em `sent_*`, o que pode
+subcontar as entregas enviadas. Padronizar os nomes de status no Jira corrigiria
+a distorção.
 
 ## Estrutura do repositório
 
