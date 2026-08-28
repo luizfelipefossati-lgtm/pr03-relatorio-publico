@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 28/08/2026 15:11** (`2026-08-28T15:11:04-03:00`)
+> **Última atualização do snapshot: 28/08/2026 17:09** (`2026-08-28T17:09:24-03:00`)
 
 ---
 
@@ -27,11 +27,11 @@ Projetos visíveis mapeados: **19**
 | `planned_2026-05` | Epics com due date em mai/2026 | 7 |
 | `planned_2026-06` | Epics com due date em jun/2026 | 1 |
 | `planned_2026-07` | Epics com due date em jul/2026 | 10 |
-| `planned_2026-08` | Epics com due date em ago/2026 | 13 |
+| `planned_2026-08` | Epics com due date em ago/2026 | 11 |
 | `overdue_2026-07` | Vencidos antes de jul/2026, não concluídos | 1 |
 | `overdue_2026-08` | Vencidos antes de ago/2026, não concluídos | 1 |
-| `lookahead_2026-07` | Due date entre ago/2026 e set/2026 | 27 |
-| `lookahead_2026-08` | Due date entre set/2026 e out/2026 | 30 |
+| `lookahead_2026-07` | Due date entre ago/2026 e set/2026 | 26 |
+| `lookahead_2026-08` | Due date entre set/2026 e out/2026 | 32 |
 | `sent_2026-07` | Transições para "Enviado - Aguardando Análise" em jul/2026 | 5 |
 | `sent_2026-08` | Transições para "Enviado - Aguardando Análise" em ago/2026 | 3 |
 | `resolved_2026-07` | Concluídos em jul/2026 | 8 |
@@ -41,8 +41,8 @@ Projetos visíveis mapeados: **19**
 
 ### Períodos congelados
 
-- **Julho/2026** — período encerrado, dados travados no snapshot (10 previstos, 1 em atraso acumulado, 11 envios, 5 com retrabalho).
-- **Agosto/2026** — mês corrente, atualizado a cada geração do snapshot (13 previstos, 1 em atraso acumulado, 5 envios, 3 com retrabalho, 30 entregas nos próximos 60 dias).
+- **Julho/2026** — período encerrado, dados travados no snapshot (10 previstos, 1 em atraso acumulado, 11 envios, 5 com retrabalho, 26 entregas nos 60 dias seguintes).
+- **Agosto/2026** — mês corrente, atualizado a cada geração do snapshot (11 previstos, 1 em atraso acumulado, 5 envios, 3 com retrabalho, 32 entregas nos próximos 60 dias).
 - **Visão acumulada** — março a agosto/2026.
 
 ## Privacidade
@@ -58,7 +58,7 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 
 | Arquivo | Função |
 |---|---|
-| `index.html` | Página publicada (artifact + dados estáticos + banner de snapshot) — 151.7 KB |
+| `index.html` | Página publicada (artifact + dados estáticos + banner de snapshot) — 148,0 KB |
 | `snapshot-data.js` | Bloco de dados estáticos, também embutido no `index.html` |
 | `_artifact_src.html` | Cópia do artifact original, sem os dados |
 | `_projects_min.json` | Lista minimizada de projetos e tipos de issue |
@@ -88,4 +88,5 @@ Cada execução valida, antes de publicar:
 ## Observações da fonte de dados
 
 - Existem variantes do nome do status de envio no Jira (`Enviado - Aguardando Análise`, `Enviado - Aguardando Análise1`, `Enviado- Aguardando Análise`). As consultas `sent_*` e `rework_*` usam o nome canônico, então itens com as variantes aparecem apenas em `resolved_*` — daí a diferença entre `sent` e o total de envios.
+- Em jul/2026 e ago/2026, `rework_*` retornou o mesmo conjunto de `sent_*`: todos os itens que entraram em "Enviado - Aguardando Análise" no período também saíram desse status em algum momento. Não é erro de consulta, mas convém validar a leitura do indicador de retrabalho.
 - O projeto "EG0280 - DMAE" tem a chave `G0280` no Jira (sem o `E` inicial); o valor é preservado como retornado pela API.
