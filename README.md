@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 27/08/2026 18:11** (`2026-08-27T18:11:52-03:00`)
+> **Última atualização do snapshot: 28/08/2026 09:38** (`2026-08-28T09:38:53-03:00`)
 
 ---
 
@@ -62,7 +62,7 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 | `snapshot-data.js` | Bloco de dados estáticos, também embutido no `index.html` |
 | `_artifact_src.html` | Cópia do artifact original, sem os dados |
 | `_projects_min.json` | Lista minimizada de projetos e tipos de issue |
-| `_snap/` | JSONs minimais por consulta (insumo da geração) |
+| `_snap/` | JSONs minimais por consulta (insumo da geração) + `_conv.py` (minimização da resposta da API) |
 | `_gen_snapshot.py` | Gerador do snapshot (`_artifact_src.html` + `_snap/` → `index.html`) |
 | `vercel.json` | Configuração de deploy |
 | `auto-push.ps1`, `pr03-push-watchdog.ps1` | Automação de commit/push no Windows |
