@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 28/08/2026 14:10** (`2026-08-28T14:10:52-03:00`)
+> **Última atualização do snapshot: 28/08/2026 15:11** (`2026-08-28T15:11:04-03:00`)
 
 ---
 
@@ -58,11 +58,11 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 
 | Arquivo | Função |
 |---|---|
-| `index.html` | Página publicada (artifact + dados estáticos + banner de snapshot) |
+| `index.html` | Página publicada (artifact + dados estáticos + banner de snapshot) — 151.7 KB |
 | `snapshot-data.js` | Bloco de dados estáticos, também embutido no `index.html` |
 | `_artifact_src.html` | Cópia do artifact original, sem os dados |
 | `_projects_min.json` | Lista minimizada de projetos e tipos de issue |
-| `_snap/` | JSONs minimais por consulta (insumo da geração) + `_conv.py` (minimização da resposta da API) |
+| `_snap/` | JSONs minimais por consulta (insumo da geração) + `_conv.py` / `_pick.py` (minimização e pareamento das respostas da API) |
 | `_gen_snapshot.py` | Gerador do snapshot (`_artifact_src.html` + `_snap/` → `index.html`) |
 | `vercel.json` | Configuração de deploy |
 | `auto-push.ps1`, `pr03-push-watchdog.ps1` | Automação de commit/push no Windows |
@@ -79,8 +79,13 @@ A geração do snapshot e o push são etapas independentes: o agente nunca execu
 
 Cada execução valida, antes de publicar:
 
-- sintaxe do bloco `snapshot-data.js` (`node --check`);
-- resolução das 16 consultas JQL pelo interceptador `window.cowork.callMcpTool` (cada JQL do artifact precisa cair no dataset correto);
+- sintaxe e execução do bloco `snapshot-data.js` em Node;
+- resolução das 16 consultas JQL pelo interceptador `window.cowork.callMcpTool` (cada JQL do artifact precisa cair no dataset correto, com a contagem esperada);
 - preservação dos meses congelados contra a sobrescrita de `window.__HISTORY__` feita pelo artifact;
-- ausência de `accountId`, e-mails, avatares e `iconUrl` no HTML final;
-- posição do banner de snapshot (imediatamente antes de `</body>`).
+- ausência de `accountId`, e-mails, avatares e `iconUrl` nos datasets e no HTML final;
+- posição do banner de snapshot (imediatamente antes de `</body>`, não no topo do body).
+
+## Observações da fonte de dados
+
+- Existem variantes do nome do status de envio no Jira (`Enviado - Aguardando Análise`, `Enviado - Aguardando Análise1`, `Enviado- Aguardando Análise`). As consultas `sent_*` e `rework_*` usam o nome canônico, então itens com as variantes aparecem apenas em `resolved_*` — daí a diferença entre `sent` e o total de envios.
+- O projeto "EG0280 - DMAE" tem a chave `G0280` no Jira (sem o `E` inicial); o valor é preservado como retornado pela API.
