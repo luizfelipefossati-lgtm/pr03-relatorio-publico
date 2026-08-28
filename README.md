@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 28/08/2026 13:11** (`2026-08-28T13:11:02-03:00`)
+> **Última atualização do snapshot: 28/08/2026 14:10** (`2026-08-28T14:10:52-03:00`)
 
 ---
 
