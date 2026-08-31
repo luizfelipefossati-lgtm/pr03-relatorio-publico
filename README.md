@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 31/08/2026 10:35** (`2026-08-31T10:35:59-03:00`)
+> **Última atualização do snapshot: 31/08/2026 11:30** (`2026-08-31T11:30:44-03:00`)
 
 ---
 
@@ -41,7 +41,7 @@ Projetos visíveis mapeados: **19**
 
 Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
 
-**Nenhum conjunto mudou em relação às gerações anteriores de hoje (07:35, 08:35, 09:30, 09:40 e 10:35)** — as 16 consultas foram reexecutadas contra o Jira e retornaram exatamente as mesmas contagens. Apenas o carimbo de tempo foi atualizado, e o `index.html` resultante tem o mesmo tamanho (151.363 bytes) em todas elas.
+**Nenhum conjunto mudou em relação às gerações anteriores de hoje (07:35, 08:35, 09:30, 09:40, 10:35 e 11:30)** — nesta geração foi feita uma verificação de alterações no Jira (`issuetype in ("Epic","Fluxo de trabalho") AND updated >= "2026-08-31 09:30"`), que retornou **0 issues**, confirmando que nenhum Epic mudou desde a coleta anterior; os conjuntos `planned_2026-08` e `overdue_2026-08` foram, ainda assim, reexecutados contra o Jira e retornaram exatamente as mesmas contagens e o mesmo tamanho em bytes. Apenas o carimbo de tempo foi atualizado, e o `index.html` resultante tem o mesmo tamanho (151.363 bytes) em todas elas.
 
 ### Períodos cobertos
 
@@ -100,9 +100,9 @@ A geração do snapshot e o push são etapas independentes: o agente nunca execu
 | Agosto 2026 (ao vivo) | 85 | 47 | 25% / 50% / 100% / 0% |
 | Visão Acumulada | 133 | 23 | 56% / 44% / 80% / 79% |
 
-Também confirmado em execução: `[PR03] Snapshot estatico carregado - gerado em 2026-08-31T10:35:59-03:00` no console, **0 avisos de "JQL sem correspondencia"** (os 16 padrões cobrem todas as consultas que o artifact emite) e **0 requisições de rede para `atlassian.com`**. A única requisição externa da página é o `chart.js@4.5.0` do jsDelivr, necessário para os gráficos; no sandbox de verificação esse CDN é bloqueado, então o teste rodou com um stub do `Chart` — em produção (Vercel) o script carrega normalmente.
+Também confirmado em execução: `[PR03] Snapshot estatico carregado - gerado em 2026-08-31T11:30:44-03:00` no console, **0 avisos de "JQL sem correspondencia"** (os 16 padrões cobrem todas as consultas que o artifact emite) e **0 requisições de rede para `atlassian.com`**. A única requisição externa da página é o `chart.js@4.5.0` do jsDelivr, necessário para os gráficos; no sandbox de verificação esse CDN é bloqueado, então o teste rodou com um stub do `Chart` — em produção (Vercel) o script carrega normalmente.
 
-**Execuções repetidas:** a tarefa `deploy-pr03-vercel` já rodou cinco vezes hoje (07:35, 08:35, 09:30, 09:40 e 10:35). Todas produziram `index.html` e `snapshot-data.js` de tamanho idêntico (151.363 e 63.577 bytes), diferindo apenas no carimbo de tempo. Este README descreve o arquivo que está no disco, com carimbo `2026-08-31T10:35:59-03:00`.
+**Execuções repetidas:** a tarefa `deploy-pr03-vercel` já rodou seis vezes hoje (07:35, 08:35, 09:30, 09:40, 10:35 e 11:30). Todas produziram `index.html` e `snapshot-data.js` de tamanho idêntico (151.363 e 63.577 bytes), diferindo apenas no carimbo de tempo. Este README descreve o arquivo que está no disco, com carimbo `2026-08-31T11:30:44-03:00`.
 
 ## Observações da fonte de dados
 
