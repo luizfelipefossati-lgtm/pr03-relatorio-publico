@@ -1,1 +1,192 @@
-[{"key": "EG0239-27", "fields": {"summary": "TOMO Vl - PAE", "status": {"name": "Concluído", "statusCategory": {"key": "done"}}, "project": {"key": "EG0239", "name": "EG0239 - CARPINA/ COMPESA"}, "duedate": "2026-07-10", "resolutiondate": "2026-07-14T15:00:18.092-0300", "updated": "2026-08-03T09:48:29.168-0300"}}, {"key": "EG0241-43", "fields": {"summary": "TOMO IV - PLANO DE OPERAÇÃO, MANUTENÇÃO E INSTRUMENTAÇÃO (POMI)", "status": {"name": "Medido e Faturado", "statusCategory": {"key": "done"}}, "project": {"key": "EG0241", "name": "EG0241 - XARÉU/ COMPESA"}, "duedate": "2026-07-06", "resolutiondate": "2026-07-09T09:40:19.623-0300", "updated": "2026-07-13T09:17:31.776-0300"}}, {"key": "EG0256-27", "fields": {"summary": "Diagnóstico Ambiental - Meio Físico - Avaliação Agrícola", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0256", "name": "EG0256 - SOPS_RS - EIA RIMA"}, "duedate": "2026-07-31", "resolutiondate": "2026-07-27T10:58:30.736-0300", "updated": "2026-07-27T10:59:14.278-0300"}}, {"key": "EG0256-26", "fields": {"summary": "Diagnóstico Ambiental - Meio Físico - Pedologia", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0256", "name": "EG0256 - SOPS_RS - EIA RIMA"}, "duedate": "2026-07-31", "resolutiondate": "2026-07-27T10:58:40.378-0300", "updated": "2026-07-27T10:59:07.601-0300"}}, {"key": "EG0256-25", "fields": {"summary": "Diagnóstico Ambiental - Meio Físico - Geologia e Geomorfologia", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0256", "name": "EG0256 - SOPS_RS - EIA RIMA"}, "duedate": "2026-07-31", "resolutiondate": "2026-07-27T10:58:45.012-0300", "updated": "2026-07-27T10:59:11.112-0300"}}, {"key": "EG0274-43", "fields": {"summary": "Estudos Hidrológicos ", "status": {"name": "Enviado - Aguardando Análise", "statusCategory": {"key": "done"}}, "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-07-15", "resolutiondate": "2026-08-21T11:38:34.684-0300", "updated": "2026-08-21T11:38:34.692-0300"}}, {"key": "EG0274-38", "fields": {"summary": "Estudos de Tráfego", "status": {"name": "Enviado - Aguardando Análise", "statusCategory": {"key": "done"}}, "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-07-17", "resolutiondate": "2026-08-24T13:48:05.656-0300", "updated": "2026-08-24T13:49:25.954-0300"}}, {"key": "EG0275-5", "fields": {"summary": "Relatório Parcial Projeto Básico", "status": {"name": "Concluído", "statusCategory": {"key": "done"}}, "project": {"key": "EG0275", "name": "EG0275 - CODEVASF"}, "duedate": "2026-07-15", "resolutiondate": "2026-07-03T10:16:50.117-0300", "updated": "2026-07-03T10:16:50.137-0300"}}, {"key": "EG0275-20", "fields": {"summary": "Atividades Complementares", "status": {"name": "Concluído", "statusCategory": {"key": "done"}}, "project": {"key": "EG0275", "name": "EG0275 - CODEVASF"}, "duedate": "2026-07-17", "resolutiondate": "2026-02-19T10:39:29.318-0300", "updated": "2026-05-15T13:36:14.177-0300"}}, {"key": "EG0286-2", "fields": {"summary": "Relatório de planejamento de atividades", "status": {"name": "Enviado - Aguardando Análise", "statusCategory": {"key": "done"}}, "project": {"key": "EG0286", "name": "EG0286 - DNIT/AC "}, "duedate": "2026-07-17", "resolutiondate": "2026-07-28T16:08:52.158-0300", "updated": "2026-07-28T16:08:52.179-0300"}}]
+[
+ {
+  "key": "EG0239-27",
+  "fields": {
+   "summary": "TOMO Vl - PAE",
+   "status": {
+    "name": "Concluído",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0239",
+    "name": "EG0239 - CARPINA/ COMPESA"
+   },
+   "duedate": "2026-07-10",
+   "resolutiondate": "2026-07-14T15:00:18.092-0300",
+   "updated": "2026-08-03T09:48:29.168-0300"
+  }
+ },
+ {
+  "key": "EG0241-43",
+  "fields": {
+   "summary": "TOMO IV - PLANO DE OPERAÇÃO, MANUTENÇÃO E INSTRUMENTAÇÃO (POMI)",
+   "status": {
+    "name": "Medido e Faturado",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0241",
+    "name": "EG0241 - XARÉU/ COMPESA"
+   },
+   "duedate": "2026-07-06",
+   "resolutiondate": "2026-07-09T09:40:19.623-0300",
+   "updated": "2026-07-13T09:17:31.776-0300"
+  }
+ },
+ {
+  "key": "EG0256-27",
+  "fields": {
+   "summary": "Diagnóstico Ambiental - Meio Físico - Avaliação Agrícola",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0256",
+    "name": "EG0256 - SOPS_RS - EIA RIMA"
+   },
+   "duedate": "2026-07-31",
+   "resolutiondate": "2026-07-27T10:58:30.736-0300",
+   "updated": "2026-07-27T10:59:14.278-0300"
+  }
+ },
+ {
+  "key": "EG0256-26",
+  "fields": {
+   "summary": "Diagnóstico Ambiental - Meio Físico - Pedologia",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0256",
+    "name": "EG0256 - SOPS_RS - EIA RIMA"
+   },
+   "duedate": "2026-07-31",
+   "resolutiondate": "2026-07-27T10:58:40.378-0300",
+   "updated": "2026-07-27T10:59:07.601-0300"
+  }
+ },
+ {
+  "key": "EG0256-25",
+  "fields": {
+   "summary": "Diagnóstico Ambiental - Meio Físico - Geologia e Geomorfologia",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0256",
+    "name": "EG0256 - SOPS_RS - EIA RIMA"
+   },
+   "duedate": "2026-07-31",
+   "resolutiondate": "2026-07-27T10:58:45.012-0300",
+   "updated": "2026-07-27T10:59:11.112-0300"
+  }
+ },
+ {
+  "key": "EG0274-43",
+  "fields": {
+   "summary": "Estudos Hidrológicos ",
+   "status": {
+    "name": "Enviado - Aguardando Análise",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0274",
+    "name": "EG0274 - DNIT"
+   },
+   "duedate": "2026-07-15",
+   "resolutiondate": "2026-08-21T11:38:34.684-0300",
+   "updated": "2026-08-21T11:38:34.692-0300"
+  }
+ },
+ {
+  "key": "EG0274-38",
+  "fields": {
+   "summary": "Estudos de Tráfego",
+   "status": {
+    "name": "Enviado - Aguardando Análise",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0274",
+    "name": "EG0274 - DNIT"
+   },
+   "duedate": "2026-07-17",
+   "resolutiondate": "2026-08-24T13:48:05.656-0300",
+   "updated": "2026-08-24T13:49:25.954-0300"
+  }
+ },
+ {
+  "key": "EG0275-5",
+  "fields": {
+   "summary": "Relatório Parcial Projeto Básico",
+   "status": {
+    "name": "Concluído",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0275",
+    "name": "EG0275 - CODEVASF"
+   },
+   "duedate": "2026-07-15",
+   "resolutiondate": "2026-07-03T10:16:50.117-0300",
+   "updated": "2026-07-03T10:16:50.137-0300"
+  }
+ },
+ {
+  "key": "EG0275-20",
+  "fields": {
+   "summary": "Atividades Complementares",
+   "status": {
+    "name": "Concluído",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0275",
+    "name": "EG0275 - CODEVASF"
+   },
+   "duedate": "2026-07-17",
+   "resolutiondate": "2026-02-19T10:39:29.318-0300",
+   "updated": "2026-05-15T13:36:14.177-0300"
+  }
+ },
+ {
+  "key": "EG0286-2",
+  "fields": {
+   "summary": "Relatório de planejamento de atividades",
+   "status": {
+    "name": "Enviado - Aguardando Análise",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0286",
+    "name": "EG0286 - DNIT/AC "
+   },
+   "duedate": "2026-07-17",
+   "resolutiondate": "2026-07-28T16:08:52.158-0300",
+   "updated": "2026-07-28T16:08:52.179-0300"
+  }
+ }
+]

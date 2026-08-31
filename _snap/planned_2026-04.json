@@ -1,1 +1,287 @@
-[{"key": "EG0240-1", "fields": {"summary": "TOMO III - REVISÃO PERIÓDICA DE SEGURANÇA DE BARRAGEM (RPSB)", "status": {"name": "Medido e Faturado", "statusCategory": {"key": "done"}}, "project": {"key": "EG0240", "name": "EG0240 - GOITÁ/ COMPESA"}, "duedate": "2026-04-30", "resolutiondate": "2026-04-30T16:24:47.919-0300", "updated": "2026-05-18T10:20:55.123-0300"}}, {"key": "EG0273-15", "fields": {"summary": "Análise e Aprovação DNIT - Relatório Projeto Executivo", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300"}}, {"key": "EG0273-14", "fields": {"summary": "Relatório Projeto Executivo", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300"}}, {"key": "EG0273-13", "fields": {"summary": "Orçamento e Plano de Execução da Obra", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300"}}, {"key": "EG0273-12", "fields": {"summary": "Projeto de Componentes Ambientais e Paisagismo", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300"}}, {"key": "EG0273-11", "fields": {"summary": "Projeto de Sinalização e Segurança Viária", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300"}}, {"key": "EG0273-10", "fields": {"summary": "Projeto de Obras Complementares", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300"}}, {"key": "EG0273-9", "fields": {"summary": "Verificação Projetos de OAEs ", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300"}}, {"key": "EG0273-8", "fields": {"summary": "Projeto de Pavimentação", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300"}}, {"key": "EG0273-7", "fields": {"summary": "Projeto de Drenagem e OAC", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300"}}, {"key": "EG0273-6", "fields": {"summary": "Projeto de Terrraplenagem", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300"}}, {"key": "EG0273-5", "fields": {"summary": "Projeto Geométrico", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300"}}, {"key": "EG0273-4", "fields": {"summary": "Estudos Hidrológicos", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300"}}, {"key": "EG0273-3", "fields": {"summary": "Estudos Geológicos", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-04-13", "resolutiondate": null, "updated": "2026-04-30T16:40:04.648-0300"}}, {"key": "EG0274-44", "fields": {"summary": "Levantamento Ambiental", "status": {"name": "Enviado - Aguardando Análise", "statusCategory": {"key": "done"}}, "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-04-01", "resolutiondate": "2026-07-31T09:31:10.611-0300", "updated": "2026-07-31T09:31:10.632-0300"}}]
+[
+ {
+  "key": "EG0240-1",
+  "fields": {
+   "summary": "TOMO III - REVISÃO PERIÓDICA DE SEGURANÇA DE BARRAGEM (RPSB)",
+   "status": {
+    "name": "Medido e Faturado",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0240",
+    "name": "EG0240 - GOITÁ/ COMPESA"
+   },
+   "duedate": "2026-04-30",
+   "resolutiondate": "2026-04-30T16:24:47.919-0300",
+   "updated": "2026-05-18T10:20:55.123-0300"
+  }
+ },
+ {
+  "key": "EG0273-15",
+  "fields": {
+   "summary": "Análise e Aprovação DNIT - Relatório Projeto Executivo",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0273",
+    "name": "EG0273 - DNIT AP"
+   },
+   "duedate": "2026-04-13",
+   "resolutiondate": null,
+   "updated": "2026-04-30T16:40:04.648-0300"
+  }
+ },
+ {
+  "key": "EG0273-14",
+  "fields": {
+   "summary": "Relatório Projeto Executivo",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0273",
+    "name": "EG0273 - DNIT AP"
+   },
+   "duedate": "2026-04-13",
+   "resolutiondate": null,
+   "updated": "2026-04-30T16:40:04.648-0300"
+  }
+ },
+ {
+  "key": "EG0273-13",
+  "fields": {
+   "summary": "Orçamento e Plano de Execução da Obra",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0273",
+    "name": "EG0273 - DNIT AP"
+   },
+   "duedate": "2026-04-13",
+   "resolutiondate": null,
+   "updated": "2026-04-30T16:40:04.648-0300"
+  }
+ },
+ {
+  "key": "EG0273-12",
+  "fields": {
+   "summary": "Projeto de Componentes Ambientais e Paisagismo",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0273",
+    "name": "EG0273 - DNIT AP"
+   },
+   "duedate": "2026-04-13",
+   "resolutiondate": null,
+   "updated": "2026-04-30T16:40:04.648-0300"
+  }
+ },
+ {
+  "key": "EG0273-11",
+  "fields": {
+   "summary": "Projeto de Sinalização e Segurança Viária",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0273",
+    "name": "EG0273 - DNIT AP"
+   },
+   "duedate": "2026-04-13",
+   "resolutiondate": null,
+   "updated": "2026-04-30T16:40:04.648-0300"
+  }
+ },
+ {
+  "key": "EG0273-10",
+  "fields": {
+   "summary": "Projeto de Obras Complementares",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0273",
+    "name": "EG0273 - DNIT AP"
+   },
+   "duedate": "2026-04-13",
+   "resolutiondate": null,
+   "updated": "2026-04-30T16:40:04.648-0300"
+  }
+ },
+ {
+  "key": "EG0273-9",
+  "fields": {
+   "summary": "Verificação Projetos de OAEs ",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0273",
+    "name": "EG0273 - DNIT AP"
+   },
+   "duedate": "2026-04-13",
+   "resolutiondate": null,
+   "updated": "2026-04-30T16:40:04.648-0300"
+  }
+ },
+ {
+  "key": "EG0273-8",
+  "fields": {
+   "summary": "Projeto de Pavimentação",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0273",
+    "name": "EG0273 - DNIT AP"
+   },
+   "duedate": "2026-04-13",
+   "resolutiondate": null,
+   "updated": "2026-04-30T16:40:04.648-0300"
+  }
+ },
+ {
+  "key": "EG0273-7",
+  "fields": {
+   "summary": "Projeto de Drenagem e OAC",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0273",
+    "name": "EG0273 - DNIT AP"
+   },
+   "duedate": "2026-04-13",
+   "resolutiondate": null,
+   "updated": "2026-04-30T16:40:04.648-0300"
+  }
+ },
+ {
+  "key": "EG0273-6",
+  "fields": {
+   "summary": "Projeto de Terrraplenagem",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0273",
+    "name": "EG0273 - DNIT AP"
+   },
+   "duedate": "2026-04-13",
+   "resolutiondate": null,
+   "updated": "2026-04-30T16:40:04.648-0300"
+  }
+ },
+ {
+  "key": "EG0273-5",
+  "fields": {
+   "summary": "Projeto Geométrico",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0273",
+    "name": "EG0273 - DNIT AP"
+   },
+   "duedate": "2026-04-13",
+   "resolutiondate": null,
+   "updated": "2026-04-30T16:40:04.648-0300"
+  }
+ },
+ {
+  "key": "EG0273-4",
+  "fields": {
+   "summary": "Estudos Hidrológicos",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0273",
+    "name": "EG0273 - DNIT AP"
+   },
+   "duedate": "2026-04-13",
+   "resolutiondate": null,
+   "updated": "2026-04-30T16:40:04.648-0300"
+  }
+ },
+ {
+  "key": "EG0273-3",
+  "fields": {
+   "summary": "Estudos Geológicos",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0273",
+    "name": "EG0273 - DNIT AP"
+   },
+   "duedate": "2026-04-13",
+   "resolutiondate": null,
+   "updated": "2026-04-30T16:40:04.648-0300"
+  }
+ },
+ {
+  "key": "EG0274-44",
+  "fields": {
+   "summary": "Levantamento Ambiental",
+   "status": {
+    "name": "Enviado - Aguardando Análise",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0274",
+    "name": "EG0274 - DNIT"
+   },
+   "duedate": "2026-04-01",
+   "resolutiondate": "2026-07-31T09:31:10.611-0300",
+   "updated": "2026-07-31T09:31:10.632-0300"
+  }
+ }
+]

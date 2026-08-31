@@ -1,352 +1,352 @@
 [
-  {
-    "key": "CREA",
-    "name": "GESTÃO - CREA ",
-    "issueTypes": [
-      {
-        "name": "Fluxo de trabalho",
-        "hierarchyLevel": 1
-      },
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      }
-    ]
-  },
-  {
-    "key": "EG0232",
-    "name": "EG0232 - EMBASA",
-    "issueTypes": [
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      }
-    ]
-  },
-  {
-    "key": "EG0235",
-    "name": "EG0235 - SEMOBI",
-    "issueTypes": [
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      },
-      {
-        "name": "Epic",
-        "hierarchyLevel": 1
-      },
-      {
-        "name": "Erro",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "História",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      }
-    ]
-  },
-  {
-    "key": "EG0239",
-    "name": "EG0239 - CARPINA/ COMPESA",
-    "issueTypes": [
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      },
-      {
-        "name": "Epic",
-        "hierarchyLevel": 1
-      }
-    ]
-  },
-  {
-    "key": "EG0240",
-    "name": "EG0240 - GOITÁ/ COMPESA",
-    "issueTypes": [
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      },
-      {
-        "name": "Epic",
-        "hierarchyLevel": 1
-      },
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      }
-    ]
-  },
-  {
-    "key": "EG0241",
-    "name": "EG0241 - XARÉU/ COMPESA",
-    "issueTypes": [
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      },
-      {
-        "name": "Epic",
-        "hierarchyLevel": 1
-      }
-    ]
-  },
-  {
-    "key": "EG0256",
-    "name": "EG0256 - SOPS_RS - EIA RIMA",
-    "issueTypes": [
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      },
-      {
-        "name": "Epic",
-        "hierarchyLevel": 1
-      }
-    ]
-  },
-  {
-    "key": "EG0257",
-    "name": "EG0257 - DMAE ",
-    "issueTypes": [
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      },
-      {
-        "name": "Epic",
-        "hierarchyLevel": 1
-      }
-    ]
-  },
-  {
-    "key": "EG0272",
-    "name": "EG0272 - CASAN",
-    "issueTypes": [
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      },
-      {
-        "name": "Epic",
-        "hierarchyLevel": 1
-      }
-    ]
-  },
-  {
-    "key": "EG0273",
-    "name": "EG0273 - DNIT AP",
-    "issueTypes": [
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      },
-      {
-        "name": "Epic",
-        "hierarchyLevel": 1
-      }
-    ]
-  },
-  {
-    "key": "EG0274",
-    "name": "EG0274 - DNIT",
-    "issueTypes": [
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      },
-      {
-        "name": "Epic",
-        "hierarchyLevel": 1
-      }
-    ]
-  },
-  {
-    "key": "EG0275",
-    "name": "EG0275 - CODEVASF",
-    "issueTypes": [
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      },
-      {
-        "name": "Epic",
-        "hierarchyLevel": 1
-      }
-    ]
-  },
-  {
-    "key": "EG0285",
-    "name": "EG0285 - EMBASA - BARREIRAS",
-    "issueTypes": [
-      {
-        "name": "Fluxo de trabalho",
-        "hierarchyLevel": 1
-      },
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      }
-    ]
-  },
-  {
-    "key": "EG0286",
-    "name": "EG0286 - DNIT/AC ",
-    "issueTypes": [
-      {
-        "name": "Fluxo de trabalho",
-        "hierarchyLevel": 1
-      },
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      }
-    ]
-  },
-  {
-    "key": "EG0287",
-    "name": "EG0287 - Dique de Camboriú",
-    "issueTypes": [
-      {
-        "name": "Fluxo de trabalho",
-        "hierarchyLevel": 1
-      },
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      }
-    ]
-  },
-  {
-    "key": "EG0292",
-    "name": "EG0292 - PREFEITURA DE BLUMENAU",
-    "issueTypes": [
-      {
-        "name": "Fluxo de trabalho",
-        "hierarchyLevel": 1
-      },
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      }
-    ]
-  },
-  {
-    "key": "G0120",
-    "name": "EG0120 - DAER",
-    "issueTypes": [
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      },
-      {
-        "name": "Epic",
-        "hierarchyLevel": 1
-      }
-    ]
-  },
-  {
-    "key": "G0280",
-    "name": "EG0280 - DMAE",
-    "issueTypes": [
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      },
-      {
-        "name": "Epic",
-        "hierarchyLevel": 1
-      }
-    ]
-  },
-  {
-    "key": "PE",
-    "name": "Projetos -  Engenharia",
-    "issueTypes": [
-      {
-        "name": "Tarefa",
-        "hierarchyLevel": 0
-      },
-      {
-        "name": "Subtarefa",
-        "hierarchyLevel": -1
-      }
-    ]
-  }
+ {
+  "key": "G0120",
+  "name": "EG0120 - DAER",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   },
+   {
+    "name": "Epic",
+    "hierarchyLevel": 1
+   }
+  ]
+ },
+ {
+  "key": "EG0232",
+  "name": "EG0232 - EMBASA",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   }
+  ]
+ },
+ {
+  "key": "EG0235",
+  "name": "EG0235 - SEMOBI",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   },
+   {
+    "name": "Epic",
+    "hierarchyLevel": 1
+   },
+   {
+    "name": "Erro",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "História",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   }
+  ]
+ },
+ {
+  "key": "EG0239",
+  "name": "EG0239 - CARPINA/ COMPESA",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   },
+   {
+    "name": "Epic",
+    "hierarchyLevel": 1
+   }
+  ]
+ },
+ {
+  "key": "EG0240",
+  "name": "EG0240 - GOITÁ/ COMPESA",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   },
+   {
+    "name": "Epic",
+    "hierarchyLevel": 1
+   },
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   }
+  ]
+ },
+ {
+  "key": "EG0241",
+  "name": "EG0241 - XARÉU/ COMPESA",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   },
+   {
+    "name": "Epic",
+    "hierarchyLevel": 1
+   }
+  ]
+ },
+ {
+  "key": "EG0256",
+  "name": "EG0256 - SOPS_RS - EIA RIMA",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   },
+   {
+    "name": "Epic",
+    "hierarchyLevel": 1
+   }
+  ]
+ },
+ {
+  "key": "EG0257",
+  "name": "EG0257 - DMAE ",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   },
+   {
+    "name": "Epic",
+    "hierarchyLevel": 1
+   }
+  ]
+ },
+ {
+  "key": "EG0272",
+  "name": "EG0272 - CASAN",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   },
+   {
+    "name": "Epic",
+    "hierarchyLevel": 1
+   }
+  ]
+ },
+ {
+  "key": "EG0273",
+  "name": "EG0273 - DNIT AP",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   },
+   {
+    "name": "Epic",
+    "hierarchyLevel": 1
+   }
+  ]
+ },
+ {
+  "key": "EG0274",
+  "name": "EG0274 - DNIT",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   },
+   {
+    "name": "Epic",
+    "hierarchyLevel": 1
+   }
+  ]
+ },
+ {
+  "key": "EG0275",
+  "name": "EG0275 - CODEVASF",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   },
+   {
+    "name": "Epic",
+    "hierarchyLevel": 1
+   }
+  ]
+ },
+ {
+  "key": "G0280",
+  "name": "EG0280 - DMAE",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   },
+   {
+    "name": "Epic",
+    "hierarchyLevel": 1
+   }
+  ]
+ },
+ {
+  "key": "EG0285",
+  "name": "EG0285 - EMBASA - BARREIRAS",
+  "issueTypes": [
+   {
+    "name": "Fluxo de trabalho",
+    "hierarchyLevel": 1
+   },
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   }
+  ]
+ },
+ {
+  "key": "EG0286",
+  "name": "EG0286 - DNIT/AC ",
+  "issueTypes": [
+   {
+    "name": "Fluxo de trabalho",
+    "hierarchyLevel": 1
+   },
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   }
+  ]
+ },
+ {
+  "key": "EG0287",
+  "name": "EG0287 - Dique de Camboriú",
+  "issueTypes": [
+   {
+    "name": "Fluxo de trabalho",
+    "hierarchyLevel": 1
+   },
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   }
+  ]
+ },
+ {
+  "key": "EG0292",
+  "name": "EG0292 - PREFEITURA DE BLUMENAU",
+  "issueTypes": [
+   {
+    "name": "Fluxo de trabalho",
+    "hierarchyLevel": 1
+   },
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   }
+  ]
+ },
+ {
+  "key": "CREA",
+  "name": "GESTÃO - CREA ",
+  "issueTypes": [
+   {
+    "name": "Fluxo de trabalho",
+    "hierarchyLevel": 1
+   },
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   }
+  ]
+ },
+ {
+  "key": "PE",
+  "name": "Projetos -  Engenharia",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   }
+  ]
+ }
 ]

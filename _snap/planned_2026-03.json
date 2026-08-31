@@ -1,1 +1,135 @@
-[{"key": "EG0256-23", "fields": {"summary": "Áreas de Influência Direta e Indireta", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0256", "name": "EG0256 - SOPS_RS - EIA RIMA"}, "duedate": "2026-03-31", "resolutiondate": null, "updated": "2026-04-01T09:07:29.995-0300"}}, {"key": "EG0273-2", "fields": {"summary": "Estudos Topográficos Complementares", "status": {"name": "Enviado - Aguardando Análise1", "statusCategory": {"key": "done"}}, "project": {"key": "EG0273", "name": "EG0273 - DNIT AP"}, "duedate": "2026-03-05", "resolutiondate": "2026-03-09T20:28:03.860-0300", "updated": "2026-05-19T09:31:01.762-0300"}}, {"key": "EG0274-17", "fields": {"summary": "Caracterização Funcional/Estrutural do Pavimento", "status": {"name": "Enviado - Aguardando Análise", "statusCategory": {"key": "done"}}, "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-03-06", "resolutiondate": "2026-03-12T08:59:10.783-0300", "updated": "2026-03-12T08:59:10.803-0300"}}, {"key": "EG0274-40", "fields": {"summary": "Estudos Topográficos, interferências e cadastramento de OAE/OAC  ", "status": {"name": "Medido e Faturado", "statusCategory": {"key": "done"}}, "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-03-13", "resolutiondate": "2026-03-23T14:51:02.855-0300", "updated": "2026-07-31T09:31:15.122-0300"}}, {"key": "EG0274-41", "fields": {"summary": "Estudos Geotécnicos", "status": {"name": "Enviado - Aguardando Análise", "statusCategory": {"key": "done"}}, "project": {"key": "EG0274", "name": "EG0274 - DNIT"}, "duedate": "2026-03-25", "resolutiondate": "2026-08-30T23:13:21.019-0300", "updated": "2026-08-30T23:13:21.027-0300"}}, {"key": "EG0287-6", "fields": {"summary": "RT 1 - Diagnóstico, Estudo de Concepção e Proposição de Alternativas", "status": {"name": "Enviado - Aguardando Análise", "statusCategory": {"key": "done"}}, "project": {"key": "EG0287", "name": "EG0287 - Dique de Camboriú"}, "duedate": "2026-03-27", "resolutiondate": "2026-04-15T13:55:50.095-0300", "updated": "2026-04-27T09:25:08.131-0300"}}, {"key": "EG0287-9", "fields": {"summary": "RT 6 - Projeto Executivo", "status": {"name": "Enviado - Aguardando Análise", "statusCategory": {"key": "done"}}, "project": {"key": "EG0287", "name": "EG0287 - Dique de Camboriú"}, "duedate": "2026-03-31", "resolutiondate": "2026-04-15T13:55:40.520-0300", "updated": "2026-04-15T13:55:40.541-0300"}}]
+[
+ {
+  "key": "EG0256-23",
+  "fields": {
+   "summary": "Áreas de Influência Direta e Indireta",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0256",
+    "name": "EG0256 - SOPS_RS - EIA RIMA"
+   },
+   "duedate": "2026-03-31",
+   "resolutiondate": null,
+   "updated": "2026-04-01T09:07:29.995-0300"
+  }
+ },
+ {
+  "key": "EG0273-2",
+  "fields": {
+   "summary": "Estudos Topográficos Complementares",
+   "status": {
+    "name": "Enviado - Aguardando Análise1",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0273",
+    "name": "EG0273 - DNIT AP"
+   },
+   "duedate": "2026-03-05",
+   "resolutiondate": "2026-03-09T20:28:03.860-0300",
+   "updated": "2026-05-19T09:31:01.762-0300"
+  }
+ },
+ {
+  "key": "EG0274-17",
+  "fields": {
+   "summary": "Caracterização Funcional/Estrutural do Pavimento",
+   "status": {
+    "name": "Enviado - Aguardando Análise",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0274",
+    "name": "EG0274 - DNIT"
+   },
+   "duedate": "2026-03-06",
+   "resolutiondate": "2026-03-12T08:59:10.783-0300",
+   "updated": "2026-03-12T08:59:10.803-0300"
+  }
+ },
+ {
+  "key": "EG0274-40",
+  "fields": {
+   "summary": "Estudos Topográficos, interferências e cadastramento de OAE/OAC  ",
+   "status": {
+    "name": "Medido e Faturado",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0274",
+    "name": "EG0274 - DNIT"
+   },
+   "duedate": "2026-03-13",
+   "resolutiondate": "2026-03-23T14:51:02.855-0300",
+   "updated": "2026-07-31T09:31:15.122-0300"
+  }
+ },
+ {
+  "key": "EG0274-41",
+  "fields": {
+   "summary": "Estudos Geotécnicos",
+   "status": {
+    "name": "Enviado - Aguardando Análise",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0274",
+    "name": "EG0274 - DNIT"
+   },
+   "duedate": "2026-03-25",
+   "resolutiondate": "2026-08-30T23:13:21.019-0300",
+   "updated": "2026-08-30T23:13:21.027-0300"
+  }
+ },
+ {
+  "key": "EG0287-6",
+  "fields": {
+   "summary": "RT 1 - Diagnóstico, Estudo de Concepção e Proposição de Alternativas",
+   "status": {
+    "name": "Enviado - Aguardando Análise",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0287",
+    "name": "EG0287 - Dique de Camboriú"
+   },
+   "duedate": "2026-03-27",
+   "resolutiondate": "2026-04-15T13:55:50.095-0300",
+   "updated": "2026-04-27T09:25:08.131-0300"
+  }
+ },
+ {
+  "key": "EG0287-9",
+  "fields": {
+   "summary": "RT 6 - Projeto Executivo",
+   "status": {
+    "name": "Enviado - Aguardando Análise",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0287",
+    "name": "EG0287 - Dique de Camboriú"
+   },
+   "duedate": "2026-03-31",
+   "resolutiondate": "2026-04-15T13:55:40.520-0300",
+   "updated": "2026-04-15T13:55:40.541-0300"
+  }
+ }
+]
