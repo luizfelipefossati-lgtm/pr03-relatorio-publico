@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 31/08/2026 00:36** (`2026-08-31T00:36:27-03:00`)
+> **Última atualização do snapshot: 31/08/2026 01:36** (`2026-08-31T01:36:28-03:00`)
 
 ---
 
@@ -27,11 +27,11 @@ Projetos visíveis mapeados: **19**
 | `planned_2026-05` | Epics com due date em mai/2026 | 7 |
 | `planned_2026-06` | Epics com due date em jun/2026 | 1 |
 | `planned_2026-07` | Epics com due date em jul/2026 | 10 |
-| `planned_2026-08` | Epics com due date em ago/2026 | 9 |
+| `planned_2026-08` | Epics com due date em ago/2026 | 8 |
 | `overdue_2026-07` | Vencidos antes de jul/2026, não concluídos | 0 |
 | `overdue_2026-08` | Vencidos antes de ago/2026, não concluídos | 0 |
 | `lookahead_2026-07` | Due date entre ago/2026 e set/2026 | 26 |
-| `lookahead_2026-08` | Due date entre set/2026 e out/2026 | 34 |
+| `lookahead_2026-08` | Due date entre set/2026 e out/2026 | 35 |
 | `sent_2026-07` | Transições para "Enviado - Aguardando Análise" em jul/2026 | 5 |
 | `sent_2026-08` | Transições para "Enviado - Aguardando Análise" em ago/2026 | 4 |
 | `resolved_2026-07` | Concluídos em jul/2026 | 8 |
@@ -39,10 +39,12 @@ Projetos visíveis mapeados: **19**
 | `rework_2026-07` | Retrabalho (saiu de "Enviado - Aguardando Análise") em jul/2026 | 5 |
 | `rework_2026-08` | Retrabalho (saiu de "Enviado - Aguardando Análise") em ago/2026 | 3 |
 
+Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
+
 ### Períodos congelados
 
 - **Julho/2026** — período encerrado, dados travados no snapshot (10 previstos, 0 em atraso acumulado, 11 envios, 5 com retrabalho, 26 entregas nos 60 dias seguintes).
-- **Agosto/2026** — mês corrente, atualizado a cada geração do snapshot (9 previstos, 0 em atraso acumulado, 6 envios, 3 com retrabalho, 34 entregas nos próximos 60 dias).
+- **Agosto/2026** — mês corrente, atualizado a cada geração do snapshot (8 previstos, 0 em atraso acumulado, 6 envios, 3 com retrabalho, 35 entregas nos próximos 60 dias).
 - **Visão acumulada** — março a agosto/2026.
 
 ## Privacidade
@@ -58,11 +60,11 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 
 | Arquivo | Função |
 |---|---|
-| `index.html` | Página publicada (artifact + dados estáticos + banner de snapshot) — 147,8 KB (151.359 bytes) |
+| `index.html` | Página publicada (artifact + dados estáticos + banner de snapshot) — 147,8 KB (151.363 bytes) |
 | `snapshot-data.js` | Bloco de dados estáticos, também embutido no `index.html` |
 | `_artifact_src.html` | Cópia do artifact original, sem os dados |
 | `_projects_min.json` | Lista minimizada de projetos e tipos de issue |
-| `_snap/` | JSONs minimais por consulta (insumo da geração) + `_conv.py` / `_pick.py` / `_w.py` (minimização e pareamento das respostas da API) |
+| `_snap/` | JSONs minimais por consulta (insumo da geração) + `_load_all.py` (carga desta execução) e `_w.py` (minimização) |
 | `_gen_snapshot.py` | Gerador do snapshot (`_artifact_src.html` + `_snap/` → `index.html`) |
 | `vercel.json` | Configuração de deploy |
 | `auto-push.ps1`, `pr03-push-watchdog.ps1` | Automação de commit/push no Windows |
@@ -81,16 +83,17 @@ Esta execução validou, antes de publicar:
 
 - sintaxe e execução do bloco `snapshot-data.js` em Node — **OK**;
 - resolução das 16 consultas JQL pelo interceptador `window.cowork.callMcpTool`, comparando cada resultado com o dataset esperado — **16/16 OK, 0 falhas**;
-- `getVisibleJiraProjects` interceptado retornando os 19 projetos — **OK**;
-- preservação dos meses congelados contra a sobrescrita de `window.__HISTORY__` feita pelo artifact — **OK** (`2026-07` mantido após atribuição direta);
+- `getVisibleJiraProjects` interceptado retornando os 19 projetos e os tipos `Epic` / `Fluxo de trabalho` — **OK**;
+- preservação do mês congelado (`2026-07`) contra a sobrescrita de `window.__HISTORY__` feita pelo artifact — **OK**;
 - ausência de `accountId`, e-mails, avatares e `iconUrl` nos datasets e no HTML final — **OK**;
 - posição do banner de snapshot (imediatamente antes de `</body>`, não no topo do body) — **OK** (linha 1025 de 1027);
-- conferência de que `_artifact_src.html` continua idêntico ao artifact de origem nos pontos de injeção e nas consultas JQL — **OK**.
+- comentário `<!-- Snapshot gerado em ... -->` no topo do `<head>` — **OK** (1 ocorrência).
 
 ## Observações da fonte de dados
 
+- **Escopo de "Epic".** O artifact monta a consulta a partir dos tipos de issue com `hierarchyLevel === 1` retornados por `getVisibleJiraProjects` — hoje `Epic` e `Fluxo de trabalho`. Consultas restritas a `issuetype = Epic` subestimam todos os conjuntos, porque deixam de fora os projetos EG0285, EG0286, EG0287, EG0292 e CREA, que usam `Fluxo de trabalho`. Em ago/2026 isso corresponde a 2 de 8 previstos e 15 de 35 no lookahead.
 - Existem variantes do nome do status de envio no Jira (`Enviado - Aguardando Análise`, `Enviado - Aguardando Análise1`, `Enviado- Aguardando Análise`). As consultas `sent_*` e `rework_*` usam o nome canônico, então itens com as variantes aparecem apenas em `resolved_*` — daí a diferença entre `sent` e o total de envios (jul/2026: 5 em `sent`, 11 na união com `resolved`; ago/2026: 4 e 6).
 - Em jul/2026, `rework_2026-07` retornou exatamente o mesmo conjunto de `sent_2026-07`: todos os itens que entraram em "Enviado - Aguardando Análise" no período também saíram desse status em algum momento. Não é erro de consulta, mas convém validar a leitura do indicador de retrabalho. Em ago/2026 os conjuntos já divergem (3 de 4).
-- `overdue_2026-07` e `overdue_2026-08` retornaram vazios nesta geração: não há Epic com due date anterior ao início do mês ainda fora de `statusCategory=Done`. Nas gerações anteriores havia 1 item — a diferença vem da conclusão de `EG0274-41` e `EG0274-38` em ago/2026.
+- `overdue_2026-07` e `overdue_2026-08` retornaram vazios: não há Epic com due date anterior ao início do mês ainda fora de `statusCategory=Done`. O último item em atraso acumulado era `EG0274-41` (Estudos Geotécnicos, due 25/03/2026), concluído em 30/08/2026 23:13.
 - `EG0285-8` (due date 03/11/2026) aparece em `resolved_2026-08` por ter sido concluído em ago/2026, bem antes do prazo. `EG0274-43`, `EG0274-41` e `EG0274-38` também aparecem em `resolved_2026-08` com due date anterior (jul, mar e jul/2026) — entregas em atraso liquidadas no mês.
 - O projeto "EG0280 - DMAE" tem a chave `G0280` no Jira (sem o `E` inicial); o valor é preservado como retornado pela API.

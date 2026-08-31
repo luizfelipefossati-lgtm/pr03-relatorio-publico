@@ -100,5 +100,42 @@ DS = {
  "resolved_2026-08": ["EG0274-43","EG0274-41","EG0274-38","EG0241-44","EG0239-28"],
 }
 
+# --- Fluxo de trabalho (hierarchyLevel 1 em EG0285/EG0286/EG0287/CREA/EG0292) ---
+d("EG0286-2","Relatório de planejamento de atividades",EA,"done","EG0286","2026-07-17","2026-07-28T16:08:52.158-0300","2026-07-28T16:08:52.179-0300")
+d("EG0285-8","ESTUDOS DE CONCEPÇÃO E VIABILIDADE (RECV)","Enviado- Aguardando Análise","done","EG0285","2026-11-03","2026-08-11T15:04:12.928-0300","2026-08-11T15:04:12.955-0300")
+d("EG0286-8","Estudo topográfico",EAND,"indeterminate","EG0286","2026-08-31",None,"2026-07-30T09:33:06.932-0300")
+d("EG0286-7","Estudo de tráfego",EAND,"indeterminate","EG0286","2026-08-31",None,"2026-07-30T09:37:47.572-0300")
+d("EG0286-23","Projeto de desapropriação (pb)",TP,"new","EG0286","2026-10-20",None,"2026-06-17T17:39:00.759-0300")
+d("EG0286-22","Projeto de componentes ambientais e paisagismo (pb)",TP,"new","EG0286","2026-10-22",None,"2026-06-17T17:38:57.611-0300")
+d("EG0286-21","Projeto de sinalização e segurança viária (pb)",TP,"new","EG0286","2026-10-12",None,"2026-06-17T17:38:54.156-0300")
+d("EG0286-20","Projeto de obras complementares - oc (pb)",TP,"new","EG0286","2026-10-12",None,"2026-06-17T17:38:44.118-0300")
+d("EG0286-17","Projeto de pavimentação (pb)",TP,"new","EG0286","2026-10-14",None,"2026-06-17T17:38:32.376-0300")
+d("EG0286-16","Projeto de drenagem (pb)",TP,"new","EG0286","2026-10-14",None,"2026-06-17T17:38:28.787-0300")
+d("EG0286-15","Projeto de terraplenagem (pb)",TP,"new","EG0286","2026-10-14",None,"2026-06-17T17:38:22.692-0300")
+d("EG0286-14","Projeto geométrico e de interseções (pb)",TP,"new","EG0286","2026-09-29",None,"2026-06-17T17:38:16.515-0300")
+d("EG0286-13","Estudo geotécnico - sondagem para oae",TP,"new","EG0286","2026-09-14",None,"2026-07-03T11:07:40.831-0300")
+d("EG0286-12","Levantamento ambiental",TP,"new","EG0286","2026-09-25",None,"2026-08-26T10:47:34.779-0300")
+d("EG0286-11","Estudos hidrológicos",EAND,"indeterminate","EG0286","2026-09-23",None,"2026-08-30T23:27:03.793-0300")
+d("EG0286-10","Estudos geológicos",EAND,"indeterminate","EG0286","2026-09-30",None,"2026-08-28T16:30:11.901-0300")
+d("EG0286-9","Estudo geotécnico de subleito/ e ocorrências",TP,"new","EG0286","2026-10-28",None,"2026-08-28T16:30:25.519-0300")
+d("EG0286-6","Estudo de traçado",TP,"new","EG0286","2026-09-30",None,"2026-08-30T23:26:14.328-0300")
+d("EG0285-19","SERVIÇOS TOPOGRÁFICOS",EAND,"indeterminate","EG0285","2026-09-18",None,"2026-05-18T10:57:07.064-0300")
+d("EG0287-9","RT 6 - Projeto Executivo",EA,"done","EG0287","2026-03-31","2026-04-15T13:55:40.520-0300","2026-04-15T13:55:40.541-0300")
+d("EG0287-6","RT 1 - Diagnóstico, Estudo de Concepção e Proposição de Alternativas",EA,"done","EG0287","2026-03-27","2026-04-15T13:55:50.095-0300","2026-04-27T09:25:08.131-0300")
+
+DSX = {
+ "planned_2026-03": ["EG0287-9","EG0287-6"],
+ "planned_2026-07": ["EG0286-2"],
+ "planned_2026-08": ["EG0286-8","EG0286-7"],
+ "lookahead_2026-07": ["EG0286-14","EG0286-13","EG0286-12","EG0286-11","EG0286-10","EG0286-8","EG0286-7","EG0286-6","EG0285-19"],
+ "lookahead_2026-08": ["EG0286-23","EG0286-22","EG0286-21","EG0286-20","EG0286-17","EG0286-16","EG0286-15","EG0286-14","EG0286-13","EG0286-12","EG0286-11","EG0286-10","EG0286-9","EG0286-6","EG0285-19"],
+ "sent_2026-07": ["EG0286-2","EG0285-8"],
+ "rework_2026-07": ["EG0286-2","EG0285-8"],
+ "resolved_2026-07": ["EG0286-2"],
+ "resolved_2026-08": ["EG0285-8"],
+}
+for k, v in DSX.items():
+    DS[k] = DS[k] + v
+
 for name in sorted(DS):
     write(name, [I[k] for k in DS[name]])
