@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 31/08/2026 01:36** (`2026-08-31T01:36:28-03:00`)
+> **Última atualização do snapshot: 31/08/2026 02:32** (`2026-08-31T02:32:06-03:00`)
 
 ---
 
@@ -81,13 +81,15 @@ A geração do snapshot e o push são etapas independentes: o agente nunca execu
 
 Esta execução validou, antes de publicar:
 
-- sintaxe e execução do bloco `snapshot-data.js` em Node — **OK**;
-- resolução das 16 consultas JQL pelo interceptador `window.cowork.callMcpTool`, comparando cada resultado com o dataset esperado — **16/16 OK, 0 falhas**;
-- `getVisibleJiraProjects` interceptado retornando os 19 projetos e os tipos `Epic` / `Fluxo de trabalho` — **OK**;
+- as 16 consultas JQL retornaram registros dentro das faixas de data esperadas (`duedate` / `resolved`) — **16/16 OK**;
+- renderização da página em navegador headless (Chromium), com o interceptador `window.cowork.callMcpTool` ativo — **sem nenhum aviso `JQL sem correspondencia`**, ou seja, os 16 padrões casaram com as consultas emitidas pelo artifact;
+- `getVisibleJiraProjects` interceptado retornando os 19 projetos e os tipos `Epic` / `Fluxo de trabalho` — **OK** (os 19 projetos aparecem no filtro renderizado);
+- KPIs renderizados a partir dos dados embutidos (ago/2026: OTD 25%, 8 previstos, 2 entregues, 6 pendentes, 0 em atraso acumulado, retrabalho 50%) — **OK**;
 - preservação do mês congelado (`2026-07`) contra a sobrescrita de `window.__HISTORY__` feita pelo artifact — **OK**;
-- ausência de `accountId`, e-mails, avatares e `iconUrl` nos datasets e no HTML final — **OK**;
-- posição do banner de snapshot (imediatamente antes de `</body>`, não no topo do body) — **OK** (linha 1025 de 1027);
-- comentário `<!-- Snapshot gerado em ... -->` no topo do `<head>` — **OK** (1 ocorrência).
+- ausência de `accountId`, e-mails, avatares e `iconUrl` nos datasets e no HTML final — **OK** (nenhuma ocorrência; a única aparição da palavra "accountIds" é no comentário do próprio bloco de dados);
+- nenhuma referência a `api.atlassian.com` no HTML publicado — **OK** (0 ocorrências);
+- posição do banner de snapshot (imediatamente antes de `</body>`, não no topo do body) — **OK** (linha 1025 de 1028);
+- comentário `<!-- Snapshot gerado em ... -->` no topo do `<head>` — **OK** (1 ocorrência, linha 18).
 
 ## Observações da fonte de dados
 
