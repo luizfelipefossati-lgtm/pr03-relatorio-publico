@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 31/08/2026 03:37** (`2026-08-31T03:37:14-03:00`)
+> **Última atualização do snapshot: 31/08/2026 04:36** (`2026-08-31T04:36:06-03:00`)
 
 ---
 
@@ -45,9 +45,9 @@ Nenhum conjunto mudou em relação à geração anterior — apenas o carimbo de
 
 ### Períodos congelados
 
-- **Julho/2026** — período encerrado, dados travados no snapshot (10 previstos, 0 em atraso acumulado, 11 envios, 5 com retrabalho, 26 entregas nos 60 dias seguintes).
+- **Julho/2026** — período encerrado, dados travados no snapshot (10 previstos, 8 entregues, 2 pendentes, 0 em atraso acumulado, OTD 80%, 11 envios, 5 com retrabalho, 26 entregas nos 60 dias seguintes).
 - **Agosto/2026** — mês corrente, atualizado a cada geração do snapshot (8 previstos, 2 entregues, 6 pendentes, 0 em atraso acumulado, OTD 25%, retrabalho 50%, 35 entregas nos próximos 60 dias).
-- **Visão acumulada** — março a agosto/2026: 61 previstos, 34 entregues, OTD acumulado 56%.
+- **Visão acumulada** — março a agosto/2026: 61 previstos, 34 entregues, OTD acumulado 56% (mar 43%, abr 84%, mai 27%, jun 50%, jul 80%, ago 25%).
 
 ## Privacidade
 
@@ -62,7 +62,7 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 
 | Arquivo | Função |
 |---|---|
-| `index.html` | Página publicada (artifact + dados estáticos + banner de snapshot) — 147,8 KB (151.363 bytes) |
+| `index.html` | Página publicada (artifact + dados estáticos + banner de snapshot) — 147.8 KB (151,363 bytes) |
 | `snapshot-data.js` | Bloco de dados estáticos, também embutido no `index.html` |
 | `_artifact_src.html` | Cópia do artifact original, sem os dados |
 | `_projects_min.json` | Lista minimizada de projetos e tipos de issue |
@@ -83,23 +83,23 @@ A geração do snapshot e o push são etapas independentes: o agente nunca execu
 
 Executada antes de publicar:
 
-- **Estrutura e faixas de data dos 16 conjuntos** — 16/16 OK. Cada registro validado quanto ao formato mínimo, ausência de chaves duplicadas, `statusCategory` válido e `duedate` / `resolutiondate` dentro da janela da consulta. `rework_*` confirmado como subconjunto de `sent_*` nos dois meses.
+- **Contagem dos 16 conjuntos conferida contra o Jira** com `searchResultMode: "count"` — 16/16 batendo. Essa conferência apanhou um registro perdido na transcrição de `rework_2026-07` (`EG0285-8`, 4 em vez de 5), corrigido antes da geração. As demais 15 consultas já estavam corretas.
+- **Estrutura dos 16 conjuntos** — cada registro validado quanto ao formato mínimo, presença de `statusCategory`, `project.key` / `project.name`. `rework_*` confirmado como subconjunto de `sent_*` nos dois meses.
 - **Renderização em navegador headless (Chromium)**, com o interceptador `window.cowork.callMcpTool` ativo, percorrendo **as três abas** (Julho/2026, Agosto/2026 e Visão Acumulada) — **nenhum aviso `JQL sem correspondencia`** e **nenhum erro de página**. Os 16 padrões casaram com todas as consultas emitidas pelo artifact.
-- **Zero requisições para `api.atlassian.com`** durante a renderização completa.
+- **Zero requisições para `api.atlassian.com`** durante a renderização completa das três abas.
 - `getVisibleJiraProjects` interceptado retornando os 19 projetos e os tipos `Epic` / `Fluxo de trabalho` — OK (20 opções no filtro renderizado, incluindo "Todos").
-- **KPIs renderizados a partir dos dados embutidos** — ago/2026: OTD 25%, 8 previstos, 2 entregues, 6 pendentes, 0 em atraso acumulado, retrabalho 50% (3/6). Visão acumulada: 61 previstos, 34 entregues, OTD 56%.
-- **Preservação do mês congelado (`2026-07`)** contra a sobrescrita de `window.__HISTORY__` feita pelo artifact — OK.
+- **KPIs renderizados a partir dos dados embutidos** — ago/2026: OTD 25%, 8 previstos, 2 entregues, 6 pendentes, 0 em atraso acumulado, retrabalho 50% (3/6). jul/2026: OTD 80%, 10 previstos, 8 entregues, retrabalho 45% (5/11). Visão acumulada: 61 previstos, 34 entregues, OTD 56%.
+- **Preservação do mês congelado (`2026-07`)** contra a sobrescrita de `window.__HISTORY__` feita pelo artifact — OK (`__HISTORY__` final expõe `2026-07` do snapshot mais `2026-04`, `2026-05` e `2026-06` do próprio artifact).
 - **Ausência de `accountId`, e-mails, avatares e `iconUrl`** nos datasets e no HTML final — OK (a única aparição da palavra "accountIds" é no comentário do próprio bloco de dados).
 - **Posição do banner** de snapshot (imediatamente antes de `</body>`, não no topo do body) — OK.
 - **Comentário `<!-- Snapshot gerado em ... -->`** no topo do `<head>` — OK.
-
-**Não verificado nesta execução:** o carregamento do Chart.js (`cdn.jsdelivr.net/npm/chart.js@4.5.0`). O ambiente de verificação não tem acesso de rede a esse CDN, então os gráficos foram validados apenas quanto à ausência de erros de inicialização, com a biblioteca substituída por um stub. Os números dos KPIs, tabelas e heatmap — que não dependem do Chart.js — foram verificados normalmente.
+- **Gráficos (Chart.js)** validados com a biblioteca real (`chart.js@4.5.0`) injetada localmente no lugar do CDN, já que o ambiente de verificação não tem acesso de rede a `cdn.jsdelivr.net`: donuts de OTD e retrabalho, barras por projeto e heatmap acumulado renderizaram sem erro. **Não verificado:** o carregamento do CDN em si, a partir do domínio publicado.
 
 ## Observações da fonte de dados
 
 - **Escopo de "Epic".** O artifact monta a consulta a partir dos tipos de issue com `hierarchyLevel === 1` retornados por `getVisibleJiraProjects` — hoje `Epic` e `Fluxo de trabalho`. Consultas restritas a `issuetype = Epic` subestimam todos os conjuntos, porque deixam de fora os projetos EG0285, EG0286, EG0287, EG0292 e CREA, que usam `Fluxo de trabalho`. Em ago/2026 isso corresponde a 2 de 8 previstos e 15 de 35 no lookahead.
-- **Abril, maio e junho/2026 na Visão Acumulada vêm do `window.__HISTORY__` embutido no próprio artifact**, não das consultas deste snapshot — o snapshot só congela `2026-07`. Por isso o heatmap mostra 19 previstos em abr/2026 e 15 em mai/2026, enquanto uma consulta nova ao Jira hoje retorna 15 e 7. São recortes de momentos diferentes; se a intenção for realinhar, o histórico embutido no artifact precisa ser regerado.
-- Existem variantes do nome do status de envio no Jira (`Enviado - Aguardando Análise`, `Enviado - Aguardando Análise1`, `Enviado- Aguardando Análise`). As consultas `sent_*` e `rework_*` usam o nome canônico, então itens com as variantes aparecem apenas em `resolved_*` — daí a diferença entre `sent` e o total de envios (jul/2026: 5 em `sent`, 11 na união com `resolved`; ago/2026: 4 e 6).
+- **Abril, maio e junho/2026 na Visão Acumulada vêm do `window.__HISTORY__` embutido no próprio artifact**, não das consultas deste snapshot — o snapshot só congela `2026-07`. Por isso o heatmap mostra 19 previstos em abr/2026, 15 em mai/2026 e 2 em jun/2026, enquanto uma consulta nova ao Jira hoje retorna 15, 7 e 1. São recortes de momentos diferentes; se a intenção for realinhar, o histórico embutido no artifact precisa ser regerado.
+- Existem variantes do nome do status de envio no Jira (`Enviado - Aguardando Análise`, `Enviado - Aguardando Análise1`, `Enviado- Aguardando Análise` — esta última sem espaço antes do hífen). As consultas `sent_*` e `rework_*` usam o nome canônico, então itens com as variantes aparecem apenas em `resolved_*` — daí a diferença entre `sent` e o total de envios (jul/2026: 5 em `sent`, 11 na união com `resolved`; ago/2026: 4 e 6). Essa quase-duplicidade de nomes é uma armadilha real: qualquer filtro por igualdade exata com o nome canônico ignora silenciosamente os itens com as variantes.
 - Em jul/2026, `rework_2026-07` retornou exatamente o mesmo conjunto de `sent_2026-07`: todos os itens que entraram em "Enviado - Aguardando Análise" no período também saíram desse status em algum momento. Não é erro de consulta, mas convém validar a leitura do indicador de retrabalho. Em ago/2026 os conjuntos já divergem (3 de 4).
 - `overdue_2026-07` e `overdue_2026-08` retornaram vazios: não há Epic com due date anterior ao início do mês ainda fora de `statusCategory=Done`. O último item em atraso acumulado era `EG0274-41` (Estudos Geotécnicos, due 25/03/2026), concluído em 30/08/2026 23:13.
 - `EG0285-8` (due date 03/11/2026) aparece em `resolved_2026-08` por ter sido concluído em ago/2026, bem antes do prazo. `EG0274-43`, `EG0274-41` e `EG0274-38` também aparecem em `resolved_2026-08` com due date anterior (jul, mar e jul/2026) — entregas em atraso liquidadas no mês.
