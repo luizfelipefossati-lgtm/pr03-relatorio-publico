@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 31/08/2026 09:40** (`2026-08-31T09:40:17-03:00`)
+> **Última atualização do snapshot: 31/08/2026 10:35** (`2026-08-31T10:35:59-03:00`)
 
 ---
 
@@ -41,7 +41,7 @@ Projetos visíveis mapeados: **19**
 
 Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
 
-**Nenhum conjunto mudou em relação às gerações anteriores de hoje (07:35, 08:35, 09:30 e 09:40)** — as 16 consultas foram reexecutadas contra o Jira e retornaram exatamente as mesmas contagens. Apenas o carimbo de tempo foi atualizado, e o `index.html` resultante tem o mesmo tamanho (151.363 bytes) em todas elas.
+**Nenhum conjunto mudou em relação às gerações anteriores de hoje (07:35, 08:35, 09:30, 09:40 e 10:35)** — as 16 consultas foram reexecutadas contra o Jira e retornaram exatamente as mesmas contagens. Apenas o carimbo de tempo foi atualizado, e o `index.html` resultante tem o mesmo tamanho (151.363 bytes) em todas elas.
 
 ### Períodos cobertos
 
@@ -87,14 +87,22 @@ A geração do snapshot e o push são etapas independentes: o agente nunca execu
 - **Estrutura dos 16 conjuntos validada por script** — chaves exatas em todos os níveis, `statusCategory.key` sempre em `new | indeterminate | done`, `project.key` coerente com o prefixo da `key` da issue e presente em `_projects_min.json`. **0 problemas.**
 - **Contagens comparadas com a geração anterior** — 16/16 idênticas, incluindo os dois conjuntos vazios (`overdue_*`).
 - **Ausência de `accountId`, e-mails, `avatarUrls` e `iconUrl`** no HTML final — OK. A única ocorrência da string `accountId` é na frase "Nao contem accountIds, e-mails nem avatares" do cabeçalho de comentário do próprio bloco de dados.
-- **Ordem de injeção** — o bloco do snapshot aparece antes do script principal do artifact (offset 83.126 contra 85.576).
+- **Ordem de injeção** — o bloco do snapshot aparece antes do script principal do artifact (offset 83.126 contra 85.567).
 - **Posição do banner** de snapshot (imediatamente antes de `</body>`, não no topo do body) — OK.
 - **Comentário `<!-- Snapshot gerado em ... -->`** no topo do `<head>` — OK.
 - **Nenhuma operação de git executada** pelo agente (sem `add`, `commit`, `push` ou autenticação).
 
-**Não executado nesta geração:** o teste de renderização em navegador headless (Chromium/Playwright) das três abas, feito em execuções anteriores. Como os 16 conjuntos de dados, os 16 padrões de JQL e o `_artifact_src.html` estão comprovadamente idênticos aos da geração anterior — que passou nesse teste —, a renderização deve se comportar da mesma forma. Isso é inferência, não medição desta execução.
+**Renderização verificada nesta geração** (Chromium/Playwright headless, sobre o `index.html` que está no disco):
 
-**Execuções sobrepostas:** duas execuções da tarefa `deploy-pr03-vercel` rodaram com poucos minutos de diferença (09:30 e 09:40) e produziram `index.html` e `snapshot-data.js` de tamanho idêntico, diferindo apenas no carimbo de tempo. Este README descreve o arquivo que está no disco, com carimbo `2026-08-31T09:40:17-03:00`.
+| Aba | Linhas de tabela | Chaves de issue | KPIs |
+|---|---:|---:|---|
+| Julho 2026 (encerrado) | 78 | 38 | 80% / 45% / 100% / 0% |
+| Agosto 2026 (ao vivo) | 85 | 47 | 25% / 50% / 100% / 0% |
+| Visão Acumulada | 133 | 23 | 56% / 44% / 80% / 79% |
+
+Também confirmado em execução: `[PR03] Snapshot estatico carregado - gerado em 2026-08-31T10:35:59-03:00` no console, **0 avisos de "JQL sem correspondencia"** (os 16 padrões cobrem todas as consultas que o artifact emite) e **0 requisições de rede para `atlassian.com`**. A única requisição externa da página é o `chart.js@4.5.0` do jsDelivr, necessário para os gráficos; no sandbox de verificação esse CDN é bloqueado, então o teste rodou com um stub do `Chart` — em produção (Vercel) o script carrega normalmente.
+
+**Execuções repetidas:** a tarefa `deploy-pr03-vercel` já rodou cinco vezes hoje (07:35, 08:35, 09:30, 09:40 e 10:35). Todas produziram `index.html` e `snapshot-data.js` de tamanho idêntico (151.363 e 63.577 bytes), diferindo apenas no carimbo de tempo. Este README descreve o arquivo que está no disco, com carimbo `2026-08-31T10:35:59-03:00`.
 
 ## Observações da fonte de dados
 
