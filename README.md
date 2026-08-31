@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 31/08/2026 08:35** (`2026-08-31T08:35:12-03:00`)
+> **Última atualização do snapshot: 31/08/2026 09:40** (`2026-08-31T09:40:17-03:00`)
 
 ---
 
@@ -41,13 +41,13 @@ Projetos visíveis mapeados: **19**
 
 Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
 
-**Nenhum conjunto mudou em relação à geração anterior (31/08/2026 07:35)** — as 16 consultas foram reexecutadas contra o Jira e retornaram exatamente as mesmas contagens e os mesmos registros. Apenas o carimbo de tempo foi atualizado.
+**Nenhum conjunto mudou em relação às gerações anteriores de hoje (07:35, 08:35, 09:30 e 09:40)** — as 16 consultas foram reexecutadas contra o Jira e retornaram exatamente as mesmas contagens. Apenas o carimbo de tempo foi atualizado, e o `index.html` resultante tem o mesmo tamanho (151.363 bytes) em todas elas.
 
-### Períodos congelados
+### Períodos cobertos
 
-- **Julho/2026** — período encerrado, dados travados no snapshot (10 previstos, 8 entregues, 2 pendentes, 0 em atraso acumulado, OTD 80%, 11 envios, 5 com retrabalho, 26 entregas nos 60 dias seguintes).
-- **Agosto/2026** — mês corrente, atualizado a cada geração do snapshot (8 previstos, 2 entregues, 6 pendentes, 0 em atraso acumulado, OTD 25%, retrabalho 50% (3/6), 35 entregas nos próximos 60 dias).
-- **Visão acumulada** — março a agosto/2026: 61 previstos, 34 entregues, 27 pendentes, OTD acumulado 56%.
+- **Julho/2026** — período encerrado, dados travados no snapshot (10 previstos, 0 em atraso acumulado, 11 envios na união `sent` + `resolved`, 5 com retrabalho, 26 entregas nos 60 dias seguintes).
+- **Agosto/2026** — mês corrente, atualizado a cada geração do snapshot (8 previstos, 0 em atraso acumulado, 6 concluídos no mês, 3 com retrabalho, 35 entregas nos próximos 60 dias).
+- **Visão acumulada** — março a agosto/2026, um conjunto `planned` por mês.
 
 ## Privacidade
 
@@ -62,9 +62,9 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 
 | Arquivo | Função |
 |---|---|
-| `index.html` | Página publicada (artifact + dados estáticos + banner de snapshot) — 147.8 KB (151,363 bytes) |
+| `index.html` | Página publicada (artifact + dados estáticos + banner de snapshot) — 147,8 KB (151.363 bytes) |
 | `snapshot-data.js` | Bloco de dados estáticos, também embutido no `index.html` |
-| `_artifact_src.html` | Cópia do artifact original, sem os dados |
+| `_artifact_src.html` | Cópia do artifact original, sem os dados (não versionado) |
 | `_projects_min.json` | Lista minimizada de projetos e tipos de issue |
 | `_snap/` | JSONs minimais por consulta (insumo da geração) |
 | `_gen_snapshot.py` | Gerador do snapshot (`_artifact_src.html` + `_snap/` → `index.html`) |
@@ -81,30 +81,27 @@ A geração do snapshot e o push são etapas independentes: o agente nunca execu
 
 ## Verificação desta geração
 
-Executada antes de publicar:
-
-- **16 consultas reexecutadas no Jira** (mais `getVisibleJiraProjects`) via MCP com `fields` restrito a `summary, status, project, duedate, resolutiondate, updated`. Nenhuma consulta falhou; nenhuma exigiu paginação (todas abaixo do limite de 100 resultados).
-- **18 JQLs emitidas pelo artifact conferidas contra os 16 padrões do snapshot por script** (mês anterior, mês corrente e os 6 meses da visão acumulada) — 18/18 casaram com o conjunto esperado, 0 falhas.
-- **Estrutura dos 16 conjuntos validada por script** — conjunto de chaves exato em todos os níveis (`key` + os 6 campos declarados), sem `accountId`, avatares, `iconUrl` ou ADF.
+- **16 consultas reexecutadas no Jira** (mais `getVisibleJiraProjects`) via MCP, com `fields` restrito a `summary, status, project, duedate, resolutiondate, updated`. Nenhuma consulta falhou; nenhuma exigiu paginação (todas com `hasNextPage: false`, abaixo do limite de 100 resultados).
+- **`_artifact_src.html` reconferido contra o Live Artifact.** O arquivo `Artifacts\pr03-relatorio-indicadores-epics\index.html` foi lido na íntegra e comparado byte a byte com a cópia local: **idênticos** — 87.509 bytes, 948 linhas, `md5 6a2b6462a4efbec1890af4494a7f0b74`. O caveat das execuções anteriores ("fonte não pôde ser reconferida") fica **resolvido**.
+- **16 JQLs emitidas pelo artifact conferidas por script contra os 16 padrões do snapshot** (mês anterior, mês corrente e os meses da visão acumulada) — **16/16 casaram** com o conjunto esperado, 0 falhas.
+- **Estrutura dos 16 conjuntos validada por script** — chaves exatas em todos os níveis, `statusCategory.key` sempre em `new | indeterminate | done`, `project.key` coerente com o prefixo da `key` da issue e presente em `_projects_min.json`. **0 problemas.**
 - **Contagens comparadas com a geração anterior** — 16/16 idênticas, incluindo os dois conjuntos vazios (`overdue_*`).
-- **Renderização em navegador headless (Chromium via Playwright)**, com o interceptador `window.cowork.callMcpTool` ativo, percorrendo **as três abas** (Julho/2026, Agosto/2026 e Visão Acumulada) — **nenhum aviso `JQL sem correspondencia`**, **nenhum erro de página** e **nenhum erro de console**. Os 16 padrões casaram com todas as consultas emitidas pelo artifact.
-- **Zero requisições para qualquer host `*atlassian*`** durante a renderização completa das três abas.
-- **KPIs renderizados a partir dos dados embutidos** — ago/2026: OTD 25% (2 de 8), 6 pendentes, 0 em atraso acumulado, retrabalho 50% (3/6). jul/2026: OTD 80% (8 de 10), retrabalho 45% (5/11). Visão acumulada: 61 previstos, 34 entregues, 27 pendentes, OTD 56%.
-- **Preservação do mês congelado (`2026-07`)** contra a sobrescrita de `window.__HISTORY__` feita pelo artifact — OK (`__HISTORY__` final expõe `2026-04`, `2026-05`, `2026-06` do próprio artifact mais `2026-07` do snapshot).
-- **Gráficos (Chart.js)** — 5 canvas renderizados (`c1`, `c2`, `c3`, `chEvo`, `chBar`), com dimensões > 0, nas três abas, usando a biblioteca real `chart.js@4.5.0` (`chart.umd.js`, baixada do `cdn.jsdelivr.net` e reinjetada pela rota interceptada para tornar o teste determinístico) — dimensões: `c2` 654×130, `chEvo` 1350×220, `chBar` 1350×280, `c1` e `c3` 300×160. Nesta execução o CDN **foi alcançado a partir do sandbox** e o arquivo real do jsDelivr foi servido à página com o hash SRI conferido pelo próprio navegador (nenhum erro de `integrity`). **Não verificado:** o carregamento do CDN a partir do domínio publicado.
-- **Ausência de `accountId`, e-mails, avatares e `iconUrl`** no HTML final — OK (a única aparição da palavra "accountIds" é no comentário do próprio bloco de dados).
-- **Ordem de injeção** — o bloco do snapshot aparece antes do script principal do artifact (offset 83.126 contra 85.567).
+- **Ausência de `accountId`, e-mails, `avatarUrls` e `iconUrl`** no HTML final — OK. A única ocorrência da string `accountId` é na frase "Nao contem accountIds, e-mails nem avatares" do cabeçalho de comentário do próprio bloco de dados.
+- **Ordem de injeção** — o bloco do snapshot aparece antes do script principal do artifact (offset 83.126 contra 85.576).
 - **Posição do banner** de snapshot (imediatamente antes de `</body>`, não no topo do body) — OK.
 - **Comentário `<!-- Snapshot gerado em ... -->`** no topo do `<head>` — OK.
 - **Nenhuma operação de git executada** pelo agente (sem `add`, `commit`, `push` ou autenticação).
 
+**Não executado nesta geração:** o teste de renderização em navegador headless (Chromium/Playwright) das três abas, feito em execuções anteriores. Como os 16 conjuntos de dados, os 16 padrões de JQL e o `_artifact_src.html` estão comprovadamente idênticos aos da geração anterior — que passou nesse teste —, a renderização deve se comportar da mesma forma. Isso é inferência, não medição desta execução.
+
+**Execuções sobrepostas:** duas execuções da tarefa `deploy-pr03-vercel` rodaram com poucos minutos de diferença (09:30 e 09:40) e produziram `index.html` e `snapshot-data.js` de tamanho idêntico, diferindo apenas no carimbo de tempo. Este README descreve o arquivo que está no disco, com carimbo `2026-08-31T09:40:17-03:00`.
+
 ## Observações da fonte de dados
 
-- **Escopo de "Epic".** O artifact monta a consulta a partir dos tipos de issue com `hierarchyLevel === 1` retornados por `getVisibleJiraProjects` — hoje `Epic` e `Fluxo de trabalho`. Consultas restritas a `issuetype = Epic` subestimam todos os conjuntos, porque deixam de fora os projetos EG0285, EG0286, EG0287, EG0292 e CREA, que usam `Fluxo de trabalho`. Em ago/2026 isso corresponde a 2 de 8 previstos e 15 de 35 no lookahead.
-- **Abril, maio e junho/2026 na Visão Acumulada vêm do `window.__HISTORY__` embutido no próprio artifact**, não das consultas deste snapshot — o snapshot só congela `2026-07`. Por isso o heatmap mostra 19 previstos em abr/2026, 15 em mai/2026 e 2 em jun/2026, enquanto uma consulta nova ao Jira hoje retorna 15, 7 e 1. São recortes de momentos diferentes; se a intenção for realinhar, o histórico embutido no artifact precisa ser regerado.
+- **Escopo de "Epic".** O artifact monta a consulta a partir dos tipos de issue com `hierarchyLevel === 1` retornados por `getVisibleJiraProjects` — hoje `Epic` e `Fluxo de trabalho`. Consultas restritas a `issuetype = Epic` subestimam todos os conjuntos, porque deixam de fora os projetos EG0285, EG0286, EG0287, EG0292 e CREA, que usam `Fluxo de trabalho`.
+- **Abril, maio e junho/2026 na Visão Acumulada vêm do `window.__HISTORY__` embutido no próprio artifact**, não das consultas deste snapshot — o snapshot só congela `2026-07`. Por isso o heatmap mostra 19 previstos em abr/2026, 15 em mai/2026 e 2 em jun/2026, enquanto uma consulta nova ao Jira hoje retorna 15, 7 e 1. São recortes de momentos diferentes; para realinhar, o histórico embutido no artifact precisa ser regerado.
 - Existem variantes do nome do status de envio no Jira (`Enviado - Aguardando Análise`, `Enviado - Aguardando Análise1`, `Enviado- Aguardando Análise` — esta última sem espaço antes do hífen). As consultas `sent_*` e `rework_*` usam o nome canônico, então itens com as variantes aparecem apenas em `resolved_*` — daí a diferença entre `sent` e o total de envios (jul/2026: 5 em `sent`, 11 na união com `resolved`; ago/2026: 4 e 6). Essa quase-duplicidade de nomes é uma armadilha real: qualquer filtro por igualdade exata com o nome canônico ignora silenciosamente os itens com as variantes.
 - Em jul/2026, `rework_2026-07` retornou exatamente o mesmo conjunto de `sent_2026-07`: todos os itens que entraram em "Enviado - Aguardando Análise" no período também saíram desse status em algum momento. Não é erro de consulta, mas convém validar a leitura do indicador de retrabalho — a cláusula `status changed from` não tem recorte temporal, então casa também com a transição normal para "Medido e Faturado". Em ago/2026 os conjuntos já divergem (3 de 4).
-- `overdue_2026-07` e `overdue_2026-08` retornaram vazios: não há Epic com due date anterior ao início do mês ainda fora de `statusCategory=Done`. O último item em atraso acumulado era `EG0274-41` (Estudos Geotécnicos, due 25/03/2026), concluído em 30/08/2026 23:13. Vale notar que várias situações de "aguardando análise do cliente" estão mapeadas na categoria `Done` do Jira, então `statusCategory!=Done` não equivale a "trabalho em aberto".
-- `EG0285-8` (due date 03/11/2026) aparece em `resolved_2026-08` por ter sido concluído em ago/2026, bem antes do prazo. `EG0274-43`, `EG0274-41` e `EG0274-38` também aparecem em `resolved_2026-08` com due date anterior (jul, mar e jul/2026) — entregas em atraso liquidadas no mês.
+- `overdue_2026-07` e `overdue_2026-08` retornaram vazios: não há Epic com due date anterior ao início do mês ainda fora de `statusCategory=Done`. Vale notar que várias situações de "aguardando análise do cliente" estão mapeadas na categoria `Done` do Jira, então `statusCategory!=Done` não equivale a "trabalho em aberto".
 - O projeto "EG0280 - DMAE" tem a chave `G0280` no Jira (sem o `E` inicial); o valor é preservado como retornado pela API.
-- **`_artifact_src.html` não pôde ser reconferido nesta execução**: a pasta do artifact (`Artifacts\pr03-relatorio-indicadores-epics`) continua fora das pastas conectadas à sessão — apenas `pr03-relatorio-publico` está montada. A geração usou a cópia local, de 24/08/2026. Se o Live Artifact tiver mudado depois disso, é preciso reconectar a pasta e atualizar `_artifact_src.html`.
+- Peculiaridades do cadastro original foram preservadas literalmente: espaços à direita (`EG0286 - DNIT/AC `, `Estudos Hidrológicos `), espaço duplo (`TOMO IV -  PLANO...`) e nomes de status com erro de digitação (`Em Revisã`).
