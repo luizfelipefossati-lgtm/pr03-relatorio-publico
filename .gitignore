@@ -10,3 +10,6 @@ _artifact_src.html
 
 # Copia temporaria do Live Artifact usada para conferir sincronia com _artifact_src.html
 _artifact_live_check.html
+
+# Backups pontuais gravados durante a atualizacao do snapshot (nao versionar)
+*.bak
