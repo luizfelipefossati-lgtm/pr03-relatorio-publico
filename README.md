@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 31/08/2026 12:38** (`2026-08-31T12:38:40-03:00`)
+> **Última atualização do snapshot: 31/08/2026 13:36** (`2026-08-31T13:36:49-03:00`)
 
 ---
 
@@ -41,7 +41,7 @@ Projetos visíveis mapeados: **19**
 
 Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
 
-**Nenhum conjunto mudou em relação às gerações anteriores de hoje (07:35, 08:35, 09:30, 09:40, 10:35, 11:30 e 12:38)** — nesta geração os **16 conjuntos foram integralmente reexecutados** contra o Jira (sem atalho de verificação por `updated`) e comparados campo a campo com os dados da geração anterior: **16/16 idênticos**, mesmas chaves de issue e mesmos valores de `status`, `duedate`, `resolutiondate` e `updated`. A lista de projetos (`getVisibleJiraProjects`) também foi reexecutada e conferida por hash canônico — idêntica (19 projetos, `md5 e7a0d8e010f894459f7a584a734d868f`). Apenas o carimbo de tempo mudou, e o `index.html` resultante mantém 151.363 bytes.
+**Nenhum conjunto mudou em relação às gerações anteriores de hoje (07:35, 08:35, 09:30, 09:40, 10:35, 11:30, 12:38 e 13:36)** — nesta geração os **16 conjuntos foram integralmente reexecutados** contra o Jira (sem atalho de verificação por `updated`) e comparados campo a campo com os dados da geração anterior: **16/16 idênticos**, mesmas chaves de issue e mesmos valores de `status`, `duedate`, `resolutiondate` e `updated`. A lista de projetos (`getVisibleJiraProjects`) também foi reexecutada e conferida por hash canônico — idêntica (19 projetos; hash canônico `b731f930545f116171f41b27cacd1b33`, arquivo `md5 9afa500ac43dedbdb597e22350141e76`). Apenas o carimbo de tempo mudou, e o `index.html` resultante mantém 151.363 bytes.
 
 ### Períodos cobertos
 
@@ -82,7 +82,7 @@ A geração do snapshot e o push são etapas independentes: o agente nunca execu
 ## Verificação desta geração
 
 - **16 consultas reexecutadas no Jira** (mais `getVisibleJiraProjects`) via MCP, com `fields` restrito a `summary, status, project, duedate, resolutiondate, updated`. Nenhuma consulta falhou; nenhuma exigiu paginação (todas com `hasNextPage: false`, abaixo do limite de 100 resultados).
-- **`_artifact_src.html` NÃO pôde ser reconferido contra o Live Artifact nesta geração.** A pasta `Artifacts\pr03-relatorio-indicadores-epics` não estava montada na sessão (apenas `pr03-relatorio-publico`), então a fonte usada foi a cópia local do repositório. As duas cópias locais — `_artifact_src.html` e `_artifact_live_check.html`, esta última extraída do Live Artifact às 12:39 de hoje — são byte a byte idênticas: 87.509 bytes, `md5 6a2b6462a4efbec1890af4494a7f0b74`, o mesmo hash confirmado na geração das 11:30. Alterações feitas no Live Artifact após aquela extração não estariam refletidas aqui.
+- **`_artifact_src.html` NÃO pôde ser reconferido contra o Live Artifact nesta geração.** A pasta `Artifacts\pr03-relatorio-indicadores-epics` não estava montada na sessão (apenas `pr03-relatorio-publico`), então a fonte usada foi a cópia local do repositório. As duas cópias locais — `_artifact_src.html` e `_artifact_live_check.html`, esta última extraída do Live Artifact às 12:39 de hoje — são byte a byte idênticas: 87.509 bytes, `md5 6a2b6462a4efbec1890af4494a7f0b74`, o mesmo hash confirmado nas gerações das 11:30 e 12:38. Alterações feitas no Live Artifact após aquela extração não estariam refletidas aqui.
 - **16 JQLs emitidas pelo artifact conferidas por script contra os 16 padrões do snapshot** (mês anterior, mês corrente e os meses da visão acumulada) — **16/16 casaram** com o conjunto esperado, 0 falhas.
 - **Estrutura dos 16 conjuntos validada por script** — chaves exatas em todos os níveis, `statusCategory.key` sempre em `new | indeterminate | done`, `project.key` coerente com o prefixo da `key` da issue e presente em `_projects_min.json`. **0 problemas.**
 - **Contagens comparadas com a geração anterior** — 16/16 idênticas, incluindo os dois conjuntos vazios (`overdue_*`).
@@ -100,9 +100,9 @@ A geração do snapshot e o push são etapas independentes: o agente nunca execu
 | Agosto 2026 (ao vivo) | 85 | 49 | 25% (2 de 8) | 50% (3/6) |
 | Visão Acumulada | 133 | 27 | 56% acumulado (34 de 61) | 34 entregues / 27 pendentes |
 
-Também confirmado em execução: `[PR03] Snapshot estatico carregado - gerado em 2026-08-31T12:38:40-03:00` no console, **0 avisos de "JQL sem correspondencia"** (os 16 padrões cobrem todas as consultas que o artifact emite) e **0 requisições de rede para `atlassian.com`**. A única requisição externa da página é o `chart.js@4.5.0` do jsDelivr, necessário para os gráficos; no sandbox de verificação esse CDN é bloqueado, então o teste rodou com um stub do `Chart` — em produção (Vercel) o script carrega normalmente.
+Também confirmado em execução: `[PR03] Snapshot estatico carregado - gerado em 2026-08-31T13:36:49-03:00` no console, **0 avisos de "JQL sem correspondencia"** (os 16 padrões cobrem todas as consultas que o artifact emite) e **0 requisições de rede para `atlassian.com`**. A única requisição externa da página é o `chart.js@4.5.0` do jsDelivr, necessário para os gráficos; no sandbox de verificação esse CDN é bloqueado, então o teste rodou com um stub do `Chart` — em produção (Vercel) o script carrega normalmente.
 
-**Execuções repetidas:** a tarefa `deploy-pr03-vercel` já rodou sete vezes hoje (07:35, 08:35, 09:30, 09:40, 10:35, 11:30 e 12:38). Todas produziram `index.html` e `snapshot-data.js` de tamanho idêntico (151.363 e 63.577 bytes), diferindo apenas no carimbo de tempo. Este README descreve o arquivo que está no disco, com carimbo `2026-08-31T12:38:40-03:00`.
+**Execuções repetidas:** a tarefa `deploy-pr03-vercel` já rodou oito vezes hoje (07:35, 08:35, 09:30, 09:40, 10:35, 11:30, 12:38 e 13:36). Todas produziram `index.html` e `snapshot-data.js` de tamanho idêntico (151.363 e 63.577 bytes), diferindo apenas no carimbo de tempo. Este README descreve o arquivo que está no disco, com carimbo `2026-08-31T13:36:49-03:00`.
 
 ## Observações da fonte de dados
 
