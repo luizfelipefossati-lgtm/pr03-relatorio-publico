@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/08/2026 22:40** (`2026-08-30T22:40:02-03:00`)
+> **Última atualização do snapshot: 30/08/2026 22:44** (`2026-08-30T22:44:51-03:00`)
 
 ---
 
@@ -51,7 +51,7 @@ Os dados embutidos passam por minimização antes de serem gravados. São mantid
 
 `key`, `summary`, `status.name`, `status.statusCategory.key`, `project.key`, `project.name`, `duedate`, `resolutiondate`, `updated`.
 
-**Removidos:** `accountId`, e-mails, avatares, `iconUrl`, descrições em ADF, dados de responsável (assignee/reporter) e demais metadados da API.
+**Removidos:** `accountId`, e-mails, avatares, `iconUrl`, descrições em ADF, comentários, worklogs, dados de responsável (assignee/reporter) e demais metadados da API.
 Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.name` — publicação aprovada pelo responsável pelo repositório.
 
 ## Estrutura
@@ -62,7 +62,7 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 | `snapshot-data.js` | Bloco de dados estáticos, também embutido no `index.html` |
 | `_artifact_src.html` | Cópia do artifact original, sem os dados |
 | `_projects_min.json` | Lista minimizada de projetos e tipos de issue |
-| `_snap/` | JSONs minimais por consulta (insumo da geração) + `_conv.py` / `_pick.py` (minimização e pareamento das respostas da API) |
+| `_snap/` | JSONs minimais por consulta (insumo da geração) + `_conv.py` / `_pick.py` / `_w.py` (minimização e pareamento das respostas da API) |
 | `_gen_snapshot.py` | Gerador do snapshot (`_artifact_src.html` + `_snap/` → `index.html`) |
 | `vercel.json` | Configuração de deploy |
 | `auto-push.ps1`, `pr03-push-watchdog.ps1` | Automação de commit/push no Windows |
@@ -89,4 +89,5 @@ Cada execução valida, antes de publicar:
 
 - Existem variantes do nome do status de envio no Jira (`Enviado - Aguardando Análise`, `Enviado - Aguardando Análise1`, `Enviado- Aguardando Análise`). As consultas `sent_*` e `rework_*` usam o nome canônico, então itens com as variantes aparecem apenas em `resolved_*` — daí a diferença entre `sent` e o total de envios.
 - Em jul/2026 e ago/2026, `rework_*` retornou o mesmo conjunto de `sent_*`: todos os itens que entraram em "Enviado - Aguardando Análise" no período também saíram desse status em algum momento. Não é erro de consulta, mas convém validar a leitura do indicador de retrabalho.
+- `EG0285-8` (due date 03/11/2026) aparece em `resolved_2026-08` por ter sido concluído em 11/08/2026, bem antes do prazo.
 - O projeto "EG0280 - DMAE" tem a chave `G0280` no Jira (sem o `E` inicial); o valor é preservado como retornado pela API.
