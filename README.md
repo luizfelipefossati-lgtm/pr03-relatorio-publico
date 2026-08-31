@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 28/08/2026 17:09** (`2026-08-28T17:09:24-03:00`)
+> **Última atualização do snapshot: 30/08/2026 22:40** (`2026-08-30T22:40:02-03:00`)
 
 ---
 
@@ -58,7 +58,7 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 
 | Arquivo | Função |
 |---|---|
-| `index.html` | Página publicada (artifact + dados estáticos + banner de snapshot) — 148,0 KB |
+| `index.html` | Página publicada (artifact + dados estáticos + banner de snapshot) — 148,0 KB (151.532 bytes) |
 | `snapshot-data.js` | Bloco de dados estáticos, também embutido no `index.html` |
 | `_artifact_src.html` | Cópia do artifact original, sem os dados |
 | `_projects_min.json` | Lista minimizada de projetos e tipos de issue |
