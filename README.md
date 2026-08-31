@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 31/08/2026 02:32** (`2026-08-31T02:32:06-03:00`)
+> **Última atualização do snapshot: 31/08/2026 03:37** (`2026-08-31T03:37:14-03:00`)
 
 ---
 
@@ -41,11 +41,13 @@ Projetos visíveis mapeados: **19**
 
 Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
 
+Nenhum conjunto mudou em relação à geração anterior — apenas o carimbo de tempo foi atualizado.
+
 ### Períodos congelados
 
 - **Julho/2026** — período encerrado, dados travados no snapshot (10 previstos, 0 em atraso acumulado, 11 envios, 5 com retrabalho, 26 entregas nos 60 dias seguintes).
-- **Agosto/2026** — mês corrente, atualizado a cada geração do snapshot (8 previstos, 0 em atraso acumulado, 6 envios, 3 com retrabalho, 35 entregas nos próximos 60 dias).
-- **Visão acumulada** — março a agosto/2026.
+- **Agosto/2026** — mês corrente, atualizado a cada geração do snapshot (8 previstos, 2 entregues, 6 pendentes, 0 em atraso acumulado, OTD 25%, retrabalho 50%, 35 entregas nos próximos 60 dias).
+- **Visão acumulada** — março a agosto/2026: 61 previstos, 34 entregues, OTD acumulado 56%.
 
 ## Privacidade
 
@@ -64,7 +66,7 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 | `snapshot-data.js` | Bloco de dados estáticos, também embutido no `index.html` |
 | `_artifact_src.html` | Cópia do artifact original, sem os dados |
 | `_projects_min.json` | Lista minimizada de projetos e tipos de issue |
-| `_snap/` | JSONs minimais por consulta (insumo da geração) + `_load_all.py` (carga desta execução) e `_w.py` (minimização) |
+| `_snap/` | JSONs minimais por consulta (insumo da geração) |
 | `_gen_snapshot.py` | Gerador do snapshot (`_artifact_src.html` + `_snap/` → `index.html`) |
 | `vercel.json` | Configuração de deploy |
 | `auto-push.ps1`, `pr03-push-watchdog.ps1` | Automação de commit/push no Windows |
@@ -77,25 +79,29 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 
 A geração do snapshot e o push são etapas independentes: o agente nunca executa operações de git nem autentica no GitHub.
 
-## Verificação da geração
+## Verificação desta geração
 
-Esta execução validou, antes de publicar:
+Executada antes de publicar:
 
-- as 16 consultas JQL retornaram registros dentro das faixas de data esperadas (`duedate` / `resolved`) — **16/16 OK**;
-- renderização da página em navegador headless (Chromium), com o interceptador `window.cowork.callMcpTool` ativo — **sem nenhum aviso `JQL sem correspondencia`**, ou seja, os 16 padrões casaram com as consultas emitidas pelo artifact;
-- `getVisibleJiraProjects` interceptado retornando os 19 projetos e os tipos `Epic` / `Fluxo de trabalho` — **OK** (os 19 projetos aparecem no filtro renderizado);
-- KPIs renderizados a partir dos dados embutidos (ago/2026: OTD 25%, 8 previstos, 2 entregues, 6 pendentes, 0 em atraso acumulado, retrabalho 50%) — **OK**;
-- preservação do mês congelado (`2026-07`) contra a sobrescrita de `window.__HISTORY__` feita pelo artifact — **OK**;
-- ausência de `accountId`, e-mails, avatares e `iconUrl` nos datasets e no HTML final — **OK** (nenhuma ocorrência; a única aparição da palavra "accountIds" é no comentário do próprio bloco de dados);
-- nenhuma referência a `api.atlassian.com` no HTML publicado — **OK** (0 ocorrências);
-- posição do banner de snapshot (imediatamente antes de `</body>`, não no topo do body) — **OK** (linha 1025 de 1028);
-- comentário `<!-- Snapshot gerado em ... -->` no topo do `<head>` — **OK** (1 ocorrência, linha 18).
+- **Estrutura e faixas de data dos 16 conjuntos** — 16/16 OK. Cada registro validado quanto ao formato mínimo, ausência de chaves duplicadas, `statusCategory` válido e `duedate` / `resolutiondate` dentro da janela da consulta. `rework_*` confirmado como subconjunto de `sent_*` nos dois meses.
+- **Renderização em navegador headless (Chromium)**, com o interceptador `window.cowork.callMcpTool` ativo, percorrendo **as três abas** (Julho/2026, Agosto/2026 e Visão Acumulada) — **nenhum aviso `JQL sem correspondencia`** e **nenhum erro de página**. Os 16 padrões casaram com todas as consultas emitidas pelo artifact.
+- **Zero requisições para `api.atlassian.com`** durante a renderização completa.
+- `getVisibleJiraProjects` interceptado retornando os 19 projetos e os tipos `Epic` / `Fluxo de trabalho` — OK (20 opções no filtro renderizado, incluindo "Todos").
+- **KPIs renderizados a partir dos dados embutidos** — ago/2026: OTD 25%, 8 previstos, 2 entregues, 6 pendentes, 0 em atraso acumulado, retrabalho 50% (3/6). Visão acumulada: 61 previstos, 34 entregues, OTD 56%.
+- **Preservação do mês congelado (`2026-07`)** contra a sobrescrita de `window.__HISTORY__` feita pelo artifact — OK.
+- **Ausência de `accountId`, e-mails, avatares e `iconUrl`** nos datasets e no HTML final — OK (a única aparição da palavra "accountIds" é no comentário do próprio bloco de dados).
+- **Posição do banner** de snapshot (imediatamente antes de `</body>`, não no topo do body) — OK.
+- **Comentário `<!-- Snapshot gerado em ... -->`** no topo do `<head>` — OK.
+
+**Não verificado nesta execução:** o carregamento do Chart.js (`cdn.jsdelivr.net/npm/chart.js@4.5.0`). O ambiente de verificação não tem acesso de rede a esse CDN, então os gráficos foram validados apenas quanto à ausência de erros de inicialização, com a biblioteca substituída por um stub. Os números dos KPIs, tabelas e heatmap — que não dependem do Chart.js — foram verificados normalmente.
 
 ## Observações da fonte de dados
 
 - **Escopo de "Epic".** O artifact monta a consulta a partir dos tipos de issue com `hierarchyLevel === 1` retornados por `getVisibleJiraProjects` — hoje `Epic` e `Fluxo de trabalho`. Consultas restritas a `issuetype = Epic` subestimam todos os conjuntos, porque deixam de fora os projetos EG0285, EG0286, EG0287, EG0292 e CREA, que usam `Fluxo de trabalho`. Em ago/2026 isso corresponde a 2 de 8 previstos e 15 de 35 no lookahead.
+- **Abril, maio e junho/2026 na Visão Acumulada vêm do `window.__HISTORY__` embutido no próprio artifact**, não das consultas deste snapshot — o snapshot só congela `2026-07`. Por isso o heatmap mostra 19 previstos em abr/2026 e 15 em mai/2026, enquanto uma consulta nova ao Jira hoje retorna 15 e 7. São recortes de momentos diferentes; se a intenção for realinhar, o histórico embutido no artifact precisa ser regerado.
 - Existem variantes do nome do status de envio no Jira (`Enviado - Aguardando Análise`, `Enviado - Aguardando Análise1`, `Enviado- Aguardando Análise`). As consultas `sent_*` e `rework_*` usam o nome canônico, então itens com as variantes aparecem apenas em `resolved_*` — daí a diferença entre `sent` e o total de envios (jul/2026: 5 em `sent`, 11 na união com `resolved`; ago/2026: 4 e 6).
 - Em jul/2026, `rework_2026-07` retornou exatamente o mesmo conjunto de `sent_2026-07`: todos os itens que entraram em "Enviado - Aguardando Análise" no período também saíram desse status em algum momento. Não é erro de consulta, mas convém validar a leitura do indicador de retrabalho. Em ago/2026 os conjuntos já divergem (3 de 4).
 - `overdue_2026-07` e `overdue_2026-08` retornaram vazios: não há Epic com due date anterior ao início do mês ainda fora de `statusCategory=Done`. O último item em atraso acumulado era `EG0274-41` (Estudos Geotécnicos, due 25/03/2026), concluído em 30/08/2026 23:13.
 - `EG0285-8` (due date 03/11/2026) aparece em `resolved_2026-08` por ter sido concluído em ago/2026, bem antes do prazo. `EG0274-43`, `EG0274-41` e `EG0274-38` também aparecem em `resolved_2026-08` com due date anterior (jul, mar e jul/2026) — entregas em atraso liquidadas no mês.
 - O projeto "EG0280 - DMAE" tem a chave `G0280` no Jira (sem o `E` inicial); o valor é preservado como retornado pela API.
+- **`_artifact_src.html` não pôde ser reconferido nesta execução**: a pasta do artifact (`Artifacts\pr03-relatorio-indicadores-epics`) não está entre as pastas conectadas à sessão. A geração usou a cópia local, de 24/08/2026. Se o Live Artifact tiver mudado depois disso, é preciso reconectar a pasta e atualizar `_artifact_src.html`.
