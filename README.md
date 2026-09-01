@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 01/09/2026 14:34** (`2026-09-01T14:34:25-03:00`)
+> **Última atualização do snapshot: 01/09/2026 15:32** (`2026-09-01T15:32:03-03:00`)
 
 ---
 
@@ -47,9 +47,9 @@ Projetos visíveis mapeados: **19**
 Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
 Dos 21 conjuntos carregados, **11 vão embutidos** como `DATASETS` no JavaScript (apenas os alcançáveis por algum padrão de JQL: os 6 do mês corrente e os `planned` da Visão Acumulada). Os meses congelados viajam dentro de `__SNAPSHOT__.months` e nunca chegam a consultar o Jira.
 
-### O que mudou desde a geração anterior (01/09/2026 13:33)
+### O que mudou desde a geração anterior (01/09/2026 14:34)
 
-- **Nenhuma alteração nos dados.** Os seis conjuntos de setembro/2026 foram reconsultados no Jira e conferem com a geração das 13:33: 22 previstos, 2 em atraso acumulado, 25 no lookahead, 0 envios, 0 concluídos, 0 com retrabalho.
+- **Nenhuma alteração nos dados.** Os seis conjuntos de setembro/2026 foram reconsultados no Jira e conferem, byte a byte, com a geração das 14:34: 22 previstos, 2 em atraso acumulado, 25 no lookahead, 0 envios, 0 concluídos, 0 com retrabalho.
 - A lista de projetos visíveis (`getVisibleJiraProjects`) também não mudou: os mesmos 19 projetos, tipos de nível Epic `Epic` e `Fluxo de trabalho`.
 - Julho e agosto/2026 permanecem congelados com os mesmos números; apenas o carimbo de geração do `index.html` e do banner mudou.
 
@@ -66,11 +66,11 @@ O `index.html` gerado foi carregado em navegador headless (Chromium/Playwright) 
 
 - **Nenhuma requisição para a Atlassian** — 0 requisições para `atlassian.net` ou qualquer host da Atlassian. O único host externo solicitado é `cdn.jsdelivr.net`, para o Chart.js.
 - **Nenhum aviso `[PR03] JQL sem correspondencia no snapshot`** no console — todos os 11 padrões de JQL resolveram.
-- Console registra `[PR03] Snapshot estatico carregado - gerado em 2026-09-01T14:34:25-03:00; consultas ao Jira desativadas.`
-- **0 erros de JavaScript.** `__HISTORY__` com abr, mai, jun, jul e ago/2026; abas "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada" presentes; seletor de projeto com os 19 projetos ("Todos" + 19 opções).
+- Console registra `[PR03] Snapshot estatico carregado - gerado em 2026-09-01T15:32:03-03:00; consultas ao Jira desativadas.`
+- **0 erros de JavaScript** e nenhum recurso 404. `__HISTORY__` com abr, mai, jun, jul e ago/2026; abas "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada" presentes e navegáveis, todas sem "Erro na inicialização"; seletor de projeto com os 19 projetos ("Todos" + 19 opções).
 - Resumo executivo renderizado: OTD 0% (0 de 22), 22 previstos, 0 entregues, 22 pendentes do mês, 2 em atraso acumulado, retrabalho 0% (0/0).
-- **Gráficos:** os 5 `canvas` do dashboard são inicializados e desenhados, sem "Erro na inicialização".
-- Observação sobre o ambiente de verificação: o sandbox onde o teste roda não tem saída para `cdn.jsdelivr.net`. Como a tag do Chart.js usa `integrity` (SRI), um stub não é aceito pelo navegador; o teste de renderização é feito com o `chart.js@4.5.0` real servido localmente, em uma **cópia temporária** do HTML sem o atributo `integrity`. O `index.html` publicado mantém a tag original com SRI intacta e, no Vercel, carrega o arquivo do CDN normalmente.
+- **Gráficos:** os 5 `canvas` do dashboard são inicializados e desenhados — `c1`, `c2` e `c3` nas abas mensais, `chEvo` (1190×220) e `chBar` (1190×280) na Visão Acumulada.
+- Observação sobre o ambiente de verificação: nesta execução o sandbox alcançou `cdn.jsdelivr.net` por `curl`, mas a requisição do próprio navegador ao CDN foi encerrada pela rede (`ERR_CONNECTION_RESET`), deixando `Chart is not defined`. Como a tag do Chart.js usa `integrity` (SRI), o teste de renderização é feito com o `chart.js@4.5.0` real (baixado do mesmo CDN) servido localmente, em uma **cópia temporária** do HTML sem o atributo `integrity`. O `index.html` publicado mantém a tag original com SRI intacta e, no Vercel, carrega o arquivo do CDN normalmente.
 - As duas únicas menções a `atlassian.net` no HTML vêm do próprio artifact e não são requisições: o texto do rodapé ("Fonte: JIRA (projetos-engeplus.atlassian.net)") e a base dos links `browse/` usada quando se clica em um EPIC.
 
 ### Observação sobre a origem do HTML
