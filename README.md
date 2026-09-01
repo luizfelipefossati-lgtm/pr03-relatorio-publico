@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 01/09/2026 15:32** (`2026-09-01T15:32:03-03:00`)
+> **Última atualização do snapshot: 01/09/2026 16:31** (`2026-09-01T16:31:05-03:00`)
 
 ---
 
@@ -47,35 +47,35 @@ Projetos visíveis mapeados: **19**
 Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
 Dos 21 conjuntos carregados, **11 vão embutidos** como `DATASETS` no JavaScript (apenas os alcançáveis por algum padrão de JQL: os 6 do mês corrente e os `planned` da Visão Acumulada). Os meses congelados viajam dentro de `__SNAPSHOT__.months` e nunca chegam a consultar o Jira.
 
-### O que mudou desde a geração anterior (01/09/2026 14:34)
+### O que mudou desde a geração anterior (01/09/2026 15:32)
 
-- **Nenhuma alteração nos dados.** Os seis conjuntos de setembro/2026 foram reconsultados no Jira e conferem, byte a byte, com a geração das 14:34: 22 previstos, 2 em atraso acumulado, 25 no lookahead, 0 envios, 0 concluídos, 0 com retrabalho.
-- A lista de projetos visíveis (`getVisibleJiraProjects`) também não mudou: os mesmos 19 projetos, tipos de nível Epic `Epic` e `Fluxo de trabalho`.
-- Julho e agosto/2026 permanecem congelados com os mesmos números; apenas o carimbo de geração do `index.html` e do banner mudou.
+- **Nenhuma alteração nos dados.** Os conjuntos de setembro/2026 foram reconsultados no Jira nesta geração e conferem, byte a byte, com a geração das 15:32: 22 previstos, 2 em atraso acumulado, 25 no lookahead, 0 envios, 0 concluídos, 0 com retrabalho.
+- `sent_2026-09` e `resolved_2026-09` voltaram vazios; como `rework` é subconjunto de `sent`, foi gravado vazio sem nova consulta.
+- Julho e agosto/2026 permanecem congelados com os mesmos números. A lista de projetos visíveis foi reaproveitada da geração anterior (19 projetos, tipos `Epic` e `Fluxo de trabalho`).
+- Mudaram apenas o carimbo de geração do `index.html`, do `snapshot-data.js` e do banner.
 
 ### Períodos cobertos
 
 - **Julho/2026** — encerrado, congelado em 01/08/2026 (10 previstos, 0 em atraso acumulado, 11 envios na união `sent` + `resolved`, 5 com retrabalho, 26 entregas nos 60 dias seguintes).
 - **Agosto/2026** — encerrado, congelado em 01/09/2026 (4 previstos, 0 em atraso acumulado, 6 envios, 3 com retrabalho, 39 entregas nos 60 dias seguintes).
-- **Setembro/2026** — mês corrente, atualizado a cada geração do snapshot (22 previstos, 2 em atraso acumulado, 0 concluídos até agora, 25 entregas nos próximos 60 dias).
+- **Setembro/2026** — mês corrente, atualizado a cada geração do snapshot (22 previstos, 0 entregues até agora, 2 em atraso acumulado, 25 entregas nos próximos 60 dias).
 - **Visão acumulada** — abril a setembro/2026, um conjunto `planned` por mês.
 
 ## Verificação desta geração
 
 O `index.html` gerado foi carregado em navegador headless (Chromium/Playwright) antes da publicação:
 
-- **Nenhuma requisição para a Atlassian** — 0 requisições para `atlassian.net` ou qualquer host da Atlassian. O único host externo solicitado é `cdn.jsdelivr.net`, para o Chart.js.
+- **Nenhuma requisição para a Atlassian** — 0 requisições para `atlassian.net` ou qualquer host da Atlassian; nesta verificação, 0 requisições externas de qualquer natureza (o Chart.js foi servido localmente, ver observação abaixo).
 - **Nenhum aviso `[PR03] JQL sem correspondencia no snapshot`** no console — todos os 11 padrões de JQL resolveram.
-- Console registra `[PR03] Snapshot estatico carregado - gerado em 2026-09-01T15:32:03-03:00; consultas ao Jira desativadas.`
-- **0 erros de JavaScript** e nenhum recurso 404. `__HISTORY__` com abr, mai, jun, jul e ago/2026; abas "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada" presentes e navegáveis, todas sem "Erro na inicialização"; seletor de projeto com os 19 projetos ("Todos" + 19 opções).
-- Resumo executivo renderizado: OTD 0% (0 de 22), 22 previstos, 0 entregues, 22 pendentes do mês, 2 em atraso acumulado, retrabalho 0% (0/0).
-- **Gráficos:** os 5 `canvas` do dashboard são inicializados e desenhados — `c1`, `c2` e `c3` nas abas mensais, `chEvo` (1190×220) e `chBar` (1190×280) na Visão Acumulada.
-- Observação sobre o ambiente de verificação: nesta execução o sandbox alcançou `cdn.jsdelivr.net` por `curl`, mas a requisição do próprio navegador ao CDN foi encerrada pela rede (`ERR_CONNECTION_RESET`), deixando `Chart is not defined`. Como a tag do Chart.js usa `integrity` (SRI), o teste de renderização é feito com o `chart.js@4.5.0` real (baixado do mesmo CDN) servido localmente, em uma **cópia temporária** do HTML sem o atributo `integrity`. O `index.html` publicado mantém a tag original com SRI intacta e, no Vercel, carrega o arquivo do CDN normalmente.
+- Console registra `[PR03] Snapshot estatico carregado - gerado em 2026-09-01T16:31:05-03:00; consultas ao Jira desativadas.`
+- **0 erros de JavaScript** e nenhum recurso 404. Abas "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada — Histórico" presentes; nenhuma mensagem "Erro na inicialização"; seletor de projeto com "Todos" + os 19 projetos.
+- Os `canvas` do dashboard (`c1`, `c2`, `c3` nas abas mensais e `chEvo`/`chBar` na Visão Acumulada) estão presentes e inicializados após o carregamento.
+- Observação sobre o ambiente de verificação: a tag do Chart.js usa `integrity` (SRI), e o CDN não é alcançável pelo navegador do sandbox. O teste é feito com o `chart.js@4.5.0` real (baixado do mesmo CDN) servido localmente, em uma **cópia temporária** do HTML sem o atributo `integrity`. O `index.html` publicado mantém a tag original com SRI intacta e, no Vercel, carrega o arquivo do CDN normalmente.
 - As duas únicas menções a `atlassian.net` no HTML vêm do próprio artifact e não são requisições: o texto do rodapé ("Fonte: JIRA (projetos-engeplus.atlassian.net)") e a base dos links `browse/` usada quando se clica em um EPIC.
 
 ### Observação sobre a origem do HTML
 
-Nesta execução a pasta do Live Artifact (`C:\Users\DELL\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics`) **não estava montada na sessão** — a sessão só tinha acesso a este repositório. O snapshot foi gerado a partir de `_artifact_src.html`, cópia limpa do artifact idêntica (`cmp` byte a byte) à última conferência com o artifact ao vivo em 31/08/2026. Enquanto a pasta do artifact seguir desconectada, alterações de layout feitas no Live Artifact não entram no snapshot — apenas os dados do Jira são atualizados.
+Nesta execução a pasta do Live Artifact (`C:\Users\DELL\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics`) **não estava montada na sessão** — a sessão só tinha acesso a este repositório. O snapshot foi gerado a partir de `_artifact_src.html`, cópia limpa do artifact idêntica (`diff` byte a byte) à última conferência com o artifact ao vivo em 31/08/2026. Enquanto a pasta do artifact seguir desconectada, alterações de layout feitas no Live Artifact não entram no snapshot — apenas os dados do Jira são atualizados.
 
 ## Privacidade
 
