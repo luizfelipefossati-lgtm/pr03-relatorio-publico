@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 01/09/2026 18:30** (`2026-09-01T18:30:31-03:00`)
+> **Última atualização do snapshot: 01/09/2026 19:29** (`2026-09-01T19:29:15-03:00`)
 
 ---
 
@@ -47,13 +47,13 @@ Projetos visíveis mapeados: **19**
 Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
 Dos 21 conjuntos carregados, **11 vão embutidos** como `DATASETS` no JavaScript (apenas os alcançáveis por algum padrão de JQL: os 6 do mês corrente e os `planned` da Visão Acumulada). Os meses congelados viajam dentro de `__SNAPSHOT__.months` e nunca chegam a consultar o Jira.
 
-### O que mudou desde a geração anterior (01/09/2026 17:30)
+### O que mudou desde a geração anterior (01/09/2026 18:30)
 
-- **Nenhuma alteração nos números.** Os 6 conjuntos de setembro/2026 foram reconsultados no Jira nesta geração e voltaram com as mesmas contagens da geração das 17:30: 22 previstos, 2 em atraso acumulado, 25 no lookahead, 0 envios, 0 concluídos, 0 com retrabalho.
+- **Nenhuma alteração nos números.** Os 6 conjuntos de setembro/2026 foram reconsultados no Jira nesta geração e voltaram idênticos aos da geração das 18:30 — mesmas chaves, mesma ordem e mesmos carimbos `updated`: 22 previstos, 2 em atraso acumulado, 25 no lookahead, 0 envios, 0 concluídos, 0 com retrabalho.
 - `sent_2026-09`, `resolved_2026-09` e `rework_2026-09` voltaram vazios do Jira (setembro acabou de começar).
-- A lista de projetos visíveis **não foi reconsultada** nesta geração: foi reaproveitado o `_projects_min.json` coletado hoje mais cedo (19 projetos, tipos de nível Epic `Epic` e `Fluxo de trabalho`).
+- A lista de projetos visíveis **foi reconsultada** nesta geração via `getVisibleJiraProjects` e conferiu com o `_projects_min.json` existente (19 projetos; tipos de nível Epic `Epic` e `Fluxo de trabalho`), que por isso não precisou ser reescrito.
 - Julho e agosto/2026 permanecem congelados com os mesmos números; os `planned` da Visão Acumulada (abr–set/2026) não foram alterados.
-- Em relação ao arquivo anterior, mudaram os carimbos de geração (comentário do `<head>`, cabeçalho do script, `generatedAt`, `console.log` e banner).
+- Em relação ao arquivo anterior, mudaram apenas os carimbos de geração (comentário do `<head>`, cabeçalho do script, `generatedAt`, `console.log` e banner).
 
 ### Períodos cobertos
 
