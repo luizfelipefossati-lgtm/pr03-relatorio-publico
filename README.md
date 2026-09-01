@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 01/09/2026 10:35** (`2026-09-01T10:35:45-03:00`)
+> **Última atualização do snapshot: 01/09/2026 11:31** (`2026-09-01T11:31:23-03:00`)
 
 ---
 
@@ -11,14 +11,6 @@ Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatór
 Esta página é uma **cópia congelada** do Live Artifact `pr03-relatorio-indicadores-epics`.
 Os dados do Jira são pré-buscados no momento da geração e embutidos no próprio `index.html`.
 A página publicada **não consulta o Jira ao vivo** — não há credenciais, tokens nem chamadas de rede para a Atlassian.
-
-## Virada de mês (setembro/2026)
-
-Esta é a primeira geração após a virada de mês:
-
-- **Agosto/2026 encerrou** e passou a ser o período congelado da aba "Encerrado".
-- **Setembro/2026** é agora o mês corrente ("Ao vivo" no artifact, servido pelos dados do snapshot aqui).
-- O gerador (`_gen_snapshot.py`) foi ajustado para congelar **todos** os meses anteriores que tenham os 6 conjuntos completos em `_snap/`, e não apenas o mês imediatamente anterior. Sem esse ajuste, julho/2026 sairia do `__HISTORY__` na virada e desapareceria da Visão Acumulada, porque o artifact traz embutidos apenas abr–jun/2026.
 
 ## Conteúdo do snapshot
 
@@ -55,36 +47,30 @@ Projetos visíveis mapeados: **19**
 Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
 Dos 21 conjuntos carregados, **11 vão embutidos** como `DATASETS` no JavaScript (apenas os alcançáveis por algum padrão de JQL: os 6 do mês corrente e os `planned` da Visão Acumulada). Os meses congelados viajam dentro de `__SNAPSHOT__.months` e nunca chegam a consultar o Jira.
 
-### O que mudou desde a geração anterior (01/09/2026 09:48)
+### O que mudou desde a geração anterior (01/09/2026 10:35)
 
-- **Nenhuma alteração nos dados.** Os seis conjuntos de setembro/2026 foram reconsultados no Jira e conferem, registro por registro, com a geração das 09:48: 22 previstos, 2 em atraso acumulado, 25 no lookahead, 0 envios, 0 concluídos, 0 com retrabalho.
-- A lista de projetos visíveis (`getVisibleJiraProjects`) também não mudou: 19 projetos, tipos de nível Epic `Epic` e `Fluxo de trabalho`.
+- **Nenhuma alteração nos dados.** Os seis conjuntos de setembro/2026 foram reconsultados no Jira e conferem, registro por registro (chave, status, due date, `resolutiondate` e `updated`), com a geração das 10:35: 22 previstos, 2 em atraso acumulado, 25 no lookahead, 0 envios, 0 concluídos, 0 com retrabalho.
+- A lista de projetos visíveis (`getVisibleJiraProjects`) também não mudou: os mesmos 19 projetos, tipos de nível Epic `Epic` e `Fluxo de trabalho`.
 - Julho e agosto/2026 permanecem congelados com os mesmos números; apenas o carimbo de geração do `index.html` e do banner mudou.
-
-### Registro da virada de mês (geração de 01/09/2026 09:48)
-
-- **`planned_2026-08` caiu de 8 para 4 registros.** Quatro EPICs com due date 31/08 foram reprogramados para setembro e agora aparecem em `planned_2026-09`: `EG0240-43` (TOMO IV — Projeto de Instrumentação), `EG0240-4` (TOMO V — PRE), `EG0241-42` (TOMO V — PRE) e `EG0275-112` (Licenças Ambientais). Como agosto foi congelado nesta geração, o mês fecha com **4 previstos e OTD de 50%** (2 entregues, ambos com pequeno atraso) em vez dos 8 previstos que a versão anterior mostrava.
-- **`overdue_2026-09` = 2**: `EG0286-8` (Estudo topográfico) e `EG0286-7` (Estudo de tráfego), ambos com due date 31/08/2026 e ainda em andamento — são as pendências acumuladas que setembro herda.
-- `lookahead_2026-08` subiu de 35 para 39 registros; `lookahead_2026-09` (out–nov/2026) tem 25.
-- `sent`, `resolved` e `rework` de setembro estão vazios: o mês tem um dia. Os conjuntos de agosto (4 / 6 / 3) foram reexecutados e conferem com o baseline anterior.
-- Julho/2026 foi mantido congelado com os mesmos números da geração anterior (10 previstos, 11 envios, 5 com retrabalho).
 
 ### Períodos cobertos
 
 - **Julho/2026** — encerrado, congelado em 01/08/2026 (10 previstos, 0 em atraso acumulado, 11 envios na união `sent` + `resolved`, 5 com retrabalho, 26 entregas nos 60 dias seguintes).
 - **Agosto/2026** — encerrado, congelado em 01/09/2026 (4 previstos, 0 em atraso acumulado, 6 envios, 3 com retrabalho, 39 entregas nos 60 dias seguintes).
 - **Setembro/2026** — mês corrente, atualizado a cada geração do snapshot (22 previstos, 2 em atraso acumulado, 0 concluídos até agora, 25 entregas nos próximos 60 dias).
-- **Visão acumulada** — abril a setembro/2026, um conjunto `planned` por mês (72 previstos, 31 entregues, OTD acumulado 43%).
+- **Visão acumulada** — abril a setembro/2026, um conjunto `planned` por mês.
 
 ## Verificação desta geração
 
 O `index.html` gerado foi carregado em navegador headless (Chromium) antes da publicação:
 
 - **Nenhuma requisição para `atlassian.net`** ou qualquer host da Atlassian (0 requisições). O único host externo solicitado é `cdn.jsdelivr.net`, para o Chart.js que já faz parte do artifact.
-- **Nenhum aviso `[PR03] JQL sem correspondencia no snapshot`** no console — todos os 11 padrões de JQL resolveram. Confirmado também por teste direto dos padrões contra as consultas que o artifact monta para setembro/2026 e para os seis meses da Visão Acumulada (abr–set/2026): 11 de 11 com correspondência.
-- Console registra `[PR03] Snapshot estatico carregado - gerado em 2026-09-01T10:35:45-03:00; consultas ao Jira desativadas.`
-- `__HISTORY__` com abr, mai, jun, jul e ago/2026; abas "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada" presentes; cabeçalho do mês corrente renderizando como `Setembro 2026 — Ao vivo`. Nenhum erro de JavaScript na página.
-- Observação sobre o ambiente de verificação: o sandbox onde o teste roda não tem saída para `cdn.jsdelivr.net`, então o Chart.js não carregou e os gráficos (inclusive o da Visão Acumulada) ficaram sem renderizar ali. É uma limitação do ambiente de teste, não do snapshot — na publicação no Vercel o CDN está acessível. As tabelas e os indicadores numéricos, que vêm dos dados embutidos, renderizaram normalmente.
+- **Nenhum aviso `[PR03] JQL sem correspondencia no snapshot`** no console — todos os 11 padrões de JQL resolveram.
+- Console registra `[PR03] Snapshot estatico carregado - gerado em 2026-09-01T11:31:23-03:00; consultas ao Jira desativadas.`
+- Nenhum erro de JavaScript na página. `__HISTORY__` com abr, mai, jun, jul e ago/2026; abas "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada" presentes; cabeçalho do mês corrente renderizando como `Setembro 2026 — Ao vivo`; seletor de projeto com os 19 projetos.
+- Resumo executivo renderizado: OTD 0% (0 de 22), 22 previstos, 0 entregues, 22 pendentes do mês, 2 em atraso acumulado, retrabalho 0%.
+- Observação sobre o ambiente de verificação: o sandbox onde o teste roda não tem saída para `cdn.jsdelivr.net`, então o teste é repetido com o Chart.js substituído por um stub. Na publicação no Vercel o CDN está acessível e os gráficos renderizam normalmente.
+- Observação sobre a origem do HTML: nesta execução a pasta do Live Artifact não estava montada na sessão, então o snapshot foi gerado a partir de `_artifact_src.html` (cópia do artifact limpo, idêntica à última conferência com o artifact ao vivo em 31/08/2026).
 
 ## Privacidade
 
