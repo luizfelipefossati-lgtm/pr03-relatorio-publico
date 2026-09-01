@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 01/09/2026 11:31** (`2026-09-01T11:31:23-03:00`)
+> **Última atualização do snapshot: 01/09/2026 12:32** (`2026-09-01T12:32:25-03:00`)
 
 ---
 
@@ -47,9 +47,9 @@ Projetos visíveis mapeados: **19**
 Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
 Dos 21 conjuntos carregados, **11 vão embutidos** como `DATASETS` no JavaScript (apenas os alcançáveis por algum padrão de JQL: os 6 do mês corrente e os `planned` da Visão Acumulada). Os meses congelados viajam dentro de `__SNAPSHOT__.months` e nunca chegam a consultar o Jira.
 
-### O que mudou desde a geração anterior (01/09/2026 10:35)
+### O que mudou desde a geração anterior (01/09/2026 11:31)
 
-- **Nenhuma alteração nos dados.** Os seis conjuntos de setembro/2026 foram reconsultados no Jira e conferem, registro por registro (chave, status, due date, `resolutiondate` e `updated`), com a geração das 10:35: 22 previstos, 2 em atraso acumulado, 25 no lookahead, 0 envios, 0 concluídos, 0 com retrabalho.
+- **Nenhuma alteração nos dados.** Os seis conjuntos de setembro/2026 foram reconsultados no Jira e conferem, registro por registro (chave, status, due date, `resolutiondate` e `updated`), com a geração das 11:31 — inclusive na ordem dos registros: 22 previstos, 2 em atraso acumulado, 25 no lookahead, 0 envios, 0 concluídos, 0 com retrabalho.
 - A lista de projetos visíveis (`getVisibleJiraProjects`) também não mudou: os mesmos 19 projetos, tipos de nível Epic `Epic` e `Fluxo de trabalho`.
 - Julho e agosto/2026 permanecem congelados com os mesmos números; apenas o carimbo de geração do `index.html` e do banner mudou.
 
@@ -64,13 +64,17 @@ Dos 21 conjuntos carregados, **11 vão embutidos** como `DATASETS` no JavaScript
 
 O `index.html` gerado foi carregado em navegador headless (Chromium) antes da publicação:
 
-- **Nenhuma requisição para `atlassian.net`** ou qualquer host da Atlassian (0 requisições). O único host externo solicitado é `cdn.jsdelivr.net`, para o Chart.js que já faz parte do artifact.
+- **Nenhuma requisição externa** — 0 hosts externos solicitados, 0 requisições para `atlassian.net` ou qualquer host da Atlassian.
 - **Nenhum aviso `[PR03] JQL sem correspondencia no snapshot`** no console — todos os 11 padrões de JQL resolveram.
-- Console registra `[PR03] Snapshot estatico carregado - gerado em 2026-09-01T11:31:23-03:00; consultas ao Jira desativadas.`
-- Nenhum erro de JavaScript na página. `__HISTORY__` com abr, mai, jun, jul e ago/2026; abas "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada" presentes; cabeçalho do mês corrente renderizando como `Setembro 2026 — Ao vivo`; seletor de projeto com os 19 projetos.
-- Resumo executivo renderizado: OTD 0% (0 de 22), 22 previstos, 0 entregues, 22 pendentes do mês, 2 em atraso acumulado, retrabalho 0%.
+- Console registra `[PR03] Snapshot estatico carregado - gerado em 2026-09-01T12:32:25-03:00; consultas ao Jira desativadas.`
+- Nenhum erro de JavaScript e nenhum aviso no console. `__HISTORY__` com abr, mai, jun, jul e ago/2026; abas "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada" presentes; seletor de projeto com os 19 projetos.
+- Resumo executivo renderizado: OTD 0% (0 de 22), 22 previstos, 0 entregues, 22 pendentes do mês, 2 em atraso acumulado, retrabalho 0% (0/0).
 - Observação sobre o ambiente de verificação: o sandbox onde o teste roda não tem saída para `cdn.jsdelivr.net`, então o teste é repetido com o Chart.js substituído por um stub. Na publicação no Vercel o CDN está acessível e os gráficos renderizam normalmente.
-- Observação sobre a origem do HTML: nesta execução a pasta do Live Artifact não estava montada na sessão, então o snapshot foi gerado a partir de `_artifact_src.html` (cópia do artifact limpo, idêntica à última conferência com o artifact ao vivo em 31/08/2026).
+- As duas únicas menções a `atlassian.net` no HTML vêm do próprio artifact e não são requisições: o texto do rodapé ("Fonte: JIRA (projetos-engeplus.atlassian.net)") e a base dos links `browse/` usada quando se clica em um EPIC.
+
+### Observação sobre a origem do HTML
+
+Nesta execução a pasta do Live Artifact (`C:\Users\DELL\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics`) **não estava montada na sessão** — a sessão só tinha acesso a este repositório. O snapshot foi gerado a partir de `_artifact_src.html`, cópia limpa do artifact idêntica (MD5 `6a2b6462a4efbec1890af4494a7f0b74`) à última conferência com o artifact ao vivo em 31/08/2026. Enquanto a pasta do artifact seguir desconectada, alterações de layout feitas no Live Artifact não entram no snapshot — apenas os dados do Jira são atualizados.
 
 ## Privacidade
 
