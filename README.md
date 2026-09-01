@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 01/09/2026 16:31** (`2026-09-01T16:31:05-03:00`)
+> **Última atualização do snapshot: 01/09/2026 17:30** (`2026-09-01T17:30:15-03:00`)
 
 ---
 
@@ -47,12 +47,13 @@ Projetos visíveis mapeados: **19**
 Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
 Dos 21 conjuntos carregados, **11 vão embutidos** como `DATASETS` no JavaScript (apenas os alcançáveis por algum padrão de JQL: os 6 do mês corrente e os `planned` da Visão Acumulada). Os meses congelados viajam dentro de `__SNAPSHOT__.months` e nunca chegam a consultar o Jira.
 
-### O que mudou desde a geração anterior (01/09/2026 15:32)
+### O que mudou desde a geração anterior (01/09/2026 16:31)
 
-- **Nenhuma alteração nos dados.** Os conjuntos de setembro/2026 foram reconsultados no Jira nesta geração e conferem, byte a byte, com a geração das 15:32: 22 previstos, 2 em atraso acumulado, 25 no lookahead, 0 envios, 0 concluídos, 0 com retrabalho.
-- `sent_2026-09` e `resolved_2026-09` voltaram vazios; como `rework` é subconjunto de `sent`, foi gravado vazio sem nova consulta.
-- Julho e agosto/2026 permanecem congelados com os mesmos números. A lista de projetos visíveis foi reaproveitada da geração anterior (19 projetos, tipos `Epic` e `Fluxo de trabalho`).
-- Mudaram apenas o carimbo de geração do `index.html`, do `snapshot-data.js` e do banner.
+- **Nenhuma alteração nos dados.** Os 6 conjuntos de setembro/2026 foram reconsultados no Jira nesta geração e conferem, item a item (chave + `updated`), com a geração das 16:31: 22 previstos, 2 em atraso acumulado, 25 no lookahead, 0 envios, 0 concluídos, 0 com retrabalho.
+- `sent_2026-09`, `resolved_2026-09` e `rework_2026-09` voltaram vazios do Jira.
+- A lista de projetos visíveis foi reconsultada e confere (mesmo hash): 19 projetos, tipos de nível Epic `Epic` e `Fluxo de trabalho`.
+- Julho e agosto/2026 permanecem congelados com os mesmos números; os `planned` da Visão Acumulada (abr–set/2026) não foram alterados.
+- `git diff` do `index.html` e do `snapshot-data.js`: mudaram **apenas** os carimbos de geração (comentário do `<head>`, cabeçalho do script, `generatedAt`, `console.log` e banner) — 8 linhas alteradas, nenhuma diferença de dados.
 
 ### Períodos cobertos
 
@@ -65,12 +66,12 @@ Dos 21 conjuntos carregados, **11 vão embutidos** como `DATASETS` no JavaScript
 
 O `index.html` gerado foi carregado em navegador headless (Chromium/Playwright) antes da publicação:
 
-- **Nenhuma requisição para a Atlassian** — 0 requisições para `atlassian.net` ou qualquer host da Atlassian; nesta verificação, 0 requisições externas de qualquer natureza (o Chart.js foi servido localmente, ver observação abaixo).
+- **Nenhuma requisição para a Atlassian** — percorrendo as três abas, o navegador emitiu 2 requisições no total: o próprio `index.html` e o `chart.js` do CDN (interceptado localmente). 0 requisições para `atlassian.net` ou qualquer host da Atlassian.
 - **Nenhum aviso `[PR03] JQL sem correspondencia no snapshot`** no console — todos os 11 padrões de JQL resolveram.
-- Console registra `[PR03] Snapshot estatico carregado - gerado em 2026-09-01T16:31:05-03:00; consultas ao Jira desativadas.`
+- Console registra `[PR03] Snapshot estatico carregado - gerado em 2026-09-01T17:30:15-03:00; consultas ao Jira desativadas.`
 - **0 erros de JavaScript** e nenhum recurso 404. Abas "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada — Histórico" presentes; nenhuma mensagem "Erro na inicialização"; seletor de projeto com "Todos" + os 19 projetos.
 - Os `canvas` do dashboard (`c1`, `c2`, `c3` nas abas mensais e `chEvo`/`chBar` na Visão Acumulada) estão presentes e inicializados após o carregamento.
-- Observação sobre o ambiente de verificação: a tag do Chart.js usa `integrity` (SRI), e o CDN não é alcançável pelo navegador do sandbox. O teste é feito com o `chart.js@4.5.0` real (baixado do mesmo CDN) servido localmente, em uma **cópia temporária** do HTML sem o atributo `integrity`. O `index.html` publicado mantém a tag original com SRI intacta e, no Vercel, carrega o arquivo do CDN normalmente.
+- Observação sobre o ambiente de verificação: o CDN do Chart.js não é alcançável pelo navegador do sandbox. O teste roda sobre o **`index.html` publicado, sem qualquer alteração**: a requisição do `chart.js@4.5.0` é interceptada e respondida com o arquivo real baixado do mesmo CDN, de modo que o `integrity` (SRI) da tag continua sendo validado pelo navegador e passa. No Vercel a tag carrega do CDN normalmente.
 - As duas únicas menções a `atlassian.net` no HTML vêm do próprio artifact e não são requisições: o texto do rodapé ("Fonte: JIRA (projetos-engeplus.atlassian.net)") e a base dos links `browse/` usada quando se clica em um EPIC.
 
 ### Observação sobre a origem do HTML
