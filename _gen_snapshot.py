@@ -32,8 +32,27 @@ for off in range(5, -1, -1):
     while m <= 0: m += 12; y -= 1
     acum_months.append((y, m))
 
+FULL_SETS = ['planned', 'overdue', 'lookahead', 'sent', 'resolved', 'rework']
+
+def has_full(y, m):
+    k = '%04d-%02d' % (y, m)
+    return all(os.path.exists(os.path.join(SNAPDIR, n + '_' + k + '.json')) for n in FULL_SETS)
+
+# Meses congelados: TODO mes anterior ao corrente que tenha os 6 conjuntos em _snap/.
+# Nao apenas PREV: na virada de mes, congelar so o mes anterior apagaria do
+# __HISTORY__ os meses congelados em geracoes anteriores (ex.: jul/2026 na virada
+# para setembro), porque o artifact so traz 2026-04..2026-06 embutidos.
+_cand = set()
+for _fn in os.listdir(SNAPDIR):
+    _mm = re.match(r'^planned_(\d{4})-(\d{2})\.json$', _fn)
+    if _mm:
+        _cand.add((int(_mm.group(1)), int(_mm.group(2))))
+FROZEN = sorted(t for t in _cand if t < CUR and has_full(*t))
+if PREV not in FROZEN:
+    sys.exit('ERRO: mes anterior (%s) sem os 6 conjuntos completos em _snap/.' % PREVK)
+
 names = []
-for (y, m) in [PREV, CUR]:
+for (y, m) in FROZEN + [CUR]:
     k = '%04d-%02d' % (y, m)
     names += ['planned_'+k, 'overdue_'+k, 'lookahead_'+k, 'sent_'+k, 'resolved_'+k, 'rework_'+k]
 for (y, m) in acum_months:
@@ -62,17 +81,18 @@ def build_month(y, m):
     det = [{'key': i['key'], 'sm': i['fields'].get('summary') or '',
             'pj': i['fields']['project']['key'], 'rw': i['key'] in rw} for i in allsent]
     det.sort(key=lambda d: 0 if d['rw'] else 1)
+    fa = '%04d-%02d-01' % ((y, m + 1) if m < 12 else (y + 1, 1))
     return {
         'planned': DATASETS['planned_'+k],
         'overdue': DATASETS['overdue_'+k],
         'sent': {'total': len(allsent), 'rework': len(rw & seen), 'details': det},
         'look': DATASETS['lookahead_'+k],
         'period': {'s': s, 'e': e, 'l': MO[m-1] + ' ' + str(y), 'm': m-1, 'y': y},
-        '_frozen_at': TODAY,
+        '_frozen_at': min(fa, TODAY),
         '_note': 'Dados congelados no fechamento do período. Alterações no Jira após %s não afetam este relatório.' % e,
     }
 
-MONTHS = {PREVK: build_month(*PREV)}
+MONTHS = dict((mk(t), build_month(*t)) for t in FROZEN)
 
 projects = json.load(open(os.path.join(BASE, '_projects_min.json'), encoding='utf-8'))
 projects.sort(key=lambda p: p.get('name') or '')
@@ -86,10 +106,12 @@ SNAP = {'generated': TODAY, 'generatedAt': STAMP_ISO, 'epicTypeNames': epic_type
 pats = []
 # Os padroes sao montados como regex "cru" em Python e serializados com json.dumps,
 # que cuida de escapar barras e aspas para o literal de string do JavaScript.
-for (y, m) in [PREV, CUR]:
+# Somente o mes corrente precisa de padrao: os meses congelados sao servidos
+# pelo __HISTORY__ e nunca chegam a consultar o Jira.
+for (y, m) in [CUR]:
     k = '%04d-%02d' % (y, m); ld = last_day(y, m)
     pats.append(('rework_'+k, r'DURING \("{k}-01","{k}-{ld:02d}"\)[\s\S]*changed from'.format(k=k, ld=ld)))
-for (y, m) in [PREV, CUR]:
+for (y, m) in [CUR]:
     k = '%04d-%02d' % (y, m); ld = last_day(y, m)
     pats.append(('sent_'+k, r'DURING \("{k}-01","{k}-{ld:02d}"\)'.format(k=k, ld=ld)))
     pats.append(('resolved_'+k, r'resolved>="{k}-01"[\s\S]*resolved<="{k}-{ld:02d}"'.format(k=k, ld=ld)))
@@ -105,6 +127,10 @@ for (y, m) in acum_months:
     pats.append(('planned_'+k, r'duedate>="{k}-01"[\s\S]*duedate<="{k}-{ld:02d}"'.format(k=k, ld=ld)))
 
 J = lambda o: json.dumps(o, ensure_ascii=False, separators=(',', ':'))
+
+# Apenas os conjuntos alcancaveis por algum padrao vao para o JS; os meses
+# congelados ja viajam dentro de SNAP.months e nao precisam ser duplicados.
+JS_DATASETS = dict((n, DATASETS[n]) for n, _rx in pats)
 
 script = '''<script>
 /* =========================================================================
@@ -187,7 +213,7 @@ script = '''<script>
 ''' % {
     'stamp': STAMP_ISO,
     'snap': J(SNAP),
-    'datasets': J(DATASETS),
+    'datasets': J(JS_DATASETS),
     'patterns': ','.join('{n:%s,re:new RegExp(%s)}' % (J(n), J(rx)) for n, rx in pats),
 }
 
@@ -222,9 +248,11 @@ print('OK  index.html %.1f KB | snapshot-data.js %.1f KB' % (
     len(out.encode('utf-8'))/1024, len(script.encode('utf-8'))/1024))
 print('gerado:', STAMP_ISO)
 print('meses congelados:', list(MONTHS.keys()), '| mes ao vivo (via DATASETS):', CURK)
-print('datasets:', len(DATASETS), '| patterns:', len(pats))
+print('datasets carregados:', len(DATASETS), '| embutidos no JS:', len(JS_DATASETS),
+      '| patterns:', len(pats))
 for n in names: print('   %-22s %d' % (n, len(DATASETS[n])))
-mj = MONTHS[PREVK]
-print('%s: previstos=%d atraso=%d envios=%d retrabalho=%d lookahead=%d' % (
-    PREVK, len(mj['planned']), len(mj['overdue']), mj['sent']['total'],
-    mj['sent']['rework'], len(mj['look'])))
+for k in sorted(MONTHS):
+    mj = MONTHS[k]
+    print('%s (congelado em %s): previstos=%d atraso=%d envios=%d retrabalho=%d lookahead=%d' % (
+        k, mj['_frozen_at'], len(mj['planned']), len(mj['overdue']), mj['sent']['total'],
+        mj['sent']['rework'], len(mj['look'])))

@@ -13,3 +13,9 @@ _artifact_live_check.html
 
 # Backups pontuais gravados durante a atualizacao do snapshot (nao versionar)
 *.bak
+
+# Backups datados (ex.: _gen_snapshot.py.bak-20260901)
+*.bak-*
+
+# Area de staging da geracao de 01/09/2026; os conjuntos definitivos ficam em _snap/
+_snap09/

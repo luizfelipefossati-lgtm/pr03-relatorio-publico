@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 31/08/2026 14:36** (`2026-08-31T14:36:31-03:00`)
+> **Última atualização do snapshot: 01/09/2026 09:48** (`2026-09-01T09:48:33-03:00`)
 
 ---
 
@@ -12,42 +12,71 @@ Esta página é uma **cópia congelada** do Live Artifact `pr03-relatorio-indica
 Os dados do Jira são pré-buscados no momento da geração e embutidos no próprio `index.html`.
 A página publicada **não consulta o Jira ao vivo** — não há credenciais, tokens nem chamadas de rede para a Atlassian.
 
+## Virada de mês (setembro/2026)
+
+Esta é a primeira geração após a virada de mês:
+
+- **Agosto/2026 encerrou** e passou a ser o período congelado da aba "Encerrado".
+- **Setembro/2026** é agora o mês corrente ("Ao vivo" no artifact, servido pelos dados do snapshot aqui).
+- O gerador (`_gen_snapshot.py`) foi ajustado para congelar **todos** os meses anteriores que tenham os 6 conjuntos completos em `_snap/`, e não apenas o mês imediatamente anterior. Sem esse ajuste, julho/2026 sairia do `__HISTORY__` na virada e desapareceria da Visão Acumulada, porque o artifact traz embutidos apenas abr–jun/2026.
+
 ## Conteúdo do snapshot
 
 Fonte: Jira Cloud `projetos-engeplus` (`ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 Tipos de issue considerados como Epic: `Epic`, `Fluxo de trabalho`
 Projetos visíveis mapeados: **19**
 
-### Consultas resolvidas (16)
+### Consultas resolvidas (18 conjuntos + lista de projetos)
 
 | Conjunto | Escopo | Registros |
 |---|---|---:|
-| `planned_2026-03` | Epics com due date em mar/2026 | 7 |
-| `planned_2026-04` | Epics com due date em abr/2026 | 15 |
-| `planned_2026-05` | Epics com due date em mai/2026 | 7 |
-| `planned_2026-06` | Epics com due date em jun/2026 | 1 |
 | `planned_2026-07` | Epics com due date em jul/2026 | 10 |
-| `planned_2026-08` | Epics com due date em ago/2026 | 8 |
 | `overdue_2026-07` | Vencidos antes de jul/2026, não concluídos | 0 |
-| `overdue_2026-08` | Vencidos antes de ago/2026, não concluídos | 0 |
 | `lookahead_2026-07` | Due date entre ago/2026 e set/2026 | 26 |
-| `lookahead_2026-08` | Due date entre set/2026 e out/2026 | 35 |
 | `sent_2026-07` | Transições para "Enviado - Aguardando Análise" em jul/2026 | 5 |
-| `sent_2026-08` | Transições para "Enviado - Aguardando Análise" em ago/2026 | 4 |
 | `resolved_2026-07` | Concluídos em jul/2026 | 8 |
-| `resolved_2026-08` | Concluídos em ago/2026 | 6 |
 | `rework_2026-07` | Retrabalho (saiu de "Enviado - Aguardando Análise") em jul/2026 | 5 |
-| `rework_2026-08` | Retrabalho (saiu de "Enviado - Aguardando Análise") em ago/2026 | 3 |
+| `planned_2026-08` | Epics com due date em ago/2026 | 4 |
+| `overdue_2026-08` | Vencidos antes de ago/2026, não concluídos | 0 |
+| `lookahead_2026-08` | Due date entre set/2026 e out/2026 | 39 |
+| `sent_2026-08` | Transições para "Enviado - Aguardando Análise" em ago/2026 | 4 |
+| `resolved_2026-08` | Concluídos em ago/2026 | 6 |
+| `rework_2026-08` | Retrabalho em ago/2026 | 3 |
+| `planned_2026-09` | Epics com due date em set/2026 | 22 |
+| `overdue_2026-09` | Vencidos antes de set/2026, não concluídos | 2 |
+| `lookahead_2026-09` | Due date entre out/2026 e nov/2026 | 25 |
+| `sent_2026-09` | Transições para "Enviado - Aguardando Análise" em set/2026 | 0 |
+| `resolved_2026-09` | Concluídos em set/2026 | 0 |
+| `rework_2026-09` | Retrabalho em set/2026 | 0 |
+| `planned_2026-04` | Epics com due date em abr/2026 (Visão Acumulada) | 15 |
+| `planned_2026-05` | Epics com due date em mai/2026 (Visão Acumulada) | 7 |
+| `planned_2026-06` | Epics com due date em jun/2026 (Visão Acumulada) | 1 |
 
-Total: **140 registros**. Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
+Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
+Dos 21 conjuntos carregados, **11 vão embutidos** como `DATASETS` no JavaScript (apenas os alcançáveis por algum padrão de JQL: os 6 do mês corrente e os `planned` da Visão Acumulada). Os meses congelados viajam dentro de `__SNAPSHOT__.months` e nunca chegam a consultar o Jira.
 
-**Nenhum conjunto mudou em relação às gerações anteriores de hoje (07:35, 08:35, 09:30, 09:40, 10:35, 11:30, 12:38 e 13:36).** Nesta geração os **16 conjuntos foram integralmente reexecutados** contra o Jira, sem atalho de verificação por `updated`, e comparados registro a registro com o baseline em disco: **16/16 idênticos**, mesmas chaves de issue e mesmos valores de `status`, `duedate`, `resolutiondate` e `updated`. A lista de projetos também foi reexecutada e conferida por hash canônico (19 projetos, `6be2081bdb5082c1f762299ca7a92ea2`) — semanticamente idêntica à anterior; o arquivo `_projects_min.json` foi reescrito pelo fetch novo e difere da versão anterior apenas na formatação. Apenas o carimbo de tempo mudou, e o `index.html` resultante mantém **151.363 bytes**.
+### O que mudou desde a geração anterior (31/08/2026 14:36)
+
+- **`planned_2026-08` caiu de 8 para 4 registros.** Quatro EPICs com due date 31/08 foram reprogramados para setembro e agora aparecem em `planned_2026-09`: `EG0240-43` (TOMO IV — Projeto de Instrumentação), `EG0240-4` (TOMO V — PRE), `EG0241-42` (TOMO V — PRE) e `EG0275-112` (Licenças Ambientais). Como agosto foi congelado nesta geração, o mês fecha com **4 previstos e OTD de 50%** (2 entregues, ambos com pequeno atraso) em vez dos 8 previstos que a versão anterior mostrava.
+- **`overdue_2026-09` = 2**: `EG0286-8` (Estudo topográfico) e `EG0286-7` (Estudo de tráfego), ambos com due date 31/08/2026 e ainda em andamento — são as pendências acumuladas que setembro herda.
+- `lookahead_2026-08` subiu de 35 para 39 registros; `lookahead_2026-09` (out–nov/2026) tem 25.
+- `sent`, `resolved` e `rework` de setembro estão vazios: o mês tem um dia. Os conjuntos de agosto (4 / 6 / 3) foram reexecutados e conferem com o baseline anterior.
+- Julho/2026 foi mantido congelado com os mesmos números da geração anterior (10 previstos, 11 envios, 5 com retrabalho).
 
 ### Períodos cobertos
 
-- **Julho/2026** — período encerrado, dados travados no snapshot (10 previstos, 0 em atraso acumulado, 11 envios na união `sent` + `resolved`, 5 com retrabalho, 26 entregas nos 60 dias seguintes).
-- **Agosto/2026** — mês corrente, atualizado a cada geração do snapshot (8 previstos, 0 em atraso acumulado, 6 concluídos no mês, 3 com retrabalho, 35 entregas nos próximos 60 dias).
-- **Visão acumulada** — março a agosto/2026, um conjunto `planned` por mês.
+- **Julho/2026** — encerrado, congelado em 01/08/2026 (10 previstos, 0 em atraso acumulado, 11 envios na união `sent` + `resolved`, 5 com retrabalho, 26 entregas nos 60 dias seguintes).
+- **Agosto/2026** — encerrado, congelado em 01/09/2026 (4 previstos, 0 em atraso acumulado, 6 envios, 3 com retrabalho, 39 entregas nos 60 dias seguintes).
+- **Setembro/2026** — mês corrente, atualizado a cada geração do snapshot (22 previstos, 2 em atraso acumulado, 0 concluídos até agora, 25 entregas nos próximos 60 dias).
+- **Visão acumulada** — abril a setembro/2026, um conjunto `planned` por mês (72 previstos, 31 entregues, OTD acumulado 43%).
+
+## Verificação desta geração
+
+O `index.html` gerado foi carregado em navegador headless antes da publicação:
+
+- Nenhuma requisição para `atlassian.net` ou qualquer host da Atlassian — a única chamada externa é o Chart.js em `cdn.jsdelivr.net`, que já faz parte do artifact.
+- Nenhum aviso `[PR03] JQL sem correspondencia no snapshot` no console: todos os padrões resolveram.
+- `__HISTORY__` com abr, mai, jun, jul e ago/2026; abas "Agosto 2026 — Encerrado" e "Setembro 2026 — Ao vivo" renderizando; Visão Acumulada abr–set/2026 carregando sem erro.
 
 ## Privacidade
 
@@ -58,57 +87,16 @@ Os dados embutidos passam por minimização antes de serem gravados. São mantid
 **Removidos:** `accountId`, e-mails, avatares, `iconUrl`, descrições em ADF, comentários, worklogs, dados de responsável (assignee/reporter) e demais metadados da API.
 Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.name` — publicação aprovada pelo responsável pelo repositório.
 
-## Estrutura
+## Arquivos
 
-| Arquivo | Função |
-|---|---|
-| `index.html` | Página publicada (artifact + dados estáticos + banner de snapshot) — 147,8 KB (151.363 bytes) |
-| `snapshot-data.js` | Bloco de dados estáticos, também embutido no `index.html` — 62,1 KB (63.577 bytes) |
-| `_artifact_src.html` | Cópia do artifact original, sem os dados (não versionado) |
-| `_projects_min.json` | Lista minimizada de projetos e tipos de issue |
-| `_snap/` | JSONs minimais por consulta (insumo da geração) |
-| `_gen_snapshot.py` | Gerador do snapshot (`_artifact_src.html` + `_snap/` → `index.html`) |
-| `vercel.json` | Configuração de deploy |
-| `auto-push.ps1`, `pr03-push-watchdog.ps1` | Automação de commit/push no Windows |
+| Arquivo | Tamanho | Descrição |
+|---|---:|---|
+| `index.html` | 143,6 KB | Snapshot estático publicado (dados embutidos) |
+| `snapshot-data.js` | 57,8 KB | Bloco de dados injetado (cópia avulsa, para inspeção) |
+| `_artifact_src.html` | 85,5 KB | Cópia do artifact original, sem dados |
+| `_snap/*.json` | — | Conjuntos minimais por mês, reutilizados entre gerações |
+| `_gen_snapshot.py` | — | Gerador do snapshot |
 
-## Pipeline de atualização
+## Publicação
 
-1. A tarefa agendada **`deploy-pr03-vercel`** (Cowork) consulta o Jira, gera o snapshot e grava `index.html` + `README.md`.
-2. A tarefa do Windows Task Scheduler **`PR03-Auto-Push-GitHub`** roda a cada 30 minutos, detecta alterações no working tree e faz `git add -A`, `commit` e `push`.
-3. O **Vercel** publica automaticamente cerca de 1 minuto após o push.
-
-A geração do snapshot e o push são etapas independentes: o agente nunca executa operações de git nem autentica no GitHub.
-
-## Verificação desta geração
-
-- **16 consultas reexecutadas no Jira** (mais `getVisibleJiraProjects`) via MCP, com `fields` restrito a `summary, status, project, duedate, resolutiondate, updated`. Nenhuma consulta falhou; nenhuma exigiu paginação (todas com `hasNextPage: false`, abaixo do limite de 100 resultados).
-- **`_artifact_src.html` NÃO pôde ser reconferido contra o Live Artifact nesta geração.** A pasta `Artifacts\pr03-relatorio-indicadores-epics` não estava montada na sessão (apenas `pr03-relatorio-publico`), então a fonte usada foi a cópia local do repositório. As duas cópias locais — `_artifact_src.html` e `_artifact_live_check.html`, esta última extraída do Live Artifact às 12:39 de hoje — são byte a byte idênticas: 87.509 bytes, `md5 6a2b6462a4efbec1890af4494a7f0b74`, o mesmo hash confirmado nas gerações das 11:30, 12:38 e 13:36. Alterações feitas no Live Artifact após aquela extração não estariam refletidas aqui.
-- **16 JQLs emitidas pelo artifact conferidas por script contra os 16 padrões do snapshot** (mês anterior, mês corrente e os meses da visão acumulada) — **16/16 casaram** com o conjunto esperado, 0 falhas.
-- **Estrutura dos 140 registros validada por script** — chaves exatas em todos os níveis, `statusCategory.key` sempre em `new | indeterminate | done`, `project.key` coerente com o prefixo da `key` da issue e presente em `_projects_min.json`. **0 problemas.**
-- **Ausência de `accountId`, e-mails, `avatarUrls` e `iconUrl`** no HTML final — OK. A única ocorrência da string `accountId` é na frase "Nao contem accountIds, e-mails nem avatares" do cabeçalho de comentário do próprio bloco de dados.
-- **Ordem de injeção** — o bloco do snapshot aparece antes do script principal do artifact (`__SNAPSHOT__` na linha 298, `window.__HISTORY__=` na linha 360).
-- **Posição do banner** de snapshot (imediatamente antes de `</body>`, não no topo do body) — OK.
-- **Comentário `<!-- Snapshot gerado em 2026-08-31T14:36:31-03:00 -->`** no topo do `<head>` — OK.
-- **Nenhuma operação de git executada** pelo agente (sem `add`, `commit`, `push` ou autenticação).
-
-**Renderização verificada nesta geração** (Chromium/Playwright headless, sobre o `index.html` que está no disco):
-
-| Aba | Linhas de tabela | OTD | Retrabalho | Pendentes |
-|---|---:|---:|---:|---:|
-| Julho 2026 (encerrado) | 77 | 80% (8 de 10) | 45% (5/11) | 2 de 10 |
-| Agosto 2026 (ao vivo) | 84 | 25% (2 de 8) | 50% (3/6) | 6 de 8 |
-| Visão Acumulada | 49 | 56% (34 de 61) | — | 27 de 61 |
-
-Também confirmado em execução: `[PR03] Snapshot estatico carregado - gerado em 2026-08-31T14:36:31-03:00` no console, **0 avisos de "JQL sem correspondencia"** (os 16 padrões cobrem todas as consultas que o artifact emite), **0 erros de página** e **0 requisições de rede para `atlassian.com`**. As três abas renderizaram sem erro, incluindo a Visão Acumulada. A única requisição externa da página é o `chart.js@4.5.0` do jsDelivr, necessário para os gráficos; no sandbox de verificação esse CDN é bloqueado, então o teste rodou com um stub do `Chart` injetado antes do carregamento — em produção (Vercel) o script carrega normalmente, com o `integrity` SRI declarado no HTML.
-
-**Execuções repetidas:** a tarefa `deploy-pr03-vercel` já rodou nove vezes hoje (07:35, 08:35, 09:30, 09:40, 10:35, 11:30, 12:38, 13:36 e 14:36). Todas produziram `index.html` e `snapshot-data.js` de tamanho idêntico (151.363 e 63.577 bytes), diferindo apenas no carimbo de tempo. Este README descreve o arquivo que está no disco, com carimbo `2026-08-31T14:36:31-03:00`.
-
-## Observações da fonte de dados
-
-- **Escopo de "Epic".** O artifact monta a consulta a partir dos tipos de issue com `hierarchyLevel === 1` retornados por `getVisibleJiraProjects` — hoje `Epic` e `Fluxo de trabalho`. Consultas restritas a `issuetype = Epic` subestimam todos os conjuntos, porque deixam de fora os projetos EG0285, EG0286, EG0287, EG0292 e CREA, que usam `Fluxo de trabalho`.
-- **Abril, maio e junho/2026 na Visão Acumulada vêm do `window.__HISTORY__` embutido no próprio artifact**, não das consultas deste snapshot — o snapshot só congela `2026-07`. Por isso o heatmap mostra 19 previstos em abr/2026, 15 em mai/2026 e 2 em jun/2026, enquanto uma consulta nova ao Jira hoje retorna 15, 7 e 1. São recortes de momentos diferentes; para realinhar, o histórico embutido no artifact precisa ser regerado.
-- Existem variantes do nome do status de envio no Jira (`Enviado - Aguardando Análise`, `Enviado - Aguardando Análise1`, `Enviado- Aguardando Análise` — esta última sem espaço antes do hífen), todas presentes nos dados desta geração. As consultas `sent_*` e `rework_*` usam o nome canônico, então itens com as variantes aparecem apenas em `resolved_*` — daí a diferença entre `sent` e o total de envios (jul/2026: 5 em `sent`, 11 na união com `resolved`; ago/2026: 4 e 6). Essa quase-duplicidade de nomes é uma armadilha real: qualquer filtro por igualdade exata com o nome canônico ignora silenciosamente os itens com as variantes.
-- Em jul/2026, `rework_2026-07` retornou exatamente o mesmo conjunto de `sent_2026-07` (confirmado nesta geração): todos os itens que entraram em "Enviado - Aguardando Análise" no período também saíram desse status em algum momento. Não é erro de consulta, mas convém validar a leitura do indicador de retrabalho — a cláusula `status changed from` não tem recorte temporal, então casa também com a transição normal para "Medido e Faturado". Em ago/2026 os conjuntos já divergem (3 de 4).
-- `overdue_2026-07` e `overdue_2026-08` retornaram vazios: não há Epic com due date anterior ao início do mês ainda fora de `statusCategory=Done`. Vale notar que várias situações de "aguardando análise do cliente" estão mapeadas na categoria `Done` do Jira, então `statusCategory!=Done` não equivale a "trabalho em aberto".
-- O projeto "EG0280 - DMAE" tem a chave `G0280` no Jira (sem o `E` inicial); o valor é preservado como retornado pela API.
-- Peculiaridades do cadastro original foram preservadas literalmente: espaços à direita (`EG0286 - DNIT/AC `, `Estudos Hidrológicos `), espaço duplo (`TOMO IV -  PLANO...`) e nomes de status com erro de digitação (`Em Revisã`).
+O commit e o push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler, que verifica o working tree a cada 30 minutos. O deploy no Vercel ocorre cerca de 1 minuto após o push.
