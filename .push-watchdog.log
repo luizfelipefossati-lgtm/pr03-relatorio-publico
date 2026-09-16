@@ -8555,3 +8555,9 @@
 2026-09-16 09:30:27  ERRO: push falhou (exit 1): error: RPC failed; curl 6 Recv failure: Connection was reset send-pack: unexpected disconnect while reading sideband packet fatal: the remote end hung up unexpectedly Everything up-to-date
 2026-09-16 09:44:37  === Watchdog iniciando ===
 2026-09-16 09:44:42  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'False' | lock: 'False' | index quebrado: 'False'
+2026-09-16 09:44:43  Commit OK: 12936292bb06e3d1430c49153f1241b84cd209e2
+2026-09-16 09:44:43  Empurrando para origin/main...
+2026-09-16 09:44:46  Push OK e VERIFICADO: HEAD sincronizado com origin/main. Vercel deploya em ~1 min.
+2026-09-16 09:44:46  === Watchdog concluido com sucesso ===
+2026-09-16 09:54:29  === Watchdog iniciando ===
+2026-09-16 09:54:30  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'False' | lock: 'False' | index quebrado: 'False'
