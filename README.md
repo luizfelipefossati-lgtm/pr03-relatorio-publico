@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 16/09/2026 16:31** (`2026-09-16T16:31:39-03:00`)
+> **Última atualização do snapshot: 16/09/2026 17:30** (`2026-09-16T17:30:18-03:00`)
 
 ---
 
@@ -47,16 +47,14 @@ Projetos visíveis mapeados: **19**
 Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
 Dos 21 conjuntos carregados, **11 vão embutidos** como `DATASETS` no JavaScript (apenas os alcançáveis por algum padrão de JQL: os 6 do mês corrente e os `planned` da Visão Acumulada). Os meses congelados viajam dentro de `__SNAPSHOT__.months` e nunca chegam a consultar o Jira.
 
-### O que mudou desde a geração anterior (03/09/2026 17:30)
+### O que mudou desde a geração anterior (16/09/2026 16:31)
 
-- **Segunda entrega de setembro/2026 registrada.** O EPIC `EG0286-30` — *Relatório Periódico* (EG0286 - DNIT/AC) — passou para **"Enviado - Aguardando Análise"** em **16/09/2026 10:43**, com `resolutiondate` na mesma data. Efeito: `sent_2026-09` **1 → 2** e `resolved_2026-09` **1 → 2** (junto com `EG0286-7`, *Estudo de tráfego*, enviado em 03/09).
-- **Um EPIC saiu do mês corrente.** O `EG0286-12` — *Levantamento ambiental* (EG0286 - DNIT/AC) — teve o due date movido de setembro para **19/10/2026** (`updated` em 11/09/2026 12:12). Efeito: `planned_2026-09` **22 → 21** e `lookahead_2026-09` **25 → 26**. Conferido chave por chave contra o conjunto anterior guardado em `_snap09/`.
-- O atraso acumulado segue com **um único** EPIC: `EG0286-8` — *Estudo topográfico*, due date 31/08/2026, ainda "Em andamento". `overdue_2026-09` permanece em **1**.
-- `rework_2026-09` permanece em **0** — nenhum EPIC enviado em setembro saiu do status de envio.
-- Como `EG0286-30` tem due date em 28/01/2028 e `EG0286-7` em 31/08/2026, **nenhuma das duas entregas entra no "Previstos" de setembro**: elas aparecem no painel de envios, e o OTD do mês continua calculado sobre os 21 previstos.
-- A lista de projetos visíveis foi reconsultada (`getVisibleJiraProjects`, 19 projetos) e confere integralmente com o `_projects_min.json` do repositório (mesmo hash da forma canônica), reaproveitado sem alteração. Tipos de nível Epic: `Epic` e `Fluxo de trabalho`.
+- **Nenhuma alteração nos dados do Jira.** As 6 consultas do mês corrente (`planned`, `overdue`, `lookahead`, `sent`, `resolved`, `rework` de set/2026) foram refeitas ao vivo e conferidas **campo a campo** (chave, status, categoria, projeto, due date, `resolutiondate` e `updated`) contra os conjuntos guardados em `_snap/`: resultado idêntico em todos os 52 registros. Só o carimbo de tempo do snapshot mudou.
+- Setembro/2026 segue com **21 previstos**, **2 envios** (`EG0286-30` — *Relatório Periódico*, enviado em 16/09 10:43; `EG0286-7` — *Estudo de tráfego*, enviado em 03/09), **0 retrabalho** e **26 entregas** nos 60 dias seguintes.
+- O atraso acumulado segue com **um único** EPIC: `EG0286-8` — *Estudo topográfico*, due date 31/08/2026, ainda "Em andamento".
+- A lista de projetos visíveis foi reconsultada (`getVisibleJiraProjects`): **19 projetos**, mesmas chaves do `_projects_min.json` do repositório, reaproveitado sem alteração. Tipos de nível Epic: `Epic` e `Fluxo de trabalho`.
+- **O HTML de origem foi revalidado contra o Live Artifact.** Diferente da geração anterior, nesta execução foi possível obter o HTML atual do artifact `pr03-relatorio-indicadores-epics` diretamente pelo desktop: o SHA-256 confere **byte a byte** com o `_artifact_src.html` versionado (`2f09463c…2419`, 87.509 bytes). O layout do snapshot está, portanto, em dia com o artifact ao vivo.
 - Julho e agosto/2026 permanecem congelados com os mesmos números; os `planned` da Visão Acumulada de abril a junho/2026 não foram alterados.
-- A pasta do Live Artifact (`Artifacts\pr03-relatorio-indicadores-epics`) **não estava montada** nesta sessão; o snapshot foi gerado a partir do `_artifact_src.html` versionado no repositório, portanto sem revalidação contra o artifact ao vivo.
 
 ### Períodos cobertos
 
@@ -70,18 +68,17 @@ Dos 21 conjuntos carregados, **11 vão embutidos** como `DATASETS` no JavaScript
 O `index.html` gerado foi carregado em navegador headless (Chromium/Playwright), a partir de uma cópia byte a byte do arquivo publicado, percorrendo as três abas:
 
 - **Nenhuma requisição para a Atlassian.** O navegador emitiu 2 requisições no total: o próprio `index.html` e o `chart.js@4.5.0` do CDN. 0 requisições para `atlassian.net` ou qualquer host da Atlassian.
-- **Nenhum aviso `[PR03] JQL sem correspondencia no snapshot`** no console — todos os 11 padrões de JQL resolveram. Conferência direta dos padrões contra as 8 JQLs que o artifact monta (mês corrente e Visão Acumulada): todas casaram com o conjunto correto.
-- Única mensagem de console de toda a sessão: `[PR03] Snapshot estatico carregado - gerado em 2026-09-16T16:31:39-03:00; consultas ao Jira desativadas.`
+- **Nenhum aviso `[PR03] JQL sem correspondencia no snapshot`** no console — todos os 11 padrões de JQL resolveram.
+- Única mensagem de console de toda a sessão: `[PR03] Snapshot estatico carregado - gerado em 2026-09-16T17:30:18-03:00; consultas ao Jira desativadas.`
 - **0 erros de JavaScript**, nenhuma mensagem em nível `warning`/`error` e `#EA` (área de erro de inicialização) vazia.
-- As três abas foram clicadas em sequência — "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada — Histórico" — todas renderizando normalmente; 80 `option` no total da página (seletores de projeto com 20 opções cada: "Todos" + os 19 projetos).
-- `window.__SNAPSHOT__.generatedAt` = `2026-09-16T16:31:39-03:00`, 19 projetos, e `window.__HISTORY__` com os 5 meses congelados (`2026-04` a `2026-08`) — confirmando que o merge defensivo do `__HISTORY__` preservou os meses do snapshot.
+- As três abas foram percorridas — "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada — Histórico" — todas renderizando normalmente; 80 `option` no total da página (seletores de projeto com 20 opções cada: "Todos" + os 19 projetos).
+- `window.__SNAPSHOT__.generatedAt` = `2026-09-16T17:30:18-03:00`, 19 projetos, e `window.__HISTORY__` com os 5 meses congelados (`2026-04` a `2026-08`) — confirmando que o merge defensivo do `__HISTORY__` preservou os meses do snapshot.
 - Os 5 `canvas` do dashboard (`c1`, `c2`, `c3` nas abas mensais e `chEvo`/`chBar` na Visão Acumulada) foram inicializados e desenhados com dimensões não nulas.
-- As duas únicas menções a `atlassian.net` no HTML vêm do próprio artifact e não são requisições: o texto do rodapé ("Fonte: JIRA (projetos-engeplus.atlassian.net)") e a base dos links `browse/` usada quando se clica em um EPIC.
 - Nenhuma operação de git foi executada — commit e push são da tarefa agendada.
 
 ### Observação sobre a origem do HTML
 
-Nesta execução a pasta do Live Artifact (`C:\Users\DELL\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics`) **não estava montada na sessão** — a sessão só tinha acesso a este repositório, e o pedido de acesso à pasta foi recusado pelo ambiente. O snapshot foi gerado a partir de `_artifact_src.html`, cópia limpa do artifact, ainda idêntica (mesmo MD5) à `_artifact_live_check.html` conferida com o artifact ao vivo em 31/08/2026. Enquanto a pasta do artifact seguir desconectada, alterações de layout feitas no Live Artifact não entram no snapshot — apenas os dados do Jira são atualizados.
+A pasta do Live Artifact (`C:\Users\DELL\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics`) **não estava montada nesta sessão**. O snapshot foi gerado a partir do `_artifact_src.html` versionado no repositório — que, nesta execução, foi **confirmado idêntico** (SHA-256 `2f09463c3e7c98cd03ce4bdf773e6160576a13b74387cd0518efd5279eec2419`) ao HTML atual do Live Artifact, obtido diretamente pelo desktop. Layout e dados estão sincronizados.
 
 ## Privacidade
 
