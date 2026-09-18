@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 16/09/2026 17:30** (`2026-09-16T17:30:18-03:00`)
+> **Última atualização do snapshot: 16/09/2026 18:31** (`2026-09-16T18:31:26-03:00`)
 
 ---
 
@@ -47,14 +47,36 @@ Projetos visíveis mapeados: **19**
 Mais 1 chamada a `getVisibleJiraProjects` (19 projetos, 2 tipos de nível Epic).
 Dos 21 conjuntos carregados, **11 vão embutidos** como `DATASETS` no JavaScript (apenas os alcançáveis por algum padrão de JQL: os 6 do mês corrente e os `planned` da Visão Acumulada). Os meses congelados viajam dentro de `__SNAPSHOT__.months` e nunca chegam a consultar o Jira.
 
-### O que mudou desde a geração anterior (16/09/2026 16:31)
+### ⚠️ Cuidado ao refazer as consultas: o filtro de tipo NÃO é `issuetype=Epic`
 
-- **Nenhuma alteração nos dados do Jira.** As 6 consultas do mês corrente (`planned`, `overdue`, `lookahead`, `sent`, `resolved`, `rework` de set/2026) foram refeitas ao vivo e conferidas **campo a campo** (chave, status, categoria, projeto, due date, `resolutiondate` e `updated`) contra os conjuntos guardados em `_snap/`: resultado idêntico em todos os 52 registros. Só o carimbo de tempo do snapshot mudou.
+O artifact monta o filtro dinamicamente (`ETQ`, linha ~360 do `_artifact_src.html`) a partir de **todos** os tipos de issue de `hierarchyLevel === 1` encontrados em `getVisibleJiraProjects`:
+
+```
+issuetype in ("Epic","Fluxo de trabalho")
+```
+
+Projetos *team-managed* renomeiam o Epic — hoje o **EG0286 - DNIT/AC** usa `Fluxo de trabalho`.
+Rodar as consultas com `issuetype=Epic` **não gera erro**: devolve silenciosamente menos registros. Nesta geração, o efeito medido seria:
+
+| Conjunto de set/2026 | `issuetype=Epic` | `issuetype in (...)` correto |
+|---|---:|---:|
+| `planned` | 15 | **21** |
+| `overdue` | 0 | **1** |
+| `lookahead` | 12 | **26** |
+| `sent` | 0 | **2** |
+| `resolved` | 0 | **2** |
+
+Ou seja, o projeto EG0286 inteiro (37 issues) sumiria do relatório publicado, zerando os indicadores de envio e de atraso acumulado. O `ETQ` deve sempre ser derivado dos `epicTypeNames` correntes, nunca escrito à mão.
+
+### O que mudou desde a geração anterior (16/09/2026 17:30)
+
+- **Nenhuma alteração nos dados do Jira.** As 6 consultas do mês corrente (`planned`, `overdue`, `lookahead`, `sent`, `resolved`, `rework` de set/2026) foram refeitas ao vivo e conferidas contra os conjuntos guardados em `_snap/`: mesmas 52 chaves, mesmos status, categorias, projetos, due dates e carimbos de `resolutiondate`/`updated`. Só o carimbo de tempo do snapshot mudou.
 - Setembro/2026 segue com **21 previstos**, **2 envios** (`EG0286-30` — *Relatório Periódico*, enviado em 16/09 10:43; `EG0286-7` — *Estudo de tráfego*, enviado em 03/09), **0 retrabalho** e **26 entregas** nos 60 dias seguintes.
 - O atraso acumulado segue com **um único** EPIC: `EG0286-8` — *Estudo topográfico*, due date 31/08/2026, ainda "Em andamento".
-- A lista de projetos visíveis foi reconsultada (`getVisibleJiraProjects`): **19 projetos**, mesmas chaves do `_projects_min.json` do repositório, reaproveitado sem alteração. Tipos de nível Epic: `Epic` e `Fluxo de trabalho`.
-- **O HTML de origem foi revalidado contra o Live Artifact.** Diferente da geração anterior, nesta execução foi possível obter o HTML atual do artifact `pr03-relatorio-indicadores-epics` diretamente pelo desktop: o SHA-256 confere **byte a byte** com o `_artifact_src.html` versionado (`2f09463c…2419`, 87.509 bytes). O layout do snapshot está, portanto, em dia com o artifact ao vivo.
+- A lista de projetos visíveis foi reconsultada: **19 projetos**, mesmas chaves do `_projects_min.json` do repositório, reaproveitado sem alteração. Tipos de nível Epic: `Epic` e `Fluxo de trabalho`.
+- **O HTML de origem foi revalidado contra o Live Artifact**: SHA-256 `2f09463c…2419`, 87.509 bytes, idêntico byte a byte ao `_artifact_src.html` versionado. Layout do snapshot em dia com o artifact ao vivo.
 - Julho e agosto/2026 permanecem congelados com os mesmos números; os `planned` da Visão Acumulada de abril a junho/2026 não foram alterados.
+- Novo na documentação: a seção acima sobre o filtro `issuetype`, depois de a divergência ser detectada e corrigida durante esta geração.
 
 ### Períodos cobertos
 
@@ -69,16 +91,16 @@ O `index.html` gerado foi carregado em navegador headless (Chromium/Playwright),
 
 - **Nenhuma requisição para a Atlassian.** O navegador emitiu 2 requisições no total: o próprio `index.html` e o `chart.js@4.5.0` do CDN. 0 requisições para `atlassian.net` ou qualquer host da Atlassian.
 - **Nenhum aviso `[PR03] JQL sem correspondencia no snapshot`** no console — todos os 11 padrões de JQL resolveram.
-- Única mensagem de console de toda a sessão: `[PR03] Snapshot estatico carregado - gerado em 2026-09-16T17:30:18-03:00; consultas ao Jira desativadas.`
+- Única mensagem de console de toda a sessão: `[PR03] Snapshot estatico carregado - gerado em 2026-09-16T18:31:26-03:00; consultas ao Jira desativadas.`
 - **0 erros de JavaScript**, nenhuma mensagem em nível `warning`/`error` e `#EA` (área de erro de inicialização) vazia.
 - As três abas foram percorridas — "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada — Histórico" — todas renderizando normalmente; 80 `option` no total da página (seletores de projeto com 20 opções cada: "Todos" + os 19 projetos).
-- `window.__SNAPSHOT__.generatedAt` = `2026-09-16T17:30:18-03:00`, 19 projetos, e `window.__HISTORY__` com os 5 meses congelados (`2026-04` a `2026-08`) — confirmando que o merge defensivo do `__HISTORY__` preservou os meses do snapshot.
-- Os 5 `canvas` do dashboard (`c1`, `c2`, `c3` nas abas mensais e `chEvo`/`chBar` na Visão Acumulada) foram inicializados e desenhados com dimensões não nulas.
+- `window.__SNAPSHOT__.generatedAt` = `2026-09-16T18:31:26-03:00`, 19 projetos, e `window.__HISTORY__` com os 5 meses congelados (`2026-04` a `2026-08`) — confirmando que o merge defensivo do `__HISTORY__` preservou os meses do snapshot.
+- Os 5 `canvas` do dashboard (`c1` 300×160, `c2` 494×182, `c3` 300×160 nas abas mensais; `chEvo` 1190×220 e `chBar` 1190×280 na Visão Acumulada) foram inicializados e desenhados com dimensões não nulas.
 - Nenhuma operação de git foi executada — commit e push são da tarefa agendada.
 
 ### Observação sobre a origem do HTML
 
-A pasta do Live Artifact (`C:\Users\DELL\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics`) **não estava montada nesta sessão**. O snapshot foi gerado a partir do `_artifact_src.html` versionado no repositório — que, nesta execução, foi **confirmado idêntico** (SHA-256 `2f09463c3e7c98cd03ce4bdf773e6160576a13b74387cd0518efd5279eec2419`) ao HTML atual do Live Artifact, obtido diretamente pelo desktop. Layout e dados estão sincronizados.
+A pasta do Live Artifact (`C:\Users\DELL\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics`) **não estava montada nesta sessão** e não pôde ser concedida por solicitação automática. O snapshot foi gerado a partir do `_artifact_src.html` versionado no repositório — **confirmado idêntico** (SHA-256 `2f09463c3e7c98cd03ce4bdf773e6160576a13b74387cd0518efd5279eec2419`) ao HTML atual do Live Artifact, obtido diretamente pelo desktop. Layout e dados estão sincronizados.
 
 ## Privacidade
 
