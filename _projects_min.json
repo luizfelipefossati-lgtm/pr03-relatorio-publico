@@ -300,6 +300,24 @@
   ]
  },
  {
+  "key": "EG291",
+  "name": "EG0291 - Arroio Feijó",
+  "issueTypes": [
+   {
+    "name": "Fluxo de trabalho",
+    "hierarchyLevel": 1
+   },
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   }
+  ]
+ },
+ {
   "key": "G0120",
   "name": "EG0120 - DAER",
   "issueTypes": [
