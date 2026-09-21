@@ -19,3 +19,6 @@ _artifact_live_check.html
 
 # Area de staging da geracao de 01/09/2026; os conjuntos definitivos ficam em _snap/
 _snap09/
+
+# Arquivos que o sandbox nao consegue apagar (ex.: .git/index.lock obsoleto movido para ca)
+_to_delete/
