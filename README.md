@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 21/09/2026 13:32** (`2026-09-21T13:32:12-03:00`)
+> **Última atualização do snapshot: 21/09/2026 14:31** (`2026-09-21T14:31:18-03:00`)
 
 ---
 
@@ -58,20 +58,24 @@ issuetype in ("Epic","Fluxo de trabalho")
 Projetos *team-managed* renomeiam o Epic — hoje o **EG0286 - DNIT/AC**, o **EG0285 - EMBASA - BARREIRAS**, o **EG0287 - Dique de Camboriú**, o **EG0292 - PREFEITURA DE BLUMENAU**, o **EG0291 - Arroio Feijó** e a **GESTÃO - CREA** usam `Fluxo de trabalho`.
 Rodar as consultas com `issuetype=Epic` **não gera erro**: devolve silenciosamente menos registros, e esses projetos inteiros sumiriam do relatório publicado, zerando os indicadores de envio e de atraso acumulado. O `ETQ` deve sempre ser derivado dos `epicTypeNames` correntes, nunca escrito à mão.
 
-### O que mudou desde a geração anterior (21/09/2026 12:30)
+### O que mudou desde a geração anterior (21/09/2026 13:32)
 
-**Nenhum dado do Jira mudou.** Os seis conjuntos de setembro foram reconsultados ao vivo e vieram **byte a byte idênticos** aos da geração anterior (comparação por `cmp` conjunto a conjunto). Os indicadores de setembro seguem: 21 previstos, 2 em atraso acumulado, 5 envios, 4 concluídos, 2 com retrabalho, 26 entregas nos próximos 60 dias.
+**Nada mudou no Jira.** Esta geração reconsultou ao vivo os seis conjuntos de setembro **e** a lista de projetos visíveis:
 
-**A única mudança é a lista de projetos visíveis, que foi reconsultada nesta geração** (nas duas gerações anteriores ela havia sido reaproveitada do repositório):
-
-| | Geração anterior (12:30) | Agora (13:32) |
+| | Geração anterior (13:32) | Agora (14:31) |
 |---|---:|---:|
-| Projetos visíveis (`getVisibleJiraProjects`) | 19 | **20** |
+| Projetos visíveis (`getVisibleJiraProjects`) | 20 | **20** (`_projects_min.json` com SHA-256 idêntico) |
+| `planned_2026-09` | 21 | **21** |
+| `overdue_2026-09` | 2 | **2** |
+| `sent_2026-09` | 5 | **5** |
+| `resolved_2026-09` | 4 | **4** |
+| `rework_2026-09` | 2 | **2** |
+| `lookahead_2026-09` | 26 | **26** |
 
-- Entrou **`EG291` — EG0291 - Arroio Feijó** (team-managed, tipo de nível Epic: `Fluxo de trabalho`). Nenhum projeto saiu.
-- O projeto novo ainda não tem EPICs com due date nos períodos cobertos, então **não altera nenhum indicador** — aparece apenas nos seletores de projeto da página.
-- Os `epicTypeNames` continuam `Epic` e `Fluxo de trabalho`; o `ETQ` usado nas seis consultas de setembro foi derivado deles.
+- Comparação registro a registro (`key` + `status.name` + `statusCategory` + `duedate`) dos seis conjuntos: **conjuntos idênticos**, sem entradas novas nem removidas. A única diferença em relação aos arquivos anteriores é a ordem das linhas, que agora segue exatamente a ordem devolvida pelo Jira.
+- Os `epicTypeNames` continuam `Epic` e `Fluxo de trabalho`; o `ETQ` usado nas sete consultas de setembro foi derivado deles.
 - Julho e agosto/2026 permanecem congelados com os mesmos números; os `planned` da Visão Acumulada de abril a junho/2026 não foram alterados.
+- A atualização desta geração é, portanto, apenas o **carimbo de data/hora** do banner e do `generatedAt`, confirmando que os dados publicados foram reconferidos contra o Jira às 14:31.
 
 ### Períodos cobertos
 
@@ -86,18 +90,18 @@ O `index.html` gerado foi carregado em navegador headless (Chromium/Playwright),
 
 - **Nenhuma requisição para a Atlassian.** O navegador emitiu 2 requisições no total: o próprio `index.html` e o `chart.js@4.5.0` do CDN. 0 requisições para `atlassian.net` ou qualquer host da Atlassian.
 - **Nenhum aviso `[PR03] JQL sem correspondencia no snapshot`** no console — todos os 11 padrões de JQL resolveram.
-- Única mensagem de console de toda a sessão: `[PR03] Snapshot estatico carregado - gerado em 2026-09-21T13:32:12-03:00; consultas ao Jira desativadas.`
+- Única mensagem de console de toda a sessão: `[PR03] Snapshot estatico carregado - gerado em 2026-09-21T14:31:18-03:00; consultas ao Jira desativadas.`
 - **0 erros de JavaScript** e nenhuma mensagem em nível `warning`/`error`.
-- As três abas foram percorridas — "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada — Histórico" — todas renderizando normalmente; 82 `option` no total da página (os seletores de projeto ganharam uma opção com a entrada do EG0291).
-- `window.__SNAPSHOT__.generatedAt` = `2026-09-21T13:32:12-03:00`, 20 projetos, e `window.__HISTORY__` com os 5 meses congelados (`2026-04` a `2026-08`) — confirmando que o merge defensivo do `__HISTORY__` preservou os meses do snapshot.
+- As três abas foram percorridas — "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada — Histórico" — todas renderizando normalmente; 82 `option` no total da página.
+- `window.__SNAPSHOT__.generatedAt` = `2026-09-21T14:31:18-03:00`, 20 projetos, `epicTypeNames` = `Epic`, `Fluxo de trabalho`, e `window.__HISTORY__` com os 5 meses congelados (`2026-04` a `2026-08`) — confirmando que o merge defensivo do `__HISTORY__` preservou os meses do snapshot.
 - Os 5 `canvas` do dashboard (`c1` 300×160, `c2` 494×182, `c3` 300×160 nas abas mensais; `chEvo` 1190×220 e `chBar` 1190×280 na Visão Acumulada) foram inicializados e desenhados com dimensões não nulas.
-- Estrutura do arquivo conferida: comentário `<!-- Snapshot gerado em ... -->` no topo do `<head>`, bloco `__SNAPSHOT__` **antes** do script principal do artifact e banner de aviso imediatamente antes de `</body>` (única ocorrência da tag).
-- Varredura de vazamento no HTML final: 0 ocorrências de `avatarUrls`, `emailAddress` ou `@engeplus`. A única ocorrência da string `accountId` é a própria frase do cabeçalho do gerador ("Nao contem accountIds, e-mails nem avatares").
+- Estrutura do arquivo conferida: comentário `<!-- Snapshot gerado em ... -->` no topo do `<head>`, bloco `__SNAPSHOT__` (posição 82.587) **antes** do script principal do artifact (`window.__HISTORY__=` na 85.021) e banner de aviso imediatamente antes de `</body>` (única ocorrência da tag).
+- Varredura de vazamento no HTML final: 0 ocorrências de `avatarUrls`, `emailAddress`, `iconUrl` ou `@engeplus`. A única ocorrência da string `accountId` é a própria frase do cabeçalho do gerador ("Nao contem accountIds, e-mails nem avatares").
 - Nenhuma operação de git foi executada — commit e push são da tarefa agendada.
 
 ### Observação sobre a origem do HTML
 
-**Nesta geração a sincronia com o Live Artifact foi reconferida.** A pasta `C:\Users\DELL\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics` continua **não montada** nesta sessão, mas o HTML corrente do Live Artifact foi obtido diretamente pelo `id` do artifact e comparado com o `_artifact_src.html` versionado no repositório: **SHA-256 idêntico** (`2f09463c3e7c98cd03ce4bdf773e6160576a13b74387cd0518efd5279eec2419`, 87.509 bytes). O layout do artifact não mudou desde 18/09/2026, e o snapshot foi gerado a partir de uma base fiel ao que está no ar.
+**A sincronia com o Live Artifact foi reconferida nesta geração.** A pasta `C:\Users\DELL\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics` continua **não montada** nesta sessão, mas o HTML corrente do Live Artifact foi obtido diretamente pelo `id` do artifact e comparado com o `_artifact_src.html` versionado no repositório: **SHA-256 idêntico** (`2f09463c3e7c98cd03ce4bdf773e6160576a13b74387cd0518efd5279eec2419`, 87.509 bytes). O layout do artifact não mudou desde 27/07/2026 (`updatedAt` do artifact), e o snapshot foi gerado a partir de uma base fiel ao que está no ar.
 
 ## Privacidade
 
@@ -117,6 +121,7 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 | `_artifact_src.html` | 85.5 KB | Cópia do artifact original, sem dados |
 | `_projects_min.json` | 5.1 KB | Lista minimal de projetos visíveis (20) e seus tipos de issue |
 | `_snap/*.json` | — | Conjuntos minimais por mês, reutilizados entre gerações |
+| `_snap/_run0921e.py` | — | Carga dos dados de setembro verificados nesta geração |
 | `_gen_snapshot.py` | — | Gerador do snapshot |
 
 ## Publicação
