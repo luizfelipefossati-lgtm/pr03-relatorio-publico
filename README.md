@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 21/09/2026 20:29** (`2026-09-21T20:29:07-03:00`)
+> **Última atualização do snapshot: 21/09/2026 21:30** (`2026-09-21T21:30:04-03:00`)
 
 ---
 
@@ -58,11 +58,13 @@ issuetype in ("Epic","Fluxo de trabalho")
 Projetos *team-managed* renomeiam o Epic — hoje o **EG0286 - DNIT/AC**, o **EG0285 - EMBASA - BARREIRAS**, o **EG0287 - Dique de Camboriú**, o **EG0292 - PREFEITURA DE BLUMENAU**, o **EG0291 - Arroio Feijó** e a **GESTÃO - CREA** usam `Fluxo de trabalho`.
 Rodar as consultas com `issuetype=Epic` **não gera erro**: devolve silenciosamente menos registros, e esses projetos inteiros sumiriam do relatório publicado, zerando os indicadores de envio e de atraso acumulado. O `ETQ` deve sempre ser derivado dos `epicTypeNames` correntes, nunca escrito à mão.
 
-### O que mudou desde a geração anterior (21/09/2026 17:35)
+Nesta geração o efeito foi medido de novo: a consulta `planned` de setembro com `issuetype=Epic` devolveu **14** registros, contra **20** com o `ETQ` correto — faltariam `EG0286-13`, `EG0286-11`, `EG0286-14`, `EG0286-10`, `EG0286-6` e `EG0285-19`.
 
-**Nenhuma mudança no Jira.** As seis consultas de setembro/2026 foram refeitas ao vivo e devolveram exatamente os mesmos registros da geração anterior — mesmas chaves, mesmos status, mesmos prazos. Esta geração apenas renova o carimbo de data/hora do snapshot.
+### O que mudou desde a geração anterior (21/09/2026 20:29)
 
-| | Geração anterior (17:35) | Agora (20:29) |
+**Nenhuma mudança no Jira.** As seis consultas de setembro/2026 foram refeitas ao vivo e devolveram exatamente os mesmos registros da geração anterior — mesmas chaves, mesmos status, mesmos prazos, mesmos `updated`. Esta geração apenas renova o carimbo de data/hora do snapshot.
+
+| | Geração anterior (20:29) | Agora (21:30) |
 |---|---:|---:|
 | `planned_2026-09` | 20 | **20** |
 | `overdue_2026-09` | 2 | **2** |
@@ -89,18 +91,18 @@ O `index.html` gerado foi carregado em navegador headless (Chromium/Playwright),
 
 - **Nenhuma requisição para a Atlassian.** O navegador emitiu 2 requisições no total: o próprio `index.html` e o `chart.js@4.5.0` do CDN. 0 requisições para `atlassian.net` ou qualquer host da Atlassian.
 - **Nenhum aviso `[PR03] JQL sem correspondencia no snapshot`** no console — todos os 11 padrões de JQL resolveram.
-- Única mensagem de console de toda a sessão: `[PR03] Snapshot estatico carregado - gerado em 2026-09-21T20:29:07-03:00; consultas ao Jira desativadas.`
+- Única mensagem de console de toda a sessão: `[PR03] Snapshot estatico carregado - gerado em 2026-09-21T21:30:04-03:00; consultas ao Jira desativadas.`
 - **0 erros de JavaScript** e nenhuma mensagem em nível `warning`/`error`.
 - As três abas foram percorridas — "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada — Histórico" — todas renderizando normalmente.
-- `window.__SNAPSHOT__.generatedAt` = `2026-09-21T20:29:07-03:00`, 20 projetos, `epicTypeNames` = `Epic`, `Fluxo de trabalho`, e `window.__HISTORY__` com os 5 meses congelados (`2026-04` a `2026-08`) — confirmando que o merge defensivo do `__HISTORY__` preservou os meses do snapshot.
+- `window.__SNAPSHOT__.generatedAt` = `2026-09-21T21:30:04-03:00`, 20 projetos, `epicTypeNames` = `Epic`, `Fluxo de trabalho`, e `window.__HISTORY__` com os 5 meses congelados (`2026-04` a `2026-08`) — confirmando que o merge defensivo do `__HISTORY__` preservou os meses do snapshot.
 - Os 5 `canvas` do dashboard (`c1` 300×160, `c2` 494×182, `c3` 300×160 nas abas mensais; `chEvo` 1190×220 e `chBar` 1190×280 na Visão Acumulada) foram inicializados e desenhados com dimensões não nulas.
 - Estrutura do arquivo conferida: comentário `<!-- Snapshot gerado em ... -->` no topo do `<head>`, bloco `__SNAPSHOT__` **antes** do script principal do artifact (`window.__HISTORY__=`) e banner de aviso imediatamente antes de `</body>` (única ocorrência da tag).
 - Varredura de vazamento no HTML final: 0 ocorrências de `avatarUrls`, `emailAddress`, `iconUrl` ou `@engeplus`. A única ocorrência da string `accountId` é a própria frase do cabeçalho do gerador ("Nao contem accountIds, e-mails nem avatares").
-- Nenhuma operação de git que altere o repositório foi executada (sem `add`, `commit` ou `push`) — apenas leitura de `status`/`log`; o `.git/index.lock` residual dessa leitura foi renomeado para `index.lock.orphan-cowork-*`, deixando o caminho livre para a tarefa agendada.
+- Nenhuma operação de git foi executada nesta geração — nem leitura, nem `add`, `commit` ou `push`. O working tree foi deixado pronto para a tarefa agendada.
 
 ### Observação sobre a origem do HTML
 
-**A sincronia com o Live Artifact foi reconferida nesta geração.** A pasta `C:\Users\DELL\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics` continua **não montada** nesta sessão, mas o HTML corrente do Live Artifact foi obtido diretamente pelo `id` do artifact e comparado com o `_artifact_src.html` versionado no repositório: **SHA-256 idêntico** (`2f09463c3e7c98cd03ce4bdf773e6160576a13b74387cd0518efd5279eec2419`, 87.509 bytes). O layout do artifact não mudou desde 27/07/2026 (`updatedAt` do artifact), e o snapshot foi gerado a partir de uma base fiel ao que está no ar.
+**A sincronia com o Live Artifact foi reconferida nesta geração.** A pasta `C:\Users\DELL\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics` continua **não montada** nesta sessão (a única pasta conectada é a do repositório), mas o HTML corrente do Live Artifact foi obtido diretamente pelo `id` do artifact e comparado com o `_artifact_src.html` versionado no repositório: **SHA-256 idêntico** (`2f09463c3e7c98cd03ce4bdf773e6160576a13b74387cd0518efd5279eec2419`, 87.509 bytes). O layout do artifact não mudou desde 27/07/2026 (`updatedAt` do artifact), e o snapshot foi gerado a partir de uma base fiel ao que está no ar.
 
 ## Privacidade
 
@@ -120,7 +122,7 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 | `_artifact_src.html` | 85.5 KB | Cópia do artifact original, sem dados |
 | `_projects_min.json` | 5.1 KB | Lista minimal de projetos visíveis (20) e seus tipos de issue |
 | `_snap/*.json` | — | Conjuntos minimais por mês, reutilizados entre gerações |
-| `_snap/_run0921i.py` | — | Carga dos dados de setembro verificados nesta geração |
+| `_snap/_run0922a.py` | — | Carga dos dados de setembro verificados nesta geração |
 | `_gen_snapshot.py` | — | Gerador do snapshot |
 
 ## Publicação
