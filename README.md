@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 24/09/2026 10:30** (`2026-09-24T10:30:10-03:00`)
+> **Última atualização do snapshot: 24/09/2026 15:21** (`2026-09-24T15:21:22-03:00`)
 
 ---
 
@@ -60,11 +60,11 @@ Rodar as consultas com `issuetype=Epic` **não gera erro**: devolve silenciosame
 
 **A geração das 15:29 reconfirmou o problema na prática.** Uma rodada exploratória com `issuetype=Epic` devolveu **14** registros em `planned_2026-09` (em vez de 20) e **1** em `overdue_2026-09` (em vez de 2) — faltando `EG0286-13`, `EG0286-11`, `EG0286-14`, `EG0286-10`, `EG0286-6`, `EG0285-19` e `EG0286-8`. Consultados um a um, esses itens continuam existindo no Jira, com `issuetype.name = "Fluxo de trabalho"` e `hierarchyLevel = 1`. As consultas foram refeitas com o `ETQ` correto antes de gerar o snapshot, e desde então todas as gerações usam `issuetype in ("Epic","Fluxo de trabalho")`. Nenhum dado publicado foi afetado.
 
-### O que mudou desde a geração anterior (24/09/2026 10:06)
+### O que mudou desde a geração anterior (24/09/2026 10:30)
 
-**Nenhuma mudança no Jira.** As seis consultas de setembro/2026 foram refeitas ao vivo e devolveram exatamente os mesmos registros da geração anterior — mesmas chaves, mesmos status, mesmos prazos, mesmas datas de resolução e mesmos `updated`. A conferência foi feita registro a registro por script (`_snap/_verify0924b.py`), não por contagem. Esta geração apenas renova o carimbo de data/hora do snapshot.
+**Nenhuma mudança no Jira.** As seis consultas de setembro/2026 foram refeitas ao vivo e devolveram exatamente os mesmos registros da geração anterior — mesmas chaves, mesmos status, mesmos prazos, mesmas datas de resolução e mesmos `updated`. A conferência foi feita registro a registro por script (`_snap/_verify0924c.py`), não por contagem. Esta geração apenas renova o carimbo de data/hora do snapshot.
 
-| | Geração anterior (10:06 de 24/09) | Agora (10:30 de 24/09) |
+| | Geração anterior (10:30 de 24/09) | Agora (15:21 de 24/09) |
 |---|---:|---:|
 | `planned_2026-09` | 20 | **20** |
 | `overdue_2026-09` | 2 | **2** |
@@ -123,7 +123,8 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 | `_projects_min.json` | 5.1 KB | Lista minimal de projetos visíveis (20) e seus tipos de issue |
 | `_snap/*.json` | — | Conjuntos minimais por mês, reutilizados entre gerações |
 | `_snap/_run0922h.py` | — | Carga dos dados de setembro (inalterados desde 22/09/2026) |
-| `_snap/_verify0924b.py` | — | Conferência registro a registro dos 6 conjuntos de setembro contra o Jira ao vivo (desta geração) |
+| `_snap/_verify0924c.py` | — | Conferência registro a registro dos 6 conjuntos de setembro contra o Jira ao vivo (desta geração, 15:21) |
+| `_snap/_verify0924b.py` | — | Mesma conferência, da geração das 10:30 |
 | `_snap/_verify0924a.py` | — | Mesma conferência, da geração das 10:06 |
 | `_gen_snapshot.py` | — | Gerador do snapshot |
 
