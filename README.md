@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 25/09/2026 10:30** (`2026-09-25T10:30:59-03:00`)
+> **Última atualização do snapshot: 25/09/2026 11:29** (`2026-09-25T11:29:49-03:00`)
 
 ---
 
@@ -60,32 +60,25 @@ Rodar as consultas com `issuetype=Epic` **não gera erro**: devolve silenciosame
 
 **A geração das 15:29 de 24/09 reconfirmou o problema na prática.** Uma rodada exploratória com `issuetype=Epic` devolveu **14** registros em `planned_2026-09` (em vez de 20 à época) e **1** em `overdue_2026-09` (em vez de 2) — faltando `EG0286-13`, `EG0286-11`, `EG0286-14`, `EG0286-10`, `EG0286-6`, `EG0285-19` e `EG0286-8`. Consultados um a um, esses itens continuam existindo no Jira, com `issuetype.name = "Fluxo de trabalho"` e `hierarchyLevel = 1`. Desde então todas as gerações usam `issuetype in ("Epic","Fluxo de trabalho")`. Nenhum dado publicado foi afetado.
 
-### O que mudou desde a geração anterior (25/09/2026 09:30)
+### O que mudou desde a geração anterior (25/09/2026 10:30)
 
-**Houve mudança no Jira — a primeira desde 22/09.** Dois epics do projeto **EG0274** tiveram o prazo reagendado de setembro para outubro na manhã de hoje (25/09/2026, por volta das 09:56):
+**Nenhuma mudança no Jira.** As seis consultas de setembro/2026 e a lista de projetos foram refeitas ao vivo e devolveram exatamente os mesmos registros da geração das 10:30 — mesmas chaves, mesma ordem, mesmos status, prazos, datas de resolução e `updated`.
 
-| Chave | Resumo | Due date anterior | Due date atual |
-|---|---|---|---|
-| `EG0274-58` | Proj. Básico - Projeto de Terraplenagem | 17/09/2026 | **30/10/2026** |
-| `EG0274-21` | Proj. Básico - Projeto de Pavimentação | 17/09/2026 | **29/10/2026** |
-
-Nenhum dos dois estava concluído, e ambos venciam ainda dentro de setembro. Com o reagendamento eles saem de `planned_2026-09` e entram em `lookahead_2026-09`.
-
-| | Geração anterior (09:30 de 25/09) | Agora (10:30 de 25/09) |
+| | Geração anterior (10:30 de 25/09) | Agora (11:29 de 25/09) |
 |---|---:|---:|
-| `planned_2026-09` | 20 | **18** |
+| `planned_2026-09` | 18 | **18** |
 | `overdue_2026-09` | 2 | **2** |
 | `sent_2026-09` | 5 | **5** |
 | `resolved_2026-09` | 4 | **4** |
 | `rework_2026-09` | 2 | **2** |
-| `lookahead_2026-09` | 27 | **29** |
+| `lookahead_2026-09` | 29 | **29** |
 
-- Os quatro conjuntos sem alteração foram conferidos **registro a registro** (chave, resumo, status, categoria, prazo, data de resolução e `updated`), não por contagem.
+- A conferência foi feita **registro a registro** (chave, resumo, status, categoria, prazo, data de resolução e `updated`), não por contagem. O `lookahead_2026-09` voltou do MCP acima do limite de tokens e foi extraído com `jq` do arquivo salvo antes de ser comparado — inclusive os dois epics do **EG0274** reagendados na manhã de hoje (`EG0274-21` em 29/10 e `EG0274-58` em 30/10), que seguem fora de setembro.
 - A lista de projetos foi **reconsultada ao vivo**: 20 projetos, mesmas chaves de `_projects_min.json` (`CREA` … `PE`), e os tipos de nível Epic inalterados (`Epic`, `Fluxo de trabalho`). O `_projects_min.json` do repositório foi mantido.
+- O HTML do Live Artifact foi baixado do desktop e conferido por checksum: `md5 6a2b6462a4efbec1890af4494a7f0b74`, idêntico ao `_artifact_src.html` do repositório.
+- Nenhum arquivo em `_snap/` precisou ser reescrito; esta geração apenas renovou o carimbo de data/hora do snapshot.
 - Julho e agosto/2026 permanecem congelados com os mesmos números; os `planned` da Visão Acumulada de abril a junho/2026 não foram alterados.
-- Indicadores de setembro após a mudança: **18 previstos**, 5 envios, 2 com retrabalho, 2 em atraso acumulado, 29 entregas nos próximos 60 dias.
-- ⚠️ Atenção para a próxima geração: como os dois epics não foram concluídos e apenas mudaram de prazo, eles **não** contam como atraso — mas o `planned` de setembro fechará o mês com 18 em vez de 20, o que reduz a base do indicador de cumprimento de prazo do mês.
-
+- Indicadores de setembro: **18 previstos**, 5 envios, 2 com retrabalho, 2 em atraso acumulado, 29 entregas nos próximos 60 dias.
 ### Períodos cobertos
 
 - **Julho/2026** — encerrado, congelado em 01/08/2026 (10 previstos, 0 em atraso acumulado, 11 envios na união `sent` + `resolved`, 5 com retrabalho, 26 entregas nos 60 dias seguintes).
@@ -99,10 +92,10 @@ O `index.html` gerado foi carregado em navegador headless (Chromium/Playwright),
 
 - **Nenhuma requisição para a Atlassian.** O navegador emitiu 2 requisições no total: o próprio `index.html` e o `chart.js@4.5.0` do CDN. 0 requisições para `atlassian.net` ou qualquer host da Atlassian.
 - **Nenhum aviso `[PR03] JQL sem correspondencia no snapshot`** no console — todos os 11 padrões de JQL resolveram.
-- Única mensagem de console de toda a sessão: `[PR03] Snapshot estatico carregado - gerado em 2026-09-25T10:30:59-03:00; consultas ao Jira desativadas.`
+- Única mensagem de console de toda a sessão: `[PR03] Snapshot estatico carregado - gerado em 2026-09-25T11:29:49-03:00; consultas ao Jira desativadas.`
 - **0 erros de JavaScript** e nenhuma mensagem em nível `warning`/`error`.
 - As três abas foram percorridas — "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada — Histórico" — todas renderizando normalmente.
-- `window.__SNAPSHOT__.generatedAt` = `2026-09-25T10:30:59-03:00`, 20 projetos, `epicTypeNames` = `Epic`, `Fluxo de trabalho`, e `window.__HISTORY__` com os 5 meses congelados (`2026-04` a `2026-08`) — confirmando que o merge defensivo do `__HISTORY__` preservou os meses do snapshot.
+- `window.__SNAPSHOT__.generatedAt` = `2026-09-25T11:29:49-03:00`, 20 projetos, `epicTypeNames` = `Epic`, `Fluxo de trabalho`, e `window.__HISTORY__` com os 5 meses congelados (`2026-04` a `2026-08`) — confirmando que o merge defensivo do `__HISTORY__` preservou os meses do snapshot.
 - Os 5 `canvas` do dashboard foram inicializados com dimensões não nulas (`c1` 300×160, `c3` 300×160, `c2` 494×156, `chEvo` 1190×220, `chBar` 1190×280).
 - Conferência dos dados embutidos: `planned_2026-09` com 18 registros e sem `EG0274-58`/`EG0274-21`; `lookahead_2026-09` com 29 registros, contendo os dois.
 - Estrutura do arquivo conferida: comentário `<!-- Snapshot gerado em ... -->` no topo do `<head>`, bloco `__SNAPSHOT__` **antes** do script principal do artifact (`window.__HISTORY__=`) e banner de aviso imediatamente antes de `</body>` (única ocorrência da tag).
