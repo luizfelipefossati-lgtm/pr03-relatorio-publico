@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 28/09/2026 09:32** (`2026-09-28T09:32:35-03:00`)
+> **Última atualização do snapshot: 28/09/2026 10:31** (`2026-09-28T10:31:02-03:00`)
 
 ---
 
@@ -60,27 +60,22 @@ Rodar as consultas com `issuetype=Epic` **não gera erro**: devolve silenciosame
 
 **A geração das 15:29 de 24/09 reconfirmou o problema na prática.** Uma rodada exploratória com `issuetype=Epic` devolveu **14** registros em `planned_2026-09` (em vez de 20 à época) e **1** em `overdue_2026-09` (em vez de 2) — faltando `EG0286-13`, `EG0286-11`, `EG0286-14`, `EG0286-10`, `EG0286-6`, `EG0285-19` e `EG0286-8`. Consultados um a um, esses itens continuam existindo no Jira, com `issuetype.name = "Fluxo de trabalho"` e `hierarchyLevel = 1`. Desde então todas as gerações usam `issuetype in ("Epic","Fluxo de trabalho")`. Nenhum dado publicado foi afetado.
 
-### O que mudou desde a geração anterior (28/09/2026 08:32)
+### O que mudou desde a geração anterior (28/09/2026 09:32)
 
-**Houve movimentação no Jira no EG0286 - DNIT/AC, na manhã de hoje.** É a primeira geração com delta desde 25/09.
+**Sem delta nos indicadores.** As seis consultas de setembro/2026 foram refeitas ao vivo e devolveram exatamente os mesmos registros já gravados em `_snap/`.
 
-| | Geração anterior (08:32 de 28/09) | Agora (09:32 de 28/09) |
+| | Geração anterior (09:32 de 28/09) | Agora (10:31 de 28/09) |
 |---|---:|---:|
-| `planned_2026-09` | 18 | **17** |
-| `overdue_2026-09` | 2 | **1** |
-| `sent_2026-09` | 5 | **6** |
+| `planned_2026-09` | 17 | **17** |
+| `overdue_2026-09` | 1 | **1** |
+| `sent_2026-09` | 6 | **6** |
 | `resolved_2026-09` | 4 | **4** |
-| `rework_2026-09` | 2 | **3** |
-| `lookahead_2026-09` | 29 | **32** |
+| `rework_2026-09` | 3 | **3** |
+| `lookahead_2026-09` | 32 | **32** |
 
-O que está por trás dos números:
-
-- **`EG0286-8` — "Estudo topográfico" foi enviado.** Passou a "Enviado - Aguardando Análise" às 09:29 de hoje (resolução em `2026-09-28T09:29:40`). Com isso **saiu do atraso acumulado** (vencia em 31/08) e **entrou** em `sent_2026-09` e em `resolved_2026-09`. O atraso acumulado de setembro cai de 2 para 1 — resta apenas o `EG0239-28`.
-- **`EG0286-7` — "Estudo de tráfego" voltou para revisão.** Estava concluído desde 03/09; às 09:21 de hoje voltou a "Em Revisão" (resolução zerada) e o prazo foi remarcado de 31/08 para **01/10**. Por isso **entrou em `rework_2026-09`** (3º item do mês) e **saiu de `resolved_2026-09`** — os concluídos seguem em 4 porque o `EG0286-8` entrou no lugar. Permanece em `sent_2026-09`, que conta a transição ocorrida no mês.
-- **`EG0286-11` — "Estudos hidrológicos" foi reagendado** de 23/09 para **15/10**, saindo de `planned_2026-09` (18 → 17) e entrando no lookahead.
-- O `lookahead_2026-09` (out/2026 + nov/2026) sobe de 29 para 32, absorvendo o `EG0286-11` (15/10), o `EG0286-7` (01/10) e mais um item reagendado para a janela.
-- A conferência foi feita **registro a registro**, campo a campo (chave, status, categoria, projeto, prazo, data de resolução e `updated`), comparando as respostas ao vivo contra os conjuntos gravados em `_snap/`. Os cinco conjuntos com delta foram reescritos; o comparador desta rodada está em `_snap/_run0928b.py`.
-- O `lookahead_2026-09` estourou o limite de tokens do MCP e foi reduzido fora do comparador, mantendo apenas os campos minimais.
+- A conferência foi feita **registro a registro**, campo a campo (chave, status, categoria, projeto, prazo, data de resolução e `updated`), comparando as respostas ao vivo contra os conjuntos gravados em `_snap/`.
+- **Única diferença encontrada, e sem efeito nos indicadores:** o `EG0286-12` — "Levantamento ambiental" — teve o carimbo `updated` avançado de `2026-09-28T09:30:40` para `2026-09-28T09:31:11`, sem qualquer mudança de status (`Em andamento`), prazo (19/10/2026), projeto ou data de resolução. É uma edição registrada no Jira logo após a coleta anterior. O `lookahead_2026-09` foi reescrito apenas para manter o carimbo fiel à origem; **nenhum número publicado muda**.
+- O `lookahead_2026-09` estourou o limite de tokens do MCP e foi reduzido com `jq`, mantendo apenas os campos minimais.
 - A lista de projetos foi **reconsultada ao vivo**: 20 projetos, `isLast=true`, e os tipos de nível Epic inalterados (`Epic`, `Fluxo de trabalho`). Conferida item a item contra o `_projects_min.json` do repositório — idêntica, arquivo mantido.
 - Julho e agosto/2026 permanecem congelados com os mesmos números; os `planned` da Visão Acumulada de abril a junho/2026 não foram alterados.
 - Indicadores de setembro: **17 previstos**, 6 envios, 3 com retrabalho, 1 em atraso acumulado, 32 entregas nos próximos 60 dias.
@@ -94,14 +89,14 @@ O que está por trás dos números:
 
 ## Verificação desta geração
 
-O `index.html` gerado foi carregado em navegador headless (Chromium/Playwright), a partir de uma cópia byte a byte do arquivo publicado (`md5 bcf3f6061f643f071a108aa2913c7c97`, 151.633 bytes), percorrendo as três abas:
+O `index.html` gerado foi carregado em navegador headless (Chromium/Playwright), a partir de uma cópia byte a byte do arquivo publicado (`md5 0e1f1cde701d4c70fb2a315ca23fd41b`, 151.633 bytes), percorrendo as três abas:
 
 - **Nenhuma requisição para a Atlassian.** O navegador emitiu 2 requisições no total: o próprio `index.html` e o `chart.js@4.5.0` do CDN. 0 requisições para `atlassian.net` ou qualquer host da Atlassian.
 - **Nenhum aviso `[PR03] JQL sem correspondencia no snapshot`** no console — todos os 11 padrões de JQL resolveram.
-- Única mensagem de console de toda a sessão: `[PR03] Snapshot estatico carregado - gerado em 2026-09-28T09:32:35-03:00; consultas ao Jira desativadas.`
+- Única mensagem de console de toda a sessão: `[PR03] Snapshot estatico carregado - gerado em 2026-09-28T10:31:02-03:00; consultas ao Jira desativadas.`
 - **0 erros de JavaScript** e nenhuma mensagem em nível `warning`/`error`.
 - As três abas foram percorridas — "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada — Histórico" — todas renderizando normalmente, sem nenhum erro de página após os cliques.
-- `window.__SNAPSHOT__.generatedAt` = `2026-09-28T09:32:35-03:00`, 20 projetos, `epicTypeNames` = `Epic`, `Fluxo de trabalho`, e `window.__HISTORY__` com os 5 meses congelados (`2026-04` a `2026-08`) — confirmando que o merge defensivo do `__HISTORY__` preservou os meses do snapshot.
+- `window.__SNAPSHOT__.generatedAt` = `2026-09-28T10:31:02-03:00`, 20 projetos, `epicTypeNames` = `Epic`, `Fluxo de trabalho`, e `window.__HISTORY__` com os 5 meses congelados (`2026-04` a `2026-08`) — confirmando que o merge defensivo do `__HISTORY__` preservou os meses do snapshot.
 - Os 5 `canvas` do dashboard foram inicializados (`c1` 300×160, `c3` 300×160, `c2` 494×156, mais `chEvo` 1190×220 e `chBar` 1190×280, dimensionados ao entrar na Visão Acumulada).
 - Conferência dos dados embutidos no navegador: os 11 `DATASETS` com as contagens esperadas; `planned_2026-09` com 17 registros e **sem** `EG0286-11`; `lookahead_2026-09` com 32 registros, contendo `EG0286-11` (15/10) e `EG0286-7` (01/10).
 - Estrutura do arquivo conferida: comentário `<!-- Snapshot gerado em ... -->` no topo do `<head>`, bloco `__SNAPSHOT__` **antes** do script principal do artifact (`window.__HISTORY__=`) e banner de aviso imediatamente antes de `</body>` (única ocorrência da tag).
@@ -110,7 +105,7 @@ O `index.html` gerado foi carregado em navegador headless (Chromium/Playwright),
 
 ### Observação sobre a origem do HTML
 
-✅ **Nesta geração o HTML do Live Artifact foi relido e conferido.** A pasta `C:\Users\DELL\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics` continua **não montada** nesta sessão — a única pasta conectada é a do repositório —, mas o HTML corrente do artifact `pr03-relatorio-indicadores-epics` foi obtido diretamente pelo app Claude desta máquina e comparado byte a byte com o `_artifact_src.html` versionado no repositório: **idênticos** (`md5 6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes). O snapshot foi montado sobre esse arquivo, agora com a origem confirmada — encerrando a ressalva registrada nas gerações de 25/09 a 28/09 (08:32).
+✅ **Nesta geração o HTML do Live Artifact foi relido e conferido novamente.** A pasta `C:\Users\DELL\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics` continua **não montada** nesta sessão — a única pasta conectada é a do repositório, e o pedido de acesso foi recusado pelo app por se tratar de execução agendada, sem ninguém para aprovar. O HTML corrente do artifact `pr03-relatorio-indicadores-epics` foi obtido diretamente pelo app Claude desta máquina e comparado byte a byte com o `_artifact_src.html` versionado no repositório: **idênticos** (`md5 6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes). O snapshot foi montado sobre esse arquivo, com a origem confirmada.
 
 ## Privacidade
 
@@ -131,6 +126,7 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 | `_projects_min.json` | 5.1 KB | Lista minimal de projetos visíveis (20) e seus tipos de issue |
 | `_snap/*.json` | — | Conjuntos minimais por mês, reutilizados entre gerações |
 | `_snap/_run0928b.py` | — | Carga dos dados de setembro em vigor (geração das 09:32 de 28/09, com delta) |
+| — | — | Geração das 10:31 de 28/09: conferência ao vivo registro a registro, sem delta nos indicadores (só o carimbo `updated` do `EG0286-12`) |
 | `_snap/_run0928a.py` | — | Conferência ao vivo da geração das 08:32 de 28/09, registro a registro (sem delta) |
 | `_snap/_run0925e.py` | — | Conferência ao vivo da geração das 15:31 de 25/09, registro a registro (sem delta) |
 | `_snap/_run0925c.py` | — | Carga anterior de setembro (geração das 13:31 de 25/09) |
