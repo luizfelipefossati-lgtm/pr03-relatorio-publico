@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 28/09/2026 17:30** (`2026-09-28T17:30:05-03:00`)
+> **Última atualização do snapshot: 28/09/2026 18:30** (`2026-09-28T18:30:10-03:00`)
 
 ---
 
@@ -60,11 +60,11 @@ Rodar as consultas com `issuetype=Epic` **não gera erro**: devolve silenciosame
 
 **A geração das 15:29 de 24/09 reconfirmou o problema na prática.** Uma rodada exploratória com `issuetype=Epic` devolveu **14** registros em `planned_2026-09` (em vez de 20 à época) e **1** em `overdue_2026-09` (em vez de 2) — faltando `EG0286-13`, `EG0286-11`, `EG0286-14`, `EG0286-10`, `EG0286-6`, `EG0285-19` e `EG0286-8`. Consultados um a um, esses itens continuam existindo no Jira, com `issuetype.name = "Fluxo de trabalho"` e `hierarchyLevel = 1`. Desde então todas as gerações usam `issuetype in ("Epic","Fluxo de trabalho")`. Nenhum dado publicado foi afetado.
 
-### O que mudou desde a geração anterior (28/09/2026 16:30)
+### O que mudou desde a geração anterior (28/09/2026 17:30)
 
 **Nada nos dados.** As seis consultas de setembro foram refeitas ao vivo e vieram idênticas registro a registro. Esta geração apenas renova o carimbo de tempo do snapshot.
 
-| | Geração anterior (16:30 de 28/09) | Agora (17:30 de 28/09) |
+| | Geração anterior (17:30 de 28/09) | Agora (18:30 de 28/09) |
 |---|---:|---:|
 | `planned_2026-09` | 17 | **17** |
 | `overdue_2026-09` | 1 | **1** |
@@ -73,7 +73,7 @@ Rodar as consultas com `issuetype=Epic` **não gera erro**: devolve silenciosame
 | `rework_2026-09` | 3 | **3** |
 | `lookahead_2026-09` | 32 | **32** |
 
-- Os seis conjuntos de setembro (`planned`, `overdue`, `sent`, `resolved`, `rework`, `lookahead`) vieram **idênticos** aos gravados em chave, status, categoria, projeto, prazo, data de resolução e `updated`. Nenhum arquivo em `_snap/` foi reescrito (`_snap/_run0928i.py` registra a conferência: `SEM DELTA`).
+- Os seis conjuntos de setembro (`planned`, `overdue`, `sent`, `resolved`, `rework`, `lookahead`) vieram **idênticos** aos gravados em chave, status, categoria, projeto, prazo, data de resolução e `updated`. Nenhum arquivo em `_snap/` foi reescrito (`_snap/_run0928j.py` registra a conferência: `SEM DELTA`).
 - O `lookahead_2026-09` foi buscado em duas consultas (out/2026 e nov/2026) para não estourar o limite de tokens do MCP; as listas concatenadas somam 32 registros (23 + 9) e conferem campo a campo com o arquivo gravado.
 - A lista de projetos **foi reconsultada ao vivo** (`getVisibleJiraProjects`) e voltou idêntica ao `_projects_min.json` do repositório: as mesmas 20 chaves e os mesmos tipos de nível Epic (`Epic`, `Fluxo de trabalho`). O arquivo não precisou ser reescrito, e o `ETQ` derivado dele confere com o usado nas consultas ao vivo.
 - A **Visão Acumulada não foi reconsultada**: os `planned` de abril a agosto/2026 são meses já encerrados e foram reaproveitados dos arquivos em `_snap/`.
@@ -89,14 +89,14 @@ Rodar as consultas com `issuetype=Epic` **não gera erro**: devolve silenciosame
 
 ## Verificação desta geração
 
-O `index.html` gerado foi carregado em navegador headless (Chromium/Playwright), a partir de uma cópia byte a byte do arquivo publicado (`md5 53173770d65b85727144818f85e7a9d4`, 151.605 bytes), percorrendo as três abas:
+O `index.html` gerado foi carregado em navegador headless (Chromium/Playwright), a partir de uma cópia byte a byte do arquivo publicado (`md5 8e161058ff48b4d951d4e7c3ba5f4e32`, 151.605 bytes), percorrendo as três abas:
 
 - **Nenhuma requisição para a Atlassian.** O navegador emitiu 2 requisições no total: o próprio `index.html` e o `chart.js@4.5.0` do CDN. 0 requisições para `atlassian.net` ou qualquer host da Atlassian.
 - **Nenhum aviso `[PR03] JQL sem correspondencia no snapshot`** no console — todos os 11 padrões de JQL resolveram.
-- Única mensagem de console de toda a sessão: `[PR03] Snapshot estatico carregado - gerado em 2026-09-28T17:30:05-03:00; consultas ao Jira desativadas.`
+- Única mensagem de console de toda a sessão: `[PR03] Snapshot estatico carregado - gerado em 2026-09-28T18:30:10-03:00; consultas ao Jira desativadas.`
 - **0 erros de JavaScript** e nenhuma mensagem em nível `warning`/`error`.
 - As três abas foram percorridas uma a uma — "Agosto 2026 — Encerrado", "Setembro 2026 — Ao vivo" e "Visão Acumulada — Histórico" — todas renderizando normalmente, sem nenhum erro de página após os cliques.
-- `window.__SNAPSHOT__.generatedAt` = `2026-09-28T17:30:05-03:00`, 20 projetos, `epicTypeNames` = `Epic`, `Fluxo de trabalho`, e `window.__HISTORY__` com os 5 meses congelados (`2026-04` a `2026-08`) — confirmando que o merge defensivo do `__HISTORY__` preservou os meses do snapshot.
+- `window.__SNAPSHOT__.generatedAt` = `2026-09-28T18:30:10-03:00`, 20 projetos, `epicTypeNames` = `Epic`, `Fluxo de trabalho`, e `window.__HISTORY__` com os 5 meses congelados (`2026-04` a `2026-08`) — confirmando que o merge defensivo do `__HISTORY__` preservou os meses do snapshot.
 - Conferência dos dados embutidos no navegador: os 11 `DATASETS` com as contagens esperadas — `planned_2026-09` com 17 registros, `lookahead_2026-09` com 32, `sent_2026-09` com 6, `resolved_2026-09` com 4, `rework_2026-09` com 3, `overdue_2026-09` com 1 e os `planned` acumulados com 15 / 7 / 1 / 10 / 4.
 - Estrutura do arquivo conferida: comentário `<!-- Snapshot gerado em ... -->` no topo do `<head>`, bloco `__SNAPSHOT__` **antes** do script principal do artifact (`window.__HISTORY__=`) e banner de aviso imediatamente antes de `</body>` (única ocorrência da tag).
 - Varredura de vazamento no HTML final: 0 ocorrências de `avatarUrls`, `emailAddress`, `iconUrl` ou `api.atlassian.com`. A única ocorrência da string `accountId` é a própria frase do cabeçalho do gerador ("Nao contem accountIds, e-mails nem avatares").
@@ -124,6 +124,7 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 | `_artifact_src.html` | 85.5 KB | Cópia do artifact original, sem dados (conferida contra o artifact ao vivo em 28/09) |
 | `_projects_min.json` | 5.1 KB | Lista minimal de projetos visíveis (20) e seus tipos de issue |
 | `_snap/*.json` | — | Conjuntos minimais por mês, reutilizados entre gerações |
+| `_snap/_run0928j.py` | — | Conferência ao vivo da geração das 18:30 de 28/09, registro a registro (sem delta) |
 | `_snap/_run0928i.py` | — | Conferência ao vivo da geração das 17:30 de 28/09, registro a registro (sem delta) |
 | `_snap/_run0928h.py` | — | Conferência ao vivo da geração das 16:30 de 28/09, registro a registro (sem delta) |
 | `_snap/_run0928g.py` | — | Conferência ao vivo da geração das 15:28 de 28/09, registro a registro (sem delta) |
@@ -131,7 +132,6 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 | `_snap/_run0928e.py` | — | Conferência ao vivo da geração das 13:32 de 28/09 (setembro sem delta; delta na Visão Acumulada) |
 | `_snap/_run0928d.py` | — | Conferência ao vivo da geração das 12:30 de 28/09, registro a registro (sem delta) |
 | `_snap/_run0928c.py` | — | Carga anterior de setembro (geração das 11:30 de 28/09, com delta em `G0280-53` e `G0280-54`) |
-| `_snap/_run0928b.py` | — | Carga anterior de setembro (geração das 09:32 de 28/09, com delta) |
 | `_gen_snapshot.py` | — | Gerador do snapshot |
 
 ## Publicação
