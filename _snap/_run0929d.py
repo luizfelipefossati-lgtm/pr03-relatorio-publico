@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Consultas refeitas ao vivo no Jira em 2026-09-29 ~03:30 UTC (2026-09-29 00:30 BRT).
+# Consultas refeitas ao vivo no Jira em 2026-09-29 ~02:30 UTC (2026-09-28 23:30 BRT).
 # Sessao agendada. 6 conjuntos do mes corrente (2026-09); lookahead out+nov/2026.
 # ETQ = issuetype in ("Epic","Fluxo de trabalho"), derivado dos epicTypeNames correntes.
 # getVisibleJiraProjects refeito ao vivo: 20 projetos, isLast=true; minimal canonico
