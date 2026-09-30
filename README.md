@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/09/2026 04:29** (`2026-09-30T04:29:36-03:00`)
+> **Última atualização do snapshot: 30/09/2026 05:30** (`2026-09-30T05:30:27-03:00`)
 
 ---
 
@@ -56,10 +56,10 @@ pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Verificação ao vivo no Jira em 30/09/2026 04:29 (BRT):
+Verificação ao vivo no Jira em 30/09/2026 05:30 (BRT):
 
 - `getVisibleJiraProjects`: total = 21, `isLast = true` — assinatura idêntica a `_projects_min.json`.
-- Nenhum epic com `updated >= "2026-09-30 03:29"` — sem inserções ou edições desde a rodada anterior.
+- Nenhum epic com `updated >= "2026-09-30 04:20"` — sem inserções ou edições desde a rodada anterior.
 - Contagens ao vivo dos 6 conjuntos de set/2026 (17 · 1 · 32 · 6 · 4 · 3) idênticas aos arquivos em `_snap/`,
   o que também exclui remoções (que não alteram `updated`).
 - HTML do artifact ao vivo: md5 `6a2b6462a4efbec1890af4494a7f0b74` — idêntico a `_artifact_src.html`.
