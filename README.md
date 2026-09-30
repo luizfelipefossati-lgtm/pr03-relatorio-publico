@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/09/2026 01:34** (`2026-09-30T01:34:28-03:00`)
+> **Última atualização do snapshot: 30/09/2026 02:29** (`2026-09-30T02:29:53-03:00`)
 
 ---
 
@@ -18,17 +18,29 @@ Fonte: Jira Cloud `projetos-engeplus` (`ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 Tipos de issue considerados como Epic: `Epic`, `Fluxo de trabalho`
 Projetos visíveis mapeados: **21**
 
-### Consultas resolvidas (13 conjuntos + lista de projetos)
+### Consultas resolvidas (18 conjuntos + lista de projetos)
+
+Meses encerrados — servidos pelo histórico embutido (`window.__HISTORY__`):
 
 | Conjunto | Escopo | Registros |
 |---|---|---:|
-| `planned_2026-07` | Epics com due date em jul/2026 (visão acumulada) | 9 |
-| `planned_2026-08` | Epics com due date em ago/2026 | 3 |
+| `planned_2026-07` | Epics com due date em jul/2026 | 10 |
+| `overdue_2026-07` | Vencidos antes de jul/2026, não concluídos | 0 |
+| `lookahead_2026-07` | Due date entre ago/2026 e set/2026 | 26 |
+| `sent_2026-07` | Transições para "Enviado - Aguardando Análise" em jul/2026 | 5 |
+| `resolved_2026-07` | Concluídos em jul/2026 | 8 |
+| `rework_2026-07` | Retrabalho em jul/2026 | 5 |
+| `planned_2026-08` | Epics com due date em ago/2026 | 4 |
 | `overdue_2026-08` | Vencidos antes de ago/2026, não concluídos | 0 |
-| `lookahead_2026-08` | Due date entre set/2026 e out/2026 | 40 |
+| `lookahead_2026-08` | Due date entre set/2026 e out/2026 | 39 |
 | `sent_2026-08` | Transições para "Enviado - Aguardando Análise" em ago/2026 | 4 |
-| `resolved_2026-08` | Concluídos em ago/2026 | 4 |
-| `rework_2026-08` | Retrabalho (saiu de "Enviado - Aguardando Análise") em ago/2026 | 3 |
+| `resolved_2026-08` | Concluídos em ago/2026 | 6 |
+| `rework_2026-08` | Retrabalho em ago/2026 | 3 |
+
+Mês corrente — servido pela interceptação de JQL (`window.cowork.callMcpTool`):
+
+| Conjunto | Escopo | Registros |
+|---|---|---:|
 | `planned_2026-09` | Epics com due date em set/2026 | 17 |
 | `overdue_2026-09` | Vencidos antes de set/2026, não concluídos | 1 |
 | `lookahead_2026-09` | Due date entre out/2026 e nov/2026 | 32 |
@@ -36,13 +48,32 @@ Projetos visíveis mapeados: **21**
 | `resolved_2026-09` | Concluídos em set/2026 | 4 |
 | `rework_2026-09` | Retrabalho em set/2026 | 3 |
 
+Visão acumulada (`planned` por mês): abr/2026 = 15 · mai/2026 = 7 · jun/2026 = 1 · jul/2026 = 10 · ago/2026 = 4 · set/2026 = 17.
+
 Os meses de **abr/2026, mai/2026 e jun/2026** continuam vindo do histórico já congelado dentro do
-artifact (`window.__HISTORY__`), preservado sem alteração.
+artifact (`window.__HISTORY__`), preservado sem alteração. **Jul/2026 e ago/2026** são congelados
+pelo snapshot e mesclados a esse histórico.
+
+## Conferência desta geração
+
+Verificação ao vivo no Jira em 30/09/2026 02:29 (BRT):
+
+- `getVisibleJiraProjects`: total = 21, `isLast = true` — assinatura idêntica a `_projects_min.json`.
+- Nenhum epic com `updated >= "2026-09-30 00:30"` — sem inserções ou edições desde a rodada anterior.
+- Contagens ao vivo dos 6 conjuntos de set/2026 (17 · 1 · 32 · 6 · 4 · 3) idênticas aos arquivos em `_snap/`,
+  o que também exclui remoções (que não alteram `updated`).
+- HTML do artifact ao vivo: md5 `6a2b6462a4efbec1890af4494a7f0b74` — idêntico a `_artifact_src.html`.
+
+**Sem delta de dados nesta rodada.** A página foi regerada apenas para atualizar o carimbo de tempo.
+
+Renderização conferida em navegador headless: sem erros de console, 5 gráficos montados,
+as três abas (Agosto 2026, Setembro 2026, Visão Acumulada) abrem normalmente e o
+resumo executivo de set/2026 fecha em OTD 12% (2 de 17), 15 pendentes, 1 em atraso e 50% de retrabalho (3/6).
 
 ## Abas disponíveis
 
-- **Agosto 2026** — período encerrado, dados congelados no snapshot.
-- **Setembro 2026** — mês corrente na data de geração, congelado no snapshot.
+- **Agosto 2026** — período encerrado, dados congelados no fechamento do período.
+- **Setembro 2026** — mês corrente; os dados são os do instante da geração do snapshot.
 - **Visão Acumulada** — abr/2026 a set/2026 (padrão: últimos 6 meses).
 
 ## Estrutura
