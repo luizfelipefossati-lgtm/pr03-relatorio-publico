@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/09/2026 08:30** (`2026-09-30T08:30:07-03:00`)
+> **Última atualização do snapshot: 30/09/2026 09:29** (`2026-09-30T09:29:16-03:00`)
 
 ---
 
@@ -56,13 +56,15 @@ pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Verificação ao vivo no Jira em 30/09/2026 08:30 (BRT):
+Verificação ao vivo no Jira em 30/09/2026 09:29 (BRT):
 
 - `getVisibleJiraProjects`: total = 21, `isLast = true`. Tipos com `hierarchyLevel = 1`:
   `Epic`, `Fluxo de trabalho` — logo `ETQ = issuetype in ("Epic","Fluxo de trabalho")`,
-  idêntico ao que o artifact monta em tempo de execução.
+  idêntico ao que o artifact monta em tempo de execução. Assinatura ordem-insensível
+  (chave, nome, tipos de issue) md5 `aca1bab21c39a6dafd8d8b0bfd212527` — idêntica a
+  `_projects_min.json`.
 - Sonda de alterações `ETQ AND updated >= "2026-09-30 07:20"` → **0 issues**: nenhuma inserção
-  ou edição desde a geração anterior (07:31 BRT).
+  ou edição desde a geração anterior (08:30 BRT).
 - Contagens ao vivo dos 6 conjuntos de set/2026 — 17 · 1 · 32 · 6 · 4 · 3 — idênticas às
   gravadas em `_snap/` (a contagem cobre também remoções, que não alteram `updated`).
   `planned` e `overdue` foram ainda conferidos chave a chave, com o mesmo conjunto de epics.
@@ -70,11 +72,30 @@ Verificação ao vivo no Jira em 30/09/2026 08:30 (BRT):
 - HTML do artifact ao vivo: md5 `6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes — idêntico a
   `_artifact_src.html`, confirmando que o fonte usado na geração está atualizado.
 
+Conferência adicional dos meses da visão acumulada (`planned` de abr/2026 a set/2026),
+comparando o valor ao vivo com o gravado em `_snap/`:
+
+| Mês | Ao vivo | Gravado | |
+|---|---:|---:|---|
+| abr/2026 | 15 | 15 | igual |
+| mai/2026 | 7 | 7 | igual |
+| jun/2026 | 1 | 1 | igual |
+| jul/2026 | 9 | 10 | divergência esperada (mês congelado) |
+| ago/2026 | 3 | 4 | divergência esperada (mês congelado) |
+| set/2026 | 17 | 17 | igual |
+
+As divergências de jul e ago são o comportamento pretendido, não um erro: os meses encerrados
+são **congelados no fechamento do período** e, por projeto, não voltam a ser consultados. Uma
+alteração de due date (ou a remoção de um epic) feita no Jira depois do fechamento muda a
+contagem ao vivo, mas não pode alterar um indicador já publicado para aquele mês. Os meses em
+aberto na acumulada (abr–jun, que ainda não têm os 6 conjuntos completos) continuam batendo com
+o Jira.
+
 Renderização conferida em navegador headless (Chromium): sem erros de página nem de console,
 5 gráficos montados, única dependência externa `cdn.jsdelivr.net` (Chart.js), banner imediatamente
 antes de `</body>`, e as três abas abrem normalmente —
 **Agosto 2026** OTD 50% (2 de 4), **Setembro 2026** OTD 12% (2 de 17), 15 pendentes, 1 em atraso
-e 50% de retrabalho (3/6), **Visão Acumulada** OTD 49% (33 de 67).
+e 50% de retrabalho (3/6), **Visão Acumulada** OTD 49% (33 de 67), heatmap OTD por projeto × mês montado.
 
 > Nota de virada de mês: 30/09 é o último dia do mês corrente. Na próxima geração após a virada
 > (01/10) o gerador passa a congelar 2026-09 — os 6 conjuntos de setembro já estão completos em `_snap/`.
