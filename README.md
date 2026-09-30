@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/09/2026 07:31** (`2026-09-30T07:31:27-03:00`)
+> **Última atualização do snapshot: 30/09/2026 08:30** (`2026-09-30T08:30:07-03:00`)
 
 ---
 
@@ -56,14 +56,17 @@ pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Verificação ao vivo no Jira em 30/09/2026 07:31 (BRT):
+Verificação ao vivo no Jira em 30/09/2026 08:30 (BRT):
 
 - `getVisibleJiraProjects`: total = 21, `isLast = true`. Tipos com `hierarchyLevel = 1`:
   `Epic`, `Fluxo de trabalho` — logo `ETQ = issuetype in ("Epic","Fluxo de trabalho")`,
   idêntico ao que o artifact monta em tempo de execução.
-- Os 6 conjuntos de set/2026 foram rebuscados ao vivo e reescritos em `_snap/`.
-  Contagens (17 · 1 · 32 · 6 · 4 · 3) idênticas às da rodada anterior, assim como as chaves
-  dos epics em cada conjunto — **sem delta de dados nesta rodada**.
+- Sonda de alterações `ETQ AND updated >= "2026-09-30 07:20"` → **0 issues**: nenhuma inserção
+  ou edição desde a geração anterior (07:31 BRT).
+- Contagens ao vivo dos 6 conjuntos de set/2026 — 17 · 1 · 32 · 6 · 4 · 3 — idênticas às
+  gravadas em `_snap/` (a contagem cobre também remoções, que não alteram `updated`).
+  `planned` e `overdue` foram ainda conferidos chave a chave, com o mesmo conjunto de epics.
+  **Sem delta de dados nesta rodada**; nenhum `_snap/*.json` foi reescrito.
 - HTML do artifact ao vivo: md5 `6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes — idêntico a
   `_artifact_src.html`, confirmando que o fonte usado na geração está atualizado.
 
