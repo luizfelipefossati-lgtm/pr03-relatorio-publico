@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 29/09/2026 22:31** (`2026-09-29T22:31:08-03:00`)
+> **Última atualização do snapshot: 29/09/2026 23:30** (`2026-09-29T23:30:30-03:00`)
 
 ---
 
@@ -93,9 +93,9 @@ Rodar as consultas com `issuetype=Epic` **não gera erro**: devolve silenciosame
 
 O `index.html` gerado (151.801 bytes, md5 `b8ab9754b63c99addcb1bea9ce035b01`) foi conferido **estruturalmente** sobre o arquivo em disco:
 
-- Comentário `<!-- Snapshot gerado em 2026-09-29T22:31:08-03:00 -->` no topo do `<head>` (posição 608, logo após a abertura da tag, que começa em 601).
+- Comentário `<!-- Snapshot gerado em 2026-09-29T23:30:30-03:00 -->` no topo do `<head>` (posição 608, logo após a abertura da tag, que começa em 601).
 - Bloco `window.__SNAPSHOT__` na posição 83.569, **antes** do script principal do artifact (`<script>\nwindow.__HISTORY__=`, posição 86.010) — a ordem que garante que o `callMcpTool` já esteja substituído quando o artifact rodar.
-- Banner de aviso imediatamente antes de `</body>` (única ocorrência da tag, ao final do arquivo, posição 150.892), com o texto `Snapshot estatico - ultima atualizacao: 29/09/2026 22:31`.
+- Banner de aviso imediatamente antes de `</body>` (única ocorrência da tag, ao final do arquivo, posição 150.892), com o texto `Snapshot estatico - ultima atualizacao: 29/09/2026 23:30`.
 - Os **11 padrões de JQL** foram gerados e conferidos no `snapshot-data.js`: os 6 do mês corrente (`rework`, `sent`, `resolved`, `overdue`, `lookahead`, `planned` de 2026-09) e os `planned` de abril a agosto/2026 da Visão Acumulada. Os meses congelados (jul e ago/2026) viajam em `__SNAPSHOT__.months` e não dependem de padrão.
 - Contagens embutidas conferidas na geração: `planned_2026-09` 17, `lookahead_2026-09` 32, `sent_2026-09` 6, `resolved_2026-09` 4, `rework_2026-09` 3, `overdue_2026-09` 1, e os `planned` acumulados 15 / 7 / 1 / 10 / 4.
 - Varredura de vazamento no HTML final: **0** ocorrências de `avatarUrls`, `emailAddress`, `iconUrl` ou `api.atlassian.com`. A única ocorrência de `accountId` é a frase do cabeçalho do gerador ("Nao contem accountIds, e-mails nem avatares"). As 2 ocorrências de `atlassian.net` vêm do próprio artifact e não geram requisição: o rótulo de rodapé "Fonte: JIRA (projetos-engeplus.atlassian.net)" e a constante `JB`, base dos links `browse/` para as issues.
