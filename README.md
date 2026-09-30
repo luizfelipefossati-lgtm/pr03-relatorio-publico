@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/09/2026 12:31** (`2026-09-30T12:31:10-03:00`)
+> **Última atualização do snapshot: 30/09/2026 13:29** (`2026-09-30T13:29:49-03:00`)
 
 ---
 
@@ -56,36 +56,34 @@ pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Verificação ao vivo no Jira em 30/09/2026 12:31 (BRT):
+Verificação ao vivo no Jira em 30/09/2026 13:29 (BRT):
 
 - HTML do artifact ao vivo: md5 `6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes — idêntico a
   `_artifact_src.html`, confirmando que o fonte usado na geração está atualizado.
-- Sonda de alterações `ETQ AND updated >= "2026-09-30 11:20"` → **10 issues** alteradas. Oito delas
-  (11:23–11:29) já constavam do snapshot anterior, carimbado em 11:31. **Duas mudaram depois dele**
-  (ambas às 11:46) e motivaram a reescrita de dois conjuntos; uma terceira alteração, de 11:24,
-  atingiu um conjunto da visão acumulada que não era reescrito desde junho.
+- Sonda de alterações `ETQ AND updated >= "2026-09-30 12:25"` → **0 issues**. Nenhuma inserção ou
+  edição desde a geração anterior, carimbada em 12:31.
 - Contagens ao vivo dos 6 conjuntos de set/2026 — `planned` 14 · `overdue` 1 · `lookahead` 32 ·
-  `sent` 7 · `resolved` 4 · `rework` 3 — **idênticas** às gravadas em `_snap/`, e conferidas chave a
-  chave. Nenhum conjunto mudou de tamanho nesta rodada; as alterações foram de conteúdo.
-- Projetos: todas as chaves dos conjuntos regravados (`EG0285`, `G0280`) já constam de
-  `_projects_min.json`; nenhum projeto novo apareceu.
+  `sent` 7 · `resolved` 4 · `rework` 3 — **idênticas** às gravadas em `_snap/`. Os cinco conjuntos
+  com listagem de registros foram conferidos **chave a chave** (a contagem cobre também remoções,
+  que não mexem em `updated`).
+- Projetos: nenhuma chave nova apareceu nos conjuntos consultados; `_projects_min.json` inalterado.
 
 ### Delta desta rodada
 
-| Conjunto | Registros | O que mudou |
+**Nenhum.** Nenhum arquivo em `_snap/` foi reescrito. `index.html`, `snapshot-data.js` e este
+README foram regerados apenas para atualizar o carimbo de tempo para `2026-09-30T13:29:49-03:00`.
+
+| Conjunto | Registros | Situação |
 |---|---:|---|
-| `planned_2026-09` | 14 → 14 | `EG0285-19` (SERVIÇOS TOPOGRÁFICOS) passou de "Em andamento" para "Em Revisão" às 11:46. Segue em andamento — sem efeito no OTD. |
-| `lookahead_2026-09` | 32 → 32 | `EG0285-8` (ESTUDOS DE CONCEPÇÃO E VIABILIDADE) foi **reaberto** às 11:46: saiu de "Enviado- Aguardando Análise" (concluído, resolvido em 11/08) para "Em Revisão", com a data de resolução limpa. |
-| `planned_2026-05` | 7 → 7 | `G0280-45` a `G0280-49` (EBE 1S–5S) passaram de "Enviado - Aguardando Análise" para "Medido e Faturado" às 11:24. Ambos os status são da categoria "concluído" — sem efeito no OTD acumulado. |
-| `overdue_2026-09` | 1 | sem alteração. |
-| `sent_2026-09` | 7 | sem alteração; conferido chave a chave. |
-| `resolved_2026-09` | 4 | sem alteração. |
-| `rework_2026-09` | 3 | sem alteração; chaves conferidas (`EG0240-5`, `EG0240-43`, `EG0286-7`). |
+| `planned_2026-09` | 14 | sem alteração; chaves conferidas. |
+| `overdue_2026-09` | 1 | sem alteração (`EG0239-28`). |
+| `lookahead_2026-09` | 32 | sem alteração (contagem conferida). |
+| `sent_2026-09` | 7 | sem alteração; chaves conferidas. |
+| `resolved_2026-09` | 4 | sem alteração (`EG0240-43`, `EG0275-6`, `EG0286-8`, `EG0286-30`). |
+| `rework_2026-09` | 3 | sem alteração (`EG0240-5`, `EG0240-43`, `EG0286-7`). |
 
 Efeito nos indicadores: **nenhum**. Setembro segue em OTD 21% (3 de 14), 11 pendentes, 1 em atraso
-e retrabalho 43% (3/7); a visão acumulada segue em OTD 53% (34 de 64), 30 pendentes. As três
-alterações foram de rótulo de status dentro da mesma categoria ou em epic fora da janela de
-apuração do mês.
+e retrabalho 43% (3/7); a visão acumulada segue em OTD 53% (34 de 64), 30 pendentes.
 
 > `G0280-52` (EBE Barros Cassal) foi resolvido às 11:23 de 30/09 e aparece em `sent_2026-09`, mas
 > **não** em `resolved_2026-09`: a consulta do artifact usa `resolved<="2026-09-30"`, que o Jira
@@ -97,7 +95,7 @@ comparando o valor ao vivo com o gravado em `_snap/`:
 | Mês | Ao vivo | Gravado | |
 |---|---:|---:|---|
 | abr/2026 | 15 | 15 | igual |
-| mai/2026 | 7 | 7 | igual (conteúdo atualizado nesta rodada) |
+| mai/2026 | 7 | 7 | igual |
 | jun/2026 | 1 | 1 | igual |
 | jul/2026 | 9 | 10 | divergência esperada (mês congelado) |
 | ago/2026 | 3 | 4 | divergência esperada (mês congelado) |
