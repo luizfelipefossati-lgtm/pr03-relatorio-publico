@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/09/2026 17:30** (`2026-09-30T17:30:41-03:00`)
+> **Última atualização do snapshot: 30/09/2026 19:30** (`2026-09-30T19:30:59-03:00`)
 
 ---
 
@@ -56,35 +56,27 @@ pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Verificação ao vivo no Jira em 30/09/2026 17:30 (BRT):
+Verificação ao vivo no Jira em 30/09/2026 19:23 (BRT):
 
 - Fonte do HTML: obtido por staging do artifact `pr03-relatorio-indicadores-epics`
   (87.509 bytes, md5 `6a2b6462a4efbec1890af4494a7f0b74`) — **idêntico** ao `_artifact_src.html`
   local. A pasta `Artifacts` **não** está montada nesta sessão (`connectedFolders` traz apenas
   `pr03-relatorio-publico`), mas o staging por id do artifact dispensou a montagem.
-- Sonda de alterações `ETQ AND updated >= "2026-09-30 15:00"` → **3 issues**
-  (`EG0240-4`, `EG0285-19`, `G0280-51`).
-- Os **6 conjuntos de set/2026** foram reconsultados ao vivo, um a um. Meses encerrados
-  (≤ ago/2026) não são reconsultados, por projeto.
+- Sonda de alterações `ETQ AND updated >= "2026-09-30 17:20"` → **1 issue** (`EG0240-4`,
+  atualizada às 17:27 BRT), já incorporada na geração anterior.
 - Projetos: `_projects_min.json` inalterado; `getVisibleJiraProjects` não reconsultado.
 
 ### Delta desta rodada
 
-**Uma entrega nova.** `EG0240-4` — *TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)*
-(EG0240 - GOITÁ/ COMPESA, due date 10/09) — transicionou para
-`Enviado - Aguardando Análise` às **17:27 BRT** de hoje. Efeitos:
+**Sem delta.** Nenhuma alteração no Jira entre a geração das 17:30 e esta das 19:23 BRT. Os 21
+conjuntos de `_snap/` foram reaproveitados sem reconsulta individual: a sonda por `updated`
+cobre tanto os seis conjuntos do mês corrente quanto os `planned` da visão acumulada (qualquer
+mudança de due date ou de status carimba `updated`), e retornou apenas a issue já gravada. Esta
+geração reescreve `index.html` e `snapshot-data.js` somente para atualizar o carimbo de data.
 
-- `planned_2026-09`: mesmas 8 chaves, `EG0240-4` passa de *Tarefas pendentes* para
-  *Enviado - Aguardando Análise* (categoria `done`);
-- `sent_2026-09`: **7 → 8** registros.
-
-`overdue` (1), `resolved` (4), `rework` (3) e `lookahead` (38) foram reconsultados e vieram
-**iguais** ao gravado. `G0280-51` teve `updated` às 15:00 sem mudança efetiva de conteúdo.
-
-Indicadores de **Setembro/2026** após o delta: OTD **63% (5 de 8)** — era 50% (4 de 8) —,
-**3** pendências do mês (era 4), **1** EPIC em atraso acumulado, retrabalho **38% (3/8)**
-(era 43%, com denominador 7). Visão acumulada: OTD **62% (36 de 58)**, 22 pendentes
-(era 59%, 34 de 58).
+Indicadores de **Setembro/2026** mantidos: OTD **63% (5 de 8)**, **3** pendências do mês,
+**1** EPIC em atraso acumulado, retrabalho **38% (3/8)**. Visão acumulada: OTD **62% (36 de 58)**,
+22 pendentes.
 
 ### ⚠ Ressalva de fechamento — o corte das 00h em `resolved`
 
@@ -135,7 +127,7 @@ o Jira.
 
 Renderização conferida em navegador headless (Chromium): **0 erros de página e 0 erros/avisos de
 console**, 5 gráficos montados, única dependência externa `cdn.jsdelivr.net` (Chart.js), banner
-como último elemento do `<body>` com o carimbo 30/09/2026 17:30, e as três abas abrem
+como último elemento do `<body>` com o carimbo 30/09/2026 19:23, e as três abas abrem
 normalmente — **Agosto 2026** OTD 50% (2 de 4), **Setembro 2026** OTD 63% (5 de 8) com 3
 pendentes do mês, 1 em atraso acumulado e 38% de retrabalho (3/8), **Visão Acumulada** OTD 62%
 (36 de 58) com heatmap de OTD por projeto × mês montado.
