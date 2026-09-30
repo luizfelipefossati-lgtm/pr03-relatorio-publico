@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/09/2026 15:30** (`2026-09-30T15:30:40-03:00`)
+> **Última atualização do snapshot: 30/09/2026 16:29** (`2026-09-30T16:29:08-03:00`)
 
 ---
 
@@ -56,33 +56,26 @@ pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Verificação ao vivo no Jira em 30/09/2026 15:30 (BRT):
+Verificação ao vivo no Jira em 30/09/2026 16:29 (BRT):
 
-- Fonte do HTML: `_artifact_src.html` (87.509 bytes). A pasta `Artifacts` **não** está montada
-  nesta sessão (`connectedFolders` traz apenas `pr03-relatorio-publico`), então o fonte local foi
-  usado diretamente; ele é idêntico ao artifact conferido na rodada anterior.
-- Sonda de alterações `ETQ AND updated >= "2026-09-30 15:05"` → **1 issue**. Houve delta desde a
-  geração anterior; os 6 conjuntos de set/2026 foram reconsultados ao vivo.
-- Projetos: nenhuma chave nova nos conjuntos consultados; `_projects_min.json` inalterado.
+- Fonte do HTML: obtido por staging do artifact `pr03-relatorio-indicadores-epics`
+  (87.509 bytes, md5 `6a2b6462a4efbec1890af4494a7f0b74`) — **idêntico** ao `_artifact_src.html`
+  local. A pasta `Artifacts` **não** está montada nesta sessão (`connectedFolders` traz apenas
+  `pr03-relatorio-publico`), mas o staging por id do artifact dispensou a montagem.
+- Sonda de alterações `ETQ AND updated >= "2026-09-30 15:20"` → **0 issues**. Nenhum EPIC foi
+  criado, alterado ou transicionado desde a geração anterior.
+- Contagens de controle ao vivo: due date em set/2026 → **8** (igual ao gravado);
+  due date entre out/2026 e nov/2026 → **38** (igual ao gravado). Nenhuma exclusão de EPIC.
+- Projetos: `_projects_min.json` inalterado; `getVisibleJiraProjects` não reconsultado.
 
 ### Delta desta rodada
 
-Às **15:15 de 30/09**, `EG0285-19` (SERVIÇOS TOPOGRÁFICOS, EG0285 - EMBASA - BARREIRAS, due date
-18/09) saiu de "Em Revisão" para **"Enviado- Aguardando Análise"** (categoria `done`,
-`resolutiondate` 30/09 15:15).
+**Nenhum.** Os 21 conjuntos em `_snap/` foram reaproveitados sem reconsulta individual, com base
+na sonda de `updated` e nas duas contagens de controle acima. Apenas o carimbo de geração mudou.
 
-| Conjunto | Registros | Situação |
-|---|---:|---|
-| `planned_2026-09` | 8 | mesmas chaves; `EG0285-19` passou a `done`. |
-| `overdue_2026-09` | 1 | sem alteração (`EG0239-28`). |
-| `lookahead_2026-09` | 38 | sem alteração (md5 idêntico ao vivo). |
-| `sent_2026-09` | 7 | sem alteração — ver ressalva abaixo. |
-| `resolved_2026-09` | 4 | sem alteração — ver ressalva abaixo. |
-| `rework_2026-09` | 3 | sem alteração (`EG0240-5`, `EG0240-43`, `EG0286-7`). |
+Indicadores de **Setembro/2026** inalterados: OTD 50% (4 de 8), 4 pendências do mês, 1 EPIC em
+atraso acumulado, retrabalho 43% (3/7).
 
-Efeito nos indicadores de **Setembro/2026**: o OTD subiu de 38% (3 de 8) para **50% (4 de 8)** e as
-pendências do mês caíram de 5 para 4. Em atraso acumulado segue 1 EPIC; o retrabalho segue em
-43% (3/7). Desta vez a melhora é **entrega real**, não repactuação de prazo.
 
 ### ⚠ Ressalva de fechamento — `EG0285-19` não entra em `sent_2026-09`
 
