@@ -122,3 +122,46 @@ for name in ['planned','overdue','sent','resolved','rework','lookahead']:
     else:
         print('igual  %s (%d)'%(n,len(a)))
     write(n, rows)
+
+# ---------------------------------------------------------------------------
+# RESULTADO DESTA RODADA
+#
+# Artifact: pasta Artifacts NAO montada (connectedFolders traz so
+#   pr03-relatorio-publico). HTML obtido por staging do artifact id
+#   'pr03-relatorio-indicadores-epics': md5 6a2b6462a4efbec1890af4494a7f0b74,
+#   87.509 bytes -> IDENTICO ao _artifact_src.html. Fonte nao atualizado.
+#
+# Reescritos em _snap/: planned_2026-09 (14 -> 8) e lookahead_2026-09 (32 -> 38).
+#   Os 6 EPICs que migraram: G0280-50, G0280-51, G0280-53, G0280-54, G0280-55,
+#   EG0286-10 (duedate set/2026 -> out/2026, entre 14:55 e 15:00 BRT).
+#   overdue (1), sent (7), resolved (4) e rework (3) reconsultados e IGUAIS.
+#   Tambem capturado: EG0285-8 voltou de "Enviado- Aguardando Analise"/done
+#   para "Em Revisao"/indeterminate (11:46 BRT) dentro do lookahead.
+#
+# Projetos: _projects_min.json inalterado; getVisibleJiraProjects nao reconsultado.
+#
+# Gerado: index.html 151.163 bytes md5 d5e3876122398f0182ad987e112ecc3e
+#         snapshot-data.js 63.377 bytes md5 d96c1de6829c11ccd4c8f9093e8b17d7
+#         README.md 8.414 bytes md5 10f3d9ed0dbb3bfa87012479d37e3238
+#         carimbo 2026-09-30T15:13:00-03:00
+#   Congelados: 2026-07, 2026-08. Ao vivo via DATASETS: 2026-09.
+#   21 datasets carregados, 11 embutidos no JS, 11 patterns.
+#
+# Conferencia da acumulada (planned ao vivo x gravado):
+#   abr 15=15 | mai 7=7 | jun 1=1 | jul 9!=10 (congelado) | ago 3!=4 (congelado) | set 8=8
+#
+# Render headless (Chromium/Playwright no sandbox, arquivo staged): 0 pageerrors,
+#   0 erros/warnings de console, 5 canvas, unica requisicao externa cdn.jsdelivr.net,
+#   banner como ultimo elemento do body com o carimbo 30/09/2026 15:13.
+#     Agosto 2026    -> OTD 50% (2 de 4)
+#     Setembro 2026  -> OTD 38% (3 de 8), 5 pendentes do mes, 1 em atraso,
+#                       retrabalho 43% (3/7)   [era 21% (3 de 14) e 11 pendentes]
+#     Acumulada      -> OTD 59% (34 de 58), 24 pendentes  [era 53% (34 de 64)]
+#   A melhora do OTD e efeito de repactuacao de prazo, NAO de entrega adicional.
+#
+# Nenhum comando git executado (nem `git status`). .git/index.lock ausente antes e depois.
+# Push a cargo de PR03-Auto-Push-GitHub.
+#
+# Virada de mes: na primeira rodada apos 01/10 o gerador passa a congelar 2026-09
+# (os 6 conjuntos ja estao completos em _snap/) e 2026-10 vira o mes ao vivo --
+# os 6 conjuntos de outubro ainda NAO existem e serao criados nessa rodada.

@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/09/2026 14:28** (`2026-09-30T14:28:34-03:00`)
+> **Última atualização do snapshot: 30/09/2026 15:13** (`2026-09-30T15:13:00-03:00`)
 
 ---
 
@@ -41,14 +41,14 @@ Mês corrente — servido pela interceptação de JQL (`window.cowork.callMcpToo
 
 | Conjunto | Escopo | Registros |
 |---|---|---:|
-| `planned_2026-09` | Epics com due date em set/2026 | 14 |
+| `planned_2026-09` | Epics com due date em set/2026 | 8 |
 | `overdue_2026-09` | Vencidos antes de set/2026, não concluídos | 1 |
-| `lookahead_2026-09` | Due date entre out/2026 e nov/2026 | 32 |
+| `lookahead_2026-09` | Due date entre out/2026 e nov/2026 | 38 |
 | `sent_2026-09` | Transições para "Enviado - Aguardando Análise" em set/2026 | 7 |
 | `resolved_2026-09` | Concluídos em set/2026 | 4 |
 | `rework_2026-09` | Retrabalho em set/2026 | 3 |
 
-Visão acumulada (`planned` por mês): abr/2026 = 15 · mai/2026 = 7 · jun/2026 = 1 · jul/2026 = 10 · ago/2026 = 4 · set/2026 = 14.
+Visão acumulada (`planned` por mês): abr/2026 = 15 · mai/2026 = 7 · jun/2026 = 1 · jul/2026 = 10 · ago/2026 = 4 · set/2026 = 8.
 
 Os meses de **abr/2026, mai/2026 e jun/2026** continuam vindo do histórico já congelado dentro do
 artifact (`window.__HISTORY__`), preservado sem alteração. **Jul/2026 e ago/2026** são congelados
@@ -56,33 +56,35 @@ pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Verificação ao vivo no Jira em 30/09/2026 14:28 (BRT):
+Verificação ao vivo no Jira em 30/09/2026 15:13 (BRT):
 
 - HTML do artifact ao vivo: md5 `6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes — idêntico a
   `_artifact_src.html`, confirmando que o fonte usado na geração está atualizado.
-- Sonda de alterações `ETQ AND updated >= "2026-09-30 14:21"` → **0 issues**. Nenhuma inserção ou
-  edição desde a geração anterior, carimbada em 14:21.
-- Contagens ao vivo conferidas diretamente: `planned_2026-09` → 14 e `sent_2026-09` → 7,
-  **idênticas** às gravadas em `_snap/`. Com a sonda de alterações zerada, os demais conjuntos
-  de set/2026 (`overdue` 1 · `lookahead` 32 · `resolved` 4 · `rework` 3) permanecem válidos.
+- Sonda de alterações `ETQ AND updated >= "2026-09-30 14:28"` → **6 issues**. Houve delta desde a
+  geração anterior; os 6 conjuntos de set/2026 foram integralmente reconsultados ao vivo.
 - Projetos: nenhuma chave nova apareceu nos conjuntos consultados; `_projects_min.json` inalterado.
 
 ### Delta desta rodada
 
-**Nenhum.** Nenhum arquivo em `_snap/` foi reescrito. `index.html`, `snapshot-data.js` e este
-README foram regerados apenas para atualizar o carimbo de tempo para `2026-09-30T14:28:34-03:00`.
+Entre 14:55 e 15:00 de 30/09, **seis EPICs tiveram o due date empurrado de setembro para outubro**:
+`G0280-50` (EBE Ponta da Cadeia), `G0280-51` (EBE Baronesa do Gravataí), `G0280-53` (EBE Gaspar
+Martins), `G0280-54` (EBE Asa Branca), `G0280-55` (EBE Nova Brasília) e `EG0286-10` (Estudos
+geológicos). Eles saíram de `planned_2026-09` e entraram em `lookahead_2026-09`.
 
 | Conjunto | Registros | Situação |
 |---|---:|---|
-| `planned_2026-09` | 14 | sem alteração; chaves conferidas. |
+| `planned_2026-09` | 8 | era 14; −6 (repactuação de prazo para out/2026). |
 | `overdue_2026-09` | 1 | sem alteração (`EG0239-28`). |
-| `lookahead_2026-09` | 32 | sem alteração (contagem conferida). |
+| `lookahead_2026-09` | 38 | era 32; +6 (os mesmos EPICs, agora com due date em out/2026). |
 | `sent_2026-09` | 7 | sem alteração; chaves conferidas. |
 | `resolved_2026-09` | 4 | sem alteração (`EG0240-43`, `EG0275-6`, `EG0286-8`, `EG0286-30`). |
 | `rework_2026-09` | 3 | sem alteração (`EG0240-5`, `EG0240-43`, `EG0286-7`). |
 
-Efeito nos indicadores: **nenhum**. Setembro segue em OTD 21% (3 de 14), 11 pendentes, 1 em atraso
-e retrabalho 43% (3/7); a visão acumulada segue em OTD 53% (34 de 64), 30 pendentes.
+Efeito nos indicadores de **Setembro/2026**: a base de previstos caiu de 14 para 8 sem mudança no
+numerador de entregas, então o OTD do mês **subiu de 21% (3 de 14) para 38% (3 de 8)** e as
+pendências do mês caíram de 11 para 5. Em atraso acumulado segue 1 EPIC e o retrabalho segue em
+43% (3/7). Na visão acumulada, o OTD passou de 53% (34 de 64) para **59% (34 de 58)**, com 24
+pendentes. A melhora é efeito de repactuação de prazo, **não** de entrega adicional.
 
 > `G0280-52` (EBE Barros Cassal) foi resolvido às 11:23 de 30/09 e aparece em `sent_2026-09`, mas
 > **não** em `resolved_2026-09`: a consulta do artifact usa `resolved<="2026-09-30"`, que o Jira
@@ -98,7 +100,7 @@ comparando o valor ao vivo com o gravado em `_snap/`:
 | jun/2026 | 1 | 1 | igual |
 | jul/2026 | 9 | 10 | divergência esperada (mês congelado) |
 | ago/2026 | 3 | 4 | divergência esperada (mês congelado) |
-| set/2026 | 14 | 14 | igual |
+| set/2026 | 8 | 8 | igual |
 
 As divergências de jul e ago são o comportamento pretendido, não um erro: os meses encerrados
 são **congelados no fechamento do período** e, por projeto, não voltam a ser consultados. Uma
@@ -110,12 +112,14 @@ o Jira.
 Renderização conferida em navegador headless (Chromium): sem erros de página nem de console,
 5 gráficos montados, única dependência externa `cdn.jsdelivr.net` (Chart.js), banner como último
 elemento do `<body>`, e as três abas abrem normalmente —
-**Agosto 2026** OTD 50% (2 de 4), **Setembro 2026** OTD 21% (3 de 14), 11 pendentes, 1 em atraso
-e 43% de retrabalho (3/7), **Visão Acumulada** OTD 53% (34 de 64), 30 pendentes, heatmap OTD por
-projeto × mês montado.
+**Agosto 2026** OTD 50% (2 de 4), **Setembro 2026** OTD 38% (3 de 8), 5 pendentes do mês, 1 em
+atraso acumulado e 43% de retrabalho (3/7), **Visão Acumulada** OTD 59% (34 de 58), 24 pendentes,
+heatmap OTD por projeto × mês montado.
 
 > Nota de virada de mês: 30/09 é o último dia do mês corrente. Na próxima geração após a virada
-> (01/10) o gerador passa a congelar 2026-09 — os 6 conjuntos de setembro já estão completos em `_snap/`.
+> (01/10) o gerador passa a congelar 2026-09 — os 6 conjuntos de setembro já estão completos em
+> `_snap/` — e 2026-10 vira o mês ao vivo, com os 6 conjuntos de outubro a serem criados naquela
+> rodada.
 
 ## Abas disponíveis
 
