@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 29/09/2026 20:30** (`2026-09-29T20:30:27-03:00`)
+> **Última atualização do snapshot: 29/09/2026 21:30** (`2026-09-29T21:30:49-03:00`)
 
 ---
 
@@ -118,15 +118,15 @@ Nomes de pessoas podem, eventualmente, aparecer dentro de `summary` ou `status.n
 |---|---:|---|
 | `index.html` | 148.2 KB | Snapshot estático publicado (dados embutidos) |
 | `snapshot-data.js` | 62.5 KB | Bloco de dados injetado (cópia avulsa, para inspeção) |
-| `_artifact_src.html` | 85.5 KB | Cópia do artifact original, sem dados (md5 `6a2b6462a4efbec1890af4494a7f0b74`, conferido contra o artifact ao vivo na geração das 20:30 de 29/09) |
+| `_artifact_src.html` | 85.5 KB | Cópia do artifact original, sem dados (md5 `6a2b6462a4efbec1890af4494a7f0b74`, conferido contra o artifact ao vivo na geração das 21:30 de 29/09) |
 | `_projects_min.json` | 5.4 KB | Lista minimal de projetos visíveis (21) e seus tipos de issue |
 | `_snap/*.json` | — | Conjuntos minimais por mês, reutilizados entre gerações |
-| `_snap/_run0929o.py` | — | Conferência ao vivo desta geração (20:30 de 29/09), delta na lista de projetos |
+| `_snap/_run0930a.py` | — | Conferência ao vivo desta geração (21:30 de 29/09), registro a registro (sem delta) |
+| `_snap/_run0929o.py` | — | Conferência ao vivo da geração das 20:30 de 29/09, delta na lista de projetos |
 | `_snap/_run0929n.py` | — | Conferência ao vivo da geração das 19:30 de 29/09, sem delta |
 | `_snap/_run0929m.py` | — | Conferência ao vivo da geração das 16:30 de 29/09, sem delta |
 | `_snap/_run0929j.py` | — | Conferência ao vivo da geração das 13:31 de 29/09, registro a registro (sem delta) |
 | `_snap/_run0929h.py` | — | Conferência ao vivo da geração das 12:22 de 29/09, registro a registro (sem delta) |
-| `_snap/_run0929g.py` | — | Conferência ao vivo da geração das 10:31 de 29/09, registro a registro (sem delta) |
 | `_gen_snapshot.py` | — | Gerador do snapshot |
 
 ## Publicação
