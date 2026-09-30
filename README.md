@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/09/2026 14:21** (`2026-09-30T14:21:40-03:00`)
+> **Última atualização do snapshot: 30/09/2026 14:28** (`2026-09-30T14:28:34-03:00`)
 
 ---
 
@@ -56,12 +56,12 @@ pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Verificação ao vivo no Jira em 30/09/2026 14:21 (BRT):
+Verificação ao vivo no Jira em 30/09/2026 14:28 (BRT):
 
 - HTML do artifact ao vivo: md5 `6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes — idêntico a
   `_artifact_src.html`, confirmando que o fonte usado na geração está atualizado.
-- Sonda de alterações `ETQ AND updated >= "2026-09-30 13:29"` → **0 issues**. Nenhuma inserção ou
-  edição desde a geração anterior, carimbada em 13:29.
+- Sonda de alterações `ETQ AND updated >= "2026-09-30 14:21"` → **0 issues**. Nenhuma inserção ou
+  edição desde a geração anterior, carimbada em 14:21.
 - Contagens ao vivo conferidas diretamente: `planned_2026-09` → 14 e `sent_2026-09` → 7,
   **idênticas** às gravadas em `_snap/`. Com a sonda de alterações zerada, os demais conjuntos
   de set/2026 (`overdue` 1 · `lookahead` 32 · `resolved` 4 · `rework` 3) permanecem válidos.
@@ -70,7 +70,7 @@ Verificação ao vivo no Jira em 30/09/2026 14:21 (BRT):
 ### Delta desta rodada
 
 **Nenhum.** Nenhum arquivo em `_snap/` foi reescrito. `index.html`, `snapshot-data.js` e este
-README foram regerados apenas para atualizar o carimbo de tempo para `2026-09-30T14:21:40-03:00`.
+README foram regerados apenas para atualizar o carimbo de tempo para `2026-09-30T14:28:34-03:00`.
 
 | Conjunto | Registros | Situação |
 |---|---:|---|
