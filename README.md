@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/09/2026 15:13** (`2026-09-30T15:13:00-03:00`)
+> **Última atualização do snapshot: 30/09/2026 15:30** (`2026-09-30T15:30:40-03:00`)
 
 ---
 
@@ -56,39 +56,58 @@ pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Verificação ao vivo no Jira em 30/09/2026 15:13 (BRT):
+Verificação ao vivo no Jira em 30/09/2026 15:30 (BRT):
 
-- HTML do artifact ao vivo: md5 `6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes — idêntico a
-  `_artifact_src.html`, confirmando que o fonte usado na geração está atualizado.
-- Sonda de alterações `ETQ AND updated >= "2026-09-30 14:28"` → **6 issues**. Houve delta desde a
-  geração anterior; os 6 conjuntos de set/2026 foram integralmente reconsultados ao vivo.
-- Projetos: nenhuma chave nova apareceu nos conjuntos consultados; `_projects_min.json` inalterado.
+- Fonte do HTML: `_artifact_src.html` (87.509 bytes). A pasta `Artifacts` **não** está montada
+  nesta sessão (`connectedFolders` traz apenas `pr03-relatorio-publico`), então o fonte local foi
+  usado diretamente; ele é idêntico ao artifact conferido na rodada anterior.
+- Sonda de alterações `ETQ AND updated >= "2026-09-30 15:05"` → **1 issue**. Houve delta desde a
+  geração anterior; os 6 conjuntos de set/2026 foram reconsultados ao vivo.
+- Projetos: nenhuma chave nova nos conjuntos consultados; `_projects_min.json` inalterado.
 
 ### Delta desta rodada
 
-Entre 14:55 e 15:00 de 30/09, **seis EPICs tiveram o due date empurrado de setembro para outubro**:
-`G0280-50` (EBE Ponta da Cadeia), `G0280-51` (EBE Baronesa do Gravataí), `G0280-53` (EBE Gaspar
-Martins), `G0280-54` (EBE Asa Branca), `G0280-55` (EBE Nova Brasília) e `EG0286-10` (Estudos
-geológicos). Eles saíram de `planned_2026-09` e entraram em `lookahead_2026-09`.
+Às **15:15 de 30/09**, `EG0285-19` (SERVIÇOS TOPOGRÁFICOS, EG0285 - EMBASA - BARREIRAS, due date
+18/09) saiu de "Em Revisão" para **"Enviado- Aguardando Análise"** (categoria `done`,
+`resolutiondate` 30/09 15:15).
 
 | Conjunto | Registros | Situação |
 |---|---:|---|
-| `planned_2026-09` | 8 | era 14; −6 (repactuação de prazo para out/2026). |
+| `planned_2026-09` | 8 | mesmas chaves; `EG0285-19` passou a `done`. |
 | `overdue_2026-09` | 1 | sem alteração (`EG0239-28`). |
-| `lookahead_2026-09` | 38 | era 32; +6 (os mesmos EPICs, agora com due date em out/2026). |
-| `sent_2026-09` | 7 | sem alteração; chaves conferidas. |
-| `resolved_2026-09` | 4 | sem alteração (`EG0240-43`, `EG0275-6`, `EG0286-8`, `EG0286-30`). |
+| `lookahead_2026-09` | 38 | sem alteração (md5 idêntico ao vivo). |
+| `sent_2026-09` | 7 | sem alteração — ver ressalva abaixo. |
+| `resolved_2026-09` | 4 | sem alteração — ver ressalva abaixo. |
 | `rework_2026-09` | 3 | sem alteração (`EG0240-5`, `EG0240-43`, `EG0286-7`). |
 
-Efeito nos indicadores de **Setembro/2026**: a base de previstos caiu de 14 para 8 sem mudança no
-numerador de entregas, então o OTD do mês **subiu de 21% (3 de 14) para 38% (3 de 8)** e as
-pendências do mês caíram de 11 para 5. Em atraso acumulado segue 1 EPIC e o retrabalho segue em
-43% (3/7). Na visão acumulada, o OTD passou de 53% (34 de 64) para **59% (34 de 58)**, com 24
-pendentes. A melhora é efeito de repactuação de prazo, **não** de entrega adicional.
+Efeito nos indicadores de **Setembro/2026**: o OTD subiu de 38% (3 de 8) para **50% (4 de 8)** e as
+pendências do mês caíram de 5 para 4. Em atraso acumulado segue 1 EPIC; o retrabalho segue em
+43% (3/7). Desta vez a melhora é **entrega real**, não repactuação de prazo.
 
-> `G0280-52` (EBE Barros Cassal) foi resolvido às 11:23 de 30/09 e aparece em `sent_2026-09`, mas
-> **não** em `resolved_2026-09`: a consulta do artifact usa `resolved<="2026-09-30"`, que o Jira
-> interpreta como meia-noite do dia 30. É o comportamento do artifact ao vivo, preservado aqui.
+### ⚠ Ressalva de fechamento — `EG0285-19` não entra em `sent_2026-09`
+
+`EG0285-19` é contabilizado como **entregue** no painel de OTD (que deriva de `planned` +
+categoria de status), mas **não** aparece em `sent_2026-09` nem em `resolved_2026-09`. São duas
+causas independentes, ambas confirmadas ao vivo nesta rodada:
+
+1. **Nome de status divergente.** O status do fluxo do projeto EG0285 chama-se
+   `Enviado- Aguardando Análise` (id `11737`, **sem espaço antes do hífen**). As consultas `sent` e
+   `rework` do artifact casam a string exata `Enviado - Aguardando Análise`, então nenhuma
+   transição de EPIC do EG0285 é registrada como envio ou retrabalho.
+2. **Limite de data às 00h.** A consulta `resolved` do artifact usa `resolved<="2026-09-30"`, que o
+   Jira interpreta como **meia-noite** do dia 30. Reexecutando a mesma consulta com
+   `resolved<="2026-09-30 23:59"` o resultado passa de **4 para 6** registros, incluindo
+   `G0280-52` (resolvido 30/09 11:23) e `EG0285-19` (30/09 15:15).
+
+Consequência: **30/09 é o último dia do mês**. Na primeira geração após a virada, set/2026 será
+congelado e o total de envios do mês ficará gravado como **7 em vez de 8**, com `EG0285-19`
+permanentemente ausente do fechamento — e o denominador do retrabalho fixado em 7. O mesmo
+mecanismo já afeta silenciosamente qualquer EPIC resolvido no último dia de meses anteriores.
+
+Esse é o comportamento do artifact ao vivo, preservado aqui sem correção: o snapshot espelha o
+que a página publicada mostraria. Corrigir exige ação fora deste processo — renomear o status
+`11737` para a grafia canônica no Jira, e/ou ajustar o limite superior da consulta `resolved` no
+artifact para `23:59`.
 
 Conferência dos meses da visão acumulada (`planned` de abr/2026 a set/2026),
 comparando o valor ao vivo com o gravado em `_snap/`:
@@ -109,12 +128,12 @@ contagem ao vivo, mas não pode alterar um indicador já publicado para aquele m
 aberto na acumulada (abr–jun, que ainda não têm os 6 conjuntos completos) continuam batendo com
 o Jira.
 
-Renderização conferida em navegador headless (Chromium): sem erros de página nem de console,
-5 gráficos montados, única dependência externa `cdn.jsdelivr.net` (Chart.js), banner como último
-elemento do `<body>`, e as três abas abrem normalmente —
-**Agosto 2026** OTD 50% (2 de 4), **Setembro 2026** OTD 38% (3 de 8), 5 pendentes do mês, 1 em
-atraso acumulado e 43% de retrabalho (3/7), **Visão Acumulada** OTD 59% (34 de 58), 24 pendentes,
-heatmap OTD por projeto × mês montado.
+Renderização conferida em navegador headless (Chromium): **0 erros de página e 0 erros/avisos de
+console**, 5 gráficos montados, única dependência externa `cdn.jsdelivr.net` (Chart.js), banner
+como último elemento do `<body>` com o carimbo 30/09/2026 15:30, e as três abas abrem
+normalmente — **Agosto 2026** OTD 50% (2 de 4), **Setembro 2026** OTD 50% (4 de 8), 4 pendentes do
+mês, 1 em atraso acumulado e 43% de retrabalho (3/7), **Visão Acumulada** com heatmap de OTD por
+projeto × mês montado.
 
 > Nota de virada de mês: 30/09 é o último dia do mês corrente. Na próxima geração após a virada
 > (01/10) o gerador passa a congelar 2026-09 — os 6 conjuntos de setembro já estão completos em
