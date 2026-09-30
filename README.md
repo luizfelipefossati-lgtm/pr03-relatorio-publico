@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 29/09/2026 23:30** (`2026-09-29T23:30:30-03:00`)
+> **Última atualização do snapshot: 30/09/2026 00:30** (`2026-09-30T00:30:53-03:00`)
 
 ---
 
@@ -60,11 +60,11 @@ Rodar as consultas com `issuetype=Epic` **não gera erro**: devolve silenciosame
 
 **A geração das 15:29 de 24/09 reconfirmou o problema na prática.** Uma rodada exploratória com `issuetype=Epic` devolveu **14** registros em `planned_2026-09` (em vez de 20 à época) e **1** em `overdue_2026-09` (em vez de 2) — faltando `EG0286-13`, `EG0286-11`, `EG0286-14`, `EG0286-10`, `EG0286-6`, `EG0285-19` e `EG0286-8`. Consultados um a um, esses itens continuam existindo no Jira, com `issuetype.name = "Fluxo de trabalho"` e `hierarchyLevel = 1`. Desde então todas as gerações usam `issuetype in ("Epic","Fluxo de trabalho")`.
 
-### O que mudou desde a geração anterior (29/09/2026 21:30)
+### O que mudou desde a geração anterior (29/09/2026 23:30)
 
-**Nada.** As seis consultas de setembro e a lista de projetos foram refeitas ao vivo e vieram idênticas — registro a registro nos dados, byte a byte na lista de projetos. Esta geração apenas renova o carimbo de tempo do snapshot.
+**Nada.** As seis consultas de setembro e a lista de projetos foram refeitas ao vivo e vieram idênticas. Esta geração apenas renova o carimbo de tempo do snapshot.
 
-| | Geração anterior (21:30 de 29/09) | Agora (22:31 de 29/09) |
+| | Geração anterior (23:30 de 29/09) | Agora (00:30 de 30/09) |
 |---|---:|---:|
 | `planned_2026-09` | 17 | **17** |
 | `overdue_2026-09` | 1 | **1** |
@@ -74,10 +74,12 @@ Rodar as consultas com `issuetype=Epic` **não gera erro**: devolve silenciosame
 | `lookahead_2026-09` | 32 | **32** |
 | projetos visíveis | 21 | **21** |
 
-- Cinco dos seis conjuntos de setembro (`planned`, `overdue`, `sent`, `resolved`, `rework`) foram trazidos por inteiro e conferidos **registro a registro** contra os arquivos gravados — chave, resumo, status, categoria, projeto, prazo, data de resolução e `updated` — todos idênticos. Nenhum arquivo em `_snap/` foi reescrito (`_snap/_run0930b.py` registra a conferência: **sem delta**).
-- O `lookahead_2026-09` foi trazido por inteiro nesta geração (32 registros, `hasNextPage: false`) e conferido por **chave + `updated`** contra o arquivo gravado: os mesmos 32 itens, com os mesmos carimbos de modificação. Como qualquer inserção, remoção ou edição na faixa out/2026–nov/2026 — inclusive a mudança de prazo que tiraria ou traria uma issue para dentro dela — atualiza o campo `updated`, a conferência exclui alteração desde a captura dos 32 registros em 28/09 às 13:31.
-- A lista de projetos **foi reconsultada ao vivo** (`getVisibleJiraProjects`, `total: 21`, `isLast: true`) e normalizada da mesma forma que o `_projects_min.json` gravado: o **sha256 das duas versões é o mesmo** (`f938b6c2…1b0bc5`, 3.830 bytes normalizados). Os `epicTypeNames` continuam `Epic` e `Fluxo de trabalho`, e o `ETQ` das consultas permanece inalterado. O `_projects_min.json` não foi reescrito.
-- A pasta `Artifacts` **não estava montada** nesta sessão — a única pasta conectada é a do próprio repositório. O snapshot foi gerado a partir do `_artifact_src.html` versionado no repo (md5 `6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes), que na geração das 21:30 de 29/09 foi conferido byte a byte contra o artifact ao vivo. Nesta geração **não houve nova conferência contra o artifact ao vivo**.
+- **Varredura global de alterações:** `ETQ AND updated >= "2026-09-29 23:30"` devolveu **0** registros. Nenhum epic ou fluxo de trabalho do site foi criado ou editado desde a conferência da geração anterior — o que exclui, de uma só vez, inserções e edições em qualquer um dos conjuntos.
+- **Contagem dos seis conjuntos de setembro** reconsultada ao vivo (`searchResultMode: count`): 17 / 1 / 32 / 6 / 4 / 3, idênticas às dos arquivos gravados em `_snap/`. A contagem cobre o que a varredura de `updated` não alcança — uma exclusão de issue não atualiza carimbo nenhum, mas reduz o total. Somadas, as duas checagens excluem inserção, remoção e edição.
+- O `planned_2026-09` foi ainda trazido **por inteiro** (17 registros, `hasNextPage: false`) e as 17 chaves conferidas contra o arquivo gravado: as mesmas, na mesma ordem de projeto e prazo.
+- Nenhum arquivo em `_snap/` foi reescrito.
+- A lista de projetos **foi reconsultada ao vivo** (`getVisibleJiraProjects`, `total: 21`, `isLast: true`) e normalizada da mesma forma que o `_projects_min.json` gravado: a **assinatura md5 das duas versões é a mesma** (`aca1bab21c39a6dafd8d8b0bfd212527`, sobre chave, nome e tipos de issue com nível de hierarquia). Os `epicTypeNames` continuam `Epic` e `Fluxo de trabalho`, e o `ETQ` das consultas permanece inalterado. O `_projects_min.json` não foi reescrito.
+- A pasta `Artifacts` **não estava montada** nesta sessão — a única pasta conectada é a do próprio repositório. O HTML ao vivo foi obtido por *staging* do artifact `pr03-relatorio-indicadores-epics` e conferido contra o `_artifact_src.html` versionado no repo: **md5 `6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes, idêntico**. O artifact não mudou desde a última geração.
 - A **Visão Acumulada não foi reconsultada**: os meses de abril a agosto/2026 estão congelados e seus arquivos em `_snap/` foram reaproveitados sem alteração (abril 15, maio 7, junho 1, julho 10, agosto 4). Por desenho, o relatório preserva o retrato do fechamento de cada mês.
 - Julho e agosto/2026 permanecem **congelados** com os mesmos números, e não foram reconsultados.
 - Indicadores de setembro: **17 previstos**, 6 envios, 3 com retrabalho, 1 em atraso acumulado, 32 entregas nos próximos 60 dias. OTD do mês corrente: **12%** (agosto fechou em 50%).
@@ -91,15 +93,16 @@ Rodar as consultas com `issuetype=Epic` **não gera erro**: devolve silenciosame
 
 ## Verificação desta geração
 
-O `index.html` gerado (151.801 bytes, md5 `b8ab9754b63c99addcb1bea9ce035b01`) foi conferido **estruturalmente** sobre o arquivo em disco:
+O `index.html` gerado (151.801 bytes, md5 `9da3fffe940f07b6b5a86a1fe5b6db51`) foi conferido **estruturalmente** sobre o arquivo em disco:
 
-- Comentário `<!-- Snapshot gerado em 2026-09-29T23:30:30-03:00 -->` no topo do `<head>` (posição 608, logo após a abertura da tag, que começa em 601).
+- Comentário `<!-- Snapshot gerado em 2026-09-30T00:30:53-03:00 -->` no topo do `<head>` (posição 608, logo após a abertura da tag, que começa em 601).
 - Bloco `window.__SNAPSHOT__` na posição 83.569, **antes** do script principal do artifact (`<script>\nwindow.__HISTORY__=`, posição 86.010) — a ordem que garante que o `callMcpTool` já esteja substituído quando o artifact rodar.
-- Banner de aviso imediatamente antes de `</body>` (única ocorrência da tag, ao final do arquivo, posição 150.892), com o texto `Snapshot estatico - ultima atualizacao: 29/09/2026 23:30`.
+- Banner de aviso imediatamente antes de `</body>` (única ocorrência da tag, ao final do arquivo, posição 150.892), com o texto `Snapshot estatico - ultima atualizacao: 30/09/2026 00:30`.
 - Os **11 padrões de JQL** foram gerados e conferidos no `snapshot-data.js`: os 6 do mês corrente (`rework`, `sent`, `resolved`, `overdue`, `lookahead`, `planned` de 2026-09) e os `planned` de abril a agosto/2026 da Visão Acumulada. Os meses congelados (jul e ago/2026) viajam em `__SNAPSHOT__.months` e não dependem de padrão.
 - Contagens embutidas conferidas na geração: `planned_2026-09` 17, `lookahead_2026-09` 32, `sent_2026-09` 6, `resolved_2026-09` 4, `rework_2026-09` 3, `overdue_2026-09` 1, e os `planned` acumulados 15 / 7 / 1 / 10 / 4.
 - Varredura de vazamento no HTML final: **0** ocorrências de `avatarUrls`, `emailAddress`, `iconUrl` ou `api.atlassian.com`. A única ocorrência de `accountId` é a frase do cabeçalho do gerador ("Nao contem accountIds, e-mails nem avatares"). As 2 ocorrências de `atlassian.net` vêm do próprio artifact e não geram requisição: o rótulo de rodapé "Fonte: JIRA (projetos-engeplus.atlassian.net)" e a constante `JB`, base dos links `browse/` para as issues.
-- **Nesta geração não houve carregamento em navegador headless** — o ambiente desta sessão não dispõe do Chromium/Playwright usado nas verificações anteriores. A última checagem em navegador foi a da geração das 20:30 de 29/09, sobre um `index.html` de mesma estrutura, que registrou 0 requisições para a Atlassian, 0 erros de JavaScript e nenhum aviso `[PR03] JQL sem correspondencia no snapshot`.
+- **Nesta geração não houve carregamento em navegador headless.** A verificação foi estrutural, sobre o arquivo em disco. A última checagem em navegador foi a da geração das 20:30 de 29/09, sobre um `index.html` de mesma estrutura, que registrou 0 requisições para a Atlassian, 0 erros de JavaScript e nenhum aviso `[PR03] JQL sem correspondencia no snapshot`.
+- O `.git/index` estava **íntegro** (`git status` limpo, sem erro de assinatura); não foi preciso recuperá-lo.
 - Nenhum `git add`, `commit` ou `push` foi executado por esta sessão. O working tree foi deixado pronto para a tarefa agendada.
 
 ## Privacidade
