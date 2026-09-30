@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/09/2026 19:30** (`2026-09-30T19:30:59-03:00`)
+> **Última atualização do snapshot: 30/09/2026 20:30** (`2026-09-30T20:30:20-03:00`)
 
 ---
 
@@ -56,22 +56,23 @@ pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Verificação ao vivo no Jira em 30/09/2026 19:23 (BRT):
+Verificação ao vivo no Jira em 30/09/2026 20:28–20:30 (BRT):
 
-- Fonte do HTML: obtido por staging do artifact `pr03-relatorio-indicadores-epics`
-  (87.509 bytes, md5 `6a2b6462a4efbec1890af4494a7f0b74`) — **idêntico** ao `_artifact_src.html`
-  local. A pasta `Artifacts` **não** está montada nesta sessão (`connectedFolders` traz apenas
-  `pr03-relatorio-publico`), mas o staging por id do artifact dispensou a montagem.
-- Sonda de alterações `ETQ AND updated >= "2026-09-30 17:20"` → **1 issue** (`EG0240-4`,
-  atualizada às 17:27 BRT), já incorporada na geração anterior.
-- Projetos: `_projects_min.json` inalterado; `getVisibleJiraProjects` não reconsultado.
+- Fonte do HTML: o artifact `pr03-relatorio-indicadores-epics` foi obtido por staging pelo id e
+  confere **byte a byte** com o `_artifact_src.html` local — 87.509 bytes, md5
+  `6a2b6462a4efbec1890af4494a7f0b74` nos dois. (O artifact não é alterado desde 27/07/2026.)
+  A pasta `Artifacts` **não** está montada nesta sessão — `connectedFolders` traz apenas
+  `pr03-relatorio-publico`, e o pedido de acesso à pasta foi recusado pelo ambiente —, mas o
+  staging por id dispensou a montagem.
+- Os **seis conjuntos de set/2026** foram reconsultados individualmente ao vivo (não por sonda):
+  `planned`, `overdue`, `sent`, `resolved`, `rework` e `lookahead`. Todos **idênticos** ao
+  gravado em `_snap/` (o `lookahead`, de 38 linhas, conferido campo a campo por digest).
+- `getVisibleJiraProjects` reconsultado: **21 projetos**, idênticos a `_projects_min.json`
+  (digest por projeto conferido, incluindo `issueTypes` e `hierarchyLevel`).
 
 ### Delta desta rodada
 
-**Sem delta.** Nenhuma alteração no Jira entre a geração das 17:30 e esta das 19:23 BRT. Os 21
-conjuntos de `_snap/` foram reaproveitados sem reconsulta individual: a sonda por `updated`
-cobre tanto os seis conjuntos do mês corrente quanto os `planned` da visão acumulada (qualquer
-mudança de due date ou de status carimba `updated`), e retornou apenas a issue já gravada. Esta
+**Sem delta.** Nenhuma alteração no Jira entre a geração das 19:30 e esta das 20:30 BRT. Esta
 geração reescreve `index.html` e `snapshot-data.js` somente para atualizar o carimbo de data.
 
 Indicadores de **Setembro/2026** mantidos: OTD **63% (5 de 8)**, **3** pendências do mês,
@@ -84,7 +85,7 @@ Hoje é **o último dia de set/2026**, e três EPICs foram resolvidos ao longo d
 `G0280-52` (11:23), `EG0285-19` (15:15) e `EG0240-4` (17:27). Nenhum deles entra em
 `resolved_2026-09`, porque a consulta do artifact usa `resolved<="2026-09-30"`, que o Jira
 interpreta como **meia-noite** do dia 30. Reexecutando a mesma consulta com
-`resolved<="2026-09-30 23:59"` o resultado passa de **4 para 7** registros — confirmado ao vivo
+`resolved<="2026-09-30 23:59"` o resultado passa de **4 para 7** registros — reconfirmado ao vivo
 nesta rodada.
 
 A cláusula `DURING ("2026-09-01","2026-09-30")` de `sent` **não** sofre o mesmo corte: ela cobre o
@@ -125,12 +126,10 @@ contagem ao vivo, mas não pode alterar um indicador já publicado para aquele m
 aberto na acumulada (abr–jun, que ainda não têm os 6 conjuntos completos) continuam batendo com
 o Jira.
 
-Renderização conferida em navegador headless (Chromium): **0 erros de página e 0 erros/avisos de
-console**, 5 gráficos montados, única dependência externa `cdn.jsdelivr.net` (Chart.js), banner
-como último elemento do `<body>` com o carimbo 30/09/2026 19:23, e as três abas abrem
-normalmente — **Agosto 2026** OTD 50% (2 de 4), **Setembro 2026** OTD 63% (5 de 8) com 3
-pendentes do mês, 1 em atraso acumulado e 38% de retrabalho (3/8), **Visão Acumulada** OTD 62%
-(36 de 58) com heatmap de OTD por projeto × mês montado.
+Conferência estrutural do `index.html` gerado: comentário de geração no topo do `<head>`, bloco
+`window.__SNAPSHOT__` injetado antes do script principal do artifact, banner de snapshot como
+**último elemento do `<body>`** com o carimbo 30/09/2026 20:30, e nenhuma ocorrência de
+`accountId`, `avatarUrls`, `iconUrl` ou e-mail no arquivo publicado.
 
 > Nota de virada de mês: 30/09 é o último dia do mês corrente. Na próxima geração após a virada
 > (01/10) o gerador passa a congelar 2026-09 — os 6 conjuntos de setembro já estão completos em
