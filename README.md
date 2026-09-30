@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/09/2026 05:30** (`2026-09-30T05:30:27-03:00`)
+> **Última atualização do snapshot: 30/09/2026 06:31** (`2026-09-30T06:31:19-03:00`)
 
 ---
 
@@ -56,19 +56,26 @@ pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Verificação ao vivo no Jira em 30/09/2026 05:30 (BRT):
+Verificação ao vivo no Jira em 30/09/2026 06:31 (BRT):
 
-- `getVisibleJiraProjects`: total = 21, `isLast = true` — assinatura idêntica a `_projects_min.json`.
-- Nenhum epic com `updated >= "2026-09-30 04:20"` — sem inserções ou edições desde a rodada anterior.
+- `getVisibleJiraProjects`: total = 21, `isLast = true`. Comparação ordem-insensível de
+  (`key`, `name`, `issueTypes` + `hierarchyLevel`): md5 `9acfbae31b248a7099db00ade880a981`
+  — idêntica a `_projects_min.json`. Tipos com `hierarchyLevel = 1`: `Epic`, `Fluxo de trabalho`.
+- Nenhum epic com `updated >= "2026-09-30 05:20"` — sem inserções ou edições desde a rodada anterior.
 - Contagens ao vivo dos 6 conjuntos de set/2026 (17 · 1 · 32 · 6 · 4 · 3) idênticas aos arquivos em `_snap/`,
   o que também exclui remoções (que não alteram `updated`).
-- HTML do artifact ao vivo: md5 `6a2b6462a4efbec1890af4494a7f0b74` — idêntico a `_artifact_src.html`.
+- HTML do artifact ao vivo: md5 `6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes — idêntico a `_artifact_src.html`.
 
 **Sem delta de dados nesta rodada.** A página foi regerada apenas para atualizar o carimbo de tempo.
 
 Renderização conferida em navegador headless: sem erros de console, 5 gráficos montados,
-as três abas (Agosto 2026, Setembro 2026, Visão Acumulada) abrem normalmente e o
-resumo executivo de set/2026 fecha em OTD 12% (2 de 17), 15 pendentes, 1 em atraso e 50% de retrabalho (3/6).
+única dependência externa `cdn.jsdelivr.net` (Chart.js), banner imediatamente antes de `</body>`,
+e as três abas abrem normalmente —
+**Agosto 2026** OTD 50% (2 de 4), **Setembro 2026** OTD 12% (2 de 17), 15 pendentes, 1 em atraso
+e 50% de retrabalho (3/6), **Visão Acumulada** OTD 49% (33 de 67).
+
+> Nota de virada de mês: 30/09 é o último dia do mês corrente. Na próxima geração após a virada
+> (01/10) o gerador passa a congelar 2026-09 — os 6 conjuntos de setembro já estão completos em `_snap/`.
 
 ## Abas disponíveis
 
