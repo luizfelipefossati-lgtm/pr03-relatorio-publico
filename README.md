@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/09/2026 06:31** (`2026-09-30T06:31:19-03:00`)
+> **Última atualização do snapshot: 30/09/2026 07:31** (`2026-09-30T07:31:27-03:00`)
 
 ---
 
@@ -56,21 +56,20 @@ pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Verificação ao vivo no Jira em 30/09/2026 06:31 (BRT):
+Verificação ao vivo no Jira em 30/09/2026 07:31 (BRT):
 
-- `getVisibleJiraProjects`: total = 21, `isLast = true`. Comparação ordem-insensível de
-  (`key`, `name`, `issueTypes` + `hierarchyLevel`): md5 `9acfbae31b248a7099db00ade880a981`
-  — idêntica a `_projects_min.json`. Tipos com `hierarchyLevel = 1`: `Epic`, `Fluxo de trabalho`.
-- Nenhum epic com `updated >= "2026-09-30 05:20"` — sem inserções ou edições desde a rodada anterior.
-- Contagens ao vivo dos 6 conjuntos de set/2026 (17 · 1 · 32 · 6 · 4 · 3) idênticas aos arquivos em `_snap/`,
-  o que também exclui remoções (que não alteram `updated`).
-- HTML do artifact ao vivo: md5 `6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes — idêntico a `_artifact_src.html`.
+- `getVisibleJiraProjects`: total = 21, `isLast = true`. Tipos com `hierarchyLevel = 1`:
+  `Epic`, `Fluxo de trabalho` — logo `ETQ = issuetype in ("Epic","Fluxo de trabalho")`,
+  idêntico ao que o artifact monta em tempo de execução.
+- Os 6 conjuntos de set/2026 foram rebuscados ao vivo e reescritos em `_snap/`.
+  Contagens (17 · 1 · 32 · 6 · 4 · 3) idênticas às da rodada anterior, assim como as chaves
+  dos epics em cada conjunto — **sem delta de dados nesta rodada**.
+- HTML do artifact ao vivo: md5 `6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes — idêntico a
+  `_artifact_src.html`, confirmando que o fonte usado na geração está atualizado.
 
-**Sem delta de dados nesta rodada.** A página foi regerada apenas para atualizar o carimbo de tempo.
-
-Renderização conferida em navegador headless: sem erros de console, 5 gráficos montados,
-única dependência externa `cdn.jsdelivr.net` (Chart.js), banner imediatamente antes de `</body>`,
-e as três abas abrem normalmente —
+Renderização conferida em navegador headless (Chromium): sem erros de página nem de console,
+5 gráficos montados, única dependência externa `cdn.jsdelivr.net` (Chart.js), banner imediatamente
+antes de `</body>`, e as três abas abrem normalmente —
 **Agosto 2026** OTD 50% (2 de 4), **Setembro 2026** OTD 12% (2 de 17), 15 pendentes, 1 em atraso
 e 50% de retrabalho (3/6), **Visão Acumulada** OTD 49% (33 de 67).
 
