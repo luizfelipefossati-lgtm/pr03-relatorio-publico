@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 30/09/2026 16:29** (`2026-09-30T16:29:08-03:00`)
+> **Última atualização do snapshot: 30/09/2026 17:30** (`2026-09-30T17:30:41-03:00`)
 
 ---
 
@@ -44,7 +44,7 @@ Mês corrente — servido pela interceptação de JQL (`window.cowork.callMcpToo
 | `planned_2026-09` | Epics com due date em set/2026 | 8 |
 | `overdue_2026-09` | Vencidos antes de set/2026, não concluídos | 1 |
 | `lookahead_2026-09` | Due date entre out/2026 e nov/2026 | 38 |
-| `sent_2026-09` | Transições para "Enviado - Aguardando Análise" em set/2026 | 7 |
+| `sent_2026-09` | Transições para "Enviado - Aguardando Análise" em set/2026 | 8 |
 | `resolved_2026-09` | Concluídos em set/2026 | 4 |
 | `rework_2026-09` | Retrabalho em set/2026 | 3 |
 
@@ -56,46 +56,58 @@ pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Verificação ao vivo no Jira em 30/09/2026 16:29 (BRT):
+Verificação ao vivo no Jira em 30/09/2026 17:30 (BRT):
 
 - Fonte do HTML: obtido por staging do artifact `pr03-relatorio-indicadores-epics`
   (87.509 bytes, md5 `6a2b6462a4efbec1890af4494a7f0b74`) — **idêntico** ao `_artifact_src.html`
   local. A pasta `Artifacts` **não** está montada nesta sessão (`connectedFolders` traz apenas
   `pr03-relatorio-publico`), mas o staging por id do artifact dispensou a montagem.
-- Sonda de alterações `ETQ AND updated >= "2026-09-30 15:20"` → **0 issues**. Nenhum EPIC foi
-  criado, alterado ou transicionado desde a geração anterior.
-- Contagens de controle ao vivo: due date em set/2026 → **8** (igual ao gravado);
-  due date entre out/2026 e nov/2026 → **38** (igual ao gravado). Nenhuma exclusão de EPIC.
+- Sonda de alterações `ETQ AND updated >= "2026-09-30 15:00"` → **3 issues**
+  (`EG0240-4`, `EG0285-19`, `G0280-51`).
+- Os **6 conjuntos de set/2026** foram reconsultados ao vivo, um a um. Meses encerrados
+  (≤ ago/2026) não são reconsultados, por projeto.
 - Projetos: `_projects_min.json` inalterado; `getVisibleJiraProjects` não reconsultado.
 
 ### Delta desta rodada
 
-**Nenhum.** Os 21 conjuntos em `_snap/` foram reaproveitados sem reconsulta individual, com base
-na sonda de `updated` e nas duas contagens de controle acima. Apenas o carimbo de geração mudou.
+**Uma entrega nova.** `EG0240-4` — *TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)*
+(EG0240 - GOITÁ/ COMPESA, due date 10/09) — transicionou para
+`Enviado - Aguardando Análise` às **17:27 BRT** de hoje. Efeitos:
 
-Indicadores de **Setembro/2026** inalterados: OTD 50% (4 de 8), 4 pendências do mês, 1 EPIC em
-atraso acumulado, retrabalho 43% (3/7).
+- `planned_2026-09`: mesmas 8 chaves, `EG0240-4` passa de *Tarefas pendentes* para
+  *Enviado - Aguardando Análise* (categoria `done`);
+- `sent_2026-09`: **7 → 8** registros.
 
+`overdue` (1), `resolved` (4), `rework` (3) e `lookahead` (38) foram reconsultados e vieram
+**iguais** ao gravado. `G0280-51` teve `updated` às 15:00 sem mudança efetiva de conteúdo.
 
-### ⚠ Ressalva de fechamento — `EG0285-19` não entra em `sent_2026-09`
+Indicadores de **Setembro/2026** após o delta: OTD **63% (5 de 8)** — era 50% (4 de 8) —,
+**3** pendências do mês (era 4), **1** EPIC em atraso acumulado, retrabalho **38% (3/8)**
+(era 43%, com denominador 7). Visão acumulada: OTD **62% (36 de 58)**, 22 pendentes
+(era 59%, 34 de 58).
 
-`EG0285-19` é contabilizado como **entregue** no painel de OTD (que deriva de `planned` +
-categoria de status), mas **não** aparece em `sent_2026-09` nem em `resolved_2026-09`. São duas
-causas independentes, ambas confirmadas ao vivo nesta rodada:
+### ⚠ Ressalva de fechamento — o corte das 00h em `resolved`
 
-1. **Nome de status divergente.** O status do fluxo do projeto EG0285 chama-se
-   `Enviado- Aguardando Análise` (id `11737`, **sem espaço antes do hífen**). As consultas `sent` e
-   `rework` do artifact casam a string exata `Enviado - Aguardando Análise`, então nenhuma
-   transição de EPIC do EG0285 é registrada como envio ou retrabalho.
-2. **Limite de data às 00h.** A consulta `resolved` do artifact usa `resolved<="2026-09-30"`, que o
-   Jira interpreta como **meia-noite** do dia 30. Reexecutando a mesma consulta com
-   `resolved<="2026-09-30 23:59"` o resultado passa de **4 para 6** registros, incluindo
-   `G0280-52` (resolvido 30/09 11:23) e `EG0285-19` (30/09 15:15).
+Hoje é **o último dia de set/2026**, e três EPICs foram resolvidos ao longo do dia 30:
+`G0280-52` (11:23), `EG0285-19` (15:15) e `EG0240-4` (17:27). Nenhum deles entra em
+`resolved_2026-09`, porque a consulta do artifact usa `resolved<="2026-09-30"`, que o Jira
+interpreta como **meia-noite** do dia 30. Reexecutando a mesma consulta com
+`resolved<="2026-09-30 23:59"` o resultado passa de **4 para 7** registros — confirmado ao vivo
+nesta rodada.
 
-Consequência: **30/09 é o último dia do mês**. Na primeira geração após a virada, set/2026 será
-congelado e o total de envios do mês ficará gravado como **7 em vez de 8**, com `EG0285-19`
-permanentemente ausente do fechamento — e o denominador do retrabalho fixado em 7. O mesmo
-mecanismo já afeta silenciosamente qualquer EPIC resolvido no último dia de meses anteriores.
+A cláusula `DURING ("2026-09-01","2026-09-30")` de `sent` **não** sofre o mesmo corte: ela cobre o
+dia 30 inteiro, e por isso `EG0240-4` foi contabilizado como envio. O painel de OTD também não
+sofre, porque deriva de `planned` + categoria de status.
+
+Persiste, além disso, a divergência de **grafia de status** no projeto EG0285: o status do fluxo
+chama-se `Enviado- Aguardando Análise` (id `11737`, **sem espaço antes do hífen**), enquanto as
+consultas `sent` e `rework` casam a string exata `Enviado - Aguardando Análise`. Por isso
+`EG0285-19` conta como entregue no OTD mas não aparece em `sent_2026-09`.
+
+Consequência do fechamento: quando set/2026 for congelado (primeira geração após 01/10), o mês
+ficará gravado com **8 envios e 4 resoluções**, sem `EG0285-19` entre os envios e sem os três
+EPICs do dia 30 entre as resoluções. O mesmo mecanismo já afeta silenciosamente os últimos dias
+de meses anteriores.
 
 Esse é o comportamento do artifact ao vivo, preservado aqui sem correção: o snapshot espelha o
 que a página publicada mostraria. Corrigir exige ação fora deste processo — renomear o status
@@ -123,10 +135,10 @@ o Jira.
 
 Renderização conferida em navegador headless (Chromium): **0 erros de página e 0 erros/avisos de
 console**, 5 gráficos montados, única dependência externa `cdn.jsdelivr.net` (Chart.js), banner
-como último elemento do `<body>` com o carimbo 30/09/2026 15:30, e as três abas abrem
-normalmente — **Agosto 2026** OTD 50% (2 de 4), **Setembro 2026** OTD 50% (4 de 8), 4 pendentes do
-mês, 1 em atraso acumulado e 43% de retrabalho (3/7), **Visão Acumulada** com heatmap de OTD por
-projeto × mês montado.
+como último elemento do `<body>` com o carimbo 30/09/2026 17:30, e as três abas abrem
+normalmente — **Agosto 2026** OTD 50% (2 de 4), **Setembro 2026** OTD 63% (5 de 8) com 3
+pendentes do mês, 1 em atraso acumulado e 38% de retrabalho (3/8), **Visão Acumulada** OTD 62%
+(36 de 58) com heatmap de OTD por projeto × mês montado.
 
 > Nota de virada de mês: 30/09 é o último dia do mês corrente. Na próxima geração após a virada
 > (01/10) o gerador passa a congelar 2026-09 — os 6 conjuntos de setembro já estão completos em
