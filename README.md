@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 01/10/2026 09:31** (`2026-10-01T09:31:01-03:00`)
+> **Última atualização do snapshot: 01/10/2026 10:29** (`2026-10-01T10:29:50-03:00`)
 
 ---
 
@@ -62,11 +62,12 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 01/10/2026 09:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 01/10/2026 10:29 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Virada de mês concluída.** Esta é a primeira geração de outubro: set/2026 passou a mês
-  congelado (os 6 conjuntos já estavam completos em `_snap/`, gravados em 30/09 às 23:29) e
-  out/2026 entrou como mês ao vivo, com os 6 conjuntos criados nesta rodada.
+- **Virada de mês concluída.** Set/2026 está congelado (os 6 conjuntos foram gravados em
+  30/09 às 23:29) e out/2026 é o mês ao vivo, com os 6 conjuntos reconsultados nesta rodada.
+  Nenhuma alteração em relação à geração anterior (01/10 às 09:31): os números de outubro
+  permanecem idênticos.
 - Fonte do HTML: `_artifact_src.html` (87.509 bytes, md5 `6a2b6462a4efbec1890af4494a7f0b74`),
   cópia do artifact `pr03-relatorio-indicadores-epics`, inalterado desde 27/07/2026.
   A pasta `Artifacts` **não** está montada nesta sessão — `connectedFolders` traz apenas
@@ -118,10 +119,10 @@ artifact.
 
 ### Conferência estrutural
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-01T09:31:01-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-01T10:29:50-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact (offsets 91.887
   contra 94.330): confirmado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 01/10/2026 09:31.
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 01/10/2026 10:29.
 - As **12 chamadas dinâmicas** do mês corrente e da visão acumulada foram testadas contra os
   padrões de JQL gravados em `snapshot-data.js`, reconstruindo as consultas exatamente como o
   artifact as monta: todas resolvem para o conjunto correto, sem *fallback* para lista vazia.
