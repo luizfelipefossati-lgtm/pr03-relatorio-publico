@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 01/10/2026 13:29** (`2026-10-01T13:29:04-03:00`)
+> **Última atualização do snapshot: 01/10/2026 14:31** (`2026-10-01T14:31:20-03:00`)
 
 ---
 
@@ -118,10 +118,10 @@ artifact.
 
 ### Conferência estrutural
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-01T13:29:04-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-01T14:31:20-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact (offsets 91.887
-  contra 94.321): confirmado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 01/10/2026 13:29.
+  contra 94.330): confirmado.
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 01/10/2026 14:31.
 - As **12 chamadas dinâmicas** do mês corrente e da visão acumulada foram testadas contra os
   padrões de JQL gravados em `snapshot-data.js`, reconstruindo as consultas exatamente como o
   artifact as monta: todas resolvem para o conjunto correto, sem *fallback* para lista vazia.
