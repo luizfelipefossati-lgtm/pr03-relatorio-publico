@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 02/10/2026 18:03** (`2026-10-02T18:03:36-03:00`)
+> **Última atualização do snapshot: 02/10/2026 18:30** (`2026-10-02T18:30:43-03:00`)
 
 ---
 
@@ -62,12 +62,14 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 02/10/2026 18:03 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 02/10/2026 18:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Nenhuma movimentação no Jira desde a geração anterior (16:29 BRT).** Os seis conjuntos de
-  out/2026 foram reconsultados individualmente e vieram byte a byte iguais aos da rodada
+- **Nenhuma movimentação no Jira desde a geração anterior (18:03 BRT).** Os seis conjuntos de
+  out/2026 foram reconsultados individualmente e vieram iguais aos da rodada
   anterior: `planned` 28, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2 —
-  nenhuma chave entrou ou saiu e nenhum valor de campo mudou. O carimbo `updated` mais recente
+  nenhuma chave entrou ou saiu e nenhum valor de campo mudou (a comparação de `planned` foi
+  feita epic a epic; a única diferença no arquivo é a ordem das linhas, agora gravada na ordem
+  de `duedate` ascendente devolvida pela consulta). O carimbo `updated` mais recente
   em todo o mês permanece `2026-10-02T13:51:19-03:00` (`EG0274-38`). O snapshot foi regerado
   assim mesmo, apenas para avançar o carimbo de geração.
 - Fonte do HTML: `_artifact_src.html` (87.509 bytes), cópia do artifact
@@ -135,19 +137,19 @@ artifact.
 
 ### Conferência estrutural
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T18:03:36-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T18:30:43-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298 contra linha 360 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 18:03,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 18:30,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada (mais `getVisibleJiraProjects`)
   foram testadas contra os padrões gravados em `snapshot-data.js`, reconstruindo as consultas
   exatamente como o artifact as monta (linhas 435–454 e 666 de `_artifact_src.html`): todas
   resolvem para o conjunto correto, sem *fallback* para lista vazia, e nenhum padrão ficou órfão.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). Como
-  os dados e o HTML-fonte são idênticos aos da geração de 16:29 BRT, que foi verificada em
-  Chromium headless sem erros de script, a saída desta rodada difere apenas nos carimbos de
-  data. A única requisição externa da página continua sendo o Chart.js do `cdn.jsdelivr.net` —
+  os dados e o HTML-fonte são idênticos aos da geração de 16:29 BRT — a última verificada em
+  Chromium headless sem erros de script —, a saída desta rodada difere dela apenas nos carimbos
+  de data e na ordenação das linhas de `planned`. A única requisição externa da página continua sendo o Chart.js do `cdn.jsdelivr.net` —
   nenhuma chamada à Atlassian.
 - Nenhuma ocorrência de `avatarUrls`, `iconUrl`, `emailAddress` ou domínio de e-mail no arquivo
   publicado, e nenhuma URL da `api.atlassian.com`. A única ocorrência da palavra `accountId` é o
