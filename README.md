@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 02/10/2026 09:30** (`2026-10-02T09:30:39-03:00`)
+> **Última atualização do snapshot: 02/10/2026 10:30** (`2026-10-02T10:30:08-03:00`)
 
 ---
 
@@ -48,11 +48,11 @@ Mês corrente (out/2026) — servido pela interceptação de JQL (`window.cowork
 | Conjunto | Escopo | Registros |
 |---|---|---:|
 | `planned_2026-10` | Epics com due date em out/2026 | 27 |
-| `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 3 |
+| `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 2 |
 | `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | 18 |
-| `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | 1 |
-| `resolved_2026-10` | Concluídos em out/2026 | 1 |
-| `rework_2026-10` | Retrabalho em out/2026 | 0 |
+| `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | 2 |
+| `resolved_2026-10` | Concluídos em out/2026 | 2 |
+| `rework_2026-10` | Retrabalho em out/2026 | 1 |
 
 Visão acumulada (`planned` por mês): mai/2026 = 7 · jun/2026 = 1 · jul/2026 = 10 · ago/2026 = 4 · set/2026 = 8 · out/2026 = 27.
 
@@ -62,19 +62,20 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 02/10/2026 09:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 02/10/2026 10:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Primeiro envio de outubro registrado.** `EG0275-112` — "Licenças Ambientais", do projeto
-  EG0275 - CODEVASF — transitou para "Enviado - Aguardando Análise" em 02/10 às 09:27 BRT,
-  cerca de três minutos antes desta geração. Com isso ela entra em `sent_2026-10` e
-  `resolved_2026-10` (ambos de 0 para 1) e **sai** de `overdue_2026-10`, que cai de 4 para 3.
-  Os demais conjuntos de outubro vieram idênticos à geração anterior (02/10 às 09:13):
-  27 previstos, 18 no lookahead, `rework` ainda vazio.
+- **Segundo envio de outubro, com retrabalho.** `EG0241-42` — "TOMO V - PROJETO DE RECUPERAÇÃO
+  ESTRUTURAL (PRE)", do projeto EG0241 - XARÉU/ COMPESA — transitou para "Enviado - Aguardando
+  Análise" em 02/10 às 09:30:29 BRT, cerca de dez segundos antes da geração anterior (09:30:39)
+  e por isso ausente dela. O epic já havia passado por esse status antes, de modo que entra
+  também em `rework_2026-10`, que sai de 0 para 1 — o **primeiro retrabalho do mês**. Com o
+  envio, `sent` e `resolved` sobem de 1 para 2 e `overdue_2026-10` cai de 3 para 2.
+- Os demais conjuntos de outubro vieram **idênticos** à geração anterior: 27 previstos e 18 no
+  lookahead, sem alteração de status, due date ou carimbo de atualização em nenhum registro.
 - Fonte do HTML: `_artifact_src.html` (87.509 bytes, md5 `6a2b6462a4efbec1890af4494a7f0b74`),
   cópia do artifact `pr03-relatorio-indicadores-epics`, inalterado desde 27/07/2026.
   A pasta `Artifacts` **não** está montada nesta sessão — `connectedFolders` traz apenas
-  `pr03-relatorio-publico`, e o pedido de acesso foi recusado pelo ambiente —, de modo que a
-  cópia local é a fonte usada.
+  `pr03-relatorio-publico` —, de modo que a cópia local é a fonte usada.
 - Os **seis conjuntos de out/2026** foram consultados ao vivo, individualmente, com a projeção
   mínima de campos (`summary`, `status`, `project`, `duedate`, `resolutiondate`, `updated`).
 - Meses congelados (≤ set/2026) **não** são reconsultados, por projeto.
@@ -88,19 +89,23 @@ Geração em 02/10/2026 09:30 BRT, com consulta ao vivo ao Jira via MCP Atlassia
 ainda concluído dentro do próprio mês. Distribuição por projeto: EG0286 = 11 · EG0274 = 9 ·
 G0280 = 5 · EG0256 = 2.
 
-O mês abre com **1 envio** (`EG0275-112`, uma entrega em atraso que vinha de setembro) e
-**nenhum retrabalho**.
+O mês abre com **2 envios**, ambos de entregas que vinham em atraso de setembro, e **1 deles
+classificado como retrabalho**:
 
-**3 EPICs em atraso acumulado** permanecem em outubro:
+| EPIC | Projeto | Due date | Enviado em | Retrabalho |
+|---|---|---|---|---|
+| `EG0275-112` | EG0275 | 2026-09-04 | 02/10 09:27 | não |
+| `EG0241-42` | EG0241 | 2026-09-10 | 02/10 09:30 | sim |
+
+**2 EPICs em atraso acumulado** permanecem em outubro:
 
 | EPIC | Projeto | Due date | Status |
 |---|---|---|---|
 | `EG0239-28` | EG0239 | 2026-08-10 | Em Revisão |
-| `EG0241-42` | EG0241 | 2026-09-10 | Em Revisão |
 | `EG0240-5` | EG0240 | 2026-09-30 | Em Revisão |
 
-Os dois últimos venceram em setembro sem conclusão e migraram para o atraso acumulado na virada.
-`EG0275-112`, que vencia em 04/09, saiu desta lista ao ser enviada hoje.
+Os dois epics que saíram da lista de atraso nesta manhã — `EG0275-112` e `EG0241-42` — são
+exatamente os dois envios registrados acima.
 
 ### Setembro/2026, agora congelado
 
@@ -125,10 +130,10 @@ artifact.
 
 ### Conferência estrutural
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T09:30:39-03:00`.
-- Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact (offsets 92.232
-  contra 94.675): confirmado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 09:30.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T10:30:08-03:00`.
+- Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact (offsets 92.949
+  contra 95.399): confirmado.
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 10:30.
 - As **11 consultas JQL** do mês corrente e da visão acumulada (mais `getVisibleJiraProjects`)
   foram testadas contra os padrões gravados em `snapshot-data.js`, reconstruindo as consultas
   exatamente como o artifact as monta (linhas 435–454 de `_artifact_src.html`): todas resolvem
