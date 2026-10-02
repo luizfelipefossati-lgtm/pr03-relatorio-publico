@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 02/10/2026 15:32** (`2026-10-02T15:32:49-03:00`)
+> **Última atualização do snapshot: 02/10/2026 16:29** (`2026-10-02T16:29:42-03:00`)
 
 ---
 
@@ -62,18 +62,21 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 02/10/2026 15:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 02/10/2026 16:29 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Nenhuma movimentação no Jira desde a geração anterior (14:33 BRT).** Os seis conjuntos de
-  out/2026 foram reconsultados individualmente e vieram byte a byte idênticos aos da rodada
-  anterior: `planned` 28, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2.
+- **Nenhuma movimentação no Jira desde a geração anterior (15:32 BRT).** Os seis conjuntos de
+  out/2026 foram reconsultados individualmente e trouxeram exatamente as mesmas issues, com os
+  mesmos valores de campo, da rodada anterior: `planned` 28, `overdue` 2, `lookahead` 21,
+  `sent` 3, `resolved` 3, `rework` 2. A única diferença é a **ordem** em que o Jira devolveu os
+  resultados de `planned`, `sent`, `resolved` e `rework` — nenhuma chave entrou ou saiu.
   O carimbo `updated` mais recente em todo o mês permanece `2026-10-02T13:51:19-03:00`
   (`EG0274-38`). O snapshot foi regerado assim mesmo, apenas para avançar o carimbo de geração.
 - Fonte do HTML: `_artifact_src.html` (87.509 bytes), cópia do artifact
   `pr03-relatorio-indicadores-epics`, inalterado desde 27/07/2026.
   A pasta `Artifacts` **não** está montada nesta sessão — `connectedFolders` traz apenas
-  `pr03-relatorio-publico`, e o pedido de acesso à pasta do artifact foi recusado pelo ambiente —,
-  de modo que a cópia local é a fonte usada.
+  `pr03-relatorio-publico` —, de modo que a cópia local é a fonte usada. Nesta rodada o acesso
+  à pasta do artifact não chegou a ser solicitado: a execução é agendada e autônoma, sem ninguém
+  para aprovar o pedido.
 - Os **seis conjuntos de out/2026** foram consultados ao vivo, individualmente, com a projeção
   mínima de campos (`summary`, `status`, `project`, `duedate`, `resolutiondate`, `updated`).
 - Meses congelados (≤ set/2026) **não** são reconsultados, por projeto.
@@ -133,20 +136,21 @@ artifact.
 
 ### Conferência estrutural
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T15:32:49-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T16:29:42-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (linha 283 contra linha 360 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 15:32,
+  (linha 298 contra linha 360 de `index.html`).
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 16:29,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada (mais `getVisibleJiraProjects`)
   foram testadas contra os padrões gravados em `snapshot-data.js`, reconstruindo as consultas
   exatamente como o artifact as monta (linhas 435–454 e 666 de `_artifact_src.html`): todas
   resolvem para o conjunto correto, sem *fallback* para lista vazia, e nenhum padrão ficou órfão.
-- Renderização verificada em Chromium headless: página carrega sem erros de script, registra
-  `[PR03] Snapshot estatico carregado`, exibe as três abas (Setembro 2026, Outubro 2026, Visão
-  Acumulada) e o resumo executivo com OTD 4%, 28 previstos, 27 pendentes, 2 em atraso e
-  retrabalho 67%. A única requisição externa é o Chart.js do `cdn.jsdelivr.net` — nenhuma
-  chamada à Atlassian.
+- Renderização verificada em Chromium headless (Playwright): página carrega sem nenhum erro de
+  script, registra `[PR03] Snapshot estatico carregado - gerado em 2026-10-02T16:29:42-03:00`,
+  exibe as três abas (Setembro 2026 · Encerrado, Outubro 2026 · Ao vivo, Visão Acumulada ·
+  Histórico) e o resumo executivo com OTD 4% (1 de 28), 28 previstos, 1 entregue e 27 pendentes
+  do mês. A única requisição externa é o Chart.js do `cdn.jsdelivr.net` — nenhuma chamada à
+  Atlassian.
 - Nenhuma ocorrência de `avatarUrls`, `iconUrl`, `emailAddress` ou domínio de e-mail no arquivo
   publicado, e nenhuma URL da `api.atlassian.com`. A única ocorrência da palavra `accountId` é o
   comentário do próprio gerador ("Nao contem accountIds").
