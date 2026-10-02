@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 02/10/2026 10:30** (`2026-10-02T10:30:08-03:00`)
+> **Última atualização do snapshot: 02/10/2026 11:29** (`2026-10-02T11:29:29-03:00`)
 
 ---
 
@@ -62,7 +62,7 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 02/10/2026 10:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 02/10/2026 11:29 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 - **Segundo envio de outubro, com retrabalho.** `EG0241-42` — "TOMO V - PROJETO DE RECUPERAÇÃO
   ESTRUTURAL (PRE)", do projeto EG0241 - XARÉU/ COMPESA — transitou para "Enviado - Aguardando
@@ -130,10 +130,10 @@ artifact.
 
 ### Conferência estrutural
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T10:30:08-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T11:29:29-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact (offsets 92.949
   contra 95.399): confirmado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 10:30.
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 11:29.
 - As **11 consultas JQL** do mês corrente e da visão acumulada (mais `getVisibleJiraProjects`)
   foram testadas contra os padrões gravados em `snapshot-data.js`, reconstruindo as consultas
   exatamente como o artifact as monta (linhas 435–454 de `_artifact_src.html`): todas resolvem
