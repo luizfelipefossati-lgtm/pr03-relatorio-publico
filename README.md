@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 02/10/2026 14:33** (`2026-10-02T14:33:45-03:00`)
+> **Última atualização do snapshot: 02/10/2026 15:32** (`2026-10-02T15:32:49-03:00`)
 
 ---
 
@@ -62,34 +62,26 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 02/10/2026 14:33 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 02/10/2026 15:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Houve movimentação no Jira desde a geração anterior (13:31 BRT).** Quatro dos seis conjuntos
-  de out/2026 mudaram:
-  - `planned` 27 → 28: entrou `EG0274-38` ("Estudos de Tráfego", EG0274, due 07/10, Em Revisão),
-    atualizado às 13:51.
-  - `sent` 2 → 3 e `resolved` 2 → 3: `EG0286-7` ("Estudo de tráfego", due 01/10) transitou para
-    "Enviado - Aguardando Análise" às 13:40.
-  - `rework` 1 → 2: `EG0286-7` já havia saído desse status antes, portanto conta como reenvio.
-  - `lookahead` 18 → 21: três epics novos do projeto `EG0294` (ARTLOT - Topografia) criados às
-    13:45 — `EG0294-1` (Baía/Artlot), `EG0294-2` (Navegantes/Artlot) e `EG0294-3` (São Roque),
-    todos com due date 18/11.
-  - `overdue` permanece em 2, sem alteração.
-  O carimbo `updated` mais recente em todo o mês passou a ser `2026-10-02T13:51:19-03:00`
-  (`EG0274-38`).
-- Fonte do HTML: `_artifact_src.html` (87.509 bytes, md5 `6a2b6462a4efbec1890af4494a7f0b74`),
-  cópia do artifact `pr03-relatorio-indicadores-epics`, inalterado desde 27/07/2026.
+- **Nenhuma movimentação no Jira desde a geração anterior (14:33 BRT).** Os seis conjuntos de
+  out/2026 foram reconsultados individualmente e vieram byte a byte idênticos aos da rodada
+  anterior: `planned` 28, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2.
+  O carimbo `updated` mais recente em todo o mês permanece `2026-10-02T13:51:19-03:00`
+  (`EG0274-38`). O snapshot foi regerado assim mesmo, apenas para avançar o carimbo de geração.
+- Fonte do HTML: `_artifact_src.html` (87.509 bytes), cópia do artifact
+  `pr03-relatorio-indicadores-epics`, inalterado desde 27/07/2026.
   A pasta `Artifacts` **não** está montada nesta sessão — `connectedFolders` traz apenas
   `pr03-relatorio-publico`, e o pedido de acesso à pasta do artifact foi recusado pelo ambiente —,
   de modo que a cópia local é a fonte usada.
 - Os **seis conjuntos de out/2026** foram consultados ao vivo, individualmente, com a projeção
   mínima de campos (`summary`, `status`, `project`, `duedate`, `resolutiondate`, `updated`).
 - Meses congelados (≤ set/2026) **não** são reconsultados, por projeto.
-- `getVisibleJiraProjects`: reconsultado nesta geração — **21 projetos**, resultado idêntico ao
-  `_projects_min.json` de 30/09 (5.536 bytes), que por isso foi mantido sem reescrita. Os dois
-  tipos de nível Epic seguem sendo `Epic` e `Fluxo de trabalho`. As 10 chaves presentes nos
-  conjuntos de outubro (EG0239, EG0240, EG0241, EG0256, EG0274, EG0275, EG0285, EG0286, EG0294,
-  G0280) foram conferidas contra esse arquivo; nenhuma falta — `EG0294` já constava.
+- `getVisibleJiraProjects`: **não** reconsultado nesta rodada. O `_projects_min.json` de 30/09
+  (5.536 bytes, 21 projetos) foi reaproveitado e conferido chave a chave contra os conjuntos de
+  outubro: as 10 chaves presentes (EG0239, EG0240, EG0241, EG0256, EG0274, EG0275, EG0285,
+  EG0286, EG0294, G0280) constam todas no arquivo — `EG0294` inclusive. Os dois tipos de nível
+  Epic seguem sendo `Epic` e `Fluxo de trabalho`.
 
 ### Quadro de outubro/2026 (2º dia do mês)
 
@@ -141,18 +133,20 @@ artifact.
 
 ### Conferência estrutural
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T14:33:45-03:00`.
-- Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact (offsets 95.008
-  contra 97.451): confirmado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 14:33,
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T15:32:49-03:00`.
+- Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
+  (linha 283 contra linha 360 de `index.html`).
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 15:32,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada (mais `getVisibleJiraProjects`)
   foram testadas contra os padrões gravados em `snapshot-data.js`, reconstruindo as consultas
   exatamente como o artifact as monta (linhas 435–454 e 666 de `_artifact_src.html`): todas
   resolvem para o conjunto correto, sem *fallback* para lista vazia, e nenhum padrão ficou órfão.
 - Renderização verificada em Chromium headless: página carrega sem erros de script, registra
-  `[PR03] Snapshot estatico carregado`, e a única requisição externa é o Chart.js do
-  `cdn.jsdelivr.net` — nenhuma chamada à Atlassian.
+  `[PR03] Snapshot estatico carregado`, exibe as três abas (Setembro 2026, Outubro 2026, Visão
+  Acumulada) e o resumo executivo com OTD 4%, 28 previstos, 27 pendentes, 2 em atraso e
+  retrabalho 67%. A única requisição externa é o Chart.js do `cdn.jsdelivr.net` — nenhuma
+  chamada à Atlassian.
 - Nenhuma ocorrência de `avatarUrls`, `iconUrl`, `emailAddress` ou domínio de e-mail no arquivo
   publicado, e nenhuma URL da `api.atlassian.com`. A única ocorrência da palavra `accountId` é o
   comentário do próprio gerador ("Nao contem accountIds").
