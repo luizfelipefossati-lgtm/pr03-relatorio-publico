@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 02/10/2026 19:31** (`2026-10-02T19:31:05-03:00`)
+> **Última atualização do snapshot: 02/10/2026 20:31** (`2026-10-02T20:31:13-03:00`)
 
 ---
 
@@ -62,16 +62,16 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 02/10/2026 19:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 02/10/2026 20:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Nenhuma movimentação no Jira desde a geração anterior (18:30 BRT).** Os seis conjuntos de
+- **Nenhuma movimentação no Jira desde a geração anterior (19:31 BRT).** Os seis conjuntos de
   out/2026 foram reconsultados individualmente e vieram iguais aos da rodada
   anterior: `planned` 28, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2 —
   nenhuma chave entrou ou saiu e nenhum valor de campo mudou. Os seis arquivos de `_snap/`
   foram regravados **byte a byte idênticos** aos da rodada anterior: o script desta rodada
-  (`_snap/_run1002j.py`) passou a reordenar cada conjunto segundo a ordem já gravada quando o
-  conjunto de chaves não muda, de modo que variações do `ORDER BY` do Jira entre consultas não
-  produzam mais diffs de ordenação. O carimbo `updated` mais recente em todo o mês permanece
+  (`_snap/_run1002k.py`) mantém a reordenação de cada conjunto segundo a ordem já gravada quando
+  o conjunto de chaves não muda, de modo que variações do `ORDER BY` do Jira entre consultas não
+  produzam diffs de ordenação. O carimbo `updated` mais recente em todo o mês permanece
   `2026-10-02T13:51:19-03:00` (`EG0274-38`). O snapshot foi regerado assim mesmo, apenas para
   avançar o carimbo de geração.
 - Fonte do HTML: `_artifact_src.html` (87.509 bytes), cópia do artifact
@@ -139,10 +139,10 @@ artifact.
 
 ### Conferência estrutural
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T19:31:05-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T20:31:13-03:00` (linha 18).
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298 contra linha 360 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 19:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 20:31,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada (mais `getVisibleJiraProjects`)
   foram testadas contra os padrões gravados em `snapshot-data.js`, reconstruindo as consultas
