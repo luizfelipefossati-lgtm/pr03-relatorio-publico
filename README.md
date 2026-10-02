@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 02/10/2026 11:29** (`2026-10-02T11:29:29-03:00`)
+> **Última atualização do snapshot: 02/10/2026 12:29** (`2026-10-02T12:29:42-03:00`)
 
 ---
 
@@ -62,16 +62,15 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 02/10/2026 11:29 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 02/10/2026 12:29 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Segundo envio de outubro, com retrabalho.** `EG0241-42` — "TOMO V - PROJETO DE RECUPERAÇÃO
-  ESTRUTURAL (PRE)", do projeto EG0241 - XARÉU/ COMPESA — transitou para "Enviado - Aguardando
-  Análise" em 02/10 às 09:30:29 BRT, cerca de dez segundos antes da geração anterior (09:30:39)
-  e por isso ausente dela. O epic já havia passado por esse status antes, de modo que entra
-  também em `rework_2026-10`, que sai de 0 para 1 — o **primeiro retrabalho do mês**. Com o
-  envio, `sent` e `resolved` sobem de 1 para 2 e `overdue_2026-10` cai de 3 para 2.
-- Os demais conjuntos de outubro vieram **idênticos** à geração anterior: 27 previstos e 18 no
-  lookahead, sem alteração de status, due date ou carimbo de atualização em nenhum registro.
+- **Sem movimentação no Jira desde a geração anterior (11:29 BRT).** Os seis conjuntos de
+  out/2026 voltaram **idênticos**, registro a registro: 27 previstos, 2 em atraso, 18 no
+  lookahead, 2 envios, 2 resoluções e 1 retrabalho, sem alteração de status, due date ou
+  carimbo de atualização em nenhum epic. A diferença desta geração para a anterior é apenas
+  o carimbo de tempo.
+- Permanecem válidos os dois envios de 02/10 pela manhã — `EG0275-112` (09:27) e `EG0241-42`
+  (09:30, classificado como retrabalho) —, que seguem sendo os únicos do mês.
 - Fonte do HTML: `_artifact_src.html` (87.509 bytes, md5 `6a2b6462a4efbec1890af4494a7f0b74`),
   cópia do artifact `pr03-relatorio-indicadores-epics`, inalterado desde 27/07/2026.
   A pasta `Artifacts` **não** está montada nesta sessão — `connectedFolders` traz apenas
@@ -130,10 +129,10 @@ artifact.
 
 ### Conferência estrutural
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T11:29:29-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T12:29:42-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact (offsets 92.949
   contra 95.399): confirmado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 11:29.
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 12:29.
 - As **11 consultas JQL** do mês corrente e da visão acumulada (mais `getVisibleJiraProjects`)
   foram testadas contra os padrões gravados em `snapshot-data.js`, reconstruindo as consultas
   exatamente como o artifact as monta (linhas 435–454 de `_artifact_src.html`): todas resolvem
