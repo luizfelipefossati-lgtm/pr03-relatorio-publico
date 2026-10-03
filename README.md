@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 02/10/2026 21:30** (`2026-10-02T21:30:44-03:00`)
+> **Última atualização do snapshot: 02/10/2026 22:29** (`2026-10-02T22:29:47-03:00`)
 
 ---
 
@@ -62,14 +62,14 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 02/10/2026 21:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 02/10/2026 22:29 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Nenhuma movimentação no Jira desde a geração anterior (20:31 BRT).** Os seis conjuntos de
-  out/2026 foram reconsultados individualmente e vieram iguais aos da rodada
-  anterior: `planned` 28, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2 —
-  nenhuma chave entrou ou saiu e nenhum valor de campo mudou. Os seis arquivos de `_snap/`
-  foram regravados **byte a byte idênticos** aos da rodada anterior: o script desta rodada
-  (`_snap/_run1002l.py`) mantém a reordenação de cada conjunto segundo a ordem já gravada quando
+- **Nenhuma movimentação no Jira desde a geração anterior (21:30 BRT).** Os seis conjuntos de
+  out/2026 foram reconsultados individualmente e vieram iguais aos da rodada anterior:
+  `planned` 28, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2 — nenhuma chave
+  entrou ou saiu e nenhum valor de campo mudou. Os seis arquivos de `_snap/` foram regravados
+  **byte a byte idênticos** aos da rodada anterior: o script desta rodada
+  (`_snap/_run1002m.py`) mantém a reordenação de cada conjunto segundo a ordem já gravada quando
   o conjunto de chaves não muda, de modo que variações do `ORDER BY` do Jira entre consultas não
   produzam diffs de ordenação. O carimbo `updated` mais recente em todo o mês permanece
   `2026-10-02T13:51:19-03:00` (`EG0274-38`). O snapshot foi regerado assim mesmo, apenas para
@@ -83,11 +83,14 @@ Geração em 02/10/2026 21:30 BRT, com consulta ao vivo ao Jira via MCP Atlassia
   mínima de campos (`summary`, `status`, `project`, `duedate`, `resolutiondate`, `updated`).
   A resposta de `planned` excedeu o limite de tokens mesmo com a projeção e foi reduzida aos
   campos essenciais com `jq` sobre o arquivo salvo, conforme o procedimento previsto.
+  `resolved` foi consultado em modo contagem (`totalCount` = 3): as três issues de `sent` estão
+  todas na categoria `done` com `resolutiondate` dentro de outubro, portanto a contagem fecha a
+  identidade entre os dois conjuntos sem precisar de uma segunda listagem completa.
 - Meses congelados (≤ set/2026) **não** são reconsultados, por projeto.
 - `getVisibleJiraProjects`: **reconsultado ao vivo** nesta rodada e comparado campo a campo
   com o `_projects_min.json` de 30/09 (5.536 bytes, 21 projetos). As duas listas normalizadas
   (chave, nome e tipos de issue com nível de hierarquia) produzem o mesmo hash SHA-256
-  `f770f9f3…1ad802b`, de modo que o arquivo foi mantido sem alteração. As 10 chaves que
+  `dc345254…ede951c`, de modo que o arquivo foi mantido sem alteração. As 10 chaves que
   aparecem nos conjuntos de outubro (EG0239, EG0240, EG0241, EG0256, EG0274, EG0275, EG0285,
   EG0286, EG0294, G0280) constam todas nele. Os dois tipos de nível Epic seguem sendo `Epic`
   e `Fluxo de trabalho`.
@@ -142,12 +145,12 @@ artifact.
 
 ### Conferência estrutural
 
-Checagens automatizadas desta rodada (`_snap/_verify1002l.py`), todas aprovadas:
+Checagens automatizadas desta rodada (`_snap/_verify1002m.py`), todas aprovadas:
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T21:30:44-03:00` (linha 18).
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T22:29:47-03:00` (linha 18).
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298 contra linha 363 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 21:30,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 22:29,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
@@ -160,11 +163,16 @@ Checagens automatizadas desta rodada (`_snap/_verify1002l.py`), todas aprovadas:
 - Nenhuma ocorrência de `avatarUrls`, `iconUrl`, `emailAddress` ou domínio de e-mail no arquivo
   publicado, e nenhuma URL da `api.atlassian.com`. A única ocorrência da palavra `accountId` é o
   comentário do próprio gerador ("Nao contem accountIds").
-- A página não contém nenhum `fetch(`, `XMLHttpRequest` ou `axios`: não há como consultar o Jira
-  ao vivo. As duas únicas menções a `projetos-engeplus.atlassian.net` vêm do artifact original e
-  são inertes — o rótulo da fonte no rodapé e a base `…/browse/` usada para montar os links
-  clicáveis das chaves dos epics. A única requisição externa da página continua sendo o Chart.js
-  do `cdn.jsdelivr.net`.
+- **Recursos carregados** de host externo: apenas `cdn.jsdelivr.net` (Chart.js). A varredura de
+  `src="http…"` não encontra nenhum outro.
+- **Nenhuma chamada de rede no runtime**: zero ocorrências de `fetch(`, `XMLHttpRequest`,
+  `EventSource` ou `sendBeacon` em todo o `index.html` — não há como a página consultar o Jira.
+  As três menções a `projetos-engeplus.atlassian.net` vêm do artifact original e são inertes:
+  o rótulo da fonte no rodapé, um comentário do gerador e a base `…/browse/` usada para montar
+  os links clicáveis das chaves dos epics (`<a target="_blank">`, destino de clique, não
+  requisição). A verificação estrutural foi ajustada nesta rodada para separar *recursos
+  carregados* de *alvos de link*, que antes eram tratados como a mesma coisa e faziam a checagem
+  acusar falha indevidamente sobre esses links herdados.
 - `index.html` com 163.313 bytes (159,5 KB) em 1.028 linhas; `snapshot-data.js` com 75.527 bytes (73,8 KB).
 
 ## Abas disponíveis
