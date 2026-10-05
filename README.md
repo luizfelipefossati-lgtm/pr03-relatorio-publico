@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 05/10/2026 11:30** (`2026-10-05T11:30:32-03:00`)
+> **Última atualização do snapshot: 05/10/2026 12:30** (`2026-10-05T12:30:30-03:00`)
 
 ---
 
@@ -148,7 +148,7 @@ artifact.
 
 Checagens automatizadas desta rodada (`_snap/_verify1005c.py`), todas aprovadas:
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-05T11:30:32-03:00` (linha 18).
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-05T12:30:30-03:00` (linha 18).
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298 contra linha 363 de `index.html`).
 - Banner de snapshot como **último elemento do `<body>`**, com o carimbo 05/10/2026 11:30,
