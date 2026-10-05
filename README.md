@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 05/10/2026 12:30** (`2026-10-05T12:30:30-03:00`)
+> **Última atualização do snapshot: 05/10/2026 13:32** (`2026-10-05T13:32:09-03:00`)
 
 ---
 
@@ -62,9 +62,9 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 05/10/2026 11:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 05/10/2026 13:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Nenhuma mudança nos dados desde a geração anterior (05/10, 09:59 BRT).** Os seis conjuntos
+- **Nenhuma mudança nos dados desde a geração anterior (05/10, 12:30 BRT).** Os seis conjuntos
   de out/2026 foram reconsultados ao vivo e vieram com exatamente as mesmas chaves e contagens:
   `planned` 29, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2. Nenhuma chave
   entrou ou saiu de nenhum conjunto. O epic `EG291-4` — "PEB - Plano de Execução BIM", que
@@ -79,17 +79,14 @@ Geração em 05/10/2026 11:30 BRT, com consulta ao vivo ao Jira via MCP Atlassia
   continua idêntica ao artifact publicado.
 - Os **seis conjuntos de out/2026** foram consultados ao vivo, individualmente, com a projeção
   mínima de campos (`summary`, `status`, `project`, `duedate`, `resolutiondate`, `updated`).
-  A resposta de `planned` excedeu o limite de tokens mesmo com a projeção e foi reduzida aos
-  campos essenciais sobre o arquivo salvo, conforme o procedimento previsto. Nesta rodada as
-  consultas foram executadas em subagente, de modo que as respostas brutas do Jira não
-  trafegassem pelo contexto principal; `lookahead` coube em uma única consulta (21 registros,
-  sem paginação). `resolved` retornou exatamente as mesmas três issues de `sent`, todas na
-  categoria `done` com `resolutiondate` dentro de outubro.
+  As respostas de `planned` e `lookahead` excederam o limite de tokens e foram reduzidas aos
+  campos essenciais com `jq` sobre o arquivo salvo, conforme o procedimento previsto. Nenhuma
+  consulta paginou (`hasNextPage` = false em todas). `resolved` retornou exatamente as mesmas
+  três issues de `sent`, todas na categoria `done` com `resolutiondate` dentro de outubro.
 - Meses congelados (≤ set/2026) **não** são reconsultados, por projeto.
 - `getVisibleJiraProjects`: **reconsultado ao vivo** nesta rodada — `total` = 21, `isLast` = true.
-  O resultado foi reduzido à forma mínima e comparado com `_projects_min.json` (5.536 bytes, de
-  30/09) em forma canônica: os dois são equivalentes (mesmo hash), por isso o arquivo foi mantido
-  sem alteração. As 11 chaves que aparecem nos conjuntos de outubro
+  O resultado foi reduzido à forma mínima e regravado em `_projects_min.json`: o arquivo saiu
+  com os mesmos 5.536 bytes da versão anterior, ou seja, nenhuma mudança no cadastro de projetos. As 11 chaves que aparecem nos conjuntos de outubro
   (EG0239, EG0240, EG0241, EG0256, EG0274, EG0275, EG0285, EG0286, EG0294, EG291, G0280) constam
   todas nele — `EG291` já estava mapeado, de modo que o epic novo herda o nome correto do projeto
   sem necessidade de atualizar o arquivo. Os dois tipos de nível Epic seguem sendo `Epic` e
@@ -146,14 +143,14 @@ artifact.
 
 ### Conferência estrutural
 
-Checagens automatizadas desta rodada (`_snap/_verify1005c.py`), todas aprovadas:
+Checagens automatizadas desta rodada (`_snap/_verify1005f.py`), todas aprovadas:
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-05T12:30:30-03:00` (linha 18).
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-05T13:32:09-03:00` (linha 18).
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298 contra linha 363 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 05/10/2026 11:30,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 05/10/2026 13:32,
   seguido apenas de `</body></html>`.
-- As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
+- As **12 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
   resolvem para o conjunto correto, sem *fallback* para lista vazia, e nenhum padrão ficou órfão
   (11 padrões para 11 conjuntos embutidos).
