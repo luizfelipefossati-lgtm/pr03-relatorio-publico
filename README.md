@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 02/10/2026 22:29** (`2026-10-02T22:29:47-03:00`)
+> **Última atualização do snapshot: 05/10/2026 09:31** (`2026-10-05T09:31:21-03:00`)
 
 ---
 
@@ -62,18 +62,19 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 02/10/2026 22:29 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 05/10/2026 09:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Nenhuma movimentação no Jira desde a geração anterior (21:30 BRT).** Os seis conjuntos de
-  out/2026 foram reconsultados individualmente e vieram iguais aos da rodada anterior:
+- **Nenhuma movimentação no Jira desde a geração anterior (02/10, 23:29 BRT).** Os seis conjuntos
+  de out/2026 foram reconsultados individualmente e vieram iguais aos da rodada anterior:
   `planned` 28, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2 — nenhuma chave
   entrou ou saiu e nenhum valor de campo mudou. Os seis arquivos de `_snap/` foram regravados
   **byte a byte idênticos** aos da rodada anterior: o script desta rodada
-  (`_snap/_run1002m.py`) mantém a reordenação de cada conjunto segundo a ordem já gravada quando
+  (`_snap/_run1005a.py`) mantém a reordenação de cada conjunto segundo a ordem já gravada quando
   o conjunto de chaves não muda, de modo que variações do `ORDER BY` do Jira entre consultas não
   produzam diffs de ordenação. O carimbo `updated` mais recente em todo o mês permanece
-  `2026-10-02T13:51:19-03:00` (`EG0274-38`). O snapshot foi regerado assim mesmo, apenas para
-  avançar o carimbo de geração.
+  `2026-10-02T13:51:19-03:00` (`EG0274-38`) — ou seja, o Jira não registra movimentação de epics
+  há cerca de três dias. O snapshot foi regerado assim mesmo, apenas para avançar o carimbo de
+  geração.
 - Fonte do HTML: `_artifact_src.html` (87.509 bytes), cópia do artifact
   `pr03-relatorio-indicadores-epics`, inalterado desde 27/07/2026.
   A pasta `Artifacts` consta entre as pastas conectadas, mas é uma **localização protegida**
@@ -83,19 +84,18 @@ Geração em 02/10/2026 22:29 BRT, com consulta ao vivo ao Jira via MCP Atlassia
   mínima de campos (`summary`, `status`, `project`, `duedate`, `resolutiondate`, `updated`).
   A resposta de `planned` excedeu o limite de tokens mesmo com a projeção e foi reduzida aos
   campos essenciais com `jq` sobre o arquivo salvo, conforme o procedimento previsto.
-  `resolved` foi consultado em modo contagem (`totalCount` = 3): as três issues de `sent` estão
-  todas na categoria `done` com `resolutiondate` dentro de outubro, portanto a contagem fecha a
-  identidade entre os dois conjuntos sem precisar de uma segunda listagem completa.
+  O `lookahead` foi buscado em duas consultas (nov/2026 = 14, dez/2026 = 7) e concatenado, para
+  não esbarrar no mesmo limite. `resolved` foi consultado em listagem completa nesta rodada e
+  retornou exatamente as mesmas três issues de `sent`, todas na categoria `done` com
+  `resolutiondate` dentro de outubro.
 - Meses congelados (≤ set/2026) **não** são reconsultados, por projeto.
-- `getVisibleJiraProjects`: **reconsultado ao vivo** nesta rodada e comparado campo a campo
-  com o `_projects_min.json` de 30/09 (5.536 bytes, 21 projetos). As duas listas normalizadas
-  (chave, nome e tipos de issue com nível de hierarquia) produzem o mesmo hash SHA-256
-  `dc345254…ede951c`, de modo que o arquivo foi mantido sem alteração. As 10 chaves que
-  aparecem nos conjuntos de outubro (EG0239, EG0240, EG0241, EG0256, EG0274, EG0275, EG0285,
-  EG0286, EG0294, G0280) constam todas nele. Os dois tipos de nível Epic seguem sendo `Epic`
-  e `Fluxo de trabalho`.
+- `getVisibleJiraProjects`: **reconsultado ao vivo** nesta rodada — `total` = 21, `isLast` = true,
+  e as 21 chaves retornadas são exatamente as 21 de `_projects_min.json` (5.536 bytes, de 30/09),
+  que por isso foi mantido sem alteração. As 10 chaves que aparecem nos conjuntos de outubro
+  (EG0239, EG0240, EG0241, EG0256, EG0274, EG0275, EG0285, EG0286, EG0294, G0280) constam todas
+  nele. Os dois tipos de nível Epic seguem sendo `Epic` e `Fluxo de trabalho`.
 
-### Quadro de outubro/2026 (2º dia do mês)
+### Quadro de outubro/2026 (5º dia do mês)
 
 28 epics com due date em outubro — 14 em "Tarefas pendentes", 13 em andamento/revisão
 (11 "Em andamento" + 2 "Em Revisão") e 1 já enviado dentro do próprio mês.
@@ -145,19 +145,19 @@ artifact.
 
 ### Conferência estrutural
 
-Checagens automatizadas desta rodada (`_snap/_verify1002m.py`), todas aprovadas:
+Checagens automatizadas desta rodada (`_snap/_verify1005a.py`), todas aprovadas:
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-02T22:29:47-03:00` (linha 18).
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-05T09:31:21-03:00` (linha 18).
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298 contra linha 363 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 02/10/2026 22:29,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 05/10/2026 09:31,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
   resolvem para o conjunto correto, sem *fallback* para lista vazia, e nenhum padrão ficou órfão
   (11 padrões para 11 conjuntos embutidos).
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). Como
-  os dados e o HTML-fonte são idênticos aos da geração de 16:29 BRT — a última verificada em
+  os dados e o HTML-fonte são idênticos aos das rodadas anteriores — a última verificada em
   Chromium headless sem erros de script —, a saída desta rodada difere dela apenas nos carimbos
   de data.
 - Nenhuma ocorrência de `avatarUrls`, `iconUrl`, `emailAddress` ou domínio de e-mail no arquivo
