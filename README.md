@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 05/10/2026 09:59** (`2026-10-05T09:59:14-03:00`)
+> **Última atualização do snapshot: 05/10/2026 10:34** (`2026-10-05T10:34:39-03:00`)
 
 ---
 
@@ -62,37 +62,34 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 05/10/2026 09:59 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 05/10/2026 10:34 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Um EPIC novo entrou em outubro desde a geração anterior (05/10, 09:31 BRT).** `planned`
-  passou de 28 para 29 registros com a entrada de `EG291-4` — "PEB - Plano de Execução BIM"
-  (projeto `EG291` / EG0291 - Arroio Feijó), due date 07/10/2026, status "Em andamento",
-  `updated` 05/10/2026 09:55 BRT. É a primeira movimentação de epics registrada no Jira desde
-  02/10 e a primeira vez que o projeto EG0291 aparece nos conjuntos mensais deste snapshot.
-  Os outros cinco conjuntos de out/2026 vieram iguais aos da rodada anterior: `overdue` 2,
-  `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2 — nenhuma chave entrou ou saiu e nenhum
-  valor de campo mudou. O script desta rodada (`_snap/_run1005b.py`) mantém a reordenação de
-  cada conjunto segundo a ordem já gravada quando o conjunto de chaves não muda, de modo que
-  variações do `ORDER BY` do Jira entre consultas não produzam diffs de ordenação; como a chave
-  nova alterou o conjunto de `planned`, esse arquivo foi regravado na ordem retornada pelo Jira
-  (`ORDER BY duedate ASC`) e os cinco demais ficaram byte a byte idênticos.
+- **Nenhuma mudança nos dados desde a geração anterior (05/10, 09:59 BRT).** Os seis conjuntos
+  de out/2026 foram reconsultados ao vivo e vieram com exatamente as mesmas chaves e contagens:
+  `planned` 29, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2. Nenhuma chave
+  entrou ou saiu de nenhum conjunto. O epic `EG291-4` — "PEB - Plano de Execução BIM", que
+  entrou na rodada das 09:59 — segue sendo a movimentação mais recente registrada no Jira.
+  A saída desta rodada, portanto, difere da anterior apenas nos carimbos de data.
 - Fonte do HTML: `_artifact_src.html` (87.509 bytes), cópia do artifact
   `pr03-relatorio-indicadores-epics`, inalterado desde 27/07/2026.
   A pasta `Artifacts` consta entre as pastas conectadas, mas é uma **localização protegida**
-  (dados internos do Claude): não pode ser listada nem lida a partir de uma sessão Cowork. A
-  cópia local `_artifact_src.html` é, portanto, a fonte usada — como nas rodadas anteriores.
+  (dados internos do Claude): não pode ser listada nem lida a partir de uma sessão Cowork. Nesta
+  rodada o HTML do Live Artifact foi obtido pela via própria de artifacts, e seu SHA-256
+  (`2f09463c…ec2419`) confere com o de `_artifact_src.html` — confirmando que a cópia local
+  continua idêntica ao artifact publicado.
 - Os **seis conjuntos de out/2026** foram consultados ao vivo, individualmente, com a projeção
   mínima de campos (`summary`, `status`, `project`, `duedate`, `resolutiondate`, `updated`).
   A resposta de `planned` excedeu o limite de tokens mesmo com a projeção e foi reduzida aos
-  campos essenciais com `jq` sobre o arquivo salvo, conforme o procedimento previsto.
-  O `lookahead` foi buscado em duas consultas (nov/2026 = 14, dez/2026 = 7) e concatenado, para
-  não esbarrar no mesmo limite. `resolved` foi consultado em listagem completa nesta rodada e
-  retornou exatamente as mesmas três issues de `sent`, todas na categoria `done` com
-  `resolutiondate` dentro de outubro.
+  campos essenciais sobre o arquivo salvo, conforme o procedimento previsto. Nesta rodada as
+  consultas foram executadas em subagente, de modo que as respostas brutas do Jira não
+  trafegassem pelo contexto principal; `lookahead` coube em uma única consulta (21 registros,
+  sem paginação). `resolved` retornou exatamente as mesmas três issues de `sent`, todas na
+  categoria `done` com `resolutiondate` dentro de outubro.
 - Meses congelados (≤ set/2026) **não** são reconsultados, por projeto.
-- `getVisibleJiraProjects`: **reconsultado ao vivo** nesta rodada — `total` = 21, `isLast` = true,
-  e as 21 chaves retornadas são exatamente as 21 de `_projects_min.json` (5.536 bytes, de 30/09),
-  que por isso foi mantido sem alteração. As 11 chaves que aparecem nos conjuntos de outubro
+- `getVisibleJiraProjects`: **reconsultado ao vivo** nesta rodada — `total` = 21, `isLast` = true.
+  O resultado foi reduzido à forma mínima e comparado com `_projects_min.json` (5.536 bytes, de
+  30/09) em forma canônica: os dois são equivalentes (mesmo hash), por isso o arquivo foi mantido
+  sem alteração. As 11 chaves que aparecem nos conjuntos de outubro
   (EG0239, EG0240, EG0241, EG0256, EG0274, EG0275, EG0285, EG0286, EG0294, EG291, G0280) constam
   todas nele — `EG291` já estava mapeado, de modo que o epic novo herda o nome correto do projeto
   sem necessidade de atualizar o arquivo. Os dois tipos de nível Epic seguem sendo `Epic` e
@@ -149,12 +146,12 @@ artifact.
 
 ### Conferência estrutural
 
-Checagens automatizadas desta rodada (`_snap/_verify1005b.py`), todas aprovadas:
+Checagens automatizadas desta rodada (`_snap/_verify1005c.py`), todas aprovadas:
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-05T09:59:14-03:00` (linha 18).
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-05T10:34:39-03:00` (linha 18).
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298 contra linha 363 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 05/10/2026 09:59,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 05/10/2026 10:34,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
@@ -164,9 +161,8 @@ Checagens automatizadas desta rodada (`_snap/_verify1005b.py`), todas aprovadas:
   `planned` 29, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é idêntico ao das rodadas anteriores — a última verificada em Chromium headless
-  sem erros de script — e a única diferença de dados é uma linha a mais em `planned_2026-10`,
-  com a mesma forma das demais, de modo que a saída desta rodada difere daquela apenas nos
-  carimbos de data e nessa linha.
+  sem erros de script — e os dados vieram iguais aos da rodada anterior, de modo que a saída
+  desta rodada difere daquela apenas nos carimbos de data.
 - Nenhuma ocorrência de `avatarUrls`, `iconUrl`, `emailAddress` ou domínio de e-mail no arquivo
   publicado, e nenhuma URL da `api.atlassian.com`. A única ocorrência da palavra `accountId` é o
   comentário do próprio gerador ("Nao contem accountIds").
