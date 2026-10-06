@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 06/10/2026 10:32** (`2026-10-06T10:32:30-03:00`)
+> **Última atualização do snapshot: 06/10/2026 11:31** (`2026-10-06T11:31:14-03:00`)
 
 ---
 
@@ -62,9 +62,9 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 06/10/2026 10:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 06/10/2026 11:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Nenhuma mudança nos dados desde a geração anterior (06/10, 09:30 BRT).** Os seis conjuntos
+- **Nenhuma mudança nos dados desde a geração anterior (06/10, 10:32 BRT).** Os seis conjuntos
   de out/2026 foram reconsultados ao vivo e vieram com exatamente as mesmas chaves e contagens:
   `planned` 29, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2. Nenhuma chave
   entrou ou saiu de nenhum conjunto, e a comparação campo a campo (`summary`, `status`,
@@ -152,12 +152,12 @@ artifact.
 
 ### Conferência estrutural
 
-Checagens automatizadas desta rodada (`_snap/_verify1006c.py`), todas aprovadas:
+Checagens automatizadas desta rodada (`_snap/_verify1006d.py`), todas aprovadas:
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-06T10:32:30-03:00` (linha 18).
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-06T11:31:14-03:00` (linha 18).
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298 contra linha 363 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 06/10/2026 10:32,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 06/10/2026 11:31,
   seguido apenas de `</body></html>`.
 - As **12 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
