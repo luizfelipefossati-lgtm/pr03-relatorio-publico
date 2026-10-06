@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 06/10/2026 11:31** (`2026-10-06T11:31:14-03:00`)
+> **Última atualização do snapshot: 06/10/2026 12:30** (`2026-10-06T12:30:50-03:00`)
 
 ---
 
@@ -62,9 +62,9 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 06/10/2026 11:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 06/10/2026 12:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Nenhuma mudança nos dados desde a geração anterior (06/10, 10:32 BRT).** Os seis conjuntos
+- **Nenhuma mudança nos dados desde a geração anterior (06/10, 11:31 BRT).** Os seis conjuntos
   de out/2026 foram reconsultados ao vivo e vieram com exatamente as mesmas chaves e contagens:
   `planned` 29, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2. Nenhuma chave
   entrou ou saiu de nenhum conjunto, e a comparação campo a campo (`summary`, `status`,
@@ -92,6 +92,13 @@ Geração em 06/10/2026 11:31 BRT, com consulta ao vivo ao Jira via MCP Atlassia
   campos essenciais com `jq` sobre o arquivo salvo, conforme o procedimento previsto. Nenhuma
   consulta paginou (`hasNextPage` = false em todas). `resolved` retornou exatamente as mesmas
   três issues de `sent`, todas na categoria `done` com `resolutiondate` dentro de outubro.
+- **Filtro de tipo de item.** As consultas desta rodada usaram
+  `issuetype in (Epic, "Fluxo de trabalho")`, que é o que o artifact de fato monta: ele
+  parte de `epicTypes=['Epic']` apenas como padrão e substitui a lista pelos tipos de
+  hierarquia 1 descobertos nos projetos visíveis. Rodar com o literal `issuetype=Epic`
+  (como está escrito, de forma simplificada, no prompt da tarefa agendada) devolve só 17
+  dos 29 epics de outubro e 9 dos 21 de lookahead, porque EG0286 e EG291 nomeiam esse nível
+  como `Fluxo de trabalho`. Convém alinhar o texto do prompt agendado ao filtro real.
 - Meses congelados (≤ set/2026) **não** são reconsultados, por projeto.
 - `getVisibleJiraProjects`: **reconsultado ao vivo** nesta rodada — `total` = 21, `isLast` = true.
   O resultado foi reduzido à forma mínima e regravado em `_projects_min.json`: o arquivo saiu
@@ -152,12 +159,12 @@ artifact.
 
 ### Conferência estrutural
 
-Checagens automatizadas desta rodada (`_snap/_verify1006d.py`), todas aprovadas:
+Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-06T11:31:14-03:00` (linha 18).
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-06T12:30:50-03:00` (linha 18).
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298 contra linha 363 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 06/10/2026 11:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 06/10/2026 12:30,
   seguido apenas de `</body></html>`.
 - As **12 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
