@@ -1073,3 +1073,9 @@
 2026-10-06 12:54:43  ERRO: push falhou (exit 128): fatal: unable to access 'https://github.com/luizfelipefossati-lgtm/pr03-relatorio-publico.git/': Could not resolve host: github.com
 2026-10-06 13:04:30  === Watchdog iniciando ===
 2026-10-06 13:04:32  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'True' | lock: 'False' | index quebrado: 'False'
+2026-10-06 13:04:32  Commit OK: 0108929946edd46ae0dc5b3f0569d629dbeab1d2
+2026-10-06 13:04:32  Empurrando para origin/main...
+2026-10-06 13:04:36  Push OK e VERIFICADO: HEAD sincronizado com origin/main. Vercel deploya em ~1 min.
+2026-10-06 13:04:36  === Watchdog concluido com sucesso ===
+2026-10-06 13:14:30  === Watchdog iniciando ===
+2026-10-06 13:14:31  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'False' | lock: 'False' | index quebrado: 'False'
