@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 06/10/2026 14:32** (`2026-10-06T14:32:43-03:00`)
+> **Última atualização do snapshot: 06/10/2026 15:31** (`2026-10-06T15:31:16-03:00`)
 
 ---
 
@@ -62,9 +62,9 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 06/10/2026 14:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 06/10/2026 15:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Nenhuma mudança nos dados desde a geração anterior (06/10, 13:30 BRT).** Os seis conjuntos
+- **Nenhuma mudança nos dados desde a geração anterior (06/10, 14:32 BRT).** Os seis conjuntos
   de out/2026 e a lista de projetos foram reconsultados ao vivo e vieram com exatamente as
   mesmas chaves e contagens: `planned` 29, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3,
   `rework` 2, projetos 21. Nenhuma chave entrou ou saiu de nenhum conjunto, e a comparação
@@ -77,7 +77,9 @@ Geração em 06/10/2026 14:32 BRT, com consulta ao vivo ao Jira via MCP Atlassia
 - Cada um dos seis conjuntos de out/2026 foi coletado em **uma única consulta** nesta rodada,
   com a projeção mínima de campos. Apenas a resposta de `planned` excedeu o limite de tokens e
   foi reduzida aos campos essenciais com `jq` sobre o arquivo salvo pelo runtime, conforme o
-  procedimento previsto; as demais couberam inline. Como os dados vieram idênticos, os arquivos
+  procedimento previsto; as demais couberam inline. `planned` e a lista de projetos foram
+  conferidos por SHA-256 da forma canônica (ordenada, campo a campo) contra o pacote de `_snap/`;
+  os outros cinco conjuntos, por comparação direta registro a registro. Como os dados vieram idênticos, os arquivos
   de `_snap/` foram preservados byte a byte, inclusive na ordenação original dos registros —
   nenhuma reordenação foi necessária.
 - Fonte do HTML: `_artifact_src.html` (87.509 bytes), cópia do artifact
@@ -101,8 +103,9 @@ Geração em 06/10/2026 14:32 BRT, com consulta ao vivo ao Jira via MCP Atlassia
   como `Fluxo de trabalho`. Convém alinhar o texto do prompt agendado ao filtro real.
 - Meses congelados (≤ set/2026) **não** são reconsultados, por projeto.
 - `getVisibleJiraProjects`: **reconsultado ao vivo** nesta rodada — `total` = 21, `isLast` = true.
-  O resultado foi reduzido à forma mínima e regravado em `_projects_min.json`: o arquivo saiu
-  com os mesmos 5.536 bytes da versão anterior, ou seja, nenhuma mudança no cadastro de projetos. As 11 chaves que aparecem nos conjuntos de outubro
+  O resultado foi reduzido à mesma forma mínima e comparado por SHA-256 da forma canônica
+  contra `_projects_min.json` (5.536 bytes): hash idêntico, nenhuma mudança no cadastro de
+  projetos — o arquivo não precisou ser reescrito. As 11 chaves que aparecem nos conjuntos de outubro
   (EG0239, EG0240, EG0241, EG0256, EG0274, EG0275, EG0285, EG0286, EG0294, EG291, G0280) constam
   todas nele — `EG291` já estava mapeado, de modo que o epic novo herda o nome correto do projeto
   sem necessidade de atualizar o arquivo. Os dois tipos de nível Epic seguem sendo `Epic` e
@@ -161,10 +164,10 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-06T14:32:43-03:00` (linha 18).
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-06T15:31:16-03:00` (linha 18).
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298 contra linha 360 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 06/10/2026 14:32,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 06/10/2026 15:31,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
