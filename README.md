@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 06/10/2026 13:30** (`2026-10-06T13:30:28-03:00`)
+> **Última atualização do snapshot: 06/10/2026 14:32** (`2026-10-06T14:32:43-03:00`)
 
 ---
 
@@ -62,36 +62,36 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 06/10/2026 13:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 06/10/2026 14:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Nenhuma mudança nos dados desde a geração anterior (06/10, 11:31 BRT).** Os seis conjuntos
-  de out/2026 foram reconsultados ao vivo e vieram com exatamente as mesmas chaves e contagens:
-  `planned` 29, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2. Nenhuma chave
-  entrou ou saiu de nenhum conjunto, e a comparação campo a campo (`summary`, `status`,
-  `project`, `duedate`, `resolutiondate`, `updated`) contra o pacote gerado na rodada anterior
-  não acusou uma única divergência. O epic `EG291-4` — "PEB - Plano de Execução BIM",
-  atualizado em 05/10 às 09:55 — segue sendo a movimentação mais recente registrada no Jira.
-  A saída desta rodada, portanto, difere da anterior apenas nos carimbos de data.
-- `planned` e `lookahead` de out/2026 são coletados em duas consultas cada (quinzenas, e
-  nov + dez separados) para não estourar o limite de tokens da resposta MCP. A concatenação das
-  metades não reproduz sozinha a ordenação que o `ORDER BY` do artifact produziria, então os dois
-  conjuntos são reordenados após a coleta — `planned` por nome do projeto e due date, `lookahead`
-  por due date — antes de entrarem em `_snap/`. Com isso `planned_2026-10` ficou byte a byte na
-  mesma ordem da rodada anterior; em `lookahead_2026-10` resta apenas a ordem relativa entre
-  epics de mesmo due date, que o artifact reagrupa por faixa de dias e não afeta a renderização.
+- **Nenhuma mudança nos dados desde a geração anterior (06/10, 13:30 BRT).** Os seis conjuntos
+  de out/2026 e a lista de projetos foram reconsultados ao vivo e vieram com exatamente as
+  mesmas chaves e contagens: `planned` 29, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3,
+  `rework` 2, projetos 21. Nenhuma chave entrou ou saiu de nenhum conjunto, e a comparação
+  semântica campo a campo (`summary`, `status.name`, `status.statusCategory.key`, `project.key`,
+  `project.name`, `duedate`, `resolutiondate`, `updated`), insensível à ordem dos registros,
+  contra o pacote gravado em `_snap/` não acusou uma única divergência. O epic `EG291-4` — "PEB -
+  Plano de Execução BIM", atualizado em 05/10 às 09:55 — segue sendo a movimentação mais recente
+  registrada no Jira. Nenhum arquivo de `_snap/` foi reescrito; a saída desta rodada difere da
+  anterior apenas nos carimbos de data.
+- Cada um dos seis conjuntos de out/2026 foi coletado em **uma única consulta** nesta rodada,
+  com a projeção mínima de campos. Apenas a resposta de `planned` excedeu o limite de tokens e
+  foi reduzida aos campos essenciais com `jq` sobre o arquivo salvo pelo runtime, conforme o
+  procedimento previsto; as demais couberam inline. Como os dados vieram idênticos, os arquivos
+  de `_snap/` foram preservados byte a byte, inclusive na ordenação original dos registros —
+  nenhuma reordenação foi necessária.
 - Fonte do HTML: `_artifact_src.html` (87.509 bytes), cópia do artifact
-  `pr03-relatorio-indicadores-epics`, inalterado desde 27/07/2026.
+  `pr03-relatorio-indicadores-epics`, inalterado desde 27/07/2026. Seu SHA-256 (`2f09463c…ec2419`)
+  continua o mesmo das rodadas anteriores.
   A pasta `Artifacts` consta entre as pastas conectadas, mas é uma **localização protegida**
-  (dados internos do Claude): não pode ser listada nem lida a partir de uma sessão Cowork. Nesta
-  rodada o HTML do Live Artifact foi novamente obtido pela via própria de artifacts, e seu
-  SHA-256 (`2f09463c…ec2419`) confere com o de `_artifact_src.html` — confirmando que a cópia
-  local continua idêntica ao artifact publicado.
+  (dados internos do Claude): não pode ser listada nem lida a partir de uma sessão Cowork, e
+  nesta rodada o HTML do Live Artifact não pôde ser relido para nova conferência — a geração
+  partiu da cópia local versionada no repositório.
 - Os **seis conjuntos de out/2026** foram consultados ao vivo, individualmente, com a projeção
   mínima de campos (`summary`, `status`, `project`, `duedate`, `resolutiondate`, `updated`).
-  As respostas de `planned` e `lookahead` excederam o limite de tokens e foram reduzidas aos
-  campos essenciais com `jq` sobre o arquivo salvo, conforme o procedimento previsto. Nenhuma
-  consulta paginou (`hasNextPage` = false em todas). `resolved` retornou exatamente as mesmas
-  três issues de `sent`, todas na categoria `done` com `resolutiondate` dentro de outubro.
+  Nenhuma consulta paginou (`hasNextPage` = false em todas); `getVisibleJiraProjects` retornou
+  `isLast` = true com 21 projetos. `resolved` retornou exatamente as mesmas três issues de
+  `sent`, todas na categoria `done` com `resolutiondate` dentro de outubro.
 - **Filtro de tipo de item.** As consultas desta rodada usaram
   `issuetype in (Epic, "Fluxo de trabalho")`, que é o que o artifact de fato monta: ele
   parte de `epicTypes=['Epic']` apenas como padrão e substitui a lista pelos tipos de
@@ -161,12 +161,12 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-06T13:30:28-03:00` (linha 18).
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-06T14:32:43-03:00` (linha 18).
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (linha 298 contra linha 363 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 06/10/2026 13:30,
+  (linha 298 contra linha 360 de `index.html`).
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 06/10/2026 14:32,
   seguido apenas de `</body></html>`.
-- As **12 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
+- As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
   resolvem para o conjunto correto, sem *fallback* para lista vazia, e nenhum padrão ficou órfão
   (11 padrões para 11 conjuntos embutidos).
@@ -183,8 +183,8 @@ Checagens desta rodada (contagens e carimbos reconferidos após a geração):
   `src="http…"` não encontra nenhum outro.
 - **Nenhuma chamada de rede no runtime**: zero ocorrências de `fetch(`, `XMLHttpRequest`,
   `EventSource` ou `sendBeacon` em todo o `index.html` — não há como a página consultar o Jira.
-  As três menções a `projetos-engeplus.atlassian.net` vêm do artifact original e são inertes:
-  o rótulo da fonte no rodapé, um comentário do gerador e a base `…/browse/` usada para montar
+  As duas menções a `projetos-engeplus.atlassian.net` vêm do artifact original e são inertes:
+  o rótulo da fonte no rodapé e a base `…/browse/` usada para montar
   os links clicáveis das chaves dos epics (`<a target="_blank">`, destino de clique, não
   requisição). A verificação estrutural foi ajustada nesta rodada para separar *recursos
   carregados* de *alvos de link*, que antes eram tratados como a mesma coisa e faziam a checagem
