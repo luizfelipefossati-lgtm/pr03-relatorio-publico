@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 06/10/2026 17:30** (`2026-10-06T17:30:36-03:00`)
+> **Última atualização do snapshot: 06/10/2026 21:31** (`2026-10-06T21:31:12-03:00`)
 
 ---
 
@@ -62,28 +62,25 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 06/10/2026 17:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 06/10/2026 21:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Uma única alteração nos dados desde a geração anterior (06/10, 15:31 BRT).** Os seis
-  conjuntos de out/2026 e a lista de projetos foram reconsultados ao vivo e as contagens não
-  se moveram: `planned` 29, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2,
-  projetos 21. Nenhuma chave entrou ou saiu de nenhum conjunto. A comparação semântica campo a
-  campo (`summary`, `status.name`, `status.statusCategory.key`, `project.key`, `project.name`,
-  `duedate`, `resolutiondate`, `updated`), insensível à ordem dos registros, acusou uma única
-  divergência: o epic `EG291-4` — "PEB - Plano de Execução BIM", do projeto EG0291 - Arroio
-  Feijó — teve o campo `updated` avançado de 05/10 09:55 para **06/10 16:26 BRT**. Status
-  ("Em andamento", categoria `indeterminate`), `duedate` (07/10/2026), `summary` e
-  `resolutiondate` (nulo) permanecem inalterados — a movimentação não mudou a posição do epic
-  em nenhum indicador. Apenas `_snap/planned_2026-10.json` foi reescrito, com esse único campo
-  atualizado; os demais arquivos de `_snap/` foram preservados.
+- **Nenhuma alteração nos dados desde a geração anterior (06/10, 17:30 BRT).** Os seis
+  conjuntos de out/2026 e a lista de projetos foram reconsultados ao vivo e nada se moveu:
+  `planned` 29, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2, projetos 21.
+  Nenhuma chave entrou ou saiu de nenhum conjunto e a comparação semântica campo a campo
+  (`summary`, `status.name`, `status.statusCategory.key`, `project.key`, `project.name`,
+  `duedate`, `resolutiondate`, `updated`), insensível à ordem dos registros, não acusou
+  nenhuma divergência — nem mesmo em `updated`. O epic `EG291-4`, que havia se movido na
+  rodada anterior, permanece com `updated` em 06/10 16:26 BRT. Os arquivos de `_snap/` foram
+  reescritos com conteúdo idêntico ao anterior; `index.html` e `snapshot-data.js` mudam
+  apenas no carimbo de geração.
 - Cada um dos seis conjuntos de out/2026 foi coletado em **uma única consulta** nesta rodada,
-  com a projeção mínima de campos. Apenas a resposta de `planned` excedeu o limite de tokens e
-  foi reduzida aos campos essenciais com `jq` sobre o arquivo salvo pelo runtime, conforme o
-  procedimento previsto; as demais couberam inline. `planned` e a lista de projetos foram
-  conferidos por SHA-256 da forma canônica (ordenada, campo a campo) contra o pacote de `_snap/`;
-  os outros cinco conjuntos, por comparação direta registro a registro. Os cinco conjuntos sem
-  divergência e `_projects_min.json` foram preservados byte a byte, na ordenação original dos
-  registros; `planned_2026-10.json` foi reescrito com a mesma ordenação e um único campo alterado.
+  com a projeção mínima de campos (`summary`, `status`, `project`, `duedate`, `resolutiondate`,
+  `updated`) e `pageInfo.hasNextPage = false` em todas. Apenas as respostas de `planned` e de
+  `getVisibleJiraProjects` excederam o limite de tokens e foram reduzidas aos campos essenciais
+  sobre o arquivo salvo pelo runtime, conforme o procedimento previsto; as demais couberam
+  inline. A lista de projetos (21, `isLast=true`) foi comparada à `_projects_min.json` na forma
+  canônica ordenada: idêntica, e o arquivo foi preservado byte a byte.
 - Fonte do HTML: `_artifact_src.html` (87.509 bytes), cópia do artifact
   `pr03-relatorio-indicadores-epics`, inalterado desde 27/07/2026. Seu SHA-256 (`2f09463c…ec2419`)
   continua o mesmo das rodadas anteriores.
@@ -166,10 +163,10 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-06T17:30:36-03:00` (linha 18).
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-06T21:31:12-03:00` (linha 18).
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (linha 281 contra linha 362 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 06/10/2026 17:30,
+  (linha 298 contra linha 360 de `index.html`).
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 06/10/2026 21:31,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
