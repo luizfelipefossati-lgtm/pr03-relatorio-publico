@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 07/10/2026 09:31** (`2026-10-07T09:31:15-03:00`)
+> **Última atualização do snapshot: 07/10/2026 10:30** (`2026-10-07T10:30:49-03:00`)
 
 ---
 
@@ -62,16 +62,16 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 07/10/2026 09:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 07/10/2026 10:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-- **Nenhuma alteração nos dados desde a geração anterior (06/10, 21:31 BRT).** Os seis
+- **Nenhuma alteração nos dados desde a geração anterior (07/10, 09:31 BRT).** Os seis
   conjuntos de out/2026 e a lista de projetos foram reconsultados ao vivo e nada se moveu:
   `planned` 29, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2, projetos 21.
   Nenhuma chave entrou ou saiu de nenhum conjunto e a comparação semântica campo a campo
   (`summary`, `status.name`, `status.statusCategory.key`, `project.key`, `project.name`,
   `duedate`, `resolutiondate`, `updated`), insensível à ordem dos registros, não acusou
   nenhuma divergência — nem mesmo em `updated`. O epic `EG291-4`, que havia se movido na
-  rodada anterior, permanece com `updated` em 06/10 16:26 BRT. Como os conteúdos conferiram
+  rodada de 06/10, permanece com `updated` em 06/10 16:26 BRT. Como os conteúdos conferiram
   por hash canônico, os arquivos de `_snap/` foram preservados byte a byte; `index.html` e
   `snapshot-data.js` mudam apenas no carimbo de geração.
 - Cada um dos seis conjuntos de out/2026 foi coletado em **uma única consulta** nesta rodada,
@@ -162,10 +162,10 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-07T09:31:15-03:00` (linha 18).
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-07T10:30:49-03:00` (linha 18).
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (linha 298 contra linha 360 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 07/10/2026 09:31,
+  (linha 298 contra linha 363 de `index.html`).
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 07/10/2026 10:30,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
