@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 07/10/2026 16:30** (`2026-10-07T16:30:59-03:00`)
+> **Última atualização do snapshot: 07/10/2026 17:30** (`2026-10-07T17:30:54-03:00`)
 
 ---
 
@@ -47,14 +47,14 @@ Mês corrente (out/2026) — servido pela interceptação de JQL (`window.cowork
 
 | Conjunto | Escopo | Registros | Geração anterior |
 |---|---|---:|---:|
-| `planned_2026-10` | Epics com due date em out/2026 | 15 | 15 |
-| `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | **2** | 3 |
-| `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | 32 | 32 |
-| `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | **4** | 3 |
-| `resolved_2026-10` | Concluídos em out/2026 | **4** | 3 |
-| `rework_2026-10` | Retrabalho em out/2026 | **3** | 2 |
+| `planned_2026-10` | Epics com due date em out/2026 | **14** | 15 |
+| `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 2 | 2 |
+| `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | **33** | 32 |
+| `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | 4 | 4 |
+| `resolved_2026-10` | Concluídos em out/2026 | 4 | 4 |
+| `rework_2026-10` | Retrabalho em out/2026 | 3 | 3 |
 
-Visão acumulada (`planned` por mês): mai/2026 = 7 · jun/2026 = 1 · jul/2026 = 10 · ago/2026 = 4 · set/2026 = 8 · out/2026 = 15.
+Visão acumulada (`planned` por mês): mai/2026 = 7 · jun/2026 = 1 · jul/2026 = 10 · ago/2026 = 4 · set/2026 = 8 · out/2026 = 14.
 
 Os meses de **abr/2026 a jun/2026** continuam vindo do histórico já congelado dentro do
 artifact (`window.__HISTORY__`), preservado sem alteração. **Jul/2026, ago/2026 e set/2026** são
@@ -62,28 +62,24 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 07/10/2026 16:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 07/10/2026 17:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-### Entrega do `EG0240-5` — única alteração desta rodada
+### Reprogramação do `EG0286-22` — única alteração desta rodada
 
-Às **16:01 BRT de hoje (07/10)**, depois da geração anterior (15:32 BRT), o epic
-**`EG0240-5` — TOMO VI - PLANO DE AÇÃO EMERGENCIAL (PAE)** (projeto EG0240 - GOITÁ/ COMPESA)
-passou para "Enviado - Aguardando Análise". Ele vinha em atraso desde **30/09** e migra de um
-conjunto para outro:
+Às **16:39 BRT de hoje (07/10)**, depois da geração anterior (16:30 BRT), o epic
+**`EG0286-22`** (projeto EG0286 - DNIT/AC), que estava em "Tarefas pendentes" com due date de
+outubro, foi **reprogramado para 31/12/2026**. Com isso ele troca de conjunto:
 
 | Conjunto | Antes | Agora | Efeito |
 |---|---:|---:|---|
-| `overdue_2026-10` | 3 | **2** | `EG0240-5` sai do atraso acumulado |
-| `sent_2026-10` | 3 | **4** | `EG0240-5` entra nos envios do mês |
-| `resolved_2026-10` | 3 | **4** | idem, com `resolutiondate` 07/10 16:01 |
-| `rework_2026-10` | 2 | **3** | o epic já havia saído de "Enviado" antes, logo conta como retrabalho |
+| `planned_2026-10` | 15 | **14** | `EG0286-22` sai do previsto de outubro |
+| `lookahead_2026-10` | 32 | **33** | `EG0286-22` entra na janela nov–dez/2026 |
 
-Os conjuntos `planned_2026-10` e `lookahead_2026-10` e a lista de projetos ficaram **idênticos**
-à geração anterior, conferidos por hash canônico campo a campo. A reprogramação em massa de
-outubro registrada na rodada das 15:32 (15 epics movidos para nov–dez/2026 e jan/2027) segue
-refletida nos números e não foi alterada.
+Os conjuntos `overdue_2026-10`, `sent_2026-10`, `resolved_2026-10`, `rework_2026-10` e a lista de
+projetos ficaram **idênticos** à geração anterior, conferidos por hash canônico campo a campo.
+A entrega do `EG0240-5` registrada às 16:01 segue refletida nos números de envio.
 
-Esta é uma mudança de **entrega**, não de planejamento — o oposto da rodada anterior.
+Esta é uma mudança de **planejamento**, não de entrega.
 
 ### Demais conferências
 
@@ -101,8 +97,8 @@ Esta é uma mudança de **entrega**, não de planejamento — o oposto da rodada
   A pasta `Artifacts` segue sendo uma **localização protegida** (dados internos do Claude) e não
   pode ser lida por caminho de arquivo a partir de uma sessão Cowork. Nesta rodada, como nas
   anteriores, o HTML ao vivo do Live Artifact foi obtido pela via de *staging* de artifact
-  (`list_legacy_live_artifacts` + `device_stage_files` por `artifact_ids`, 87.509 bytes) e
-  conferido contra a cópia versionada: **idêntico, byte a byte**.
+  (`device_stage_files` por `artifact_ids`, 87.509 bytes) e conferido contra a cópia versionada:
+  **idêntico, byte a byte**.
 - `getVisibleJiraProjects`: **reconsultado ao vivo** — `total` = 21, `isLast` = true. Reduzido à
   mesma forma mínima e comparado por hash canônico contra `_projects_min.json`: idêntico, o
   arquivo não precisou ser reescrito. Os dois tipos de nível Epic seguem sendo `Epic` e
@@ -118,16 +114,17 @@ Esta é uma mudança de **entrega**, não de planejamento — o oposto da rodada
 
 ### Quadro de outubro/2026 (7º dia do mês)
 
-15 epics com due date em outubro — 13 em andamento/revisão (11 "Em andamento" + 2 "Em Revisão"),
-1 em "Tarefas pendentes" e 1 já enviado dentro do próprio mês.
-Distribuição por projeto: G0280 = 5 · EG0286 = 5 · EG0274 = 2 · EG0256 = 2 · EG291 = 1.
+14 epics com due date em outubro — 13 em andamento/revisão (11 "Em andamento" + 2 "Em Revisão")
+e 1 já enviado dentro do próprio mês. Não há mais nenhum em "Tarefas pendentes" no mês, depois
+da reprogramação do `EG0286-22`.
+Distribuição por projeto: G0280 = 5 · EG0286 = 4 · EG0274 = 2 · EG0256 = 2 · EG291 = 1.
 
-Indicadores do mês na geração: **OTD 7%** (1 de 15), **retrabalho 75%** (3 de 4 envios),
-**14 pendências do mês** e **2 em atraso acumulado**.
+Indicadores do mês na geração: **OTD 7%** (1 de 14), **retrabalho 75%** (3 de 4 envios),
+**13 pendências do mês** e **2 em atraso acumulado**.
 
-O OTD permanece em 7%: o único envio com due date de outubro continua sendo `EG0286-7`, e a
-entrega de hoje (`EG0240-5`) tem due date de setembro, portanto não entra no numerador nem no
-denominador do mês. O retrabalho subiu de 67% para 75% porque o novo envio também é reenvio.
+O OTD permanece arredondado em 7%: o único envio com due date de outubro continua sendo
+`EG0286-7`, e a saída do `EG0286-22` apenas reduz o denominador de 15 para 14. O retrabalho fica
+em 75%, sem alteração nos envios.
 
 O mês acumula **4 envios**, sendo **3 classificados como retrabalho**:
 
@@ -141,7 +138,7 @@ O mês acumula **4 envios**, sendo **3 classificados como retrabalho**:
 Três dos quatro eram entregas que vinham em atraso de setembro; `EG0286-7` é a única entrega com
 due date do próprio mês de outubro — e a única que conta no OTD até aqui.
 
-**2 EPICs em atraso acumulado** permanecem em outubro, um a menos que na geração anterior:
+**2 EPICs em atraso acumulado** permanecem em outubro, sem alteração:
 
 | EPIC | Projeto | Due date | Status |
 |---|---|---|---|
@@ -150,10 +147,10 @@ due date do próprio mês de outubro — e a única que conta no OTD até aqui.
 
 ### Lookahead nov–dez/2026
 
-32 epics, concentrados em **EG0274 = 11** e **EG0286 = 9**, seguidos de EG0285 = 4, EG0294 = 3 e
+33 epics, concentrados em **EG0274 = 11** e **EG0286 = 10**, seguidos de EG0285 = 4, EG0294 = 3 e
 um cada em G0280, EG0275, EG0241, EG0240 e EG0239. Por mês: **nov/2026 = 11** e
-**dez/2026 = 21**, dos quais 19 têm due date entre 16 e 31/12 — concentração herdada da
-reprogramação registrada na rodada das 15:32.
+**dez/2026 = 22**, dos quais 20 têm due date entre 16 e 31/12 — concentração herdada da
+reprogramação registrada na rodada das 15:32 e reforçada hoje pelo `EG0286-22` (31/12).
 
 ### Setembro/2026, congelado
 
@@ -180,65 +177,28 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-07T16:30:59-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-07T17:30:54-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (linha 298 contra linha 360 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 07/10/2026 16:30,
+  (linha 283 contra linha 374 de `index.html`).
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 07/10/2026 17:30,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
   resolvem para o conjunto correto, sem *fallback* para lista vazia, e nenhum padrão ficou órfão
   (11 padrões para 11 conjuntos embutidos).
 - Contagens dos conjuntos do mês corrente conferidas contra os arquivos de `_snap/`:
-  `planned` 15, `overdue` 2, `lookahead` 32, `sent` 4, `resolved` 4, `rework` 3.
+  `planned` 14, `overdue` 2, `lookahead` 33, `sent` 4, `resolved` 4, `rework` 3.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é idêntico ao das rodadas anteriores — a última verificada em Chromium headless
-  sem erros de script — e apenas os dados de `overdue`/`sent`/`resolved`/`rework` e o carimbo
-  mudaram.
+  sem erros de script — e apenas os dados de `planned`/`lookahead` e o carimbo mudaram.
 - Nenhuma ocorrência de `avatarUrls`, `iconUrl`, `emailAddress` ou domínio de e-mail no arquivo
   publicado, e nenhuma URL da `api.atlassian.com`. A única ocorrência da palavra `accountId` é o
   comentário do próprio gerador ("Nao contem accountIds").
-- **Recursos carregados** de host externo: apenas `cdn.jsdelivr.net` (Chart.js). A varredura de
-  `src="http…"` não encontra nenhum outro.
-- **Nenhuma chamada de rede no runtime**: zero ocorrências de `fetch(`, `XMLHttpRequest`,
-  `EventSource` ou `sendBeacon` em todo o `index.html` — não há como a página consultar o Jira.
-  As menções a `projetos-engeplus.atlassian.net` vêm do artifact original e são inertes: o rótulo
-  da fonte no rodapé e a base `…/browse/` usada para montar os links clicáveis das chaves dos
-  epics (`<a target="_blank">`, destino de clique, não requisição).
-- `index.html` com 163.737 bytes (159,9 KB); `snapshot-data.js` com 75.951 bytes (74,2 KB).
 
-## Abas disponíveis
-
-- **Setembro 2026** — período encerrado, dados congelados no fechamento do período.
-- **Outubro 2026** — mês corrente; os dados são os do instante da geração do snapshot.
-- **Visão Acumulada** — mai/2026 a out/2026 (padrão: últimos 6 meses).
-
-## Estrutura
-
-| Arquivo | Função |
-|---|---|
-| `index.html` | Página publicada, auto-contida (HTML + dados + lógica). |
-| `snapshot-data.js` | Cópia avulsa do bloco de dados embutido, para inspeção. |
-| `_gen_snapshot.py`, `_snap/`, `_projects_min.json` | Insumos e gerador de execuções anteriores. |
-| `auto-push.ps1`, `install-task.ps1` e afins | Automação local de commit/push no Windows. |
-
-A única dependência externa da página é o Chart.js via CDN (`cdn.jsdelivr.net`), usado para os gráficos.
+---
 
 ## Publicação
 
-O commit e o push são feitos automaticamente pela tarefa do Windows Task Scheduler
-`PR03-Auto-Push-GitHub`, que verifica o working tree a cada 30 minutos.
-O deploy no Vercel ocorre cerca de 1 minuto após o push.
-
-## Privacidade
-
-Os conjuntos de dados embutidos contêm apenas: chave do epic, resumo, status (nome e categoria),
-projeto (chave e nome), due date, data de resolução e data de atualização.
-**Não** incluem `accountId`, e-mails, avatares, descrições em ADF nem `iconUrl`.
-
-## Observação sobre os status de envio
-
-As consultas `sent` e `rework` casam exatamente a string `Enviado - Aguardando Análise`.
-O Jira da organização possui variantes distintas desse status em alguns projetos
-(`Enviado- Aguardando Análise`, `Enviado - Aguardando Análise1`), que **não** são contabilizadas
-nessas consultas. Esse comportamento é o mesmo do artifact ao vivo e foi preservado no snapshot.
+O `index.html` e este `README.md` são gravados no *working tree* por esta rotina. O
+`git commit`/`push` é feito separadamente pela tarefa `PR03-Auto-Push-GitHub` do Windows Task
+Scheduler, a cada 30 minutos, e o deploy no Vercel segue o push.
