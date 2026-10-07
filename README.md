@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 07/10/2026 10:30** (`2026-10-07T10:30:49-03:00`)
+> **Última atualização do snapshot: 07/10/2026 11:30** (`2026-10-07T11:30:31-03:00`)
 
 ---
 
@@ -48,7 +48,7 @@ Mês corrente (out/2026) — servido pela interceptação de JQL (`window.cowork
 | Conjunto | Escopo | Registros |
 |---|---|---:|
 | `planned_2026-10` | Epics com due date em out/2026 | 29 |
-| `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 2 |
+| `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 3 |
 | `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | 21 |
 | `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | 3 |
 | `resolved_2026-10` | Concluídos em out/2026 | 3 |
@@ -62,11 +62,11 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 07/10/2026 10:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 07/10/2026 11:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 - **Nenhuma alteração nos dados desde a geração anterior (07/10, 09:31 BRT).** Os seis
   conjuntos de out/2026 e a lista de projetos foram reconsultados ao vivo e nada se moveu:
-  `planned` 29, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2, projetos 21.
+  `planned` 29, `overdue` 3, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2, projetos 21.
   Nenhuma chave entrou ou saiu de nenhum conjunto e a comparação semântica campo a campo
   (`summary`, `status.name`, `status.statusCategory.key`, `project.key`, `project.name`,
   `duedate`, `resolutiondate`, `updated`), insensível à ordem dos registros, não acusou
@@ -116,8 +116,9 @@ Geração em 07/10/2026 10:30 BRT, com consulta ao vivo ao Jira via MCP Atlassia
 Distribuição por projeto: EG0286 = 11 · EG0274 = 10 · G0280 = 5 · EG0256 = 2 · EG291 = 1.
 
 Indicadores do mês na geração: **OTD 3%** (1 de 29), **retrabalho 67%** (2 de 3 envios),
-**28 pendências do mês** e **2 em atraso acumulado**. A queda do OTD de 4% para 3% é efeito
-apenas do denominador — o epic novo aumenta a base de previstos sem alterar o numerador.
+**28 pendências do mês** e **3 em atraso acumulado**. O atraso acumulado subiu de 2 para 3
+nesta geração: `EG0240-4` (TOMO V - PRE, due 10/09) foi alterado no Jira às 10:38 BRT de hoje
+e voltou a contar como não concluído. OTD e retrabalho não mudaram.
 
 O mês acumula **3 envios**, sendo **2 classificados como retrabalho**:
 
@@ -130,11 +131,12 @@ O mês acumula **3 envios**, sendo **2 classificados como retrabalho**:
 Os dois primeiros eram entregas que vinham em atraso de setembro; `EG0286-7` é a primeira
 entrega com due date do próprio mês de outubro — e a única que conta no OTD até aqui.
 
-**2 EPICs em atraso acumulado** permanecem em outubro:
+**3 EPICs em atraso acumulado** permanecem em outubro:
 
 | EPIC | Projeto | Due date | Status |
 |---|---|---|---|
 | `EG0239-28` | EG0239 | 2026-08-10 | Em Revisão |
+| `EG0240-4` | EG0240 | 2026-09-10 | Em Revisão |
 | `EG0240-5` | EG0240 | 2026-09-30 | Em Revisão |
 
 ### Setembro/2026, congelado
@@ -162,17 +164,17 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-07T10:30:49-03:00` (linha 18).
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-07T11:30:31-03:00` (linha 18).
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298 contra linha 363 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 07/10/2026 10:30,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 07/10/2026 11:30,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
   resolvem para o conjunto correto, sem *fallback* para lista vazia, e nenhum padrão ficou órfão
   (11 padrões para 11 conjuntos embutidos).
 - Contagens dos conjuntos do mês corrente conferidas contra os arquivos de `_snap/`:
-  `planned` 29, `overdue` 2, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2.
+  `planned` 29, `overdue` 3, `lookahead` 21, `sent` 3, `resolved` 3, `rework` 2.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é idêntico ao das rodadas anteriores — a última verificada em Chromium headless
   sem erros de script — e a única diferença de dados é o carimbo `updated` de `EG291-4`, que não
