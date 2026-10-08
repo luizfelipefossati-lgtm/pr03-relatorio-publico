@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 08/10/2026 09:32** (`2026-10-08T09:32:12-03:00`)
+> **Última atualização do snapshot: 08/10/2026 10:32** (`2026-10-08T10:32:48-03:00`)
 
 ---
 
@@ -47,9 +47,9 @@ Mês corrente (out/2026) — servido pela interceptação de JQL (`window.cowork
 
 | Conjunto | Escopo | Registros | Geração anterior |
 |---|---|---:|---:|
-| `planned_2026-10` | Epics com due date em out/2026 | **14** | 15 |
+| `planned_2026-10` | Epics com due date em out/2026 | 14 | 14 |
 | `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 2 | 2 |
-| `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | **33** | 32 |
+| `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | 33 | 33 |
 | `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | 4 | 4 |
 | `resolved_2026-10` | Concluídos em out/2026 | 4 | 4 |
 | `rework_2026-10` | Retrabalho em out/2026 | 3 | 3 |
@@ -62,13 +62,13 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 08/10/2026 09:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 08/10/2026 10:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhuma alteração nesta rodada
 
 Os **seis conjuntos** de out/2026 (`planned`, `overdue`, `lookahead`, `sent`, `resolved`,
 `rework`) e a lista de projetos visíveis ficaram **idênticos** à geração anterior
-(07/10 17:30 BRT), conferidos por hash canônico campo a campo:
+(08/10 09:32 BRT), conferidos por hash canônico campo a campo:
 
 | Conjunto | Registros | Situação |
 |---|---:|---|
@@ -80,7 +80,7 @@ Os **seis conjuntos** de out/2026 (`planned`, `overdue`, `lookahead`, `sent`, `r
 | `rework_2026-10` | 3 | idêntico |
 | projetos visíveis | 21 | idêntico |
 
-Não houve movimentação no Jira entre 07/10 17:30 e 08/10 09:32 BRT que afete o relatório.
+Não houve movimentação no Jira entre 08/10 09:32 e 08/10 10:32 BRT que afete o relatório.
 O snapshot foi **regerado apenas para atualizar o carimbo de geração**.
 
 ### Demais conferências
@@ -179,10 +179,10 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-08T09:32:12-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-08T10:32:48-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298 contra linha 360 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 08/10/2026 09:32,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 08/10/2026 10:32,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
@@ -192,7 +192,7 @@ Checagens desta rodada (contagens e carimbos reconferidos após a geração):
   `planned` 14, `overdue` 2, `lookahead` 33, `sent` 4, `resolved` 4, `rework` 3.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é idêntico ao das rodadas anteriores — a última verificada em Chromium headless
-  sem erros de script — e apenas os dados de `planned`/`lookahead` e o carimbo mudaram.
+  sem erros de script — e nesta rodada apenas o carimbo de geração mudou.
 - Nenhuma ocorrência de `avatarUrls`, `iconUrl`, `emailAddress` ou domínio de e-mail no arquivo
   publicado, e nenhuma URL da `api.atlassian.com`. A única ocorrência da palavra `accountId` é o
   comentário do próprio gerador ("Nao contem accountIds").
