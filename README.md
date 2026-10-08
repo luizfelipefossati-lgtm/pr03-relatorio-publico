@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 08/10/2026 13:31** (`2026-10-08T13:31:09-03:00`)
+> **Última atualização do snapshot: 08/10/2026 14:30** (`2026-10-08T14:30:51-03:00`)
 
 ---
 
@@ -62,7 +62,7 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 08/10/2026 13:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 08/10/2026 14:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhuma alteração de dados nesta rodada
 
@@ -183,10 +183,10 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-08T13:31:09-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-08T14:30:51-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298, contra a linha 363 do `window.__HISTORY__` do artifact).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 08/10/2026 13:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 08/10/2026 14:30,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
