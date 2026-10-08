@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 07/10/2026 17:30** (`2026-10-07T17:30:54-03:00`)
+> **Última atualização do snapshot: 08/10/2026 09:32** (`2026-10-08T09:32:12-03:00`)
 
 ---
 
@@ -62,24 +62,26 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 07/10/2026 17:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 08/10/2026 09:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-### Reprogramação do `EG0286-22` — única alteração desta rodada
+### Nenhuma alteração nesta rodada
 
-Às **16:39 BRT de hoje (07/10)**, depois da geração anterior (16:30 BRT), o epic
-**`EG0286-22`** (projeto EG0286 - DNIT/AC), que estava em "Tarefas pendentes" com due date de
-outubro, foi **reprogramado para 31/12/2026**. Com isso ele troca de conjunto:
+Os **seis conjuntos** de out/2026 (`planned`, `overdue`, `lookahead`, `sent`, `resolved`,
+`rework`) e a lista de projetos visíveis ficaram **idênticos** à geração anterior
+(07/10 17:30 BRT), conferidos por hash canônico campo a campo:
 
-| Conjunto | Antes | Agora | Efeito |
-|---|---:|---:|---|
-| `planned_2026-10` | 15 | **14** | `EG0286-22` sai do previsto de outubro |
-| `lookahead_2026-10` | 32 | **33** | `EG0286-22` entra na janela nov–dez/2026 |
+| Conjunto | Registros | Situação |
+|---|---:|---|
+| `planned_2026-10` | 14 | idêntico |
+| `overdue_2026-10` | 2 | idêntico |
+| `lookahead_2026-10` | 33 | idêntico |
+| `sent_2026-10` | 4 | idêntico |
+| `resolved_2026-10` | 4 | idêntico |
+| `rework_2026-10` | 3 | idêntico |
+| projetos visíveis | 21 | idêntico |
 
-Os conjuntos `overdue_2026-10`, `sent_2026-10`, `resolved_2026-10`, `rework_2026-10` e a lista de
-projetos ficaram **idênticos** à geração anterior, conferidos por hash canônico campo a campo.
-A entrega do `EG0240-5` registrada às 16:01 segue refletida nos números de envio.
-
-Esta é uma mudança de **planejamento**, não de entrega.
+Não houve movimentação no Jira entre 07/10 17:30 e 08/10 09:32 BRT que afete o relatório.
+O snapshot foi **regerado apenas para atualizar o carimbo de geração**.
 
 ### Demais conferências
 
@@ -177,10 +179,10 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-07T17:30:54-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-08T09:32:12-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (linha 283 contra linha 374 de `index.html`).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 07/10/2026 17:30,
+  (linha 298 contra linha 360 de `index.html`).
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 08/10/2026 09:32,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
