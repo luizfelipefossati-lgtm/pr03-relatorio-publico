@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 08/10/2026 14:30** (`2026-10-08T14:30:51-03:00`)
+> **Última atualização do snapshot: 08/10/2026 15:30** (`2026-10-08T15:30:41-03:00`)
 
 ---
 
@@ -62,16 +62,16 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 08/10/2026 14:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 08/10/2026 15:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhuma alteração de dados nesta rodada
 
 As seis consultas do mês corrente e o `getVisibleJiraProjects` foram reexecutados ao vivo e
-comparados por hash canônico contra a geração anterior (12:31): **os sete conjuntos vieram
+comparados por hash canônico contra a geração anterior (14:30): **os sete conjuntos vieram
 idênticos**. O Jira não registrou movimentação de EPICs na última hora — é a segunda rodada
 consecutiva sem alteração de dados.
 
-| Conjunto | Registros | Situação vs. 12:31 |
+| Conjunto | Registros | Situação vs. 14:30 |
 |---|---:|---|
 | `planned_2026-10` | 12 | idêntico |
 | `overdue_2026-10` | 2 | idêntico |
@@ -183,10 +183,10 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-08T14:30:51-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-08T15:30:41-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298, contra a linha 363 do `window.__HISTORY__` do artifact).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 08/10/2026 14:30,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 08/10/2026 15:30,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
