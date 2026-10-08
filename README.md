@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 08/10/2026 16:32** (`2026-10-08T16:32:42-03:00`)
+> **Última atualização do snapshot: 08/10/2026 17:32** (`2026-10-08T17:32:39-03:00`)
 
 ---
 
@@ -62,16 +62,16 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 08/10/2026 16:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 08/10/2026 17:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhuma alteração de dados nesta rodada
 
 As seis consultas do mês corrente e o `getVisibleJiraProjects` foram reexecutados ao vivo e
-comparados por hash canônico contra a geração anterior (15:30): **os sete conjuntos vieram
-idênticos**. O Jira não registrou movimentação de EPICs na última hora — é a terceira rodada
+comparados por hash canônico contra a geração anterior (16:32): **os sete conjuntos vieram
+idênticos**. O Jira não registrou movimentação de EPICs na última hora — é a quarta rodada
 consecutiva sem alteração de dados.
 
-| Conjunto | Registros | Situação vs. 15:30 |
+| Conjunto | Registros | Situação vs. 16:32 |
 |---|---:|---|
 | `planned_2026-10` | 12 | idêntico |
 | `overdue_2026-10` | 2 | idêntico |
@@ -93,6 +93,8 @@ efeito da reprogramação dos dois EPICs do EG0256 (`EG0256-30` para 19/12/2026 
   `updated`) e `pageInfo.hasNextPage = false` em todas. As respostas de `lookahead` e de
   `getVisibleJiraProjects` excederam o limite de tokens e foram reduzidas aos campos essenciais
   sobre o arquivo salvo pelo runtime, conforme o procedimento previsto; as demais couberam inline.
+  O `getVisibleJiraProjects` desta rodada reproduziu byte a byte o `_projects_min.json` em disco
+  (MD5 `441303882ffb1810eb9c6fb1337b974d`), que por isso não foi regravado.
 - A comparação com a geração anterior usa hash canônico campo a campo (`summary`, `status.name`,
   `status.statusCategory.key`, `project.key`, `project.name`, `duedate`, `resolutiondate`,
   `updated`), insensível à ordem dos registros.
@@ -183,10 +185,10 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-08T16:32:42-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-08T17:32:39-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (linha 298, contra a linha 363 do `window.__HISTORY__` do artifact).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 08/10/2026 16:32,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 08/10/2026 17:32,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
