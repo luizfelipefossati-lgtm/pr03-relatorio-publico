@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 08/10/2026 11:31** (`2026-10-08T11:31:23-03:00`)
+> **Última atualização do snapshot: 08/10/2026 12:31** (`2026-10-08T12:31:42-03:00`)
 
 ---
 
@@ -62,35 +62,28 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 08/10/2026 11:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 08/10/2026 12:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-### Reprogramação de dois EPICs do EG0256
+### Nenhuma alteração de dados nesta rodada
 
-Esta rodada registra a **primeira alteração de dados desde 05/10**: os dois EPICs do projeto
-EG0256 que tinham due date em outubro foram reprogramados no Jira hoje de manhã, minutos antes
-desta geração, e saíram do mês corrente.
+As seis consultas do mês corrente e o `getVisibleJiraProjects` foram reexecutados ao vivo e
+comparados por hash canônico contra a geração anterior (11:31): **os sete conjuntos vieram
+idênticos**. O Jira não registrou movimentação de EPICs na última hora.
 
-| EPIC | Resumo | Due date anterior | Due date novo | Atualizado em |
-|---|---|---|---|---|
-| `EG0256-30` | Diagnóstico Ambiental - Meio Antrópico | out/2026 | **2026-12-19** | 08/10 11:14 |
-| `EG0256-28` | Diagnóstico Ambiental - Meio Físico - Recursos Hídricos | out/2026 | **2027-01-29** | 08/10 11:13 |
+| Conjunto | Registros | Situação vs. 11:31 |
+|---|---:|---|
+| `planned_2026-10` | 12 | idêntico |
+| `overdue_2026-10` | 2 | idêntico |
+| `lookahead_2026-10` | 34 | idêntico |
+| `sent_2026-10` | 4 | idêntico |
+| `resolved_2026-10` | 4 | idêntico |
+| `rework_2026-10` | 3 | idêntico |
+| projetos visíveis | 21 | idêntico |
 
-Ambos seguem **"Em andamento"**, sem resolução — é reprogramação de prazo, não entrega.
-Efeito nos conjuntos:
-
-| Conjunto | Registros | Antes | Situação |
-|---|---:|---:|---|
-| `planned_2026-10` | 12 | 14 | **alterado** — saíram `EG0256-28` e `EG0256-30` |
-| `lookahead_2026-10` | 34 | 33 | **alterado** — entrou `EG0256-30` (19/12) |
-| `overdue_2026-10` | 2 | 2 | idêntico |
-| `sent_2026-10` | 4 | 4 | idêntico |
-| `resolved_2026-10` | 4 | 4 | idêntico |
-| `rework_2026-10` | 3 | 3 | idêntico |
-| projetos visíveis | 21 | 21 | idêntico |
-
-`EG0256-28` não aparece em nenhum dos dois conjuntos de outubro: com due date em **jan/2027**,
-cai fora tanto do mês corrente quanto da janela de *lookahead* (nov–dez/2026). O projeto EG0256,
-que respondia por 2 dos 14 previstos do mês, **deixa de ter EPICs em outubro**.
+O único conteúdo que muda no `index.html` publicado é o **carimbo de geração** (comentário no
+`<head>` e banner no rodapé). O quadro de outubro descrito abaixo permanece válido, incluindo o
+efeito da reprogramação dos dois EPICs do EG0256 (`EG0256-30` para 19/12/2026 e `EG0256-28` para
+29/01/2027), registrada na rodada das 11:31 desta mesma manhã.
 
 ### Demais conferências
 
@@ -132,9 +125,9 @@ Distribuição por projeto: G0280 = 5 · EG0286 = 4 · EG0274 = 2 · EG291 = 1.
 Indicadores do mês na geração: **OTD 8%** (1 de 12), **retrabalho 75%** (3 de 4 envios),
 **11 pendências do mês** e **2 em atraso acumulado**.
 
-O OTD sobe de 7% para 8% **sem nenhuma entrega nova**: o único envio com due date de outubro
-continua sendo `EG0286-7`, e a saída dos dois EPICs do EG0256 apenas reduz o denominador de 14
-para 12. O retrabalho fica em 75%, sem alteração nos envios.
+O OTD segue em 8%, estável desde a geração das 11:31: o único envio com due date de outubro
+continua sendo `EG0286-7`, e o denominador permanece em 12 após a saída dos dois EPICs do EG0256.
+O retrabalho fica em 75%, sem alteração nos envios.
 
 O mês acumula **4 envios**, sendo **3 classificados como retrabalho**:
 
@@ -161,8 +154,8 @@ due date do próprio mês de outubro — e a única que conta no OTD até aqui.
 um cada em G0280, EG0275, EG0256, EG0241, EG0240 e EG0239. Por mês: **nov/2026 = 11** e
 **dez/2026 = 23**, dos quais 21 têm due date entre 16 e 31/12.
 
-A concentração de dezembro, já registrada nas rodadas anteriores, **aumenta nesta geração** com a
-chegada do `EG0256-30` (19/12): dois terços do lookahead caem na segunda quinzena de dezembro.
+A concentração de dezembro **mantém-se** no patamar alcançado na rodada das 11:31, com a chegada
+do `EG0256-30` (19/12): dois terços do lookahead caem na segunda quinzena de dezembro.
 
 ### Setembro/2026, congelado
 
@@ -189,9 +182,9 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-08T11:31:23-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-08T12:31:42-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 08/10/2026 11:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 08/10/2026 12:31,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
@@ -201,7 +194,7 @@ Checagens desta rodada (contagens e carimbos reconferidos após a geração):
   `planned` 12, `overdue` 2, `lookahead` 34, `sent` 4, `resolved` 4, `rework` 3.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é idêntico ao das rodadas anteriores — a última verificada em Chromium headless
-  sem erros de script — e nesta rodada mudaram o carimbo de geração e os dois conjuntos acima.
+  sem erros de script — e nesta rodada mudou apenas o carimbo de geração.
 - Nenhuma ocorrência de `avatarUrls`, `iconUrl`, `emailAddress` ou domínio de e-mail no arquivo
   publicado, e nenhuma URL da `api.atlassian.com`. A única ocorrência da palavra `accountId` é o
   comentário do próprio gerador ("Nao contem accountIds").
