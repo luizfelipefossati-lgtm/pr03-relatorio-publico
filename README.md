@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 08/10/2026 12:31** (`2026-10-08T12:31:42-03:00`)
+> **Última atualização do snapshot: 08/10/2026 13:31** (`2026-10-08T13:31:09-03:00`)
 
 ---
 
@@ -47,9 +47,9 @@ Mês corrente (out/2026) — servido pela interceptação de JQL (`window.cowork
 
 | Conjunto | Escopo | Registros | Geração anterior |
 |---|---|---:|---:|
-| `planned_2026-10` | Epics com due date em out/2026 | 12 | 14 |
+| `planned_2026-10` | Epics com due date em out/2026 | 12 | 12 |
 | `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 2 | 2 |
-| `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | 34 | 33 |
+| `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | 34 | 34 |
 | `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | 4 | 4 |
 | `resolved_2026-10` | Concluídos em out/2026 | 4 | 4 |
 | `rework_2026-10` | Retrabalho em out/2026 | 3 | 3 |
@@ -62,15 +62,16 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 08/10/2026 12:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 08/10/2026 13:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhuma alteração de dados nesta rodada
 
 As seis consultas do mês corrente e o `getVisibleJiraProjects` foram reexecutados ao vivo e
-comparados por hash canônico contra a geração anterior (11:31): **os sete conjuntos vieram
-idênticos**. O Jira não registrou movimentação de EPICs na última hora.
+comparados por hash canônico contra a geração anterior (12:31): **os sete conjuntos vieram
+idênticos**. O Jira não registrou movimentação de EPICs na última hora — é a segunda rodada
+consecutiva sem alteração de dados.
 
-| Conjunto | Registros | Situação vs. 11:31 |
+| Conjunto | Registros | Situação vs. 12:31 |
 |---|---:|---|
 | `planned_2026-10` | 12 | idêntico |
 | `overdue_2026-10` | 2 | idêntico |
@@ -182,9 +183,10 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-08T12:31:42-03:00`.
-- Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 08/10/2026 12:31,
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-08T13:31:09-03:00`.
+- Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
+  (linha 298, contra a linha 363 do `window.__HISTORY__` do artifact).
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 08/10/2026 13:31,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
@@ -196,8 +198,10 @@ Checagens desta rodada (contagens e carimbos reconferidos após a geração):
   HTML-fonte é idêntico ao das rodadas anteriores — a última verificada em Chromium headless
   sem erros de script — e nesta rodada mudou apenas o carimbo de geração.
 - Nenhuma ocorrência de `avatarUrls`, `iconUrl`, `emailAddress` ou domínio de e-mail no arquivo
-  publicado, e nenhuma URL da `api.atlassian.com`. A única ocorrência da palavra `accountId` é o
-  comentário do próprio gerador ("Nao contem accountIds").
+  publicado, e nenhuma URL da `api.atlassian.com` — a única URL da Atlassian é a base
+  `https://projetos-engeplus.atlassian.net/browse/`, usada para montar os links dos EPICs. A
+  única ocorrência da palavra `accountId` é o comentário do próprio gerador
+  ("Nao contem accountIds").
 
 ---
 
