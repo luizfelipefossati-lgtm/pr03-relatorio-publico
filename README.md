@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 08/10/2026 19:32** (`2026-10-08T19:32:30-03:00`)
+> **Última atualização do snapshot: 09/10/2026 09:16** (`2026-10-09T09:16:05-03:00`)
 
 ---
 
@@ -62,16 +62,16 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 08/10/2026 19:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 09/10/2026 09:16 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhuma alteração de dados nesta rodada
 
 As seis consultas do mês corrente e o `getVisibleJiraProjects` foram reexecutados ao vivo e
-comparados por hash canônico contra a geração anterior (19:23): **os sete conjuntos vieram
-idênticos**. O Jira não registrou movimentação de EPICs na última hora — é a quinta rodada
-consecutiva sem alteração de dados.
+comparados por hash canônico contra a geração anterior (08/10, 19:32): **os sete conjuntos
+vieram idênticos**. O Jira não registrou movimentação de EPICs desde ontem à noite — é a sexta
+rodada consecutiva sem alteração de dados.
 
-| Conjunto | Registros | Situação vs. 19:23 |
+| Conjunto | Registros | Situação vs. 08/10 19:32 |
 |---|---:|---|
 | `planned_2026-10` | 12 | idêntico |
 | `overdue_2026-10` | 2 | idêntico |
@@ -84,7 +84,7 @@ consecutiva sem alteração de dados.
 O único conteúdo que muda no `index.html` publicado é o **carimbo de geração** (comentário no
 `<head>` e banner no rodapé). O quadro de outubro descrito abaixo permanece válido, incluindo o
 efeito da reprogramação dos dois EPICs do EG0256 (`EG0256-30` para 19/12/2026 e `EG0256-28` para
-29/01/2027), registrada na rodada das 11:31 desta mesma manhã.
+29/01/2027), registrada na rodada de 08/10 às 11:31.
 
 ### Demais conferências
 
@@ -119,7 +119,7 @@ efeito da reprogramação dos dois EPICs do EG0256 (`EG0256-30` para 19/12/2026 
   o texto do prompt agendado ao filtro real** — a ressalva se repete desde rodadas anteriores.
 - Meses congelados (≤ set/2026) **não** são reconsultados, por projeto.
 
-### Quadro de outubro/2026 (8º dia do mês)
+### Quadro de outubro/2026 (9º dia do mês)
 
 12 epics com due date em outubro — 11 em andamento/revisão (9 "Em andamento" + 2 "Em Revisão")
 e 1 já enviado dentro do próprio mês. Nenhum em "Tarefas pendentes".
@@ -185,10 +185,10 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-08T19:32:30-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-09T09:16:05-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (linha 298, contra a linha 363 do `window.__HISTORY__` do artifact).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 08/10/2026 19:32,
+  (linha 298, contra a linha 360 do `window.__HISTORY__` do artifact).
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 09/10/2026 09:16,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
