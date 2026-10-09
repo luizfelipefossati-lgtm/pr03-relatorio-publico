@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 09/10/2026 11:32** (`2026-10-09T11:32:36-03:00`)
+> **Última atualização do snapshot: 09/10/2026 12:30** (`2026-10-09T12:30:29-03:00`)
 
 ---
 
@@ -47,11 +47,11 @@ Mês corrente (out/2026) — servido pela interceptação de JQL (`window.cowork
 
 | Conjunto | Escopo | Registros | Geração anterior |
 |---|---|---:|---:|
-| `planned_2026-10` | Epics com due date em out/2026 | 13 | 12 |
-| `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 0 | 2 |
+| `planned_2026-10` | Epics com due date em out/2026 | 13 | 13 |
+| `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 0 | 0 |
 | `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | 34 | 34 |
 | `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | 4 | 4 |
-| `resolved_2026-10` | Concluídos em out/2026 | 5 | 4 |
+| `resolved_2026-10` | Concluídos em out/2026 | 5 | 5 |
 | `rework_2026-10` | Retrabalho em out/2026 | 3 | 3 |
 
 Visão acumulada (`planned` por mês): mai/2026 = 7 · jun/2026 = 1 · jul/2026 = 10 · ago/2026 = 4 · set/2026 = 8 · out/2026 = 13.
@@ -62,39 +62,31 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 09/10/2026 11:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 09/10/2026 12:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-### Três conjuntos alterados nesta rodada
+### Nenhum conjunto alterado nesta rodada
 
 As seis consultas do mês corrente e o `getVisibleJiraProjects` foram reexecutados ao vivo e
-comparados por hash canônico contra a geração anterior (09/10, 09:32). Depois de seis rodadas
-sem movimento, **o Jira voltou a registrar alterações**: `planned`, `overdue` e `resolved`
-mudaram; `lookahead`, `sent`, `rework` e os projetos visíveis vieram idênticos.
+comparados por hash canônico contra a geração anterior (09/10, 11:32). **Todos os sete vieram
+idênticos** — o Jira não registrou movimento no intervalo, depois das três mudanças da rodada
+anterior (`EG0239-28` concluído e `EG0240-4` reprogramado para 16/10).
 
-| Conjunto | Registros | Situação vs. 09/10 09:32 |
+| Conjunto | Registros | Situação vs. 09/10 11:32 |
 |---|---:|---|
-| `planned_2026-10` | 13 | **alterado** (+ `EG0240-4`) |
-| `overdue_2026-10` | 0 | **alterado** (− `EG0239-28`, − `EG0240-4`) |
+| `planned_2026-10` | 13 | idêntico |
+| `overdue_2026-10` | 0 | idêntico (lista vazia) |
 | `lookahead_2026-10` | 34 | idêntico |
 | `sent_2026-10` | 4 | idêntico |
-| `resolved_2026-10` | 5 | **alterado** (+ `EG0239-28`) |
+| `resolved_2026-10` | 5 | idêntico |
 | `rework_2026-10` | 3 | idêntico |
 | projetos visíveis | 21 | idêntico |
 
-As três mudanças têm a mesma origem e são coerentes entre si:
+Os arquivos de `_snap/` e o `_projects_min.json` não precisaram ser regravados. Entre a geração
+anterior e esta, mudou apenas o carimbo de tempo do `index.html` e deste `README.md`.
 
-- **`EG0239-28`** (TOMO V — PRE, EG0239 CARPINA/COMPESA) foi concluído em 09/10 às 09:36 BRT,
-  com status `Enviado - Aguardando Análise1`. Sai de `overdue` (deixou de ser `statusCategory
-  != Done`) e entra em `resolved`. Como a grafia do status tem o sufixo `1`, ele **não** é
-  capturado pela consulta `sent`, que casa o nome canônico — a mesma divergência de grafia já
-  registrada nas seções abaixo, agora com efeito visível no número de envios do mês.
-- **`EG0240-4`** (TOMO V — PRE, EG0240 GOITÁ/COMPESA) teve a due date reprogramada de
-  **10/09/2026 para 16/10/2026** (atualização em 09/10 às 09:35 BRT). Sai de `overdue` e passa
-  a contar como previsto de outubro, o que explica `planned` indo de 12 para 13.
-
-Com isso **outubro fica sem nenhum EPIC em atraso** — `overdue_2026-10` é uma lista vazia pela
-primeira vez no mês. O efeito da reprogramação dos dois EPICs do EG0256 (`EG0256-30` para
-19/12/2026 e `EG0256-28` para 29/01/2027), registrada na rodada de 08/10 às 11:31, segue valendo.
+Outubro segue **sem nenhum EPIC em atraso acumulado** — `overdue_2026-10` continua vazio desde a
+rodada das 11:32. O efeito da reprogramação dos dois EPICs do EG0256 (`EG0256-30` para 19/12/2026
+e `EG0256-28` para 29/01/2027), registrada na rodada de 08/10 às 11:31, segue valendo.
 
 ### Demais conferências
 
@@ -131,16 +123,16 @@ primeira vez no mês. O efeito da reprogramação dos dois EPICs do EG0256 (`EG0
 
 ### Quadro de outubro/2026 (9º dia do mês)
 
-12 epics com due date em outubro — 11 em andamento/revisão (9 "Em andamento" + 2 "Em Revisão")
+13 epics com due date em outubro — 12 em andamento/revisão (9 "Em andamento" + 3 "Em Revisão")
 e 1 já enviado dentro do próprio mês. Nenhum em "Tarefas pendentes".
-Distribuição por projeto: G0280 = 5 · EG0286 = 4 · EG0274 = 2 · EG291 = 1.
+Distribuição por projeto: G0280 = 5 · EG0286 = 4 · EG0274 = 2 · EG0240 = 1 · EG291 = 1.
 
-Indicadores do mês na geração: **OTD 8%** (1 de 12), **retrabalho 75%** (3 de 4 envios),
-**11 pendências do mês** e **2 em atraso acumulado**.
+Indicadores do mês na geração: **OTD 8%** (1 de 13), **retrabalho 75%** (3 de 4 envios),
+**12 pendências do mês** e **nenhum em atraso acumulado**.
 
-O OTD segue em 8%, estável desde a geração das 11:31: o único envio com due date de outubro
-continua sendo `EG0286-7`, e o denominador permanece em 12 após a saída dos dois EPICs do EG0256.
-O retrabalho fica em 75%, sem alteração nos envios.
+O OTD permanece em 8%: o único envio com due date de outubro continua sendo `EG0286-7`, e o
+denominador subiu para 13 com a entrada de `EG0240-4`, reprogramado para 16/10. O retrabalho
+fica em 75%, sem alteração nos envios.
 
 O mês acumula **4 envios**, sendo **3 classificados como retrabalho**:
 
@@ -154,12 +146,10 @@ O mês acumula **4 envios**, sendo **3 classificados como retrabalho**:
 Três dos quatro eram entregas que vinham em atraso de setembro; `EG0286-7` é a única entrega com
 due date do próprio mês de outubro — e a única que conta no OTD até aqui.
 
-**2 EPICs em atraso acumulado** permanecem em outubro, sem alteração:
-
-| EPIC | Projeto | Due date | Status |
-|---|---|---|---|
-| `EG0239-28` | EG0239 | 2026-08-10 | Em Revisão |
-| `EG0240-4` | EG0240 | 2026-09-10 | Em Revisão |
+**Nenhum EPIC em atraso acumulado** em outubro: `overdue_2026-10` é uma lista vazia. Os dois que
+constavam até a rodada das 09:32 saíram do conjunto — `EG0239-28` foi concluído em 09/10 às 09:36
+e `EG0240-4` teve a due date reprogramada de 10/09 para 16/10, passando a contar como previsto do
+próprio mês.
 
 ### Lookahead nov–dez/2026
 
@@ -167,7 +157,7 @@ due date do próprio mês de outubro — e a única que conta no OTD até aqui.
 um cada em G0280, EG0275, EG0256, EG0241, EG0240 e EG0239. Por mês: **nov/2026 = 11** e
 **dez/2026 = 23**, dos quais 21 têm due date entre 16 e 31/12.
 
-A concentração de dezembro **mantém-se** no patamar alcançado na rodada das 11:31, com a chegada
+A concentração de dezembro **mantém-se** no patamar alcançado na rodada de 08/10 às 11:31, com a chegada
 do `EG0256-30` (19/12): dois terços do lookahead caem na segunda quinzena de dezembro.
 
 ### Setembro/2026, congelado
@@ -195,10 +185,10 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-09T11:32:36-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-09T12:30:29-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (posição 95.138 do arquivo, contra 97.581 do `window.__HISTORY__` do artifact).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 09/10/2026 11:32,
+  (posição 95.131 do arquivo, contra 97.581 do `window.__HISTORY__` do artifact).
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 09/10/2026 12:30,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
