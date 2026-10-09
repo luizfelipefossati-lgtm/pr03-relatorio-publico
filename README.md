@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 09/10/2026 09:16** (`2026-10-09T09:16:05-03:00`)
+> **Última atualização do snapshot: 09/10/2026 10:33** (`2026-10-09T10:33:36-03:00`)
 
 ---
 
@@ -47,14 +47,14 @@ Mês corrente (out/2026) — servido pela interceptação de JQL (`window.cowork
 
 | Conjunto | Escopo | Registros | Geração anterior |
 |---|---|---:|---:|
-| `planned_2026-10` | Epics com due date em out/2026 | 12 | 12 |
-| `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 2 | 2 |
+| `planned_2026-10` | Epics com due date em out/2026 | 13 | 12 |
+| `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 0 | 2 |
 | `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | 34 | 34 |
 | `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | 4 | 4 |
-| `resolved_2026-10` | Concluídos em out/2026 | 4 | 4 |
+| `resolved_2026-10` | Concluídos em out/2026 | 5 | 4 |
 | `rework_2026-10` | Retrabalho em out/2026 | 3 | 3 |
 
-Visão acumulada (`planned` por mês): mai/2026 = 7 · jun/2026 = 1 · jul/2026 = 10 · ago/2026 = 4 · set/2026 = 8 · out/2026 = 12.
+Visão acumulada (`planned` por mês): mai/2026 = 7 · jun/2026 = 1 · jul/2026 = 10 · ago/2026 = 4 · set/2026 = 8 · out/2026 = 13.
 
 Os meses de **abr/2026 a jun/2026** continuam vindo do histórico já congelado dentro do
 artifact (`window.__HISTORY__`), preservado sem alteração. **Jul/2026, ago/2026 e set/2026** são
@@ -62,29 +62,39 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 09/10/2026 09:16 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 09/10/2026 10:33 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-### Nenhuma alteração de dados nesta rodada
+### Três conjuntos alterados nesta rodada
 
 As seis consultas do mês corrente e o `getVisibleJiraProjects` foram reexecutados ao vivo e
-comparados por hash canônico contra a geração anterior (08/10, 19:32): **os sete conjuntos
-vieram idênticos**. O Jira não registrou movimentação de EPICs desde ontem à noite — é a sexta
-rodada consecutiva sem alteração de dados.
+comparados por hash canônico contra a geração anterior (09/10, 09:32). Depois de seis rodadas
+sem movimento, **o Jira voltou a registrar alterações**: `planned`, `overdue` e `resolved`
+mudaram; `lookahead`, `sent`, `rework` e os projetos visíveis vieram idênticos.
 
-| Conjunto | Registros | Situação vs. 08/10 19:32 |
+| Conjunto | Registros | Situação vs. 09/10 09:32 |
 |---|---:|---|
-| `planned_2026-10` | 12 | idêntico |
-| `overdue_2026-10` | 2 | idêntico |
+| `planned_2026-10` | 13 | **alterado** (+ `EG0240-4`) |
+| `overdue_2026-10` | 0 | **alterado** (− `EG0239-28`, − `EG0240-4`) |
 | `lookahead_2026-10` | 34 | idêntico |
 | `sent_2026-10` | 4 | idêntico |
-| `resolved_2026-10` | 4 | idêntico |
+| `resolved_2026-10` | 5 | **alterado** (+ `EG0239-28`) |
 | `rework_2026-10` | 3 | idêntico |
 | projetos visíveis | 21 | idêntico |
 
-O único conteúdo que muda no `index.html` publicado é o **carimbo de geração** (comentário no
-`<head>` e banner no rodapé). O quadro de outubro descrito abaixo permanece válido, incluindo o
-efeito da reprogramação dos dois EPICs do EG0256 (`EG0256-30` para 19/12/2026 e `EG0256-28` para
-29/01/2027), registrada na rodada de 08/10 às 11:31.
+As três mudanças têm a mesma origem e são coerentes entre si:
+
+- **`EG0239-28`** (TOMO V — PRE, EG0239 CARPINA/COMPESA) foi concluído em 09/10 às 09:36 BRT,
+  com status `Enviado - Aguardando Análise1`. Sai de `overdue` (deixou de ser `statusCategory
+  != Done`) e entra em `resolved`. Como a grafia do status tem o sufixo `1`, ele **não** é
+  capturado pela consulta `sent`, que casa o nome canônico — a mesma divergência de grafia já
+  registrada nas seções abaixo, agora com efeito visível no número de envios do mês.
+- **`EG0240-4`** (TOMO V — PRE, EG0240 GOITÁ/COMPESA) teve a due date reprogramada de
+  **10/09/2026 para 16/10/2026** (atualização em 09/10 às 09:35 BRT). Sai de `overdue` e passa
+  a contar como previsto de outubro, o que explica `planned` indo de 12 para 13.
+
+Com isso **outubro fica sem nenhum EPIC em atraso** — `overdue_2026-10` é uma lista vazia pela
+primeira vez no mês. O efeito da reprogramação dos dois EPICs do EG0256 (`EG0256-30` para
+19/12/2026 e `EG0256-28` para 29/01/2027), registrada na rodada de 08/10 às 11:31, segue valendo.
 
 ### Demais conferências
 
@@ -93,8 +103,8 @@ efeito da reprogramação dos dois EPICs do EG0256 (`EG0256-30` para 19/12/2026 
   `updated`) e `pageInfo.hasNextPage = false` em todas. As respostas de `lookahead` e de
   `getVisibleJiraProjects` excederam o limite de tokens e foram reduzidas aos campos essenciais
   sobre o arquivo salvo pelo runtime, conforme o procedimento previsto; as demais couberam inline.
-  O `getVisibleJiraProjects` desta rodada reproduziu byte a byte o `_projects_min.json` em disco
-  (MD5 `441303882ffb1810eb9c6fb1337b974d`), que por isso não foi regravado.
+  O `getVisibleJiraProjects` desta rodada reproduziu o `_projects_min.json` em disco (hash
+  canônico `cc7b94d5a1583c3c97cfc229`), que por isso não foi regravado.
 - A comparação com a geração anterior usa hash canônico campo a campo (`summary`, `status.name`,
   `status.statusCategory.key`, `project.key`, `project.name`, `duedate`, `resolutiondate`,
   `updated`), insensível à ordem dos registros.
@@ -185,17 +195,17 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-09T09:16:05-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-09T10:33:36-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (linha 298, contra a linha 360 do `window.__HISTORY__` do artifact).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 09/10/2026 09:16,
+  (posição 95.138 do arquivo, contra 97.581 do `window.__HISTORY__` do artifact).
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 09/10/2026 10:33,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
   resolvem para o conjunto correto, sem *fallback* para lista vazia, e nenhum padrão ficou órfão
   (11 padrões para 11 conjuntos embutidos).
 - Contagens dos conjuntos do mês corrente conferidas contra os arquivos de `_snap/`:
-  `planned` 12, `overdue` 2, `lookahead` 34, `sent` 4, `resolved` 4, `rework` 3.
+  `planned` 13, `overdue` 0 (lista vazia), `lookahead` 34, `sent` 4, `resolved` 5, `rework` 3.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é idêntico ao das rodadas anteriores — a última verificada em Chromium headless
   sem erros de script — e nesta rodada mudou apenas o carimbo de geração.
