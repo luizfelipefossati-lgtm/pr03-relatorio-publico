@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 09/10/2026 17:31** (`2026-10-09T17:31:00-03:00`)
+> **Última atualização do snapshot: 09/10/2026 18:31** (`2026-10-09T18:31:44-03:00`)
 
 ---
 
@@ -62,17 +62,17 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 09/10/2026 17:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 09/10/2026 18:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto alterado nesta rodada
 
 As seis consultas do mês corrente e o `getVisibleJiraProjects` foram reexecutados ao vivo e
-comparados por hash canônico do conjunto completo contra a geração anterior (09/10, 16:30).
-**Todos os sete vieram idênticos** — sexta rodada consecutiva sem movimento no Jira, depois
-das três mudanças registradas às 11:32 (`EG0239-28` concluído e `EG0240-4` reprogramado para
-16/10).
+comparados byte a byte, após regravação, contra a versão anterior dos mesmos arquivos
+(geração de 09/10, 17:31, já versionada). **Todos os sete vieram idênticos** — sétima rodada
+consecutiva sem movimento no Jira, depois das três mudanças registradas às 11:32 (`EG0239-28`
+concluído e `EG0240-4` reprogramado para 16/10).
 
-| Conjunto | Registros | Situação vs. 09/10 16:30 |
+| Conjunto | Registros | Situação vs. 09/10 17:31 |
 |---|---:|---|
 | `planned_2026-10` | 13 | idêntico |
 | `overdue_2026-10` | 0 | idêntico (lista vazia) |
@@ -82,8 +82,11 @@ das três mudanças registradas às 11:32 (`EG0239-28` concluído e `EG0240-4` r
 | `rework_2026-10` | 3 | idêntico |
 | projetos visíveis | 21 | idêntico |
 
-Os arquivos de `_snap/` e o `_projects_min.json` não precisaram ser regravados. Entre a geração
-anterior e esta, mudou apenas o carimbo de tempo do `index.html` e deste `README.md`.
+Os arquivos de `_snap/` foram regravados com o resultado da coleta desta rodada e ficaram
+byte a byte iguais aos anteriores; o `_projects_min.json` foi conferido por comparação canônica
+contra o `getVisibleJiraProjects` desta rodada e, por ser idêntico, não foi regravado. Entre a
+geração anterior e esta, mudou apenas o carimbo de tempo do `index.html`, do `snapshot-data.js`
+e deste `README.md`.
 
 Outubro segue **sem nenhum EPIC em atraso acumulado** — `overdue_2026-10` continua vazio desde a
 rodada das 11:32. O efeito da reprogramação dos dois EPICs do EG0256 (`EG0256-30` para 19/12/2026
@@ -96,8 +99,9 @@ e `EG0256-28` para 29/01/2027), registrada na rodada de 08/10 às 11:31, segue v
   `updated`) e `pageInfo.hasNextPage = false` em todas. As respostas de `lookahead` e de
   `getVisibleJiraProjects` excederam o limite de tokens e foram reduzidas aos campos essenciais
   sobre o arquivo salvo pelo runtime, conforme o procedimento previsto; as demais couberam inline.
-  O `getVisibleJiraProjects` desta rodada reproduziu o `_projects_min.json` em disco (hash
-  canônico `cc7b94d5a1583c3c97cfc229`), que por isso não foi regravado.
+  O `getVisibleJiraProjects` desta rodada reproduziu o `_projects_min.json` em disco
+  (21 projetos, mesmos tipos de nível Epic: `Epic` e `Fluxo de trabalho`), que por isso não foi
+  regravado.
 - A comparação com a geração anterior usa hash canônico campo a campo (`summary`, `status.name`,
   `status.statusCategory.key`, `project.key`, `project.name`, `duedate`, `resolutiondate`,
   `updated`), insensível à ordem dos registros.
@@ -186,11 +190,11 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-09T17:31:00-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-09T18:31:44-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (`window.__SNAPSHOT__` na posição 95.131 do `index.html`, contra 97.581 do
+  (`window.__SNAPSHOT__` na posição 95.131 do `index.html`, contra 95.257 do
   `window.__HISTORY__` do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 09/10/2026 17:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 09/10/2026 18:31,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
