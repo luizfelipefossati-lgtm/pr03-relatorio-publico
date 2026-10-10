@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 10/10/2026 18:55** (`2026-10-10T18:55:43-03:00`)
+> **Última atualização do snapshot: 10/10/2026 19:30** (`2026-10-10T19:30:32-03:00`)
 
 ---
 
@@ -62,17 +62,17 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 10/10/2026 18:55 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 10/10/2026 19:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto alterado nesta rodada
 
 As seis consultas do mês corrente e o `getVisibleJiraProjects` foram reexecutados ao vivo e
-comparados por hash canônico contra a versão anterior dos mesmos arquivos (geração de 09/10,
-19:30, já versionada). **Todos os sete vieram idênticos** — nona rodada consecutiva sem
+comparados por hash canônico contra a versão anterior dos mesmos arquivos (geração de 10/10,
+18:55, já versionada). **Todos os sete vieram idênticos** — décima rodada consecutiva sem
 movimento no Jira, depois das três mudanças registradas em 09/10 às 11:32 (`EG0239-28`
 concluído e `EG0240-4` reprogramado para 16/10).
 
-| Conjunto | Registros | Situação vs. 09/10 19:30 |
+| Conjunto | Registros | Situação vs. 10/10 18:55 |
 |---|---:|---|
 | `planned_2026-10` | 13 | idêntico |
 | `overdue_2026-10` | 0 | idêntico (lista vazia) |
@@ -90,12 +90,13 @@ Outubro segue **sem nenhum EPIC em atraso acumulado** — `overdue_2026-10` cont
 rodada de 09/10 às 11:32. O efeito da reprogramação dos dois EPICs do EG0256 (`EG0256-30` para
 19/12/2026 e `EG0256-28` para 29/01/2027), registrada na rodada de 08/10 às 11:31, segue valendo.
 
-### Correção de indicador nesta rodada
+### Correção de indicador (mantida da geração de 10/10 18:55)
 
-As gerações anteriores publicaram o retrabalho de outubro como **75% (3 de 4)**, contando apenas
+Até a geração de 10/10 às 11:31, este README publicava o retrabalho de outubro como **75% (3 de 4)**, contando apenas
 os registros de `sent_2026-10` no denominador. O artifact usa outro denominador: ele monta a lista
 de envios pela **união de `sent` e `resolved`** (`allSent`), de modo que o painel exibe
-**60% (3 de 5)**. O texto deste README foi corrigido para refletir o que a página de fato mostra.
+**60% (3 de 5)**. O texto deste README foi corrigido na geração das 18:55 para refletir o que a
+página de fato mostra, e a correção segue valendo nesta rodada.
 O quinto item da união é o `EG0239-28`, que entra por `resolved` e não por `sent` porque seu
 status chama-se `Enviado - Aguardando Análise1` — uma terceira grafia, da mesma família da
 ressalva já registrada para o EG0285.
@@ -204,11 +205,11 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-10T18:55:43-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-10T19:30:32-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (`window.__SNAPSHOT__` na posição 95.131 do `index.html`, contra 97.581 do
+  (`window.__SNAPSHOT__` na posição 95.138 do `index.html`, contra 97.581 do
   `window.__HISTORY__` do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 10/10/2026 18:55,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 10/10/2026 19:30,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
