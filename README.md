@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 10/10/2026 20:32** (`2026-10-10T20:32:15-03:00`)
+> **Última atualização do snapshot: 10/10/2026 21:29** (`2026-10-10T21:29:49-03:00`)
 
 ---
 
@@ -62,17 +62,17 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 10/10/2026 20:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 10/10/2026 21:29 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto alterado nesta rodada
 
 As seis consultas do mês corrente e o `getVisibleJiraProjects` foram reexecutados ao vivo e
 comparados por hash canônico contra a versão anterior dos mesmos arquivos (geração de 10/10,
-19:30, já versionada). **Todos os sete vieram idênticos** — décima primeira rodada consecutiva
+20:32, já versionada). **Todos os sete vieram idênticos** — décima segunda rodada consecutiva
 sem movimento no Jira, depois das três mudanças registradas em 09/10 às 11:32 (`EG0239-28`
 concluído e `EG0240-4` reprogramado para 16/10).
 
-| Conjunto | Registros | Situação vs. 10/10 19:30 |
+| Conjunto | Registros | Situação vs. 10/10 20:32 |
 |---|---:|---|
 | `planned_2026-10` | 13 | idêntico |
 | `overdue_2026-10` | 0 | idêntico (lista vazia) |
@@ -82,13 +82,13 @@ concluído e `EG0240-4` reprogramado para 16/10).
 | `rework_2026-10` | 3 | idêntico |
 | projetos visíveis | 21 | idêntico |
 
-Além dos sete conjuntos acima, esta rodada reconsultou ao vivo os seis meses da **visão
-acumulada** (`planned_2026-05` a `planned_2026-10`). Maio, junho e outubro vieram idênticos aos
-arquivos em disco. Julho, agosto e setembro divergem da consulta ao vivo — e **devem divergir**:
-são meses congelados no fechamento do período, e as diferenças são exatamente as reprogramações
+A **visão acumulada** (`planned_2026-05` a `planned_2026-10`) não foi reconsultada ao vivo nesta
+rodada: outubro já é coberto pelo `planned_2026-10` acima, e maio a setembro são meses encerrados,
+servidos tal como estão em `_snap/`. Julho, agosto e setembro são, além disso, **congelados** no
+fechamento do período — divergem de propósito de uma consulta ao vivo, pelas reprogramações
 posteriores ao fechamento (`EG0274-38` e `EG0274-43` saíram de julho para outubro; `EG0286-7`
 saiu de agosto para outubro; `EG0240-4` saiu de setembro para 16/10). Pela regra de congelamento,
-esses arquivos **não** foram regravados: o histórico de OTD de cada mês continua refletindo o
+esses arquivos **não** são regravados: o histórico de OTD de cada mês continua refletindo o
 que estava previsto no fechamento daquele mês.
 
 Como a coleta desta rodada reproduziu exatamente os arquivos em disco, nenhum arquivo de
@@ -214,11 +214,11 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-10T20:32:15-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-10T21:29:49-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (`window.__SNAPSHOT__` na posição 95.138 do `index.html`, contra 97.581 do
   `window.__HISTORY__` do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 10/10/2026 20:32,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 10/10/2026 21:29,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
