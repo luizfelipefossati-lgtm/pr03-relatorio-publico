@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 10/10/2026 21:29** (`2026-10-10T21:29:49-03:00`)
+> **Última atualização do snapshot: 13/10/2026 09:31** (`2026-10-13T09:31:21-03:00`)
 
 ---
 
@@ -62,17 +62,19 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 10/10/2026 21:29 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 13/10/2026 09:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto alterado nesta rodada
 
 As seis consultas do mês corrente e o `getVisibleJiraProjects` foram reexecutados ao vivo e
-comparados por hash canônico contra a versão anterior dos mesmos arquivos (geração de 10/10,
-20:32, já versionada). **Todos os sete vieram idênticos** — décima segunda rodada consecutiva
-sem movimento no Jira, depois das três mudanças registradas em 09/10 às 11:32 (`EG0239-28`
-concluído e `EG0240-4` reprogramado para 16/10).
+comparados item a item contra a versão anterior dos mesmos arquivos (geração de 10/10,
+21:29, ainda **não** publicada — ver nota de publicação abaixo). **Todos os sete vieram
+idênticos** — décima terceira rodada consecutiva sem movimento no Jira, depois das três
+mudanças registradas em 09/10 às 11:32 (`EG0239-28` concluído e `EG0240-4` reprogramado
+para 16/10). Esta rodada cobre uma lacuna de agendamento: a geração anterior foi em 10/10
+às 21:29, quase três dias atrás.
 
-| Conjunto | Registros | Situação vs. 10/10 20:32 |
+| Conjunto | Registros | Situação vs. 10/10 21:29 |
 |---|---:|---|
 | `planned_2026-10` | 13 | idêntico |
 | `overdue_2026-10` | 0 | idêntico (lista vazia) |
@@ -90,6 +92,12 @@ posteriores ao fechamento (`EG0274-38` e `EG0274-43` saíram de julho para outub
 saiu de agosto para outubro; `EG0240-4` saiu de setembro para 16/10). Pela regra de congelamento,
 esses arquivos **não** são regravados: o histórico de OTD de cada mês continua refletindo o
 que estava previsto no fechamento daquele mês.
+
+> **Nota de publicação (13/10/2026).** O `PR03-Auto-Push-GitHub` parou em 10/10 às 23:57: a
+> última linha de `.push-watchdog.log` é `Empurrando para origin/main...` sem confirmação, e o
+> commit `ed2f177` segue **1 commit à frente** de `origin/main` (`6e7a43e`). O site publicado
+> portanto ainda serve a geração de 10/10 às 22:24. Enquanto a tarefa do Windows Task Scheduler
+> não voltar a rodar com sucesso, este `index.html` fica apenas no working tree local.
 
 Como a coleta desta rodada reproduziu exatamente os arquivos em disco, nenhum arquivo de
 `_snap/` nem o `_projects_min.json` precisou ser regravado. Entre a geração anterior e esta,
@@ -214,11 +222,11 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-10T21:29:49-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-13T09:31:21-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (`window.__SNAPSHOT__` na posição 95.138 do `index.html`, contra 97.581 do
   `window.__HISTORY__` do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 10/10/2026 21:29,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 13/10/2026 09:31,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
