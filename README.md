@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 13/10/2026 12:29** (`2026-10-13T12:29:50-03:00`)
+> **Última atualização do snapshot: 13/10/2026 13:31** (`2026-10-13T13:31:49-03:00`)
 
 ---
 
@@ -62,14 +62,15 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 13/10/2026 12:29 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 13/10/2026 13:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto alterado nesta rodada
 
 As seis consultas do mês corrente e o `getVisibleJiraProjects` foram reexecutados ao vivo e
-comparados item a item contra a versão anterior dos mesmos arquivos (geração de 13/10, 11:30).
-Os sete conjuntos vieram **idênticos**, inclusive na ordem dos registros: o Jira não registrou
-movimento entre 11:30 e 12:29. É a segunda rodada consecutiva sem movimento — o último evento
+comparados item a item — chave, resumo, status, categoria, due date, data de resolução e
+`updated`, na ordem em que o Jira devolve — contra a versão anterior dos mesmos arquivos
+(geração de 13/10, 12:29). Os sete conjuntos vieram **idênticos**: o Jira não registrou
+movimento entre 12:29 e 13:31. É a terceira rodada consecutiva sem movimento — o último evento
 captado continua sendo a reabertura de `EG0240-5`, das 09:51.
 
 Essa reabertura (`EG0240-5`, *TOMO VI - PLANO DE AÇÃO EMERGENCIAL (PAE)*, EG0240 - GOITÁ/ COMPESA),
@@ -77,7 +78,7 @@ captada na rodada das 10:32, **permanece**: o EPIC segue em `Em Revisão` sem `r
 com `updated = 2026-10-13T09:51:44.629-0300`, e continua sendo o único EPIC em atraso acumulado
 de outubro.
 
-| Conjunto | Registros | Situação vs. 13/10 11:30 |
+| Conjunto | Registros | Situação vs. 13/10 12:29 |
 |---|---:|---|
 | `planned_2026-10` | 13 | idêntico |
 | `overdue_2026-10` | 1 | idêntico |
@@ -85,7 +86,7 @@ de outubro.
 | `sent_2026-10` | 4 | idêntico |
 | `resolved_2026-10` | 4 | idêntico |
 | `rework_2026-10` | 3 | idêntico |
-| projetos visíveis | 21 | idêntico |
+| projetos visíveis | 21 | idêntico (hash `cc7b94d5a1583c3c97cfc229`) |
 
 Como a coleta desta rodada reproduziu exatamente os arquivos em disco, nenhum arquivo de
 `_snap/` nem o `_projects_min.json` precisou ser regravado. Entre a geração anterior e esta,
@@ -101,11 +102,12 @@ saiu de agosto para outubro; `EG0240-4` saiu de setembro para 16/10). Pela regra
 esses arquivos **não** são regravados: o histórico de OTD de cada mês continua refletindo o
 que estava previsto no fechamento daquele mês.
 
-> **Nota de publicação (13/10/2026, 12:29).** A cadeia de publicação segue íntegra. O
-> `.push-watchdog.log` registra três passagens desde a geração anterior — 12:04:34, 12:14:34 e
-> 12:24:34 — todas com `Commit OK` seguido de `Push OK e VERIFICADO` e `HEAD` sincronizado com
-> `origin/main`; a última foi o commit `3196def`. A geração das 11:30 foi, portanto, publicada.
-> Esta geração entra na próxima passagem da tarefa.
+> **Nota de publicação (13/10/2026, 13:31).** A cadeia de publicação segue íntegra. O
+> `.push-watchdog.log` registra seis passagens desde a geração anterior — 12:34:34, 12:44:33,
+> 12:54:34, 13:04:33, 13:14:33 e 13:24:33 — todas com `Commit OK` seguido de
+> `Push OK e VERIFICADO` e `HEAD` sincronizado com `origin/main`; a última foi o commit
+> `2ae8809`. A geração das 12:29 foi, portanto, publicada. Esta geração entra na próxima
+> passagem da tarefa.
 
 Outubro segue com **um EPIC em atraso acumulado** — `EG0240-5`, vencido em 30/09 e de novo
 `Em Revisão` desde 13/10 às 09:51. O efeito da reprogramação dos dois EPICs do EG0256
@@ -233,11 +235,11 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-13T12:29:50-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-13T13:31:49-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (`window.__SNAPSHOT__` na posição 95.025 do `index.html`, contra 97.475 do
   `window.__HISTORY__` do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 13/10/2026 12:29,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 13/10/2026 13:31,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
