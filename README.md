@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 13/10/2026 14:33** (`2026-10-13T14:33:49-03:00`)
+> **Última atualização do snapshot: 13/10/2026 15:30** (`2026-10-13T15:30:56-03:00`)
 
 ---
 
@@ -62,36 +62,57 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 13/10/2026 14:33 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 13/10/2026 15:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-### Nenhum conjunto alterado nesta rodada
+### Mudança de tipo de item no Jira — JQL do relatório corrigida nesta rodada
 
-As seis consultas do mês corrente e o `getVisibleJiraProjects` foram reexecutados ao vivo e
-comparados item a item — chave, resumo, status, categoria, due date, data de resolução e
-`updated` — contra a versão anterior dos mesmos arquivos (geração de 13/10, 13:31). Os sete
-conjuntos vieram **idênticos**: o Jira não registrou movimento entre 13:31 e 14:33. É a quarta
-rodada consecutiva sem movimento — o último evento captado continua sendo a reabertura de
-`EG0240-5`, das 09:51.
+Esta rodada começou com uma anomalia. As seis consultas do mês corrente, executadas com o
+predicado histórico `issuetype=Epic`, vieram **truncadas**: `planned` caiu de 13 para 8 itens,
+`lookahead` de 34 para 16, `sent` de 4 para 3, `resolved` de 4 para 3 e `rework` de 3 para 2.
+Todos os itens ausentes pertenciam a quatro projetos — **EG0285, EG0286, EG0294 e EG291**.
 
-Essa reabertura (`EG0240-5`, *TOMO VI - PLANO DE AÇÃO EMERGENCIAL (PAE)*, EG0240 - GOITÁ/ COMPESA),
-captada na rodada das 10:32, **permanece**: o EPIC segue em `Em Revisão` sem `resolutiondate`,
-com `updated = 2026-10-13T09:51:44.629-0300`, e continua sendo o único EPIC em atraso acumulado
-de outubro.
+A investigação descartou perda de dados e descartou perda de acesso:
 
-| Conjunto | Registros | Situação vs. 13/10 13:31 |
-|---|---:|---|
-| `planned_2026-10` | 13 | idêntico |
-| `overdue_2026-10` | 1 | idêntico |
-| `lookahead_2026-10` | 34 | idêntico (hash `76364d6bf9e470db6b21d812`) |
-| `sent_2026-10` | 4 | idêntico |
-| `resolved_2026-10` | 4 | idêntico |
-| `rework_2026-10` | 3 | idêntico |
-| projetos visíveis | 21 | idêntico (hash `b1de26860c7ecd1af394ca51`) |
+- `getVisibleJiraProjects` continua retornando **21 projetos**, os quatro inclusive, todos
+  navegáveis — ou seja, não houve mudança de permissão.
+- `project = EG0286` retorna **37 itens** normalmente, e `EG0286-7` é recuperável pelo
+  endpoint de issue com todos os campos íntegros.
 
-Como a coleta desta rodada reproduziu exatamente os arquivos em disco, nenhum arquivo de
-`_snap/` nem o `_projects_min.json` precisou ser regravado. Entre a geração anterior e esta,
-mudou apenas o carimbo de tempo do `index.html`, do `snapshot-data.js` e deste `README.md` —
-os dois primeiros, inclusive, mantiveram o mesmo tamanho em bytes (163.342 e 75.556).
+A causa é outra: nesses quatro projetos o **tipo de item deixou de se chamar `Epic` e passou a
+se chamar `Fluxo de trabalho`** (`issuetype` id 10737, `hierarchyLevel` 1). Os itens são os
+mesmos, com os mesmos campos; apenas não casam mais com o predicado `issuetype=Epic`. O
+relatório não perdeu dado nenhum — a consulta é que deixou de alcançá-lo.
+
+Com o predicado corrigido para `issuetype in (Epic, "Fluxo de trabalho")`, os seis conjuntos
+voltaram a reproduzir **exatamente** o cache em disco, item a item — chave, resumo, status,
+categoria, due date, data de resolução e `updated`:
+
+| Conjunto | Com `issuetype=Epic` | Com predicado corrigido | Cache em disco | Situação |
+|---|---:|---:|---:|---|
+| `planned_2026-10` | 8 | 13 | 13 | idêntico ao cache |
+| `overdue_2026-10` | 1 | 1 | 1 | idêntico ao cache |
+| `lookahead_2026-10` | 16 | 34 | 34 | idêntico ao cache |
+| `sent_2026-10` | 3 | 4 | 4 | idêntico ao cache |
+| `resolved_2026-10` | 3 | 4 | 4 | idêntico ao cache |
+| `rework_2026-10` | 2 | 3 | 3 | idêntico ao cache |
+| projetos visíveis | 21 | 21 | 21 | idêntico ao cache |
+
+Portanto **não houve movimento no Jira entre 14:33 e 15:30** — é a quinta rodada consecutiva
+sem movimento real. Nenhum arquivo de `_snap/` nem o `_projects_min.json` precisou ser
+regravado, e `index.html` e `snapshot-data.js` mantiveram o mesmo tamanho em bytes (163.342 e
+75.556), mudando apenas o carimbo de tempo. O snapshot publicado está **completo**: os 13
+EPICs previstos de outubro, os quatro projetos inclusive, seguem na página.
+
+A reabertura de `EG0240-5` (*TOMO VI - PLANO DE AÇÃO EMERGENCIAL (PAE)*, EG0240 - GOITÁ/
+COMPESA), captada na rodada das 10:32, **permanece**: segue em `Em Revisão` sem
+`resolutiondate`, com `updated = 2026-10-13T09:51:44.629-0300`.
+
+> **Pendência para o responsável.** O predicado `issuetype=Epic` está gravado no prompt da
+> tarefa agendada e continuará truncando os quatro projetos nas próximas rodadas. A troca por
+> `issuetype in (Epic, "Fluxo de trabalho")` nas seis consultas precisa ser feita no prompt da
+> tarefa — esta rodada aplicou a correção manualmente, mas ela não persiste sozinha. Enquanto
+> não for aplicada, uma rodada que confie no resultado bruto publicaria um relatório sem
+> EG0285, EG0286, EG0294 e EG291, inflando artificialmente o OTD.
 
 A **visão acumulada** (`planned_2026-05` a `planned_2026-10`) não foi reconsultada ao vivo nesta
 rodada: outubro já é coberto pelo `planned_2026-10` acima, e maio a setembro são meses encerrados,
@@ -102,11 +123,11 @@ saiu de agosto para outubro; `EG0240-4` saiu de setembro para 16/10). Pela regra
 esses arquivos **não** são regravados: o histórico de OTD de cada mês continua refletindo o
 que estava previsto no fechamento daquele mês.
 
-> **Nota de publicação (13/10/2026, 14:33).** A cadeia de publicação segue íntegra. O
-> `.push-watchdog.log` registra seis passagens desde a geração anterior — 13:34:34, 13:44:33,
-> 13:54:34, 14:04:34, 14:14:33 e 14:24:34 — todas com `Commit OK` seguido de
+> **Nota de publicação (13/10/2026, 15:30).** A cadeia de publicação segue íntegra. O
+> `.push-watchdog.log` registra seis passagens desde a geração anterior — 14:34:34, 14:44:34,
+> 14:54:34, 15:04:38, 15:14:38 e 15:24:34 — todas com `Commit OK` seguido de
 > `Push OK e VERIFICADO` e `HEAD` sincronizado com `origin/main`; a última foi o commit
-> `b340182`. A geração das 13:31 foi, portanto, publicada. Esta geração entra na próxima
+> `625c1e1`. A geração das 14:33 foi, portanto, publicada. Esta geração entra na próxima
 > passagem da tarefa.
 
 Outubro segue com **um EPIC em atraso acumulado** — `EG0240-5`, vencido em 30/09 e de novo
@@ -235,11 +256,11 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-13T14:33:49-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-13T15:30:56-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (`window.__SNAPSHOT__` na posição 95.025 do `index.html`, contra 97.475 do
   `window.__HISTORY__` do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 13/10/2026 14:33,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 13/10/2026 15:30,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
