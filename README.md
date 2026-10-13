@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 13/10/2026 09:31** (`2026-10-13T09:31:21-03:00`)
+> **Última atualização do snapshot: 13/10/2026 10:32** (`2026-10-13T10:32:27-03:00`)
 
 ---
 
@@ -48,10 +48,10 @@ Mês corrente (out/2026) — servido pela interceptação de JQL (`window.cowork
 | Conjunto | Escopo | Registros | Geração anterior |
 |---|---|---:|---:|
 | `planned_2026-10` | Epics com due date em out/2026 | 13 | 13 |
-| `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 0 | 0 |
+| `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | **1** | 0 |
 | `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | 34 | 34 |
 | `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | 4 | 4 |
-| `resolved_2026-10` | Concluídos em out/2026 | 5 | 5 |
+| `resolved_2026-10` | Concluídos em out/2026 | **4** | 5 |
 | `rework_2026-10` | Retrabalho em out/2026 | 3 | 3 |
 
 Visão acumulada (`planned` por mês): mai/2026 = 7 · jun/2026 = 1 · jul/2026 = 10 · ago/2026 = 4 · set/2026 = 8 · out/2026 = 13.
@@ -62,27 +62,33 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 13/10/2026 09:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 13/10/2026 10:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-### Nenhum conjunto alterado nesta rodada
+### Quatro conjuntos alterados: `EG0240-5` foi reaberto
 
 As seis consultas do mês corrente e o `getVisibleJiraProjects` foram reexecutados ao vivo e
-comparados item a item contra a versão anterior dos mesmos arquivos (geração de 10/10,
-21:29, ainda **não** publicada — ver nota de publicação abaixo). **Todos os sete vieram
-idênticos** — décima terceira rodada consecutiva sem movimento no Jira, depois das três
-mudanças registradas em 09/10 às 11:32 (`EG0239-28` concluído e `EG0240-4` reprogramado
-para 16/10). Esta rodada cobre uma lacuna de agendamento: a geração anterior foi em 10/10
-às 21:29, quase três dias atrás.
+comparados item a item contra a versão anterior dos mesmos arquivos (geração de 13/10, 09:31).
+Depois de treze rodadas consecutivas sem movimento, **o Jira mudou**: o EPIC `EG0240-5`
+(*TOMO VI - PLANO DE AÇÃO EMERGENCIAL (PAE)*, EG0240 - GOITÁ/ COMPESA) **saiu de
+`Enviado - Aguardando Análise` e voltou para `Em Revisão`** em 13/10 às 09:51 BRT
+(`updated = 2026-10-13T09:51:44.629-0300`), perdendo a `resolutiondate` que tinha desde
+07/10 às 16:01.
 
-| Conjunto | Registros | Situação vs. 10/10 21:29 |
+Como a due date dele é 30/09, a reabertura **reintroduz o primeiro EPIC em atraso acumulado de
+outubro**, depois de o conjunto ter ficado vazio desde a rodada de 09/10 às 11:32.
+
+| Conjunto | Registros | Situação vs. 13/10 09:31 |
 |---|---:|---|
 | `planned_2026-10` | 13 | idêntico |
-| `overdue_2026-10` | 0 | idêntico (lista vazia) |
+| `overdue_2026-10` | 1 | **alterado** — entra `EG0240-5` (lista estava vazia) |
 | `lookahead_2026-10` | 34 | idêntico |
-| `sent_2026-10` | 4 | idêntico |
-| `resolved_2026-10` | 5 | idêntico |
-| `rework_2026-10` | 3 | idêntico |
+| `sent_2026-10` | 4 | **alterado** — mesmos quatro keys; `EG0240-5` com novo status e sem `resolutiondate` |
+| `resolved_2026-10` | 4 | **alterado** — sai `EG0240-5` (era 5) |
+| `rework_2026-10` | 3 | **alterado** — mesmos três keys; `EG0240-5` com novo status |
 | projetos visíveis | 21 | idêntico |
+
+Os quatro arquivos alterados foram regravados em `_snap/`; `planned_2026-10`,
+`lookahead_2026-10` e `_projects_min.json` vieram idênticos e não foram tocados.
 
 A **visão acumulada** (`planned_2026-05` a `planned_2026-10`) não foi reconsultada ao vivo nesta
 rodada: outubro já é coberto pelo `planned_2026-10` acima, e maio a setembro são meses encerrados,
@@ -93,18 +99,14 @@ saiu de agosto para outubro; `EG0240-4` saiu de setembro para 16/10). Pela regra
 esses arquivos **não** são regravados: o histórico de OTD de cada mês continua refletindo o
 que estava previsto no fechamento daquele mês.
 
-> **Nota de publicação (13/10/2026).** O `PR03-Auto-Push-GitHub` parou em 10/10 às 23:57: a
-> última linha de `.push-watchdog.log` é `Empurrando para origin/main...` sem confirmação, e o
-> commit `ed2f177` segue **1 commit à frente** de `origin/main` (`6e7a43e`). O site publicado
-> portanto ainda serve a geração de 10/10 às 22:24. Enquanto a tarefa do Windows Task Scheduler
-> não voltar a rodar com sucesso, este `index.html` fica apenas no working tree local.
+> **Nota de publicação (13/10/2026, 10:32).** A parada do `PR03-Auto-Push-GitHub` registrada
+> na geração anterior **foi superada**. O `.push-watchdog.log` mostra commits e pushes
+> verificados de dez em dez minutos ao longo de toda a manhã de 13/10 — o último às 10:24:35,
+> com `Push OK e VERIFICADO`. `HEAD` e `origin/main` apontam ambos para `173e253`, sem commits
+> locais pendentes. Esta geração deve ser publicada na próxima passagem da tarefa.
 
-Como a coleta desta rodada reproduziu exatamente os arquivos em disco, nenhum arquivo de
-`_snap/` nem o `_projects_min.json` precisou ser regravado. Entre a geração anterior e esta,
-mudou apenas o carimbo de tempo do `index.html`, do `snapshot-data.js` e deste `README.md`.
-
-Outubro segue **sem nenhum EPIC em atraso acumulado** — `overdue_2026-10` continua vazio desde a
-rodada de 09/10 às 11:32. O efeito da reprogramação dos dois EPICs do EG0256 (`EG0256-30` para
+Outubro **volta a ter um EPIC em atraso acumulado** — `EG0240-5`, vencido em 30/09 e de novo
+`Em Revisão`. O efeito da reprogramação dos dois EPICs do EG0256 (`EG0256-30` para
 19/12/2026 e `EG0256-28` para 29/01/2027), registrada na rodada de 08/10 às 11:31, segue valendo.
 
 ### Correção de indicador (mantida da geração de 10/10 18:55)
@@ -160,11 +162,13 @@ e 1 já enviado dentro do próprio mês. Nenhum em "Tarefas pendentes".
 Distribuição por projeto: G0280 = 5 · EG0286 = 4 · EG0274 = 2 · EG0240 = 1 · EG291 = 1.
 
 Indicadores do mês na geração: **OTD 8%** (1 de 13), **retrabalho 60%** (3 de 5 envios),
-**12 pendências do mês** e **nenhum em atraso acumulado**.
+**12 pendências do mês** e **1 em atraso acumulado**.
 
 O OTD permanece em 8%: o único envio com due date de outubro continua sendo `EG0286-7`, e o
 denominador segue em 13 desde a entrada de `EG0240-4`, reprogramado para 16/10. O retrabalho
-fica em 60%, sem alteração nos envios.
+também fica em 60%: a reabertura de `EG0240-5` tirou o EPIC de `resolved`, mas ele continua em
+`sent` (a transição de 07/10 está no histórico e o `DURING` a enxerga), de modo que a união
+`sent` + `resolved` segue com cinco registros e três de retrabalho.
 
 O mês acumula **5 envios** no critério do painel (união de `sent` e `resolved`), sendo
 **3 classificados como retrabalho**:
@@ -174,7 +178,7 @@ O mês acumula **5 envios** no critério do painel (união de `sent` e `resolved
 | `EG0275-112` | EG0275 | 2026-09-04 | 02/10 09:27 | não |
 | `EG0241-42` | EG0241 | 2026-09-10 | 02/10 09:30 | sim |
 | `EG0286-7` | EG0286 | 2026-10-01 | 02/10 13:40 | sim |
-| `EG0240-5` | EG0240 | 2026-09-30 | 07/10 16:01 | sim |
+| `EG0240-5` | EG0240 | 2026-09-30 | 07/10 16:01 | sim — **reaberto em 13/10 09:51** |
 | `EG0239-28` | EG0239 | 2026-08-10 | 09/10 09:36 | não |
 
 Quatro dos cinco eram entregas que vinham em atraso de meses anteriores; `EG0286-7` é a única
@@ -182,11 +186,11 @@ entrega com due date do próprio mês de outubro — e a única que conta no OTD
 `EG0239-28` aparece apenas por `resolved`: seu status (`Enviado - Aguardando Análise1`) não casa
 a string exata usada pelas consultas `sent`/`rework`.
 
-**Nenhum EPIC em atraso acumulado** em outubro: `overdue_2026-10` é uma lista vazia. Os dois que
-constavam até a rodada de 09/10 às 09:32 saíram do conjunto — `EG0239-28` foi concluído em
-09/10 às 09:36
-e `EG0240-4` teve a due date reprogramada de 10/09 para 16/10, passando a contar como previsto do
-próprio mês.
+**Um EPIC em atraso acumulado** em outubro, pela primeira vez desde 09/10: `EG0240-5`, due date
+30/09, de volta a `Em Revisão`. O conjunto estava vazio porque os dois que constavam até a
+rodada de 09/10 às 09:32 havíam saído — `EG0239-28` concluído em 09/10 às 09:36 e `EG0240-4`
+reprogramado de 10/09 para 16/10. `EG0240-5` entra agora pelo caminho inverso: não por due date
+nova, mas por ter perdido a conclusão que já tinha.
 
 ### Lookahead nov–dez/2026
 
@@ -222,18 +226,18 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-13T09:31:21-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-13T10:32:27-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (`window.__SNAPSHOT__` na posição 95.138 do `index.html`, contra 97.581 do
+  (`window.__SNAPSHOT__` na posição 95.025 do `index.html`, contra 97.475 do
   `window.__HISTORY__` do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 13/10/2026 09:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 13/10/2026 10:32,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
   resolvem para o conjunto correto, sem *fallback* para lista vazia, e nenhum padrão ficou órfão
   (11 padrões para 11 conjuntos embutidos).
 - Contagens dos conjuntos do mês corrente conferidas contra os arquivos de `_snap/`:
-  `planned` 13, `overdue` 0 (lista vazia), `lookahead` 34, `sent` 4, `resolved` 5, `rework` 3.
+  `planned` 13, `overdue` 1, `lookahead` 34, `sent` 4, `resolved` 4, `rework` 3.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é idêntico ao das rodadas anteriores — a última verificada em Chromium headless
   sem erros de script — e nesta rodada mudou apenas o carimbo de geração.
@@ -249,4 +253,5 @@ Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
 O `index.html` e este `README.md` são gravados no *working tree* por esta rotina. O
 `git commit`/`push` é feito separadamente pela tarefa `PR03-Auto-Push-GitHub` do Windows Task
-Scheduler, a cada 30 minutos, e o deploy no Vercel segue o push.
+Scheduler — que, pelo `.push-watchdog.log`, vem rodando a cada **10 minutos** — e o deploy no
+Vercel segue o push.
