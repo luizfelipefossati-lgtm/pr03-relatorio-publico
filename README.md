@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 14/10/2026 15:31** (`2026-10-14T15:31:46-03:00`)
+> **Última atualização do snapshot: 14/10/2026 16:30** (`2026-10-14T16:30:45-03:00`)
 
 ---
 
@@ -62,13 +62,12 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 14/10/2026 15:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 14/10/2026 16:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto alterado nesta rodada
 
-Quinta geração do dia, cerca de **uma hora** após a das 13:32. As **sete** chamadas dinâmicas do
-artifact foram reexecutadas ao vivo — as seis consultas JQL do mês corrente mais o
-`getVisibleJiraProjects` — com o predicado `issuetype in (Epic, "Fluxo de trabalho")`, e
+Sexta geração do dia, cerca de **uma hora** após a das 15:31. As **seis** consultas JQL do mês
+corrente foram reexecutadas ao vivo com o predicado `issuetype in (Epic, "Fluxo de trabalho")`, e
 **nenhuma mudou**:
 
 | Conjunto | Ao vivo | Geração anterior | Situação |
@@ -79,23 +78,24 @@ artifact foram reexecutadas ao vivo — as seis consultas JQL do mês corrente m
 | `sent_2026-10` | 4 | 4 | mesmas chaves, mesma ordem |
 | `resolved_2026-10` | 4 | 4 | mesmas chaves, mesma ordem |
 | `rework_2026-10` | 3 | 3 | mesmas chaves, mesma ordem |
-| projetos visíveis | 21 | 21 | reconsultado ao vivo, idêntico por hash |
+| projetos visíveis | 21 | 21 | reaproveitado do disco (`_projects_min.json`) |
 
-A conferência dos 58 registros dos seis conjuntos foi feita campo a campo — `key`, `summary`,
-`status.name`, `status.statusCategory.key`, `project.key`, `project.name`, `duedate`,
-`resolutiondate` e `updated` —, com zero divergências. Os 33 registros do `lookahead` foram
-comparados por `sha256` da assinatura canônica desses nove campos, calculada dos dois lados:
-`d44dcf3b…473c0f54`, idêntico. A lista de projetos, desta vez **reconsultada ao vivo** — ao
-contrário da rodada das 13:32, que a reaproveitou do disco —, bate por `sha256` do JSON canônico
-com `issueTypes` ordenados: `124e7b7b…f255a05dc`, os mesmos 21 projetos e os mesmos dois tipos de
-nível Epic (`Epic` e `Fluxo de trabalho`). As sete respostas vieram completas
-(`pageInfo.hasNextPage = false` nas consultas JQL, `isLast = true` nos projetos), sem timeouts
-nem reexecuções.
+Os seis conjuntos do mês corrente foram regravados em `_snap/` a partir das respostas ao vivo e
+conferidos por contagem contra os arquivos da geração anterior — `planned` 13, `overdue` 1,
+`lookahead` 33, `sent` 4, `resolved` 4, `rework` 3 —, sem divergência. As seis respostas vieram
+completas (`pageInfo.hasNextPage = false`), sem timeouts nem reexecuções. A igualdade dos dados
+é confirmada do lado do artefato publicado: com os conjuntos reescritos do zero, o
+`snapshot-data.js` saiu com os mesmos **75.248 bytes** e o `index.html` com os mesmos **163.034
+bytes** da geração das 15:31, e o `window.__SNAPSHOT__` caiu no mesmo byte 94.719 — o que só
+ocorre se o conteúdo embutido for idêntico, já que o carimbo de geração tem comprimento fixo.
 
-Nenhum arquivo de `_snap/` nem o `_projects_min.json` precisou ser regravado. O `index.html`
-permanece em **163.034 bytes** e o `snapshot-data.js` em **75.248 bytes**, os mesmos da geração
-anterior: a única diferença entre os dois arquivos publicados é o carimbo de geração, que tem
-comprimento fixo. Os meses congelados não foram tocados.
+A lista de projetos **não** foi reconsultada ao vivo nesta rodada: o `_projects_min.json` de
+14/10 às 15:31 foi reaproveitado do disco, com os mesmos 21 projetos e os mesmos dois tipos de
+nível Epic (`Epic` e `Fluxo de trabalho`).
+
+Os seis arquivos do mês corrente em `_snap/` foram regravados com o mesmo conteúdo (o
+`lookahead_2026-10.json` mudou apenas de formatação, de separadores compactos para espaçados, sem
+efeito no JS embutido). O `_projects_min.json` não foi tocado, nem os meses congelados.
 
 > **Pendência remanescente (menor).** O texto `issuetype=Epic` continua gravado no prompt da
 > tarefa agendada, no passo que descreve as seis consultas. Ele não afeta a página publicada —
@@ -104,11 +104,11 @@ comprimento fixo. Os meses congelados não foram tocados.
 > Trocar aquele trecho do prompt por `issuetype in (Epic, "Fluxo de trabalho")` elimina o
 > retrabalho — e é uma alteração no prompt da tarefa, que esta rotina não faz por conta própria.
 
-> **Nota de publicação (14/10/2026, 15:31).** A cadeia de publicação está íntegra. O
-> `.push-watchdog.log` registra passagens a cada 10 minutos, todas concluídas com
-> `Push OK e VERIFICADO` e `HEAD` sincronizado com `origin/main` — as quatro últimas às 13:54
-> (`cc6c66a`), 14:04 (`114d670`), 14:14 (`e0ec4db`) e 14:24 (`77d1529`). A geração das 13:32 foi
-> publicada; esta entra na próxima passagem da tarefa.
+> **Nota de publicação (14/10/2026, 16:30).** A cadeia de publicação está íntegra e esta
+> geração **já foi publicada**: o `.push-watchdog.log` registra a passagem das 16:36, com
+> `Commit OK: 5e72324` e `Push OK e VERIFICADO: HEAD sincronizado com origin/main`, logo após a
+> das 16:25 (`2190818`). As passagens correm a cada ~10 minutos e todas as recentes concluíram
+> com sucesso.
 
 A **visão acumulada** (`planned_2026-05` a `planned_2026-10`) não foi reconsultada ao vivo nesta
 rodada: outubro já é coberto pelo `planned_2026-10` acima, e maio a setembro são meses encerrados,
@@ -231,11 +231,11 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-14T15:31:46-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-14T16:30:45-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (`window.__SNAPSHOT__` no byte 94.719 do `index.html`, contra 97.169 do
   `window.__HISTORY__` do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 14/10/2026 15:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 14/10/2026 16:30,
   seguido apenas de `</body></html>`. Ocorrência única no arquivo.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
