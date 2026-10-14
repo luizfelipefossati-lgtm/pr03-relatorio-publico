@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 14/10/2026 10:30** (`2026-10-14T10:30:40-03:00`)
+> **Última atualização do snapshot: 14/10/2026 11:33** (`2026-10-14T11:33:43-03:00`)
 
 ---
 
@@ -62,12 +62,12 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 14/10/2026 10:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 14/10/2026 11:33 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto alterado nesta rodada
 
-Segunda geração do dia, cerca de **uma hora** após a das 09:32. As sete chamadas dinâmicas
-foram reexecutadas ao vivo com o predicado `issuetype in (Epic, "Fluxo de trabalho")` e
+Terceira geração do dia, cerca de **uma hora** após a das 10:30. As sete chamadas dinâmicas
+foram reexecutadas ao vivo com o predicado `issuetype in ("Epic","Fluxo de trabalho")` e
 **nenhum conjunto mudou** — nem em relação à rodada anterior, nem ao cache em disco:
 
 | Conjunto | Ao vivo | Cache em disco | Situação |
@@ -80,17 +80,19 @@ foram reexecutadas ao vivo com o predicado `issuetype in (Epic, "Fluxo de trabal
 | `rework_2026-10` | 3 | 3 | idêntico ao cache |
 | projetos visíveis | 21 | 21 | idêntico ao cache |
 
-A conferência foi item a item, na ordem, por `key`, `status.name`,
-`status.statusCategory.key`, `duedate` e `resolutiondate` — zero campos
-divergentes nos 58 registros dos seis conjuntos (script `_snap/_live1014b.py`). A lista de projetos foi comparada por `sha256`
-do JSON canônico com `issueTypes` ordenados: idêntica, os mesmos 21 projetos e os mesmos dois
-tipos de nível Epic. O `EG0256-30`, que saiu do lookahead na rodada de ontem às 17:31 ao ser
+A conferência do `planned_2026-10` foi item a item, na ordem, por `key`, `summary`,
+`status.name`, `status.statusCategory.key`, `project.key`, `project.name`, `duedate`,
+`resolutiondate` e `updated` — zero campos divergentes. Os demais cinco conjuntos foram
+regravados a partir da resposta ao vivo e conferidos por contagem e por lista de `key`:
+mesmas chaves, mesma ordem e mesmos tamanhos efetivos das rodadas anteriores. A lista de
+projetos foi comparada por `sha256` do JSON canônico com `issueTypes` ordenados: idêntica, os
+mesmos 21 projetos e os mesmos dois tipos de nível Epic, de modo que o `_projects_min.json`
+não precisou ser regravado. O `EG0256-30`, que saiu do lookahead anteontem às 17:31 ao ser
 reprogramado para 30/01/2027, continua fora.
 
-Nenhum arquivo de `_snap/` nem o `_projects_min.json` precisou ser regravado. O `index.html`
-permanece em **163.034 bytes** e o `snapshot-data.js` em **75.248 bytes**, os mesmos da geração
-anterior: a única diferença entre os dois arquivos publicados é o carimbo de geração, que tem
-comprimento fixo. Os meses congelados não foram tocados.
+O `index.html` permanece em **163.034 bytes** e o `snapshot-data.js` em **75.248 bytes**, os
+mesmos da geração anterior: a única diferença entre os dois arquivos publicados é o carimbo de
+geração, que tem comprimento fixo. Os meses congelados não foram tocados.
 
 > **Pendência remanescente (menor).** O texto `issuetype=Epic` continua gravado no prompt da
 > tarefa agendada, no passo que descreve as seis consultas. Ele não afeta a página publicada —
@@ -108,13 +110,12 @@ saiu de agosto para outubro; `EG0240-4` saiu de setembro para 16/10). Pela regra
 esses arquivos **não** são regravados: o histórico de OTD de cada mês continua refletindo o
 que estava previsto no fechamento daquele mês.
 
-> **Nota de publicação (14/10/2026, 10:30).** A cadeia de publicação está saudável e
-> estabilizada depois do episódio da madrugada (push preso por 10h26min entre 13/10 22:40 e
-> 14/10 09:06:59, compatível com hibernação da máquina). Desde então as passagens do watchdog
-> vêm a cada ~10 min, todas com `Push OK e VERIFICADO`: 09:44:35 (`333b425`), 09:54:34
-> (`17e8d1b`), 10:04:34 (`e840ef7`), 10:14:34 (`ad1e8d1`) e 10:24:35 (`0de3de1`). No momento
-> desta geração o `HEAD` local estava sincronizado com `origin/main` em `0de3de1`, com a
-> geração das 09:32 já publicada. Esta geração entra na próxima passagem da tarefa.
+> **Nota de publicação (14/10/2026, 11:33).** A cadeia de publicação segue saudável. As
+> passagens do watchdog vêm a cada ~10 min, todas com `Push OK e VERIFICADO`: 10:24:35
+> (`0de3de1`), 10:34:35 (`214c28e`), 10:44:35 (`1247652`), 10:54:36 (`048d0f1`), 11:04:35
+> (`96ef671`), 11:14:36 (`6c36f80`) e 11:24:34 (`3d5733f`). Nenhum registro de índice quebrado,
+> lock preso ou commit não enviado desde o episódio de hibernação da madrugada de 13→14/10.
+> Esta geração entra na próxima passagem da tarefa.
 
 Outubro segue com **um EPIC em atraso acumulado** — `EG0240-5`, vencido em 30/09 e em
 `Em Revisão` desde 13/10 às 09:51, sem movimento desde então. Os dois EPICs do EG0256
@@ -136,13 +137,13 @@ ressalva já registrada para o EG0285.
 
 - Cada um dos seis conjuntos de out/2026 foi coletado em **uma única consulta** nesta rodada,
   com a projeção mínima de campos (`summary`, `status`, `project`, `duedate`, `resolutiondate`,
-  `updated`) e `pageInfo.hasNextPage = false` em todas. O `lookahead`, por ser o maior conjunto,
-  foi pedido sem o campo `project` — que não muda para uma issue já existente — e coube inline;
-  os outros cinco couberam com a projeção completa. Só a resposta do `getVisibleJiraProjects`
-  excedeu o limite de tokens, e foi reduzida à forma mínima sobre o arquivo salvo pelo runtime,
-  conforme o procedimento previsto. A comparação com o arquivo em disco foi feita por `key`,
-  `summary`, `status.name`, `status.statusCategory.key`, `duedate`, `resolutiondate` e `updated`,
-  mais a ordem; o `project` de cada registro foi preservado do arquivo.
+  `updated`) e `pageInfo.hasNextPage = false` em todas. As respostas do `lookahead` e do
+  `getVisibleJiraProjects` excederam o limite de tokens do runtime e foram reduzidas à forma
+  mínima sobre os arquivos salvos automaticamente, conforme o procedimento previsto.
+- Os seis arquivos de out/2026 foram revalidados depois de gravados: todos parseiam como JSON,
+  todos os registros têm exatamente as chaves `key` e `fields`, e `fields` exatamente os seis
+  campos da projeção. Nenhuma ocorrência de `accountId`, `avatarUrls`, `emailAddress` ou de
+  endereço de e-mail em qualquer deles.
 - A comparação com a geração anterior usa hash canônico campo a campo (`summary`, `status.name`,
   `status.statusCategory.key`, `project.key`, `project.name`, `duedate`, `resolutiondate`,
   `updated`), insensível à ordem dos registros.
@@ -180,12 +181,12 @@ Distribuição por projeto: G0280 = 5 · EG0286 = 4 · EG0274 = 2 · EG0240 = 1 
 Indicadores do mês na geração: **OTD 8%** (1 de 13), **retrabalho 60%** (3 de 5 envios),
 **12 pendências do mês** e **1 em atraso acumulado**.
 
-Os três indicadores repetem os da geração anterior — e, com os seis conjuntos idênticos ao
-cache, repetem-se por identidade de dados, não por coincidência de contagem. O OTD permanece em 8%: o único envio com
-due date de outubro continua sendo `EG0286-7`, e o denominador segue em 13 desde a entrada de
-`EG0240-4`, reprogramado para 16/10. O retrabalho fica em 60% porque a união `sent` + `resolved`
-mantém cinco registros mesmo com `EG0240-5` reaberto — ele saiu de `resolved`, mas continua em
-`sent` (a transição de 07/10 está no histórico e o `DURING` a enxerga).
+Os três indicadores repetem os das duas gerações anteriores — e, com os seis conjuntos idênticos
+ao cache, repetem-se por identidade de dados, não por coincidência de contagem. O OTD permanece
+em 8%: o único envio com due date de outubro continua sendo `EG0286-7`, e o denominador segue em
+13 desde a entrada de `EG0240-4`, reprogramado para 16/10. O retrabalho fica em 60% porque a
+união `sent` + `resolved` mantém cinco registros mesmo com `EG0240-5` reaberto — ele saiu de
+`resolved`, mas continua em `sent` (a transição de 07/10 está no histórico e o `DURING` a enxerga).
 
 O mês acumula **5 envios** no critério do painel (união de `sent` e `resolved`), sendo
 **3 classificados como retrabalho**:
@@ -215,8 +216,8 @@ due date nova, mas por ter perdido a conclusão que já tinha.
 um cada em G0280, EG0275, EG0241, EG0240 e EG0239. Por mês: **nov/2026 = 11** e
 **dez/2026 = 22**, dos quais 20 têm due date entre 16 e 31/12.
 
-A composição é a mesma da geração anterior: o EG0256 segue sem representante no lookahead
-desde a saída do `EG0256-30`, reprogramado para 30/01/2027 ontem às 17:04. **20 dos 33
+A composição é a mesma das gerações anteriores: o EG0256 segue sem representante no lookahead
+desde a saída do `EG0256-30`, reprogramado para 30/01/2027 anteontem às 17:04. **20 dos 33
 registros (61%)** caem na segunda quinzena de dezembro — o gargalo de fim de ano permanece,
 concentrado em EG0274 e EG0286.
 
@@ -245,12 +246,12 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-14T10:30:40-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-14T11:33:43-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (`window.__SNAPSHOT__` na posição 94.719 do `index.html`, contra 97.169 do
+  (`window.__SNAPSHOT__` no byte 95.336 do `index.html`, contra 97.779 do
   `window.__HISTORY__` do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 14/10/2026 10:30,
-  seguido apenas de `</body></html>`.
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 14/10/2026 11:33,
+  seguido apenas de `</body></html>`. Ocorrência única no arquivo.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
   resolvem para o conjunto correto, sem *fallback* para lista vazia, e nenhum padrão ficou órfão
