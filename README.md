@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 13/10/2026 17:31** (`2026-10-13T17:31:37-03:00`)
+> **Última atualização do snapshot: 14/10/2026 09:32** (`2026-10-14T09:32:25-03:00`)
 
 ---
 
@@ -49,7 +49,7 @@ Mês corrente (out/2026) — servido pela interceptação de JQL (`window.cowork
 |---|---|---:|---:|
 | `planned_2026-10` | Epics com due date em out/2026 | 13 | 13 |
 | `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 1 | 1 |
-| `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | 33 | 34 |
+| `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | 33 | 33 |
 | `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | 4 | 4 |
 | `resolved_2026-10` | Concluídos em out/2026 | 4 | 4 |
 | `rework_2026-10` | Retrabalho em out/2026 | 3 | 3 |
@@ -62,38 +62,35 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 13/10/2026 17:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 14/10/2026 09:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-### Movimento real no lookahead: `EG0256-30` reprogramado para 2027
+### Nenhum conjunto alterado nesta rodada
 
-Depois de seis rodadas sem movimento, o Jira mexeu. As sete chamadas dinâmicas foram
-reexecutadas ao vivo com o predicado `issuetype in (Epic, "Fluxo de trabalho")`, e **um único
-conjunto mudou**:
+Primeira geração desde a tarde de ontem — o intervalo entre as duas é de cerca de 16 horas,
+atravessando a madrugada. As sete chamadas dinâmicas foram reexecutadas ao vivo com o predicado
+`issuetype in (Epic, "Fluxo de trabalho")` e **nenhum conjunto mudou**:
 
 | Conjunto | Ao vivo | Cache em disco | Situação |
 |---|---:|---:|---|
 | `planned_2026-10` | 13 | 13 | idêntico ao cache |
 | `overdue_2026-10` | 1 | 1 | idêntico ao cache |
-| `lookahead_2026-10` | **33** | 34 | **alterado — saiu `EG0256-30`** |
+| `lookahead_2026-10` | 33 | 33 | idêntico ao cache |
 | `sent_2026-10` | 4 | 4 | idêntico ao cache |
 | `resolved_2026-10` | 4 | 4 | idêntico ao cache |
 | `rework_2026-10` | 3 | 3 | idêntico ao cache |
 | projetos visíveis | 21 | 21 | idêntico ao cache |
 
-O EPIC `EG0256-30` ("Diagnóstico Ambiental - Meio Antrópico", EG0256 - SOPS_RS - EIA RIMA)
-teve o **due date movido de 19/12/2026 para 30/01/2027**, alteração registrada no Jira hoje
-às **17:04:26 BRT** — ou seja, depois da geração das 16:30 e antes desta. Com isso ele sai da
-janela de lookahead (nov–dez/2026), que cai de 34 para 33 registros. Os outros 32 registros do
-conjunto reproduziram o cache campo a campo, e os outros cinco conjuntos do mês, mais a lista
-de 21 projetos, foram conferidos por `sha256` do JSON canônico e por comparação item a item:
-nada mais se moveu.
+A conferência foi item a item, na ordem, por `key`, `summary`, `status.name`,
+`status.statusCategory.key`, `project.key`, `duedate`, `resolutiondate` e `updated` — zero campos
+divergentes nos 58 registros dos seis conjuntos. A lista de projetos foi comparada por `sha256`
+do JSON canônico com `issueTypes` ordenados: idêntica, os mesmos 21 projetos e os mesmos dois
+tipos de nível Epic. O `EG0256-30`, que saiu do lookahead na rodada de ontem às 17:31 ao ser
+reprogramado para 30/01/2027, continua fora — a mudança de ontem se manteve.
 
-Só o `_snap/lookahead_2026-10.json` foi regravado (34 → 33 itens); `_projects_min.json` e os
-demais arquivos de `_snap/` ficaram intactos. O `index.html` passou de 163.342 para
-**163.034 bytes** e o `snapshot-data.js` de 75.556 para **75.248 bytes** — a diferença é
-exatamente o registro removido. Os meses congelados **não** foram tocados: `EG0256-30` segue
-presente nos lookaheads de ago/2026 e set/2026, como era no fechamento daqueles meses, e isso
-foi conferido no `window.__SNAPSHOT__` gerado.
+Nenhum arquivo de `_snap/` nem o `_projects_min.json` precisou ser regravado. O `index.html`
+permanece em **163.034 bytes** e o `snapshot-data.js` em **75.248 bytes**, os mesmos da geração
+anterior: a única diferença entre os dois arquivos publicados é o carimbo de geração, que tem
+comprimento fixo. Os meses congelados não foram tocados.
 
 > **Pendência remanescente (menor).** O texto `issuetype=Epic` continua gravado no prompt da
 > tarefa agendada, no passo que descreve as seis consultas. Ele não afeta a página publicada —
@@ -111,18 +108,18 @@ saiu de agosto para outubro; `EG0240-4` saiu de setembro para 16/10). Pela regra
 esses arquivos **não** são regravados: o histórico de OTD de cada mês continua refletindo o
 que estava previsto no fechamento daquele mês.
 
-> **Nota de publicação (13/10/2026, 17:31).** A cadeia de publicação segue íntegra. O
-> `.push-watchdog.log` registra seis passagens desde a geração anterior — 16:34:34, 16:44:34,
-> 16:54:34, 17:04:34, 17:14:35 e 17:24:34 — todas com `Commit OK` seguido de
-> `Push OK e VERIFICADO` e `HEAD` sincronizado com `origin/main`; a última foi o commit
-> `0435d1c`. A geração das 16:30 foi, portanto, publicada. Esta geração entra na próxima
-> passagem da tarefa.
+> **Nota de publicação (14/10/2026, 09:32).** A cadeia de publicação está íntegra, mas o
+> `.push-watchdog.log` registra um episódio digno de nota na virada da noite: a passagem das
+> **13/10 22:40** fez `Commit OK` (`8b4c3e8`) e ficou presa no push por **10h26min**, só
+> concluindo com `Push OK e VERIFICADO` às **14/10 09:06:59** — compatível com a máquina ter
+> hibernado com o push em andamento. Depois disso as passagens voltaram ao ritmo normal:
+> 09:14:37 (`e19fc8e`) e 09:24:35 (`80d70f0`), ambas com `HEAD` sincronizado com `origin/main`.
+> A geração de ontem às 17:31 foi publicada. Esta geração entra na próxima passagem da tarefa.
 
-Outubro segue com **um EPIC em atraso acumulado** — `EG0240-5`, vencido em 30/09 e de novo
-`Em Revisão` desde 13/10 às 09:51. Os dois EPICs do EG0256 reprogramados em 08/10 às 11:31
-seguiram caminhos diferentes: `EG0256-28` continua em 29/01/2027, e `EG0256-30`, que fora
-movido para 19/12/2026, foi **empurrado de novo hoje às 17:04 para 30/01/2027** — saindo do
-lookahead desta geração.
+Outubro segue com **um EPIC em atraso acumulado** — `EG0240-5`, vencido em 30/09 e em
+`Em Revisão` desde 13/10 às 09:51, sem movimento desde então. Os dois EPICs do EG0256
+reprogramados para 2027 (`EG0256-28` em 29/01 e `EG0256-30` em 30/01) seguem fora de qualquer
+conjunto de outubro.
 
 ### Correção de indicador (mantida da geração de 10/10 18:55)
 
@@ -139,12 +136,13 @@ ressalva já registrada para o EG0285.
 
 - Cada um dos seis conjuntos de out/2026 foi coletado em **uma única consulta** nesta rodada,
   com a projeção mínima de campos (`summary`, `status`, `project`, `duedate`, `resolutiondate`,
-  `updated`) e `pageInfo.hasNextPage = false` em todas. Duas respostas excederam o limite de
-  tokens — o `lookahead`, por ser o maior conjunto, e o `getVisibleJiraProjects` — e ambas foram
-  reduzidas à forma mínima sobre o arquivo salvo pelo runtime, conforme o procedimento previsto.
-  A comparação com o arquivo em disco foi feita por `key`, `summary`, `status.name`,
-  `status.statusCategory.key`, `duedate`, `resolutiondate` e `updated`; o `project` de cada
-  registro mantido foi preservado do arquivo.
+  `updated`) e `pageInfo.hasNextPage = false` em todas. O `lookahead`, por ser o maior conjunto,
+  foi pedido sem o campo `project` — que não muda para uma issue já existente — e coube inline;
+  os outros cinco couberam com a projeção completa. Só a resposta do `getVisibleJiraProjects`
+  excedeu o limite de tokens, e foi reduzida à forma mínima sobre o arquivo salvo pelo runtime,
+  conforme o procedimento previsto. A comparação com o arquivo em disco foi feita por `key`,
+  `summary`, `status.name`, `status.statusCategory.key`, `duedate`, `resolutiondate` e `updated`,
+  mais a ordem; o `project` de cada registro foi preservado do arquivo.
 - A comparação com a geração anterior usa hash canônico campo a campo (`summary`, `status.name`,
   `status.statusCategory.key`, `project.key`, `project.name`, `duedate`, `resolutiondate`,
   `updated`), insensível à ordem dos registros.
@@ -173,7 +171,7 @@ ressalva já registrada para o EG0285.
   o texto do prompt agendado ao filtro real** — a ressalva se repete desde rodadas anteriores.
 - Meses congelados (≤ set/2026) **não** são reconsultados, por projeto.
 
-### Quadro de outubro/2026 (13º dia do mês)
+### Quadro de outubro/2026 (14º dia do mês)
 
 13 epics com due date em outubro — 12 em andamento/revisão (9 "Em andamento" + 3 "Em Revisão")
 e 1 já enviado dentro do próprio mês. Nenhum em "Tarefas pendentes".
@@ -182,7 +180,8 @@ Distribuição por projeto: G0280 = 5 · EG0286 = 4 · EG0274 = 2 · EG0240 = 1 
 Indicadores do mês na geração: **OTD 8%** (1 de 13), **retrabalho 60%** (3 de 5 envios),
 **12 pendências do mês** e **1 em atraso acumulado**.
 
-Os três indicadores repetem os da geração anterior. O OTD permanece em 8%: o único envio com
+Os três indicadores repetem os da geração anterior — e, com os seis conjuntos idênticos ao
+cache, repetem-se por identidade de dados, não por coincidência de contagem. O OTD permanece em 8%: o único envio com
 due date de outubro continua sendo `EG0286-7`, e o denominador segue em 13 desde a entrada de
 `EG0240-4`, reprogramado para 16/10. O retrabalho fica em 60% porque a união `sent` + `resolved`
 mantém cinco registros mesmo com `EG0240-5` reaberto — ele saiu de `resolved`, mas continua em
@@ -216,10 +215,10 @@ due date nova, mas por ter perdido a conclusão que já tinha.
 um cada em G0280, EG0275, EG0241, EG0240 e EG0239. Por mês: **nov/2026 = 11** e
 **dez/2026 = 22**, dos quais 20 têm due date entre 16 e 31/12.
 
-A concentração de dezembro **recua um ponto** com a saída do `EG0256-30`, reprogramado de
-19/12/2026 para 30/01/2027 nesta rodada — o EG0256 deixa de ter representante no lookahead.
-Ainda assim, 20 dos 33 registros (**61%**) caem na segunda quinzena de dezembro: o gargalo de
-fim de ano permanece, concentrado em EG0274 e EG0286.
+A composição é a mesma da geração anterior: o EG0256 segue sem representante no lookahead
+desde a saída do `EG0256-30`, reprogramado para 30/01/2027 ontem às 17:04. **20 dos 33
+registros (61%)** caem na segunda quinzena de dezembro — o gargalo de fim de ano permanece,
+concentrado em EG0274 e EG0286.
 
 ### Setembro/2026, congelado
 
@@ -246,11 +245,11 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-13T17:31:37-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-14T09:32:25-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (`window.__SNAPSHOT__` na posição 94.719 do `index.html`, contra 97.169 do
   `window.__HISTORY__` do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 13/10/2026 17:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 14/10/2026 09:32,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
@@ -260,8 +259,8 @@ Checagens desta rodada (contagens e carimbos reconferidos após a geração):
   `planned` 13, `overdue` 1, `lookahead` 33, `sent` 4, `resolved` 4, `rework` 3.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é idêntico ao das rodadas anteriores — a última verificada em Chromium headless
-  sem erros de script — e nesta rodada mudaram apenas o carimbo de geração e um registro do
-  `lookahead_2026-10`, dentro da estrutura de dados já existente.
+  sem erros de script — e nesta rodada mudou apenas o carimbo de geração; os dados embutidos
+  são byte a byte os mesmos.
 - Nenhuma ocorrência de `avatarUrls`, `iconUrl`, `emailAddress` ou domínio de e-mail no arquivo
   publicado, e nenhuma URL da `api.atlassian.com` — a única URL da Atlassian é a base
   `https://projetos-engeplus.atlassian.net/browse/`, usada para montar os links dos EPICs. A
