@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 14/10/2026 09:32** (`2026-10-14T09:32:25-03:00`)
+> **Última atualização do snapshot: 14/10/2026 10:30** (`2026-10-14T10:30:40-03:00`)
 
 ---
 
@@ -62,13 +62,13 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 14/10/2026 09:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 14/10/2026 10:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto alterado nesta rodada
 
-Primeira geração desde a tarde de ontem — o intervalo entre as duas é de cerca de 16 horas,
-atravessando a madrugada. As sete chamadas dinâmicas foram reexecutadas ao vivo com o predicado
-`issuetype in (Epic, "Fluxo de trabalho")` e **nenhum conjunto mudou**:
+Segunda geração do dia, cerca de **uma hora** após a das 09:32. As sete chamadas dinâmicas
+foram reexecutadas ao vivo com o predicado `issuetype in (Epic, "Fluxo de trabalho")` e
+**nenhum conjunto mudou** — nem em relação à rodada anterior, nem ao cache em disco:
 
 | Conjunto | Ao vivo | Cache em disco | Situação |
 |---|---:|---:|---|
@@ -80,12 +80,12 @@ atravessando a madrugada. As sete chamadas dinâmicas foram reexecutadas ao vivo
 | `rework_2026-10` | 3 | 3 | idêntico ao cache |
 | projetos visíveis | 21 | 21 | idêntico ao cache |
 
-A conferência foi item a item, na ordem, por `key`, `summary`, `status.name`,
-`status.statusCategory.key`, `project.key`, `duedate`, `resolutiondate` e `updated` — zero campos
-divergentes nos 58 registros dos seis conjuntos. A lista de projetos foi comparada por `sha256`
+A conferência foi item a item, na ordem, por `key`, `status.name`,
+`status.statusCategory.key`, `duedate` e `resolutiondate` — zero campos
+divergentes nos 58 registros dos seis conjuntos (script `_snap/_live1014b.py`). A lista de projetos foi comparada por `sha256`
 do JSON canônico com `issueTypes` ordenados: idêntica, os mesmos 21 projetos e os mesmos dois
 tipos de nível Epic. O `EG0256-30`, que saiu do lookahead na rodada de ontem às 17:31 ao ser
-reprogramado para 30/01/2027, continua fora — a mudança de ontem se manteve.
+reprogramado para 30/01/2027, continua fora.
 
 Nenhum arquivo de `_snap/` nem o `_projects_min.json` precisou ser regravado. O `index.html`
 permanece em **163.034 bytes** e o `snapshot-data.js` em **75.248 bytes**, os mesmos da geração
@@ -108,13 +108,13 @@ saiu de agosto para outubro; `EG0240-4` saiu de setembro para 16/10). Pela regra
 esses arquivos **não** são regravados: o histórico de OTD de cada mês continua refletindo o
 que estava previsto no fechamento daquele mês.
 
-> **Nota de publicação (14/10/2026, 09:32).** A cadeia de publicação está íntegra, mas o
-> `.push-watchdog.log` registra um episódio digno de nota na virada da noite: a passagem das
-> **13/10 22:40** fez `Commit OK` (`8b4c3e8`) e ficou presa no push por **10h26min**, só
-> concluindo com `Push OK e VERIFICADO` às **14/10 09:06:59** — compatível com a máquina ter
-> hibernado com o push em andamento. Depois disso as passagens voltaram ao ritmo normal:
-> 09:14:37 (`e19fc8e`) e 09:24:35 (`80d70f0`), ambas com `HEAD` sincronizado com `origin/main`.
-> A geração de ontem às 17:31 foi publicada. Esta geração entra na próxima passagem da tarefa.
+> **Nota de publicação (14/10/2026, 10:30).** A cadeia de publicação está saudável e
+> estabilizada depois do episódio da madrugada (push preso por 10h26min entre 13/10 22:40 e
+> 14/10 09:06:59, compatível com hibernação da máquina). Desde então as passagens do watchdog
+> vêm a cada ~10 min, todas com `Push OK e VERIFICADO`: 09:44:35 (`333b425`), 09:54:34
+> (`17e8d1b`), 10:04:34 (`e840ef7`), 10:14:34 (`ad1e8d1`) e 10:24:35 (`0de3de1`). No momento
+> desta geração o `HEAD` local estava sincronizado com `origin/main` em `0de3de1`, com a
+> geração das 09:32 já publicada. Esta geração entra na próxima passagem da tarefa.
 
 Outubro segue com **um EPIC em atraso acumulado** — `EG0240-5`, vencido em 30/09 e em
 `Em Revisão` desde 13/10 às 09:51, sem movimento desde então. Os dois EPICs do EG0256
@@ -245,11 +245,11 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-14T09:32:25-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-14T10:30:40-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (`window.__SNAPSHOT__` na posição 94.719 do `index.html`, contra 97.169 do
   `window.__HISTORY__` do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 14/10/2026 09:32,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 14/10/2026 10:30,
   seguido apenas de `</body></html>`.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
