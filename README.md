@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 14/10/2026 16:30** (`2026-10-14T16:30:45-03:00`)
+> **Última atualização do snapshot: 14/10/2026 17:31** (`2026-10-14T17:31:13-03:00`)
 
 ---
 
@@ -62,11 +62,11 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 14/10/2026 16:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 14/10/2026 17:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto alterado nesta rodada
 
-Sexta geração do dia, cerca de **uma hora** após a das 15:31. As **seis** consultas JQL do mês
+Sétima geração do dia, cerca de **uma hora** após a das 16:30. As **seis** consultas JQL do mês
 corrente foram reexecutadas ao vivo com o predicado `issuetype in (Epic, "Fluxo de trabalho")`, e
 **nenhuma mudou**:
 
@@ -78,24 +78,28 @@ corrente foram reexecutadas ao vivo com o predicado `issuetype in (Epic, "Fluxo 
 | `sent_2026-10` | 4 | 4 | mesmas chaves, mesma ordem |
 | `resolved_2026-10` | 4 | 4 | mesmas chaves, mesma ordem |
 | `rework_2026-10` | 3 | 3 | mesmas chaves, mesma ordem |
-| projetos visíveis | 21 | 21 | reaproveitado do disco (`_projects_min.json`) |
+| projetos visíveis | 21 | 21 | **reconsultada ao vivo** nesta rodada |
 
 Os seis conjuntos do mês corrente foram regravados em `_snap/` a partir das respostas ao vivo e
 conferidos por contagem contra os arquivos da geração anterior — `planned` 13, `overdue` 1,
 `lookahead` 33, `sent` 4, `resolved` 4, `rework` 3 —, sem divergência. As seis respostas vieram
-completas (`pageInfo.hasNextPage = false`), sem timeouts nem reexecuções. A igualdade dos dados
-é confirmada do lado do artefato publicado: com os conjuntos reescritos do zero, o
-`snapshot-data.js` saiu com os mesmos **75.248 bytes** e o `index.html` com os mesmos **163.034
-bytes** da geração das 15:31, e o `window.__SNAPSHOT__` caiu no mesmo byte 94.719 — o que só
-ocorre se o conteúdo embutido for idêntico, já que o carimbo de geração tem comprimento fixo.
+completas (`pageInfo.hasNextPage = false`), sem timeouts nem reexecuções; duas delas
+(`lookahead_2026-10` e a lista de projetos) estouraram o limite de tokens da resposta e foram
+extraídas com `jq` do arquivo salvo pelo próprio MCP, conforme a disciplina do passo 3. A
+igualdade dos dados é confirmada do lado do artefato publicado: com os conjuntos reescritos do
+zero, o `snapshot-data.js` saiu com os mesmos **75.248 bytes** e o `index.html` com os mesmos
+**163.034 bytes** das gerações das 15:31 e 16:30, e o `window.__SNAPSHOT__` caiu no mesmo byte
+94.719 — o que só ocorre se o conteúdo embutido for idêntico, já que o carimbo de geração tem
+comprimento fixo.
 
-A lista de projetos **não** foi reconsultada ao vivo nesta rodada: o `_projects_min.json` de
-14/10 às 15:31 foi reaproveitado do disco, com os mesmos 21 projetos e os mesmos dois tipos de
-nível Epic (`Epic` e `Fluxo de trabalho`).
+A lista de projetos **foi** reconsultada ao vivo nesta rodada, ao contrário da anterior: o
+`getVisibleJiraProjects` devolveu os mesmos **21 projetos** e os mesmos dois tipos de nível Epic
+(`Epic` e `Fluxo de trabalho`). O `_projects_min.json` foi regravado a partir da resposta ao vivo
+e mudou apenas de formatação (passou a ser indentado), sem efeito sobre o JS embutido — os nomes
+de projeto gravados nos conjuntos continuam batendo, um a um, com os desse arquivo.
 
-Os seis arquivos do mês corrente em `_snap/` foram regravados com o mesmo conteúdo (o
-`lookahead_2026-10.json` mudou apenas de formatação, de separadores compactos para espaçados, sem
-efeito no JS embutido). O `_projects_min.json` não foi tocado, nem os meses congelados.
+Os seis arquivos do mês corrente em `_snap/` foram regravados com o mesmo conteúdo. Os meses
+congelados não foram tocados.
 
 > **Pendência remanescente (menor).** O texto `issuetype=Epic` continua gravado no prompt da
 > tarefa agendada, no passo que descreve as seis consultas. Ele não afeta a página publicada —
@@ -104,11 +108,19 @@ efeito no JS embutido). O `_projects_min.json` não foi tocado, nem os meses con
 > Trocar aquele trecho do prompt por `issuetype in (Epic, "Fluxo de trabalho")` elimina o
 > retrabalho — e é uma alteração no prompt da tarefa, que esta rotina não faz por conta própria.
 
-> **Nota de publicação (14/10/2026, 16:30).** A cadeia de publicação está íntegra e esta
-> geração **já foi publicada**: o `.push-watchdog.log` registra a passagem das 16:36, com
-> `Commit OK: 5e72324` e `Push OK e VERIFICADO: HEAD sincronizado com origin/main`, logo após a
-> das 16:25 (`2190818`). As passagens correm a cada ~10 minutos e todas as recentes concluíram
-> com sucesso.
+> **Pendência nova (operacional).** O passo 1 do prompt manda abrir o `ARTIFACT_HTML` por caminho
+> (`...\Claude\Artifacts\pr03-relatorio-indicadores-epics\index.html`) e **parar** com
+> "Artifact PR03 não encontrado" se a leitura falhar. Esse caminho hoje está em **localização
+> protegida** e a leitura falha sempre — uma rodada que siga o passo ao pé da letra aborta sem
+> gerar nada. Nesta rodada a origem foi obtida por *staging* de artifact, que funciona. Convém
+> trocar aquele passo por `list_legacy_live_artifacts` + `device_stage_files(artifact_ids=[...])`,
+> com o `_artifact_src.html` como alternativa — também uma alteração no prompt da tarefa.
+
+> **Nota de publicação (14/10/2026, 17:31).** A cadeia de publicação está íntegra: o
+> `.push-watchdog.log` registra a passagem das 17:24, com `Commit OK: eab92c4` e `Push OK e
+> VERIFICADO: HEAD sincronizado com origin/main`, logo após a das 17:14 (`ffe104c`). As passagens
+> correm a cada ~10 minutos e todas as recentes concluíram com sucesso. Esta geração entra na
+> próxima passagem.
 
 A **visão acumulada** (`planned_2026-05` a `planned_2026-10`) não foi reconsultada ao vivo nesta
 rodada: outubro já é coberto pelo `planned_2026-10` acima, e maio a setembro são meses encerrados,
@@ -146,12 +158,11 @@ ressalva já registrada para o EG0285.
   checagem introduzida nesta rodada depois de um nome de projeto ter sido escrito à mão de forma
   incorreta na primeira tentativa de gravação (`EG0285`), corrigido antes da geração do HTML.
 - Fonte do HTML: `_artifact_src.html` (87.509 bytes), cópia do artifact
-  `pr03-relatorio-indicadores-epics`, inalterado desde 27/07/2026. MD5
-  `6a2b6462a4efbec1890af4494a7f0b74`, reconferido nesta rodada. O HTML ao vivo do Live Artifact
-  **não** foi rebaixado aqui: a pasta `Artifacts` é uma **localização protegida** (dados internos
-  do Claude) e não pode ser lida por caminho de arquivo a partir de uma sessão Cowork. A última
-  conferência contra o artifact ao vivo, por *staging* de artifact (`device_stage_files` com
-  `artifact_ids`) na rodada anterior, deu **MD5 idêntico**.
+  `pr03-relatorio-indicadores-epics`, inalterado desde 27/07/2026. A pasta `Artifacts` é uma
+  **localização protegida** (dados internos do Claude) e não pode ser lida por caminho de arquivo
+  a partir de uma sessão Cowork; por isso o HTML ao vivo foi obtido **nesta rodada** por *staging*
+  de artifact (`device_stage_files` com `artifact_ids`) e conferido contra a cópia local: mesmos
+  87.509 bytes e **MD5 idêntico** (`6a2b6462a4efbec1890af4494a7f0b74`).
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram remontadas exatamente como
   o artifact as monta e testadas, uma a uma, contra os 11 padrões gravados em
   `snapshot-data.js`: cada consulta resolveu para o seu próprio conjunto, nenhuma caiu no
@@ -167,7 +178,7 @@ Distribuição por projeto: G0280 = 5 · EG0286 = 4 · EG0274 = 2 · EG0240 = 1 
 Indicadores do mês na geração: **OTD 8%** (1 de 13), **retrabalho 60%** (3 de 5 envios),
 **12 pendências do mês** e **1 em atraso acumulado**.
 
-Os três indicadores repetem os das quatro gerações anteriores — e, com os seis conjuntos idênticos
+Os três indicadores repetem os das cinco gerações anteriores — e, com os seis conjuntos idênticos
 em composição, repetem-se por identidade de dados, não por coincidência de contagem. O OTD
 permanece em 8%: o único envio com due date de outubro continua sendo `EG0286-7`, e o denominador
 segue em 13 desde a entrada de `EG0240-4`, reprogramado para 16/10. O retrabalho fica em 60%
@@ -231,11 +242,11 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-14T16:30:45-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-14T17:31:13-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (`window.__SNAPSHOT__` no byte 94.719 do `index.html`, contra 97.169 do
   `window.__HISTORY__` do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 14/10/2026 16:30,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 14/10/2026 17:31,
   seguido apenas de `</body></html>`. Ocorrência única no arquivo.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
