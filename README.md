@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 14/10/2026 14:30** (`2026-10-14T14:30:29-03:00`)
+> **Última atualização do snapshot: 14/10/2026 15:31** (`2026-10-14T15:31:46-03:00`)
 
 ---
 
@@ -62,7 +62,7 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 14/10/2026 14:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 14/10/2026 15:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto alterado nesta rodada
 
@@ -104,7 +104,7 @@ comprimento fixo. Os meses congelados não foram tocados.
 > Trocar aquele trecho do prompt por `issuetype in (Epic, "Fluxo de trabalho")` elimina o
 > retrabalho — e é uma alteração no prompt da tarefa, que esta rotina não faz por conta própria.
 
-> **Nota de publicação (14/10/2026, 14:30).** A cadeia de publicação está íntegra. O
+> **Nota de publicação (14/10/2026, 15:31).** A cadeia de publicação está íntegra. O
 > `.push-watchdog.log` registra passagens a cada 10 minutos, todas concluídas com
 > `Push OK e VERIFICADO` e `HEAD` sincronizado com `origin/main` — as quatro últimas às 13:54
 > (`cc6c66a`), 14:04 (`114d670`), 14:14 (`e0ec4db`) e 14:24 (`77d1529`). A geração das 13:32 foi
@@ -231,11 +231,11 @@ artifact.
 
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
-- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-14T14:30:29-03:00`.
+- Comentário de geração no topo do `<head>`: presente, com o carimbo `2026-10-14T15:31:46-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (`window.__SNAPSHOT__` no byte 94.719 do `index.html`, contra 97.169 do
   `window.__HISTORY__` do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 14/10/2026 14:30,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 14/10/2026 15:31,
   seguido apenas de `</body></html>`. Ocorrência única no arquivo.
 - As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
   como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
