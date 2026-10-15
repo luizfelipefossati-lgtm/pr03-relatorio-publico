@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 15/10/2026 15:31** (`2026-10-15T15:31:23-03:00`)
+> **Última atualização do snapshot: 15/10/2026 16:31** (`2026-10-15T16:31:29-03:00`)
 
 ---
 
@@ -47,12 +47,12 @@ Mês corrente (out/2026) — servido pela interceptação de JQL (`window.cowork
 
 | Conjunto | Escopo | Registros | Geração anterior |
 |---|---|---:|---:|
-| `planned_2026-10` | Epics com due date em out/2026 | **15** | 13 |
-| `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | **0** | 1 |
+| `planned_2026-10` | Epics com due date em out/2026 | 15 | 15 |
+| `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 0 | 0 |
 | `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | 33 | 33 |
-| `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | **5** | 4 |
-| `resolved_2026-10` | Concluídos em out/2026 | **5** | 4 |
-| `rework_2026-10` | Retrabalho em out/2026 | 3 | 3 |
+| `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | **6** | 5 |
+| `resolved_2026-10` | Concluídos em out/2026 | **6** | 5 |
+| `rework_2026-10` | Retrabalho em out/2026 | **4** | 3 |
 
 Visão acumulada (`planned` por mês): mai/2026 = 7 · jun/2026 = 1 · jul/2026 = 10 · ago/2026 = 4 · set/2026 = 8 · out/2026 = **15**.
 
@@ -62,72 +62,64 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 15/10/2026 15:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 15/10/2026 16:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
-### Cinco dos seis conjuntos mudaram nesta rodada
+### Três conjuntos mudaram nesta rodada
 
-Quinta geração de 15/10, cerca de **duas horas** após a das 13:31 — e a primeira do dia com
-movimento real no Jira. As **seis** consultas JQL do mês corrente foram reexecutadas ao vivo com
-o predicado `issuetype in (Epic, "Fluxo de trabalho")`:
+Sexta geração de 15/10, uma hora após a das 15:31. As **seis** consultas JQL do mês corrente
+foram reexecutadas ao vivo com o predicado `issuetype in (Epic, "Fluxo de trabalho")`:
 
 | Conjunto | Ao vivo | Geração anterior | Situação |
 |---|---:|---:|---|
-| `planned_2026-10` | **15** | 13 | **+2 chaves**, 1 reprogramação, 1 mudança de status |
-| `overdue_2026-10` | **0** | 1 | **−1 chave** (ficou vazio) |
-| `lookahead_2026-10` | 33 | 33 | mesmas chaves, mesma ordem |
-| `sent_2026-10` | **5** | 4 | **+1 chave**, 1 registro com campos alterados |
-| `resolved_2026-10` | **5** | 4 | **+1 chave** |
-| `rework_2026-10` | 3 | 3 | mesmas chaves; 1 registro com campos alterados |
-| projetos visíveis | 21 | 21 | **reconsultada ao vivo**, sem alteração |
+| `planned_2026-10` | 15 | 15 | mesmas chaves; 1 registro com campos alterados |
+| `overdue_2026-10` | 0 | 0 | vazio, sem alteração |
+| `lookahead_2026-10` | 33 | 33 | mesmas chaves |
+| `sent_2026-10` | **6** | 5 | **+1 chave** |
+| `resolved_2026-10` | **6** | 5 | **+1 chave** |
+| `rework_2026-10` | **4** | 3 | **+1 chave** |
 
-A comparação foi feita **item a item**, e não por contagem: os seis conjuntos foram remontados do
-zero a partir das respostas ao vivo, no formato mínimo, e comparados aos arquivos em `_snap/` por
-igualdade estrutural completa — chave, `summary`, `status.name`, `status.statusCategory.key`,
-`project.key`, `project.name`, `duedate`, `resolutiondate`, `updated` e a ordem dos registros.
-As diferenças apuradas, uma a uma:
+A única alteração real do intervalo:
 
 | EPIC | O que mudou | Antes | Agora |
 |---|---|---|---|
-| `EG0240-43` | **novo** em `planned` | — | TOMO IV - PROJETO DE INSTRUMENTAÇÃO, `Em Revisão`, due 23/10 |
-| `EG0240-4` | due date reprogramada | 16/10 | **23/10** (atualizado 15/10 13:58) |
-| `EG0240-5` | due date reprogramada — sai de `overdue`, entra em `planned` | 30/09 | **26/10** (atualizado 15/10 13:58) |
-| `EG291-4` | **entregue** — entra em `sent` e `resolved` | `Em andamento` | **`Enviado - Aguardando Análise`**, resolvido 15/10 13:59 |
+| `EG0274-38` | **entregue** — entra em `sent`, `resolved` e `rework` | `Em Revisão`, due 07/10 | **`Enviado - Aguardando Análise`**, resolvido 15/10 15:30 |
 
-As três alterações do EG0240 e a entrega do EG291-4 foram registradas no Jira entre **13:58 e
-14:50 de hoje**, ou seja, depois da geração das 13:31 — o que explica por que aquela rodada ainda
-encontrou tudo idêntico. Os seis conjuntos de `_snap/` foram **regravados** com os dados ao vivo;
-os meses congelados não foram tocados.
+A transição do `EG0274-38` foi registrada no Jira às **15:30 de hoje**, um minuto antes de a
+geração anterior fechar — por isso ela não a capturou. Quatro conjuntos de `_snap/` foram
+regravados (`planned`, pelo novo status do `EG0274-38`, mais `sent`, `resolved` e `rework`);
+`overdue` e `lookahead` saíram idênticos e não foram tocados. Os meses congelados também não.
 
-As seis respostas vieram completas (`pageInfo.hasNextPage = false`), sem timeouts nem
-reexecuções; duas delas (`lookahead_2026-10`, com 33 registros, e a lista de projetos)
-estouraram o limite de tokens da resposta e foram extraídas do arquivo salvo pelo próprio MCP,
-conforme a disciplina do passo 3. Estado dos arquivos depois da gravação:
+As cinco respostas reexecutadas vieram completas (`pageInfo.hasNextPage = false`), sem timeouts
+nem reexecuções. O `lookahead_2026-10` foi conferido **por contagem** contra o Jira — uma
+consulta com `searchResultMode: count` sobre o mesmo intervalo devolveu total compatível com os
+33 registros em disco — e, por isso, reaproveitado sem regravação. Estado dos arquivos depois
+da gravação:
 
 | Conjunto | SHA-256 (12 primeiros) | Bytes |
 |---|---|---:|
-| `planned_2026-10` | `7bd37aa49eba` | 5.626 |
+| `planned_2026-10` | `9e6c5f63540d` | 5.661 |
 | `overdue_2026-10` | `4f53cda18c2b` | 2 |
-| `lookahead_2026-10` | `a7915446592b` | 12.591 |
-| `sent_2026-10` | `bfb6746a723d` | 2.047 |
-| `resolved_2026-10` | `3c8279fe3d9c` | 2.092 |
-| `rework_2026-10` | `39eacb6e104d` | 1.233 |
+| `lookahead_2026-10` | `0369f85c277b` | 12.591 |
+| `sent_2026-10` | `fde12c4e34f0` | 2.443 |
+| `resolved_2026-10` | `47039cf227fb` | 2.488 |
+| `rework_2026-10` | `8b6f50c31e86` | 1.629 |
 
-O `lookahead_2026-10` manteve o hash e os 12.591 bytes das gerações anteriores — é o único dos
-seis que saiu idêntico.
+O `lookahead_2026-10` manteve os 33 registros e os 12.591 bytes das gerações anteriores.
 
-A lista de projetos **foi** reconsultada ao vivo nesta rodada: o `getVisibleJiraProjects`
-devolveu os mesmos **21 projetos** (`isLast = true`, `total = 21`) e os mesmos dois tipos de
-nível Epic (`Epic` e `Fluxo de trabalho`). A resposta foi reduzida ao formato mínimo e
-comparada ao `_projects_min.json` em disco por igualdade estrutural normalizada — chave, nome
-e lista de tipos de cada projeto. Idênticos; o arquivo, por isso, **não** foi regravado, e os
-nomes de projeto gravados nos conjuntos continuam batendo, um a um, com os desse arquivo.
+A lista de projetos **não** foi reconsultada ao vivo nesta rodada: o `_projects_min.json` em
+disco (21 projetos, gravado em 14/10) foi reaproveitado, e os dois tipos de nível Epic (`Epic`
+e `Fluxo de trabalho`) usados para montar o predicado das consultas foram lidos dele. Os nomes
+de projeto gravados nos conjuntos continuam batendo, um a um, com os desse arquivo.
 
-> **Pendência remanescente (menor).** O texto `issuetype=Epic` continua gravado no prompt da
-> tarefa agendada, no passo que descreve as seis consultas. Ele não afeta a página publicada —
-> o artifact monta o predicado dinamicamente a partir dos tipos de hierarquia 1 dos projetos
+> **Pendência remanescente.** O texto `issuetype=Epic` continua gravado no prompt da tarefa
+> agendada, no passo que descreve as seis consultas. Ele não afeta a página publicada — o
+> artifact monta o predicado dinamicamente a partir dos tipos de hierarquia 1 dos projetos
 > visíveis —, mas faz cada rodada partir de uma consulta truncada e precisar corrigi-la à mão.
-> Trocar aquele trecho do prompt por `issuetype in (Epic, "Fluxo de trabalho")` elimina o
-> retrabalho — e é uma alteração no prompt da tarefa, que esta rotina não faz por conta própria.
+> Nesta rodada o efeito foi **medido**: com `issuetype=Epic`, `planned_2026-10` devolve **10**
+> dos 15 registros, e `sent`/`resolved` perdem `EG0286-7` e `EG291-4` — some todo o conteúdo
+> dos projetos EG0286 e EG291, cujo tipo de nível Epic chama-se `Fluxo de trabalho`. Trocar
+> aquele trecho do prompt por `issuetype in (Epic, "Fluxo de trabalho")` elimina o risco — e é
+> uma alteração no prompt da tarefa, que esta rotina não faz por conta própria.
 
 > **Pendência (operacional), confirmada de novo.** O passo 1 do prompt manda abrir o
 > `ARTIFACT_HTML` por caminho (`...\Claude\Artifacts\pr03-relatorio-indicadores-epics\index.html`)
@@ -138,17 +130,17 @@ nomes de projeto gravados nos conjuntos continuam batendo, um a um, com os desse
 > que é o que o `_gen_snapshot.py` já consome. Convém trocar aquele passo por
 > `list_legacy_live_artifacts` + `device_stage_files(artifact_ids=[...])`, com o
 > `_artifact_src.html` como alternativa declarada — alteração no prompt da tarefa, que esta
-> rotina não faz por conta própria. A equivalência foi **verificada** nesta rodada: o
+> rotina não faz por conta própria. A equivalência foi **verificada na geração das 15:31**: o
 > `list_legacy_live_artifacts` + `device_stage_files(artifact_ids=[...])` trouxe o artifact ao
-> vivo (87.509 bytes, `updatedAt` 27/07/2026) e o `md5` bate com o do `_artifact_src.html` em
-> disco (`6a2b6462a4efbec1890af4494a7f0b74`) — a origem em cache é byte a byte o artifact atual,
-> sem defasagem.
+> vivo (87.509 bytes, `updatedAt` 27/07/2026) e o `md5` bateu com o do `_artifact_src.html` em
+> disco (`6a2b6462a4efbec1890af4494a7f0b74`). Nesta rodada a cópia local foi reaproveitada, com
+> o mesmo md5 reconferido — a origem em cache é byte a byte o artifact atual, sem defasagem.
 
-> **Nota de publicação (15/10/2026, 15:31).** A cadeia de publicação está íntegra: o
-> `.push-watchdog.log` registra a passagem das 15:24, com `Commit OK: 8202e3e` e `Push OK e
+> **Nota de publicação (15/10/2026, 16:31).** A cadeia de publicação está íntegra: o
+> `.push-watchdog.log` registra a passagem das 16:24, com `Commit OK: a90b716` e `Push OK e
 > VERIFICADO: HEAD sincronizado com origin/main`. As passagens correm a cada ~10 minutos e as
-> quatro mais recentes (14:54, 15:04, 15:14 e 15:24) concluíram todas com sucesso. Esta
-> geração entra na passagem seguinte, prevista para ~15:34.
+> quatro mais recentes (15:54, 16:04, 16:14 e 16:24) concluíram todas com sucesso. Esta
+> geração entra na passagem seguinte, prevista para ~16:34.
 
 A **visão acumulada** (`planned_2026-05` a `planned_2026-10`) não foi reconsultada ao vivo nesta
 rodada: outubro já é coberto pelo `planned_2026-10` acima, e maio a setembro são meses encerrados,
@@ -170,7 +162,8 @@ Até a geração de 10/10 às 11:31, este README publicava o retrabalho de outub
 os registros de `sent_2026-10` no denominador. O artifact usa outro denominador: ele monta a lista
 de envios pela **união de `sent` e `resolved`** (`allSent`). O texto deste README foi corrigido na
 geração das 18:55 para refletir o que a página de fato mostra, e a correção segue valendo nesta
-rodada — agora com **50% (3 de 6)**, porque a união ganhou o `EG291-4`.
+rodada — agora com **57% (4 de 7)**, porque a união ganhou o `EG0274-38`, que também conta
+como retrabalho.
 O sexto item da união é o `EG0239-28`, que entra por `resolved` e não por `sent` porque seu
 status chama-se `Enviado - Aguardando Análise1` — uma terceira grafia, da mesma família da
 ressalva já registrada para o EG0285.
@@ -184,14 +177,15 @@ ressalva já registrada para o EG0285.
   qualquer deles.
 - Os nomes de projeto gravados nos conjuntos são lidos do `_projects_min.json`, não digitados —
   checagem introduzida depois de um nome de projeto ter sido escrito à mão de forma incorreta na
-  primeira tentativa de gravação (`EG0285`). O `EG0291 - Arroio Feijó`, projeto do EPIC entregue
-  hoje, foi conferido contra esse arquivo.
+  primeira tentativa de gravação (`EG0285`). O `EG0274 - DNIT`, projeto do EPIC entregue nesta
+  rodada, foi conferido contra esse arquivo.
 - Fonte do HTML: `_artifact_src.html` (87.509 bytes), cópia do artifact
   `pr03-relatorio-indicadores-epics`, inalterado desde 27/07/2026. A pasta `Artifacts` é uma
   **localização protegida** (dados internos do Claude) e não pode ser lida por caminho de arquivo
-  a partir de uma sessão Cowork; por isso o HTML ao vivo foi obtido **nesta rodada** por *staging*
-  de artifact (`device_stage_files` com `artifact_ids`) e conferido contra a cópia local: mesmos
-  87.509 bytes e **MD5 idêntico** (`6a2b6462a4efbec1890af4494a7f0b74`).
+  a partir de uma sessão Cowork — recusa reconfirmada nesta rodada. O HTML ao vivo foi obtido por
+  *staging* de artifact (`device_stage_files` com `artifact_ids`) na geração das 15:31 e conferido
+  contra a cópia local: mesmos 87.509 bytes e **MD5 idêntico** (`6a2b6462a4efbec1890af4494a7f0b74`),
+  md5 reconferido nesta rodada.
 - As **12 consultas JQL** do mês corrente e da visão acumulada foram remontadas exatamente como
   o artifact as monta e testadas, uma a uma, contra os 11 padrões gravados em
   `snapshot-data.js`: cada consulta resolveu para o seu próprio conjunto, nenhuma caiu no
@@ -200,27 +194,26 @@ ressalva já registrada para o EG0285.
 
 ### Quadro de outubro/2026 (15º dia do mês)
 
-15 epics com due date em outubro — 13 em andamento/revisão (8 "Em andamento" + 5 "Em Revisão")
-e 2 já enviados dentro do próprio mês. Nenhum em "Tarefas pendentes".
+15 epics com due date em outubro — 12 em andamento/revisão (8 "Em andamento" + 4 "Em Revisão")
+e 3 já enviados dentro do próprio mês. Nenhum em "Tarefas pendentes".
 Distribuição por projeto: G0280 = 5 · EG0286 = 4 · EG0240 = 3 · EG0274 = 2 · EG291 = 1.
 
-Indicadores do mês na geração: **OTD 13%** (2 de 15), **retrabalho 50%** (3 de 6 envios),
-**13 pendências do mês** e **nenhum em atraso acumulado**.
+Indicadores do mês na geração: **OTD 20%** (3 de 15), **retrabalho 57%** (4 de 7 envios),
+**12 pendências do mês** e **nenhum em atraso acumulado**.
 
-Os três indicadores **mudaram** em relação às sete gerações anteriores, que vinham repetindo
-OTD 8% (1 de 13) e retrabalho 60% (3 de 5):
+Dois indicadores **mudaram** em relação à geração das 15:31, pela entrega do `EG0274-38`:
 
-- **OTD 8% → 13%.** O numerador subiu de 1 para 2 com a entrega do `EG291-4` (due 07/10,
-  enviado hoje às 13:59) e o denominador, de 13 para 15, com a entrada de `EG0240-43` (novo) e
-  `EG0240-5` (reprogramado para 26/10). Os dois entregues contam como **"SIM\*"** — entrega no
-  mês, mas depois da due date —, de modo que o painel marca **0 no prazo e 2 com pequeno atraso**.
-- **Retrabalho 60% → 50%.** O numerador segue em 3; o denominador passou de 5 para 6 com a
-  entrada do `EG291-4` na união `sent` + `resolved`.
-- **Atraso acumulado 1 → 0.** Pela reprogramação do `EG0240-5`, descrita acima.
-- **Pendências do mês 12 → 13**: 15 previstos menos 2 entregues.
+- **OTD 13% → 20%.** O numerador subiu de 2 para 3 com a entrega do `EG0274-38` (due 07/10,
+  enviado hoje às 15:30); o denominador segue em 15. Os três entregues contam como **"SIM\*"**
+  — entrega no mês, mas depois da due date —, de modo que o painel marca **0 no prazo e 3 com
+  pequeno atraso**.
+- **Retrabalho 50% → 57%.** Numerador e denominador subiram juntos: o `EG0274-38` entra na
+  união `sent` + `resolved` (6 → 7) e também em `rework` (3 → 4), por já ter saído antes do
+  status "Enviado - Aguardando Análise".
+- **Atraso acumulado** segue em **0**; as **pendências do mês** caem de 13 para 12.
 
-O mês acumula **6 envios** no critério do painel (união de `sent` e `resolved`), sendo
-**3 classificados como retrabalho**:
+O mês acumula **7 envios** no critério do painel (união de `sent` e `resolved`), sendo
+**4 classificados como retrabalho**:
 
 | EPIC | Projeto | Due date | Enviado em | Retrabalho |
 |---|---|---|---|---|
@@ -230,9 +223,11 @@ O mês acumula **6 envios** no critério do painel (união de `sent` e `resolved
 | `EG0240-5` | EG0240 | 2026-10-26 | 07/10 16:01 | sim — reaberto em 13/10 09:51 |
 | `EG0239-28` | EG0239 | 2026-08-10 | 09/10 09:36 | não |
 | `EG291-4` | EG291 | 2026-10-07 | 15/10 13:59 | não |
+| `EG0274-38` | EG0274 | 2026-10-07 | 15/10 15:30 | sim |
 
-Quatro dos seis eram entregas que vinham em atraso de meses anteriores; `EG0286-7` e `EG291-4`
-são as únicas com due date do próprio mês de outubro — e as únicas que contam no OTD até aqui.
+Quatro dos sete eram entregas que vinham em atraso de meses anteriores; `EG0286-7`, `EG291-4` e
+`EG0274-38` são as únicas com due date do próprio mês de outubro — e as únicas que contam no
+OTD até aqui.
 `EG0239-28` aparece apenas por `resolved`: seu status (`Enviado - Aguardando Análise1`) não casa
 a string exata usada pelas consultas `sent`/`rework`. O `EG0240-5` continua em `sent` e em
 `rework` mesmo tendo perdido a conclusão: a transição de 07/10 está no histórico e o `DURING` a
@@ -244,8 +239,8 @@ enxerga; o que mudou hoje foi apenas a sua due date.
 um cada em G0280, EG0275, EG0241, EG0240 e EG0239. Por mês: **nov/2026 = 11** e
 **dez/2026 = 22**, dos quais 20 têm due date entre 16 e 31/12.
 
-A composição é a mesma das gerações anteriores — este foi o único conjunto do mês corrente que
-saiu idêntico nesta rodada. O EG0256 segue sem representante no lookahead desde a saída do
+A composição é a mesma das gerações anteriores; junto com o `overdue` (vazio), foi um dos dois
+conjuntos do mês corrente que saíram idênticos nesta rodada. O EG0256 segue sem representante no lookahead desde a saída do
 `EG0256-30`, reprogramado para 30/01/2027. **20 dos 33 registros (61%)** caem na segunda quinzena
 de dezembro — o gargalo de fim de ano permanece, concentrado em EG0274 e EG0286.
 
@@ -275,12 +270,12 @@ artifact.
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
 - Comentário de geração no topo do `<head>`: presente, logo após `<head>`, com o carimbo
-  `2026-10-15T15:31:23-03:00`.
+  `2026-10-15T16:31:29-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (bloco injetado abre no byte 22.533 do `index.html` e `window.__SNAPSHOT__` é atribuído no
-  byte 95.688, contra o byte 98.129 da atribuição `window.__HISTORY__=` do `<script>` próprio
+  (bloco injetado abre no byte 22.611 do `index.html` e `window.__SNAPSHOT__` é atribuído no
+  byte 97.267, contra o byte 99.717 da atribuição `window.__HISTORY__=` do `<script>` próprio
   do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 15/10/2026 15:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 15/10/2026 16:31,
   seguido apenas de `</body></html>`. Ocorrência única no arquivo.
 - As **12 consultas JQL** do mês corrente e da visão acumulada (6 do mês + 6 meses da
   acumulada, sendo `planned_2026-10` comum às duas) foram reconstruídas exatamente como o
@@ -289,10 +284,10 @@ Checagens desta rodada (contagens e carimbos reconferidos após a geração):
   resolvem para o conjunto correto, sem *fallback* para lista vazia, e nenhum padrão ficou
   órfão (11 padrões para 11 conjuntos embutidos).
 - Contagens dos conjuntos do mês corrente conferidas contra os arquivos de `_snap/`:
-  `planned` 15, `overdue` 0, `lookahead` 33, `sent` 5, `resolved` 5, `rework` 3.
-- Tamanhos da geração: `index.html` **164.016 bytes** e `snapshot-data.js` **76.230 bytes**,
-  contra 163.034 e 75.248 da rodada anterior — o crescimento corresponde aos dois registros
-  novos de `planned` e ao registro novo de `sent`/`resolved`.
+  `planned` 15, `overdue` 0, `lookahead` 33, `sent` 6, `resolved` 6, `rework` 4.
+- Tamanhos da geração: `index.html` **164.972 bytes** e `snapshot-data.js` **77.186 bytes**,
+  contra 164.016 e 76.230 da rodada anterior — o crescimento corresponde ao registro novo em
+  `sent`, `resolved` e `rework`.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é idêntico ao das rodadas anteriores — a última verificada em Chromium headless
   sem erros de script — e nesta rodada mudaram apenas o carimbo de geração e os dados embutidos.
