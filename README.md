@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 15/10/2026 12:30** (`2026-10-15T12:30:22-03:00`)
+> **Última atualização do snapshot: 15/10/2026 13:31** (`2026-10-15T13:31:02-03:00`)
 
 ---
 
@@ -62,11 +62,11 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 15/10/2026 12:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 15/10/2026 13:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto alterado nesta rodada
 
-Terceira geração de 15/10, cerca de **duas horas** após a das 10:30. As **seis**
+Quarta geração de 15/10, cerca de **uma hora** após a das 12:30. As **seis**
 consultas JQL do mês corrente foram reexecutadas ao vivo com o predicado
 `issuetype in (Epic, "Fluxo de trabalho")`, e **nenhuma mudou**:
 
@@ -81,30 +81,40 @@ consultas JQL do mês corrente foram reexecutadas ao vivo com o predicado
 | projetos visíveis | 21 | 21 | **reconsultada ao vivo** nesta rodada |
 
 A comparação foi feita **item a item**, e não por contagem. Os seis conjuntos do mês corrente
-foram remontados do zero a partir das respostas ao vivo, no formato mínimo, e comparados por
-igualdade estrutural de JSON aos arquivos em `_snap/` — chave, `summary`, `status.name`,
-`status.statusCategory.key`, `project.key`, `project.name`, `duedate`, `resolutiondate` e
-`updated`, **na mesma ordem**: os seis saíram idênticos, sem uma única divergência de campo. As
-seis respostas vieram completas (`pageInfo.hasNextPage = false`), sem timeouts nem
+foram remontados do zero a partir das respostas ao vivo, no formato mínimo, e comparados aos
+arquivos em `_snap/` por **hash SHA-256 do JSON serializado** — o que cobre chave, `summary`,
+`status.name`, `status.statusCategory.key`, `project.key`, `project.name`, `duedate`,
+`resolutiondate`, `updated` **e a ordem dos registros** de uma só vez. Os seis hashes bateram,
+byte a byte, com os dos arquivos em disco:
+
+| Conjunto | SHA-256 (12 primeiros) | Bytes |
+|---|---|---:|
+| `planned_2026-10` | `b4f847fc1f0c` | 4.807 |
+| `overdue_2026-10` | `fc714b77d49c` | 397 |
+| `lookahead_2026-10` | `0369f85c277b` | 12.591 |
+| `sent_2026-10` | `bdd875dd58e3` | 1.635 |
+| `resolved_2026-10` | `b81f03dcbbdf` | 1.680 |
+| `rework_2026-10` | `d1016bb331c0` | 1.233 |
+
+As seis respostas vieram completas (`pageInfo.hasNextPage = false`), sem timeouts nem
 reexecuções; duas delas (`lookahead_2026-10`, com 33 registros, e a lista de projetos)
-estouraram o limite de tokens da resposta e foram extraídas com `jq` do arquivo salvo pelo
-próprio MCP, conforme a disciplina do passo 3. A igualdade dos dados é confirmada do lado do
-artefato publicado: com os seis conjuntos regravados a partir do resultado ao vivo, o
-`snapshot-data.js` saiu com os mesmos **75.248 bytes** e o `index.html` com os mesmos
-**163.034 bytes** das gerações anteriores, e o `window.__SNAPSHOT__` caiu no mesmo byte
+estouraram o limite de tokens da resposta e foram extraídas do arquivo salvo pelo próprio MCP,
+conforme a disciplina do passo 3. A igualdade dos dados é confirmada do lado do artefato
+publicado: o `snapshot-data.js` saiu com os mesmos **75.248 bytes** e o `index.html` com os
+mesmos **163.034 bytes** das gerações anteriores, e o `window.__SNAPSHOT__` caiu no mesmo byte
 **95.329** — o que só ocorre se o conteúdo embutido for idêntico, já que o carimbo de geração
 tem comprimento fixo.
 
 A lista de projetos **foi** reconsultada ao vivo nesta rodada: o `getVisibleJiraProjects`
 devolveu os mesmos **21 projetos** (`isLast = true`, `total = 21`) e os mesmos dois tipos de
 nível Epic (`Epic` e `Fluxo de trabalho`). A resposta foi reduzida ao formato mínimo e
-comparada ao `_projects_min.json` em disco por igualdade estrutural — chave, nome e lista de
-tipos de cada projeto, normalizados: **idênticos**, e os dois arquivos têm os mesmos 6.657
-bytes. O arquivo, por isso, **não** foi regravado — os nomes de projeto gravados nos conjuntos
-continuam batendo, um a um, com os desse arquivo.
+comparada ao `_projects_min.json` em disco por igualdade estrutural normalizada — chave, nome
+e lista de tipos de cada projeto —, com hash idêntico (`81c3eeb3b263…`). O arquivo, por isso,
+**não** foi regravado, e os nomes de projeto gravados nos conjuntos continuam batendo, um a
+um, com os desse arquivo.
 
-Os seis arquivos do mês corrente em `_snap/` foram regravados com o mesmo conteúdo. Os meses
-congelados não foram tocados.
+Como os seis conjuntos saíram idênticos aos de disco, os arquivos de `_snap/` **não**
+precisaram ser regravados nesta rodada. Os meses congelados não foram tocados.
 
 > **Pendência remanescente (menor).** O texto `issuetype=Epic` continua gravado no prompt da
 > tarefa agendada, no passo que descreve as seis consultas. Ele não afeta a página publicada —
@@ -128,11 +138,11 @@ congelados não foram tocados.
 > disco (`6a2b6462a4efbec1890af4494a7f0b74`) — a origem em cache é byte a byte o artifact atual,
 > sem defasagem.
 
-> **Nota de publicação (15/10/2026, 12:30).** A cadeia de publicação está íntegra: o
-> `.push-watchdog.log` registra a passagem das 12:24, com `Commit OK: a4e4d5f` e `Push OK e
-> VERIFICADO: HEAD sincronizado com origin/main`. As passagens correm a cada ~10 minutos e
-> todas as recentes concluíram com sucesso. Esta geração entra na passagem seguinte, prevista
-> para ~12:34.
+> **Nota de publicação (15/10/2026, 13:31).** A cadeia de publicação está íntegra: o
+> `.push-watchdog.log` registra a passagem das 13:24, com `Commit OK: 2a2db94` e `Push OK e
+> VERIFICADO: HEAD sincronizado com origin/main`. As passagens correm a cada ~10 minutos e as
+> quatro mais recentes (12:54, 13:04, 13:14 e 13:24) concluíram todas com sucesso. Esta
+> geração entra na passagem seguinte, prevista para ~13:34.
 
 A **visão acumulada** (`planned_2026-05` a `planned_2026-10`) não foi reconsultada ao vivo nesta
 rodada: outubro já é coberto pelo `planned_2026-10` acima, e maio a setembro são meses encerrados,
@@ -190,7 +200,7 @@ Distribuição por projeto: G0280 = 5 · EG0286 = 4 · EG0274 = 2 · EG0240 = 1 
 Indicadores do mês na geração: **OTD 8%** (1 de 13), **retrabalho 60%** (3 de 5 envios),
 **12 pendências do mês** e **1 em atraso acumulado**.
 
-Os três indicadores repetem os das seis gerações anteriores — e, com os seis conjuntos idênticos
+Os três indicadores repetem os das sete gerações anteriores — e, com os seis conjuntos idênticos
 em composição, repetem-se por identidade de dados, não por coincidência de contagem. O OTD
 permanece em 8%: o único envio com due date de outubro continua sendo `EG0286-7`, e o denominador
 segue em 13 desde a entrada de `EG0240-4`, reprogramado para 16/10. O retrabalho fica em 60%
@@ -255,12 +265,12 @@ artifact.
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
 - Comentário de geração no topo do `<head>`: presente, logo após `<head>`, com o carimbo
-  `2026-10-15T12:30:22-03:00`.
+  `2026-10-15T13:31:02-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (bloco injetado abre no byte 22.611 do `index.html` e `window.__SNAPSHOT__` é atribuído no
   byte 95.329, contra o byte 97.779 da atribuição `window.__HISTORY__=` do `<script>` próprio
   do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 15/10/2026 12:30,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 15/10/2026 13:31,
   seguido apenas de `</body></html>`. Ocorrência única no arquivo.
 - As **12 consultas JQL** do mês corrente e da visão acumulada (6 do mês + 6 meses da
   acumulada, sendo `planned_2026-10` comum às duas) foram reconstruídas exatamente como o
