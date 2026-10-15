@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 14/10/2026 20:31** (`2026-10-14T20:31:52-03:00`)
+> **Última atualização do snapshot: 14/10/2026 21:31** (`2026-10-14T21:31:02-03:00`)
 
 ---
 
@@ -62,7 +62,7 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 14/10/2026 20:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 14/10/2026 21:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto alterado nesta rodada
 
@@ -127,11 +127,11 @@ congelados não foram tocados.
 > disco (`6a2b6462a4efbec1890af4494a7f0b74`) — a origem em cache é byte a byte o artifact atual,
 > sem defasagem.
 
-> **Nota de publicação (14/10/2026, 20:31).** A cadeia de publicação está íntegra: o
-> `.push-watchdog.log` registra a passagem das 20:24, com `Commit OK: 12e3abe` e `Push OK e
-> VERIFICADO: HEAD sincronizado com origin/main`, logo após a das 20:14 (`3f5ed33`) e a das
-> 20:04. As passagens correm a cada ~10 minutos e todas as recentes concluíram com sucesso.
-> Esta geração entra na passagem seguinte, prevista para ~20:34.
+> **Nota de publicação (14/10/2026, 21:31).** A cadeia de publicação está íntegra: o
+> `.push-watchdog.log` registra a passagem das 21:24, com `Commit OK: 080cafc` e `Push OK e
+> VERIFICADO: HEAD sincronizado com origin/main`, logo após as das 21:14 (`8b86ab7`), 21:04
+> (`02d4d14`) e 20:54 (`0599686`). As passagens correm a cada ~10 minutos e todas as recentes
+> concluíram com sucesso. Esta geração entra na passagem seguinte, prevista para ~21:34.
 
 A **visão acumulada** (`planned_2026-05` a `planned_2026-10`) não foi reconsultada ao vivo nesta
 rodada: outubro já é coberto pelo `planned_2026-10` acima, e maio a setembro são meses encerrados,
@@ -254,16 +254,19 @@ artifact.
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
 - Comentário de geração no topo do `<head>`: presente, logo após `<head>`, com o carimbo
-  `2026-10-14T20:31:52-03:00`.
+  `2026-10-14T21:31:02-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (`window.__SNAPSHOT__` no byte 94.719 do `index.html`, contra 97.169 do
-  `window.__HISTORY__` do artifact — ordem de execução confirmada).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 14/10/2026 20:31,
+  (bloco injetado abre no byte 22.611 do `index.html` e `window.__SNAPSHOT__` é atribuído no
+  byte 95.329, contra o byte 97.770 do `<script>` próprio do artifact que define
+  `window.__HISTORY__` — ordem de execução confirmada).
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 14/10/2026 21:31,
   seguido apenas de `</body></html>`. Ocorrência única no arquivo.
-- As **11 consultas JQL** do mês corrente e da visão acumulada foram reconstruídas exatamente
-  como o artifact as monta e testadas contra os padrões gravados em `snapshot-data.js`: todas
-  resolvem para o conjunto correto, sem *fallback* para lista vazia, e nenhum padrão ficou órfão
-  (11 padrões para 11 conjuntos embutidos).
+- As **12 consultas JQL** do mês corrente e da visão acumulada (6 do mês + 6 meses da
+  acumulada, sendo `planned_2026-10` comum às duas) foram reconstruídas exatamente como o
+  artifact as monta — inclusive o `issuetype in ("Epic","Fluxo de trabalho")` montado a partir
+  dos tipos de nível Epic — e testadas contra os padrões gravados em `snapshot-data.js`: as 12
+  resolvem para o conjunto correto, sem *fallback* para lista vazia, e nenhum padrão ficou
+  órfão (11 padrões para 11 conjuntos embutidos).
 - Contagens dos conjuntos do mês corrente conferidas contra os arquivos de `_snap/`:
   `planned` 13, `overdue` 1, `lookahead` 33, `sent` 4, `resolved` 4, `rework` 3.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
