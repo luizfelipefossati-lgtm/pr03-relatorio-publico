@@ -57,6 +57,25 @@
   }
  },
  {
+  "key": "EG0274-38",
+  "fields": {
+   "summary": "Estudos de Tráfego",
+   "status": {
+    "name": "Enviado - Aguardando Análise",
+    "statusCategory": {
+     "key": "done"
+    }
+   },
+   "project": {
+    "key": "EG0274",
+    "name": "EG0274 - DNIT"
+   },
+   "duedate": "2026-10-07",
+   "resolutiondate": "2026-10-15T15:30:49.463-0300",
+   "updated": "2026-10-15T15:30:49.471-0300"
+  }
+ },
+ {
   "key": "EG0241-42",
   "fields": {
    "summary": "TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE)",
