@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 15/10/2026 18:30** (`2026-10-15T18:30:45-03:00`)
+> **Última atualização do snapshot: 15/10/2026 19:29** (`2026-10-15T19:29:45-03:00`)
 
 ---
 
@@ -62,11 +62,11 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 15/10/2026 18:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 15/10/2026 19:29 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto mudou nesta rodada
 
-Oitava geração de 15/10, uma hora após a das 17:31. As **seis** consultas JQL do mês corrente
+Nona geração de 15/10, uma hora após a das 18:30. As **seis** consultas JQL do mês corrente
 foram reexecutadas ao vivo com o predicado `issuetype in (Epic, "Fluxo de trabalho")`, e
 **nenhuma mudou**:
 
@@ -104,14 +104,15 @@ são os mesmos da geração anterior:
 | `resolved_2026-10` | `47039cf227fb` | 2.488 |
 | `rework_2026-10` | `8b6f50c31e86` | 1.629 |
 
-A lista de projetos **foi** reconsultada ao vivo nesta rodada: o `getVisibleJiraProjects`
-devolveu os mesmos **21 projetos** (`isLast = true`, `total = 21`), com chave e nome idênticos,
-um a um, aos do `_projects_min.json` em disco. A consulta foi feita sem expandir os tipos de
-issue (resposta enxuta), de modo que os dois tipos de nível Epic (`Epic` e `Fluxo de trabalho`)
-vêm do arquivo em disco, reaproveitado sem alteração — o mesmo que a geração anterior
-reconferiu por hash estrutural. O arquivo, por isso, **não** foi regravado, e os nomes de
-projeto gravados nos conjuntos continuam batendo, um a um, com os desse arquivo. Os meses
-congelados não foram tocados.
+A lista de projetos **foi** reconsultada ao vivo nesta rodada, desta vez **com** expansão dos
+tipos de issue: o `getVisibleJiraProjects` devolveu os mesmos **21 projetos** (`isLast = true`,
+`total = 21`). A resposta estourou o limite de tokens e foi reduzida ao formato mínimo com
+`jq`/python a partir do arquivo salvo pelo próprio MCP; o **SHA-256 do conjunto normalizado**
+(chave, nome e lista de tipos com `hierarchyLevel`, ordenados) bateu com o do
+`_projects_min.json` em disco — `42e8a14f9d65…` —, de modo que a dupla de tipos de nível Epic
+(`Epic` e `Fluxo de trabalho`) também está conferida ao vivo, e não apenas reaproveitada. O
+arquivo, por isso, **não** foi regravado, e os nomes de projeto gravados nos conjuntos
+continuam batendo, um a um, com os desse arquivo. Os meses congelados não foram tocados.
 
 > **Pendência remanescente.** O texto `issuetype=Epic` continua gravado no prompt da tarefa
 > agendada, no passo que descreve as seis consultas. Ele não afeta a página publicada — o
@@ -139,11 +140,11 @@ congelados não foram tocados.
 > disco (`6a2b6462a4efbec1890af4494a7f0b74`). Nesta rodada a cópia local foi reaproveitada, com
 > o mesmo md5 reconferido — a origem em cache é byte a byte o artifact atual, sem defasagem.
 
-> **Nota de publicação (15/10/2026, 18:30).** A cadeia de publicação está íntegra: o
-> `.push-watchdog.log` registra a passagem das 18:24, com `Commit OK: 8d274f5` e `Push OK e
+> **Nota de publicação (15/10/2026, 19:29).** A cadeia de publicação está íntegra: o
+> `.push-watchdog.log` registra a passagem das 19:24, com `Commit OK: 00d0463` e `Push OK e
 > VERIFICADO: HEAD sincronizado com origin/main`. As passagens correm a cada ~10 minutos e as
-> quatro mais recentes (17:54, 18:04, 18:14 e 18:24) concluíram todas com sucesso. Esta
-> geração entra na passagem seguinte, prevista para ~18:34.
+> quatro mais recentes (18:54, 19:04, 19:14 e 19:24) concluíram todas com sucesso. Esta
+> geração entra na passagem seguinte, prevista para ~19:34.
 
 A **visão acumulada** (`planned_2026-05` a `planned_2026-10`) não foi reconsultada ao vivo nesta
 rodada: outubro já é coberto pelo `planned_2026-10` acima, e maio a setembro são meses encerrados,
@@ -204,7 +205,7 @@ Distribuição por projeto: G0280 = 5 · EG0286 = 4 · EG0240 = 3 · EG0274 = 2 
 Indicadores do mês na geração: **OTD 20%** (3 de 15), **retrabalho 57%** (4 de 7 envios),
 **12 pendências do mês** e **nenhum em atraso acumulado**.
 
-Os quatro indicadores repetem os da geração das 17:31, sem nenhuma transição nova no
+Os quatro indicadores repetem os da geração das 18:30, sem nenhuma transição nova no
 intervalo:
 
 - **OTD 20%** (3 de 15). Os três entregues — `EG0286-7`, `EG291-4` e `EG0274-38` — contam
@@ -271,12 +272,12 @@ artifact.
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
 - Comentário de geração no topo do `<head>`: presente, logo após `<head>`, com o carimbo
-  `2026-10-15T18:30:45-03:00`.
+  `2026-10-15T19:29:45-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (bloco injetado abre no byte 22.611 do `index.html` e `window.__SNAPSHOT__` é atribuído no
   byte 97.267, contra o byte 99.717 da atribuição `window.__HISTORY__=` do `<script>` próprio
   do artifact — ordem de execução confirmada, com os mesmos deslocamentos da rodada anterior).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 15/10/2026 18:30,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 15/10/2026 19:29,
   seguido apenas de `</body></html>`. Ocorrência única no arquivo.
 - As **12 consultas JQL** do mês corrente e da visão acumulada (6 do mês + 6 meses da
   acumulada, sendo `planned_2026-10` comum às duas) foram reconstruídas exatamente como o
