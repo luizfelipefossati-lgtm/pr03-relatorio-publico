@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 16/10/2026 01:31** (`2026-10-16T01:31:27-03:00`)
+> **Última atualização do snapshot: 16/10/2026 02:31** (`2026-10-16T02:31:02-03:00`)
 
 ---
 
@@ -62,11 +62,11 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 16/10/2026 01:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 16/10/2026 02:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto mudou nesta rodada
 
-Segunda geração de 16/10, cerca de uma hora após a das 00:33. As **seis** consultas JQL do mês
+Terceira geração de 16/10, cerca de uma hora após a das 01:31. As **seis** consultas JQL do mês
 corrente foram reexecutadas ao vivo com o predicado `issuetype in (Epic, "Fluxo de trabalho")`, e
 **nenhuma mudou**:
 
@@ -152,15 +152,15 @@ conjuntos de outubro e no lookahead, inclusive o `EG0294`, constam da lista. Os 
 > que é o que o `_gen_snapshot.py` já consome. Convém trocar aquele passo por
 > `list_legacy_live_artifacts` + `device_stage_files(artifact_ids=[...])`, com o
 > `_artifact_src.html` como alternativa declarada — alteração no prompt da tarefa, que esta
-> rotina não faz por conta própria. Nesta rodada a equivalência **não** foi reverificada pela
-> via do artifact ao vivo; o `_artifact_src.html` em disco segue com o mesmo `md5`
-> (`6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes) conferido contra o artifact ao vivo nas
-> rodadas anteriores, de modo que a origem continua sendo, byte a byte, o artifact atual.
+> rotina não faz por conta própria. Nesta rodada a equivalência **foi** reverificada por essa
+> via: `list_legacy_live_artifacts` + `device_stage_files(artifact_ids=[...])` trouxeram o HTML
+> atual do artifact, com `md5` `6a2b6462a4efbec1890af4494a7f0b74` e 87.509 bytes — idênticos ao
+> `_artifact_src.html` em disco. A origem é, byte a byte, o artifact ao vivo.
 
-> **Nota de publicação (16/10/2026, 01:31).** A cadeia de publicação está íntegra: o
-> `.push-watchdog.log` registra a passagem das 01:24, com `Commit OK: 4c37abf` e `Push OK e
+> **Nota de publicação (16/10/2026, 02:31).** A cadeia de publicação está íntegra: o
+> `.push-watchdog.log` registra a passagem das 02:24, com `Commit OK: bb43377` e `Push OK e
 > VERIFICADO: HEAD sincronizado com origin/main`. A cadência de **10 minutos** segue regular
-> desde a virada do dia. Esta geração entra na passagem seguinte, prevista para ~01:34.
+> desde a virada do dia. Esta geração entra na passagem seguinte, prevista para ~02:34.
 
 A **visão acumulada** (`planned_2026-05` a `planned_2026-10`) não foi reconsultada ao vivo nesta
 rodada: outubro já é coberto pelo `planned_2026-10` acima, e maio a setembro são meses encerrados,
@@ -221,7 +221,7 @@ Distribuição por projeto: G0280 = 5 · EG0286 = 4 · EG0240 = 3 · EG0274 = 2 
 Indicadores do mês na geração: **OTD 20%** (3 de 15), **retrabalho 57%** (4 de 7 envios),
 **12 pendências do mês** e **nenhum em atraso acumulado**.
 
-Os quatro indicadores repetem os das gerações de 23:32 e 00:33, sem nenhuma transição nova no
+Os quatro indicadores repetem os das gerações de 00:33 e 01:31, sem nenhuma transição nova no
 intervalo:
 
 - **OTD 20%** (3 de 15). Os três entregues — `EG0286-7`, `EG291-4` e `EG0274-38` — contam
@@ -288,12 +288,12 @@ artifact.
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
 - Comentário de geração no topo do `<head>`: presente, logo após `<head>`, com o carimbo
-  `2026-10-16T01:31:27-03:00`.
+  `2026-10-16T02:31:02-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (bloco injetado abre no byte 22.522 do `index.html` e `window.__SNAPSHOT__` é atribuído no
-  byte 97.267, contra o byte 99.717 da atribuição `window.__HISTORY__=` do `<script>` próprio
-  do artifact — ordem de execução confirmada, com os mesmos deslocamentos da rodada anterior).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 16/10/2026 01:31,
+  (bloco injetado abre no byte 22.444 do `index.html` e `window.__SNAPSHOT__` é atribuído no
+  byte 96.638, contra o byte 99.079 da atribuição `window.__HISTORY__=` do `<script>` próprio
+  do artifact — ordem de execução confirmada).
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 16/10/2026 02:31,
   seguido apenas de `</body></html>`. Ocorrência única no arquivo.
 - As **12 consultas JQL** do mês corrente e da visão acumulada (6 do mês + 6 meses da
   acumulada, sendo `planned_2026-10` comum às duas) foram reconstruídas exatamente como o
