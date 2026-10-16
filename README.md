@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 15/10/2026 19:29** (`2026-10-15T19:29:45-03:00`)
+> **Última atualização do snapshot: 15/10/2026 21:32** (`2026-10-15T21:32:20-03:00`)
 
 ---
 
@@ -50,9 +50,9 @@ Mês corrente (out/2026) — servido pela interceptação de JQL (`window.cowork
 | `planned_2026-10` | Epics com due date em out/2026 | 15 | 15 |
 | `overdue_2026-10` | Vencidos antes de out/2026, não concluídos | 0 | 0 |
 | `lookahead_2026-10` | Due date entre nov/2026 e dez/2026 | 33 | 33 |
-| `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | **6** | 5 |
-| `resolved_2026-10` | Concluídos em out/2026 | **6** | 5 |
-| `rework_2026-10` | Retrabalho em out/2026 | **4** | 3 |
+| `sent_2026-10` | Transições para "Enviado - Aguardando Análise" em out/2026 | 6 | 6 |
+| `resolved_2026-10` | Concluídos em out/2026 | 6 | 6 |
+| `rework_2026-10` | Retrabalho em out/2026 | 4 | 4 |
 
 Visão acumulada (`planned` por mês): mai/2026 = 7 · jun/2026 = 1 · jul/2026 = 10 · ago/2026 = 4 · set/2026 = 8 · out/2026 = **15**.
 
@@ -62,11 +62,11 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 15/10/2026 19:29 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 15/10/2026 21:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto mudou nesta rodada
 
-Nona geração de 15/10, uma hora após a das 18:30. As **seis** consultas JQL do mês corrente
+Décima geração de 15/10, pouco mais de duas horas após a das 19:29. As **seis** consultas JQL do mês corrente
 foram reexecutadas ao vivo com o predicado `issuetype in (Epic, "Fluxo de trabalho")`, e
 **nenhuma mudou**:
 
@@ -89,9 +89,10 @@ das 16:31, continua nos três conjuntos de envio, sem nenhuma transição nova d
 Nenhum epic entrou ou saiu de outubro desde então, e nenhum campo de nenhum registro mudou.
 
 As seis respostas vieram completas (`pageInfo.hasNextPage = false`), sem timeouts nem
-reexecuções; uma delas (`lookahead_2026-10`, com 33 registros) estourou o limite de tokens da
-resposta e foi extraída com `jq` do arquivo salvo pelo próprio MCP, conforme a disciplina do
-passo 3. Como os conjuntos saíram idênticos aos de
+reexecuções. Nesta rodada o `lookahead_2026-10` foi consultado em **duas metades**
+(`duedate` em nov/2026 e em dez/2026, 11 + 22 = 33), o que manteve as duas respostas abaixo
+do limite de tokens e dispensou a extração por arquivo — a disciplina do passo 3 foi
+necessária apenas na lista de projetos. Como os conjuntos saíram idênticos aos de
 disco, **nenhum** arquivo de `_snap/` foi regravado nesta rodada — os hashes e tamanhos abaixo
 são os mesmos da geração anterior:
 
@@ -109,7 +110,7 @@ tipos de issue: o `getVisibleJiraProjects` devolveu os mesmos **21 projetos** (`
 `total = 21`). A resposta estourou o limite de tokens e foi reduzida ao formato mínimo com
 `jq`/python a partir do arquivo salvo pelo próprio MCP; o **SHA-256 do conjunto normalizado**
 (chave, nome e lista de tipos com `hierarchyLevel`, ordenados) bateu com o do
-`_projects_min.json` em disco — `42e8a14f9d65…` —, de modo que a dupla de tipos de nível Epic
+`_projects_min.json` em disco — `f938b6c2df9a…` —, de modo que a dupla de tipos de nível Epic
 (`Epic` e `Fluxo de trabalho`) também está conferida ao vivo, e não apenas reaproveitada. O
 arquivo, por isso, **não** foi regravado, e os nomes de projeto gravados nos conjuntos
 continuam batendo, um a um, com os desse arquivo. Os meses congelados não foram tocados.
@@ -140,11 +141,14 @@ continuam batendo, um a um, com os desse arquivo. Os meses congelados não foram
 > disco (`6a2b6462a4efbec1890af4494a7f0b74`). Nesta rodada a cópia local foi reaproveitada, com
 > o mesmo md5 reconferido — a origem em cache é byte a byte o artifact atual, sem defasagem.
 
-> **Nota de publicação (15/10/2026, 19:29).** A cadeia de publicação está íntegra: o
-> `.push-watchdog.log` registra a passagem das 19:24, com `Commit OK: 00d0463` e `Push OK e
-> VERIFICADO: HEAD sincronizado com origin/main`. As passagens correm a cada ~10 minutos e as
-> quatro mais recentes (18:54, 19:04, 19:14 e 19:24) concluíram todas com sucesso. Esta
-> geração entra na passagem seguinte, prevista para ~19:34.
+> **Nota de publicação (15/10/2026, 21:32).** A cadeia de publicação está íntegra: o
+> `.push-watchdog.log` registra a passagem das 21:24, com `Commit OK: e6a25e9` e `Push OK e
+> VERIFICADO: HEAD sincronizado com origin/main`. As quatro passagens mais recentes (20:54,
+> 21:04, 21:14 e 21:24) concluíram todas com sucesso. Houve, porém, uma **lacuna de 67
+> minutos** entre as passagens das 19:44 e das 20:51, fora do intervalo de ~10 minutos
+> observado no resto do log. A publicação não foi afetada — a passagem das 20:51 commitou e
+> empurrou normalmente —, mas convém olhar o agendamento da tarefa se a lacuna se repetir.
+> Esta geração entra na passagem seguinte, prevista para ~21:34.
 
 A **visão acumulada** (`planned_2026-05` a `planned_2026-10`) não foi reconsultada ao vivo nesta
 rodada: outubro já é coberto pelo `planned_2026-10` acima, e maio a setembro são meses encerrados,
@@ -205,7 +209,7 @@ Distribuição por projeto: G0280 = 5 · EG0286 = 4 · EG0240 = 3 · EG0274 = 2 
 Indicadores do mês na geração: **OTD 20%** (3 de 15), **retrabalho 57%** (4 de 7 envios),
 **12 pendências do mês** e **nenhum em atraso acumulado**.
 
-Os quatro indicadores repetem os da geração das 18:30, sem nenhuma transição nova no
+Os quatro indicadores repetem os da geração das 19:29, sem nenhuma transição nova no
 intervalo:
 
 - **OTD 20%** (3 de 15). Os três entregues — `EG0286-7`, `EG291-4` e `EG0274-38` — contam
@@ -272,12 +276,12 @@ artifact.
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
 - Comentário de geração no topo do `<head>`: presente, logo após `<head>`, com o carimbo
-  `2026-10-15T19:29:45-03:00`.
+  `2026-10-15T21:32:20-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (bloco injetado abre no byte 22.611 do `index.html` e `window.__SNAPSHOT__` é atribuído no
   byte 97.267, contra o byte 99.717 da atribuição `window.__HISTORY__=` do `<script>` próprio
   do artifact — ordem de execução confirmada, com os mesmos deslocamentos da rodada anterior).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 15/10/2026 19:29,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 15/10/2026 21:32,
   seguido apenas de `</body></html>`. Ocorrência única no arquivo.
 - As **12 consultas JQL** do mês corrente e da visão acumulada (6 do mês + 6 meses da
   acumulada, sendo `planned_2026-10` comum às duas) foram reconstruídas exatamente como o
