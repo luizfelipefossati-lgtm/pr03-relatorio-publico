@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 16/10/2026 00:33** (`2026-10-16T00:33:15-03:00`)
+> **Última atualização do snapshot: 16/10/2026 01:31** (`2026-10-16T01:31:27-03:00`)
 
 ---
 
@@ -62,11 +62,11 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 16/10/2026 00:33 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 16/10/2026 01:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum conjunto mudou nesta rodada
 
-Primeira geração de 16/10, cerca de uma hora após a das 23:32 de 15/10. As **seis** consultas JQL do mês
+Segunda geração de 16/10, cerca de uma hora após a das 00:33. As **seis** consultas JQL do mês
 corrente foram reexecutadas ao vivo com o predicado `issuetype in (Epic, "Fluxo de trabalho")`, e
 **nenhuma mudou**:
 
@@ -89,47 +89,47 @@ por chave e conferidos **campo a campo** — `summary`, `duedate`, `resolutionda
 sem nenhuma transição nova depois dele. Nenhum epic entrou ou saiu de outubro desde a rodada
 anterior.
 
-As respostas vieram completas (`pageInfo.hasNextPage = false`), sem timeouts. Houve **um**
-`502 Bad Gateway` na primeira tentativa do `lookahead_2026-10`; a consulta foi refeita e, como
-nas rodadas anteriores, dividida em **duas metades** (`duedate` em nov/2026 e em dez/2026,
-11 + 22 = 33), o que manteve as duas respostas abaixo do limite de tokens. A lista de projetos
-foi pedida sem `expandIssueTypes`, e coube na resposta sem precisar de `jq`.
+As respostas vieram completas (`pageInfo.hasNextPage = false`), sem timeouts e **sem nenhum**
+`502`. O `lookahead_2026-10` foi pedido numa consulta só, em nov–dez/2026; a resposta estourou
+o limite de tokens da ferramenta e foi gravada em arquivo pelo próprio MCP, de onde saiu
+reduzida por `jq` aos campos mínimos — o procedimento previsto no prompt, sem precisar dividir
+a consulta em metades como nas rodadas anteriores. A lista de projetos foi pedida **com**
+`expandIssueTypes` e também estourou o limite; foi reduzida do arquivo salvo por um script
+Python curto.
 
-Diferente das rodadas anteriores, os seis arquivos de `_snap/` **foram regravados** com os
-registros vindos ao vivo. O conteúdo é o mesmo — a conferência campo a campo contra a geração
-anterior, extraída do `index.html` publicado às 23:32, não achou **nenhuma** divergência em
-`planned`, `overdue` e `lookahead` —, mas a ordem dos registros passou a ser a devolvida pelo
-Jira sob o `ORDER BY` que o próprio artifact usa (`project ASC, duedate ASC` em `planned`;
-`duedate ASC` no `lookahead`), em vez da ordem herdada de rodadas antigas. Os acentos deixaram
-de ser escapados como `\uXXXX`, o que explica os arquivos menores sem perda de conteúdo. Os
-hashes abaixo são o
-**SHA-256 do conjunto normalizado** de cada arquivo em disco (chave, `summary`, `status.name`,
-`status.statusCategory.key`, `project.key`, `project.name`, `duedate`, `resolutiondate` e
-`updated`, ordenados por chave), recalculados após a geração:
+Cinco dos seis arquivos de `_snap/` **foram regravados** com os
+registros vindos ao vivo. O `lookahead_2026-10` **não** foi regravado: a resposta ao vivo saiu
+idêntica à do arquivo em disco na assinatura (chave, `duedate`, `status.name` e `updated` dos
+33 registros, mesmo SHA-1 dos dois lados), e reescrevê-lo só produziria ruído no *diff*. Os
+cinco regravados saíram com o mesmo conteúdo de antes: a conferência **registro a registro e
+campo a campo** contra a tabela da checagem ao vivo das 02:31 (`_snap/_live1016c.py`) não achou
+nenhuma divergência em nenhum dos seis conjuntos. Os hashes abaixo são o **SHA-256 dos bytes**
+de cada arquivo em disco — recipiente diferente do usado nas tabelas das rodadas anteriores,
+que normalizavam os registros antes de somar; os valores não são comparáveis com os de lá:
 
 | Conjunto | SHA-256 (12 primeiros) | Bytes |
 |---|---|---:|
-| `planned_2026-10` | `19456cd636e8` | 4.654 |
+| `planned_2026-10` | `b6abc214d6c0` | 4.654 |
 | `overdue_2026-10` | `4f53cda18c2b` | 2 |
-| `lookahead_2026-10` | `28b00f233059` | 10.378 |
-| `sent_2026-10` | `3eb94bbd0629` | 2.039 |
-| `resolved_2026-10` | `b73b7af71af9` | 2.084 |
-| `rework_2026-10` | `f017c8de2206` | 1.359 |
+| `lookahead_2026-10` | `a7915446592b` | 10.378 |
+| `sent_2026-10` | `3b5f6e5baf7e` | 2.039 |
+| `resolved_2026-10` | `cc1816951c1c` | 2.084 |
+| `rework_2026-10` | `ef078b89c74b` | 1.359 |
 
-Os hashes de `planned` e `lookahead` mudaram em relação à rodada anterior **sem** mudança de
-conteúdo: a receita é sensível à serialização, e nesta rodada a ordem dos registros e o
-escape de acentos mudaram, como descrito acima. A igualdade de conteúdo foi verificada
-diretamente, registro a registro e campo a campo, contra o `index.html` anterior.
+Os seis arquivos mantiveram **exatamente** o tamanho em bytes da rodada anterior. A igualdade
+de conteúdo não se apoia nisso: foi verificada diretamente, registro a registro e campo a
+campo, contra a referência das 02:31.
 
-A lista de projetos **foi** reconsultada ao vivo nesta rodada (`getVisibleJiraProjects`, sem
+A lista de projetos **foi** reconsultada ao vivo nesta rodada (`getVisibleJiraProjects`, **com**
 `expandIssueTypes`), e saiu idêntica à embutida: os mesmos **21 projetos** — `CREA`, `EG0232`,
 `EG0235`, `EG0239`, `EG0240`, `EG0241`, `EG0256`, `EG0257`, `EG0272`, `EG0273`, `EG0274`,
 `EG0275`, `EG0285`, `EG0286`, `EG0287`, `EG0292`, `EG0294`, `EG291`, `G0120`, `G0280` e `PE`
-—, conferidos por **chave**, sem entrada nem saída. A dupla de tipos de nível Epic (`Epic` e
-`Fluxo de trabalho`) **não** foi reconsultada nesta rodada — a chamada dispensou o
-`expandIssueTypes` —, e vem do `_projects_min.json` em disco; ela continua coerente com as
-consultas do mês, que foram montadas com `issuetype in ("Epic","Fluxo de trabalho")` e
-devolveram normalmente o conteúdo de `EG0286` e `EG291`. Todos os projetos que aparecem nos
+—, conferidos por **chave** e pelo SHA-1 da lista normalizada inteira (idêntico ao do
+`_projects_min.json` em disco), sem entrada nem saída. A dupla de tipos de nível Epic (`Epic` e
+`Fluxo de trabalho`) **foi** reconsultada ao vivo nesta rodada, derivada dos `issueTypes` de
+`hierarchyLevel = 1` dos 21 projetos, e saiu igual à embutida; as consultas do mês foram
+montadas com `issuetype in ("Epic","Fluxo de trabalho")` e devolveram normalmente o conteúdo
+de `EG0286` e `EG291`. O `_projects_min.json` não precisou ser regravado. Todos os projetos que aparecem nos
 conjuntos de outubro e no lookahead, inclusive o `EG0294`, constam da lista. Os meses congelados não foram tocados.
 
 > **Pendência remanescente.** O texto `issuetype=Epic` continua gravado no prompt da tarefa
@@ -152,17 +152,15 @@ conjuntos de outubro e no lookahead, inclusive o `EG0294`, constam da lista. Os 
 > que é o que o `_gen_snapshot.py` já consome. Convém trocar aquele passo por
 > `list_legacy_live_artifacts` + `device_stage_files(artifact_ids=[...])`, com o
 > `_artifact_src.html` como alternativa declarada — alteração no prompt da tarefa, que esta
-> rotina não faz por conta própria. A equivalência foi **reverificada nesta geração**: o
-> `list_legacy_live_artifacts` + `device_stage_files(artifact_ids=[...])` trouxe o artifact ao
-> vivo (87.509 bytes, `updatedAt` 27/07/2026) e o `md5` bateu com o do `_artifact_src.html` em
-> disco (`6a2b6462a4efbec1890af4494a7f0b74`). O caminho continua recusado, mas a origem em
-> cache é, nesta rodada também, byte a byte o artifact atual — sem defasagem.
+> rotina não faz por conta própria. Nesta rodada a equivalência **não** foi reverificada pela
+> via do artifact ao vivo; o `_artifact_src.html` em disco segue com o mesmo `md5`
+> (`6a2b6462a4efbec1890af4494a7f0b74`, 87.509 bytes) conferido contra o artifact ao vivo nas
+> rodadas anteriores, de modo que a origem continua sendo, byte a byte, o artifact atual.
 
-> **Nota de publicação (16/10/2026, 00:33).** A cadeia de publicação está íntegra: o
-> `.push-watchdog.log` registra a passagem das 00:24, com `Commit OK: 57d533b` e `Push OK e
-> VERIFICADO: HEAD sincronizado com origin/main`. As passagens de 00:14 e 00:24 concluíram
-> ambas com sucesso, mantendo a cadência regular de **10 minutos** da virada do dia. Esta
-> geração entra na passagem seguinte, prevista para ~00:34.
+> **Nota de publicação (16/10/2026, 01:31).** A cadeia de publicação está íntegra: o
+> `.push-watchdog.log` registra a passagem das 01:24, com `Commit OK: 4c37abf` e `Push OK e
+> VERIFICADO: HEAD sincronizado com origin/main`. A cadência de **10 minutos** segue regular
+> desde a virada do dia. Esta geração entra na passagem seguinte, prevista para ~01:34.
 
 A **visão acumulada** (`planned_2026-05` a `planned_2026-10`) não foi reconsultada ao vivo nesta
 rodada: outubro já é coberto pelo `planned_2026-10` acima, e maio a setembro são meses encerrados,
@@ -290,12 +288,12 @@ artifact.
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
 - Comentário de geração no topo do `<head>`: presente, logo após `<head>`, com o carimbo
-  `2026-10-16T00:33:15-03:00`.
+  `2026-10-16T01:31:27-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (bloco injetado abre no byte 22.522 do `index.html` e `window.__SNAPSHOT__` é atribuído no
   byte 97.267, contra o byte 99.717 da atribuição `window.__HISTORY__=` do `<script>` próprio
   do artifact — ordem de execução confirmada, com os mesmos deslocamentos da rodada anterior).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 16/10/2026 00:33,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 16/10/2026 01:31,
   seguido apenas de `</body></html>`. Ocorrência única no arquivo.
 - As **12 consultas JQL** do mês corrente e da visão acumulada (6 do mês + 6 meses da
   acumulada, sendo `planned_2026-10` comum às duas) foram reconstruídas exatamente como o
@@ -307,10 +305,8 @@ Checagens desta rodada (contagens e carimbos reconferidos após a geração):
   `planned` 15, `overdue` 0, `lookahead` 33, `sent` 6, `resolved` 6, `rework` 4.
 - Tamanhos da geração: `index.html` **164.972 bytes** e `snapshot-data.js` **77.186 bytes**,
   exatamente os da rodada anterior — o conteúdo embutido é idêntico e o carimbo de geração
-  tem comprimento fixo. A comparação byte a byte com o `index.html` anterior, ignorando os
-  carimbos, isola **uma única** diferença: a ordem dos registros dentro de `planned_2026-10`
-  e `lookahead_2026-10` na linha do `var DATASETS`, agora a ordem devolvida pelo Jira sob o
-  `ORDER BY` do artifact.
+  tem comprimento fixo. Os deslocamentos do bloco injetado e das atribuições
+  `window.__SNAPSHOT__` / `window.__HISTORY__=` também repetem os da rodada anterior.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é idêntico ao das rodadas anteriores — a última verificada em Chromium headless
   sem erros de script — e nesta rodada mudaram apenas o carimbo de geração e os dados embutidos.
