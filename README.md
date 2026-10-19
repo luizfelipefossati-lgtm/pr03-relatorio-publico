@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 19/10/2026 12:30** (`2026-10-19T12:30:55-03:00`)
+> **Última atualização do snapshot: 19/10/2026 13:30** (`2026-10-19T13:30:26-03:00`)
 
 ---
 
@@ -246,7 +246,7 @@ artifact.
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
 - Comentário de geração no topo do `<head>`: presente, imediatamente após `<head>` (byte 609 do
-  arquivo), com o carimbo `2026-10-19T12:30:55-03:00`.
+  arquivo), com o carimbo `2026-10-19T13:30:26-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (o bloco injetado abre no byte 22.522 do `index.html` e `window.__SNAPSHOT__` é atribuído no
   byte 97.267, contra o byte 99.708 da atribuição `window.__HISTORY__=` do `<script>` próprio
