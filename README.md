@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 19/10/2026 15:31** (`2026-10-19T15:31:36-03:00`)
+> **Última atualização do snapshot: 19/10/2026 16:31** (`2026-10-19T16:31:36-03:00`)
 
 ---
 
@@ -62,7 +62,7 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 19/10/2026 15:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 19/10/2026 16:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum indicador mudou nesta rodada
 
@@ -239,13 +239,13 @@ artifact.
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
 - Comentário de geração no topo do `<head>`: presente, imediatamente após `<head>` (byte 608 do
-  arquivo), com o carimbo `2026-10-19T15:31:36-03:00`.
+  arquivo), com o carimbo `2026-10-19T16:31:36-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (o bloco injetado abre no byte 22.453 do `index.html` e `window.__SNAPSHOT__` é atribuído no
   byte 96.638, contra o byte 99.088 da atribuição `window.__HISTORY__=` do `<script>` próprio
   do artifact — ordem de execução confirmada). O bloco embutido é, além disso, **byte a byte
   igual** ao `snapshot-data.js` gravado ao lado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 19/10/2026 15:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 19/10/2026 16:31,
   seguido apenas de `</body></html>`. Ocorrência única no arquivo (abre no byte 163.738).
 - Tamanhos da geração: `index.html` **164.972 bytes** (MD5 `d7acf6b8f26c…`) e
   `snapshot-data.js` **77.186 bytes** (MD5 `86ef64004a23…`). Os tamanhos são exatamente os da
@@ -280,7 +280,7 @@ O `index.html` e este `README.md` são gravados no *working tree* por esta rotin
 Scheduler — que, pelo `.push-watchdog.log`, vem rodando a cada **10 minutos** — e o deploy no
 Vercel segue o push.
 
-> **Nota de publicação (19/10/2026, 15:31).** A cadeia de publicação está íntegra: as seis
+> **Nota de publicação (19/10/2026, 16:31).** A cadeia de publicação está íntegra: as seis
 > passagens mais recentes do watchdog — 13:44, 13:54, 14:04, 14:14, 14:24 e 14:34 — concluíram
 > todas com sucesso, em cadência regular de 10 minutos, a última com
 > `Commit OK: 7ed22768` e `Push OK e VERIFICADO: HEAD sincronizado com origin/main`. Em nenhuma
