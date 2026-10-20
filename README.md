@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 20/10/2026 09:31** (`2026-10-20T09:31:51-03:00`)
+> **Última atualização do snapshot: 20/10/2026 10:37** (`2026-10-20T10:37:34-03:00`)
 
 ---
 
@@ -50,17 +50,17 @@ Meses encerrados de jul a set/2026 continuam servidos pelo histórico embutido e
 
 ## Conferência desta geração
 
-Geração em 20/10/2026 09:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 20/10/2026 10:37 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum indicador mudou nesta rodada
 
 As **seis** consultas do mês corrente, as duas `planned` de mai e jun/2026 e a lista de projetos
 foram reexecutadas ao vivo, com o predicado `issuetype in ("Epic","Fluxo de trabalho")` e a
 projeção de seis campos (`summary`, `status`, `project`, `duedate`, `resolutiondate`,
-`updated`). Todas voltaram completas (`pageInfo.hasNextPage = false`), sem paginação pendente e
-sem erro:
+`updated`). Todas voltaram completas (`pageInfo.hasNextPage = false`), sem paginação pendente,
+sem atingir o teto de 100 resultados e sem erro:
 
-| Conjunto | Ao vivo nesta rodada | Rodada das 08:31 | Situação |
+| Conjunto | Ao vivo nesta rodada | Rodada das 09:31 | Situação |
 |---|---:|---:|---|
 | `planned_2026-10` | 15 | 15 | idêntico |
 | `overdue_2026-10` | 0 | 0 | vazio, sem alteração |
@@ -72,14 +72,19 @@ sem erro:
 | `planned_2026-06` | 1 | 1 | idêntico |
 | projetos visíveis | 21 | 21 | idêntico |
 
-A igualdade não foi inferida do total: cada conjunto recém-consultado foi **comparado registro a
-registro** com o conjunto da rodada anterior (comparação de estruturas JSON já normalizadas,
-campo a campo, inclusive `status`, `duedate`, `resolutiondate` e `updated`), e os onze conjuntos
-voltaram idênticos. A lista de projetos foi comparada da mesma forma, após a mesma ordenação por
-nome que o artifact aplica. O produto final confirma: `index.html` saiu com exatamente
-**164.972 bytes** e `snapshot-data.js` com exatamente **77.186 bytes** — os mesmos números da
-rodada das 08:31. Como o carimbo de geração tem comprimento fixo, mudou apenas o carimbo; os MD5
-diferem por isso (`index.html` `06debc88b4f7…`, `snapshot-data.js` `42a7c99ec2ab…`).
+Duas evidências sustentam a igualdade, além das contagens. A lista de projetos recém-consultada
+foi comparada **byte a byte** com a da rodada das 09:31 (`projects_min_2026-10-20.json`): MD5
+`10bc87f80001…` nos dois lados, arquivo reaproveitado sem reescrita. E o produto final saiu com
+exatamente os mesmos tamanhos da rodada anterior — `index.html` com **164.972 bytes** e
+`snapshot-data.js` com **77.186 bytes**; como os conjuntos são reserializados em forma compacta
+e o carimbo de geração tem comprimento fixo, qualquer alteração de conteúdo nos onze conjuntos
+teria mudado esses tamanhos. Os MD5 diferem apenas por causa do carimbo (`index.html`
+`9fcf7ba469d6…`, `snapshot-data.js` `c715343f1461…`).
+
+Ressalva de método: os arquivos de `_snap/` desta rodada foram regravados em JSON compacto
+(sem espaço após `:` e `,`), enquanto os da rodada anterior usavam o separador com espaço. Os
+tamanhos em bytes de `_snap/*.json` portanto **não** são comparáveis entre as duas rodadas — a
+comparação válida é a do arquivo final, acima.
 
 ### Quadro de outubro/2026 (20º dia do mês)
 
@@ -95,17 +100,29 @@ no intervalo.
 
 33 epics com due date nos dois meses seguintes, mesma contagem das rodadas anteriores.
 
+### Ponto de atenção nos dados de origem (não é falha desta rotina)
+
+Dois epics carregam no Jira o status `Enviado - Aguardando Análise**1**` — com um `1` sobrando no
+fim do nome: `EG0239-28` (aparece em `resolved_2026-10`) e `EG0256-24` (em `planned_2026-06`).
+A categoria de status dos dois é `done`, então eles contam normalmente como concluídos; mas a
+consulta de envios casa com o nome exato `"Enviado - Aguardando Análise"` e, por isso, **não**
+captura a transição desses dois. Nos meses congelados o efeito é neutralizado, porque o gerador
+une `sent` e `resolved` ao montar o total de envios; no mês corrente, quem é contado como
+enviado pela via da transição fica de fora. Parece um status renomeado por engano em dois fluxos
+de trabalho — vale corrigir o nome no Jira, que é mais seguro do que normalizar no relatório.
+O dado foi preservado verbatim no snapshot.
+
 ### Conferência estrutural
 
 - Comentário de geração **no topo do `<head>`**: presente, imediatamente depois de `<head>`
-  (posição 608), com o carimbo `2026-10-20T09:31:51-03:00`. Ocorrência única no arquivo.
+  (posição 608), com o carimbo `2026-10-20T10:37:34-03:00`. Ocorrência única no arquivo.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (o bloco injetado abre na posição 22.444 e `window.__SNAPSHOT__` é atribuído na posição
   96.638, contra a posição 99.088 da atribuição `window.__HISTORY__=` do `<script>` próprio do
   artifact — ordem de execução confirmada). O bloco embutido é, além disso, **byte a byte igual**
   ao `snapshot-data.js` gravado ao lado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 09:31,
-  abrindo na posição 163.738 e seguido apenas de `</body></html>`. Ocorrência única no arquivo.
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 10:37,
+  abrindo na posição 163.845 e seguido apenas de `</body></html>`. Ocorrência única no arquivo.
 - Roteamento de JQL testado de ponta a ponta: as **doze** chamadas dinâmicas que o artifact monta
   (as seis do mês corrente, as seis `planned` da visão acumulada mai–out/2026, sendo
   `planned_2026-10` comum às duas, e `getVisibleJiraProjects`) foram remontadas exatamente como
@@ -114,11 +131,15 @@ no intervalo.
   (`fields.status.name` presente em todas), e a de projetos devolveu os 21 registros; nenhuma
   caiu no aviso `JQL sem correspondência no snapshot` e nenhum padrão ficou órfão — ou seja, a
   página publicada não tem como consultar o Jira ao vivo.
-- O acessor de `window.__HISTORY__` foi verificado depois do carregamento: devolve os três meses
-  congelados (`2026-07`, `2026-08`, `2026-09`), confirmando que a atribuição direta feita pelo
-  script do artifact é mesclada, e não sobrescreve o histórico do snapshot.
+- O acessor de `window.__HISTORY__` foi verificado depois do carregamento, inclusive com uma
+  atribuição direta simulada (`window.__HISTORY__ = {'2026-04': …}`): devolveu `2026-04`
+  **mais** os três meses congelados (`2026-07`, `2026-08`, `2026-09`), com `period`, `planned`,
+  `sent` e `rework` íntegros — a atribuição do script do artifact é mesclada, não sobrescreve.
 - Os oito arquivos de dados foram regravados em `_snap/` na forma aninhada que o artifact
-  consome e relidos em seguida: todos parseiam como JSON, com as contagens da tabela acima.
+  consome, relidos em seguida e validados elemento a elemento: todos parseiam como JSON, todos
+  os registros têm exatamente as chaves `key` e `fields`, e cada `fields` tem exatamente
+  `summary`, `status`, `project`, `duedate`, `resolutiondate` e `updated`. Contagens conforme a
+  tabela acima.
 - Nenhuma ocorrência de `avatarUrls`, `iconUrl`, `emailAddress` ou domínio de e-mail no arquivo
   publicado, e nenhuma URL da `api.atlassian.com` — a única URL da Atlassian é a base
   `https://projetos-engeplus.atlassian.net/browse/`, usada para montar os links dos EPICs. A
@@ -144,12 +165,12 @@ no intervalo.
 O `index.html` e este `README.md` são gravados no *working tree* por esta rotina. O
 `git commit`/`push` é feito separadamente pela tarefa `PR03-Auto-Push-GitHub` do Windows Task
 Scheduler — que, pelo `.push-watchdog.log`, vem rodando a cada **10 minutos** (última passagem
-registrada às 09:24 de hoje, commit `fe762f9`, push verificado) — e o deploy no Vercel segue o
+registrada às 10:35 de hoje, commit `ec3bb94`, push verificado) — e o deploy no Vercel segue o
 push.
 
-> **Nota de publicação (20/10/2026, 09:31).** Esta rodada gravou no *working tree* os seis
-> conjuntos de out/2026 e os dois de mai e jun/2026 em `_snap/`, a lista de projetos
-> `projects_min_2026-10-20.json`, o `index.html`, o `snapshot-data.js` e este `README.md`.
-> Nenhuma operação de `git` foi executada pela rotina; a próxima passagem da tarefa
-> `PR03-Auto-Push-GitHub` leva tudo ao ar em até 10 minutos, com o deploy no Vercel cerca de um
-> minuto depois.
+> **Nota de publicação (20/10/2026, 10:37).** Esta rodada gravou no *working tree* os seis
+> conjuntos de out/2026 e os dois de mai e jun/2026 em `_snap/`, o `index.html`, o
+> `snapshot-data.js` e este `README.md`. A lista de projetos veio idêntica à da rodada anterior
+> e `projects_min_2026-10-20.json` foi reaproveitado sem reescrita. Nenhuma operação de `git`
+> foi executada pela rotina; a próxima passagem da tarefa `PR03-Auto-Push-GitHub` leva tudo ao
+> ar em até 10 minutos, com o deploy no Vercel cerca de um minuto depois.
