@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 20/10/2026 01:36** (`2026-10-20T01:36:33-03:00`)
+> **Última atualização do snapshot: 20/10/2026 02:34** (`2026-10-20T02:34:18-03:00`)
 
 ---
 
@@ -62,18 +62,18 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 20/10/2026 01:36 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 20/10/2026 02:34 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum indicador mudou nesta rodada
 
-Sétima geração de 19/10, cerca de **uma hora** depois da das 22:31. As **seis** consultas JQL do
+Geração de 20/10 às 02:34, cerca de **uma hora** depois da das 01:36. As **seis** consultas JQL do
 mês corrente foram reexecutadas ao vivo com o predicado
 `issuetype in ("Epic","Fluxo de trabalho")` e a projeção de seis campos (`summary`, `status`,
 `project`, `duedate`, `resolutiondate`, `updated`). Todas voltaram completas
 (`pageInfo.hasNextPage = false`), sem paginação pendente e sem erro. As contagens repetem, uma a
 uma, as da rodada anterior:
 
-| Conjunto | Ao vivo | Geração das 22:31 | Situação |
+| Conjunto | Ao vivo | Geração das 01:36 | Situação |
 |---|---:|---:|---|
 | `planned_2026-10` | 15 | 15 | idêntico |
 | `overdue_2026-10` | 0 | 0 | vazio, sem alteração |
@@ -95,13 +95,13 @@ registros. Os arquivos `planned_2026-05.json` (2.053 bytes, `eeb137b01b57`) e
 `planned_2026-06.json` (371 bytes, `beb577eb21a8`) foram regravados em formato compacto nesta
 rodada; o conteúdo é o mesmo já embutido no snapshot anterior.
 
-**Correção aplicada nesta rodada.** Na primeira montagem do bloco estático, as expressões
+**Correção mantida das rodadas anteriores.** Na primeira montagem do bloco estático, as expressões
 regulares de `PATTERNS` saíram com barras duplicadas (`\\(` em vez de `\(`), o que faria
 `resolveJql` não casar com nenhuma consulta e devolver listas vazias em toda a página. O defeito
 foi detectado antes da entrega por um teste que roda as nove consultas que o artifact monta
 contra os padrões realmente gravados no `index.html`; o gerador foi corrigido e o arquivo
-refeito. O teste agora resolve as nove para o conjunto correto, e o `index.html` voltou aos
-164.972 bytes e ao mesmo formato das gerações anteriores.
+refeito. Desde então os nove padrões resolvem para o conjunto correto, e o `index.html` mantém
+os 164.972 bytes e o mesmo formato das gerações anteriores — reconfirmado nesta rodada.
 
 **Ressalva sobre o predicado.** O prompt da tarefa agendada descreve as consultas de forma
 abreviada, com `issuetype=Epic`. Esse predicado, tomado ao pé da letra, **perde** os projetos
@@ -180,7 +180,7 @@ ressalva já registrada para o EG0285.
   nenhum padrão ficou órfão.
 - Meses congelados (≤ set/2026) **não** são reconsultados, por projeto.
 
-### Quadro de outubro/2026 (19º dia do mês)
+### Quadro de outubro/2026 (20º dia do mês)
 
 15 epics com due date em outubro — 12 em andamento/revisão (8 "Em andamento" + 4 "Em Revisão")
 e 3 já enviados dentro do próprio mês. Nenhum em "Tarefas pendentes".
@@ -189,8 +189,8 @@ Distribuição por projeto: G0280 = 5 · EG0286 = 4 · EG0240 = 3 · EG0274 = 2 
 Indicadores do mês na geração: **OTD 20%** (3 de 15), **retrabalho 57%** (4 de 7 envios),
 **12 pendências do mês** e **nenhum em atraso acumulado**.
 
-Os quatro indicadores repetem os das gerações de 16/10 às 18:32 e das quatro rodadas de 19/10,
-sem nenhuma transição nova no intervalo:
+Os quatro indicadores repetem os das gerações de 16/10 às 18:32, das rodadas de 19/10 e da
+rodada de 20/10 às 01:36, sem nenhuma transição nova no intervalo:
 
 - **OTD 20%** (3 de 15). Os três entregues — `EG0286-7`, `EG291-4` e `EG0274-38` — contam
   como **"SIM\*"** (entrega no mês, mas depois da due date), de modo que o painel marca
@@ -255,13 +255,13 @@ artifact.
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
 - Comentário de geração no topo do `<head>`: presente, imediatamente após `<head>` (byte 609 do
-  arquivo), com o carimbo `2026-10-20T01:36:33-03:00`.
+  arquivo), com o carimbo `2026-10-20T02:34:18-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (o bloco injetado abre no byte 22.522 do `index.html` e `window.__SNAPSHOT__` é atribuído no
   byte 97.267, contra o byte 99.717 da atribuição `window.__HISTORY__=` do `<script>` próprio
   do artifact — ordem de execução confirmada). O bloco embutido é, além disso, **byte a byte
   igual** ao `snapshot-data.js` gravado ao lado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 01:36,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 02:34,
   seguido apenas de `</body></html>`. Ocorrência única no arquivo (abre no byte 164.733).
 - Roteamento de JQL testado de ponta a ponta: as **nove** consultas que o artifact monta
   (as seis do mês corrente mais `planned` de mai, jun e set/2026) foram confrontadas com as
