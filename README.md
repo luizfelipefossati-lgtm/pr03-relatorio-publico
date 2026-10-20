@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 20/10/2026 08:31** (`2026-10-20T08:31:25-03:00`)
+> **Última atualização do snapshot: 20/10/2026 09:31** (`2026-10-20T09:31:51-03:00`)
 
 ---
 
@@ -18,7 +18,7 @@ Fonte: Jira Cloud `projetos-engeplus` (`ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 Tipos de issue considerados como Epic: `Epic`, `Fluxo de trabalho` (derivados dos tipos de nível 1 dos projetos visíveis)
 Projetos visíveis mapeados: **21**
 
-### Consultas resolvidas (12 consultas JQL + lista de projetos)
+### Consultas resolvidas (11 consultas JQL + lista de projetos)
 
 Mês corrente — **out/2026**, reconsultado ao vivo nesta rodada:
 
@@ -50,7 +50,7 @@ Meses encerrados de jul a set/2026 continuam servidos pelo histórico embutido e
 
 ## Conferência desta geração
 
-Geração em 20/10/2026 08:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 20/10/2026 09:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum indicador mudou nesta rodada
 
@@ -60,7 +60,7 @@ projeção de seis campos (`summary`, `status`, `project`, `duedate`, `resolutio
 `updated`). Todas voltaram completas (`pageInfo.hasNextPage = false`), sem paginação pendente e
 sem erro:
 
-| Conjunto | Ao vivo nesta rodada | Rodada das 06:32 | Situação |
+| Conjunto | Ao vivo nesta rodada | Rodada das 08:31 | Situação |
 |---|---:|---:|---|
 | `planned_2026-10` | 15 | 15 | idêntico |
 | `overdue_2026-10` | 0 | 0 | vazio, sem alteração |
@@ -72,12 +72,14 @@ sem erro:
 | `planned_2026-06` | 1 | 1 | idêntico |
 | projetos visíveis | 21 | 21 | idêntico |
 
-A igualdade foi confirmada pelo **tamanho do produto final**: `index.html` saiu com exatamente
+A igualdade não foi inferida do total: cada conjunto recém-consultado foi **comparado registro a
+registro** com o conjunto da rodada anterior (comparação de estruturas JSON já normalizadas,
+campo a campo, inclusive `status`, `duedate`, `resolutiondate` e `updated`), e os onze conjuntos
+voltaram idênticos. A lista de projetos foi comparada da mesma forma, após a mesma ordenação por
+nome que o artifact aplica. O produto final confirma: `index.html` saiu com exatamente
 **164.972 bytes** e `snapshot-data.js` com exatamente **77.186 bytes** — os mesmos números da
-rodada das 06:32. Como o carimbo de geração tem comprimento fixo, a coincidência exata dos dois
-tamanhos só se sustenta se a lista de projetos, os onze conjuntos e todos os registros
-embutidos forem os mesmos. Mudou apenas o carimbo; os MD5 diferem por isso
-(`index.html` `67b546025957…`, `snapshot-data.js` `d0d8d1193bb3…`).
+rodada das 08:31. Como o carimbo de geração tem comprimento fixo, mudou apenas o carimbo; os MD5
+diferem por isso (`index.html` `06debc88b4f7…`, `snapshot-data.js` `42a7c99ec2ab…`).
 
 ### Quadro de outubro/2026 (20º dia do mês)
 
@@ -96,14 +98,14 @@ no intervalo.
 ### Conferência estrutural
 
 - Comentário de geração **no topo do `<head>`**: presente, imediatamente depois de `<head>`
-  (posição 608), com o carimbo `2026-10-20T08:31:25-03:00`. Ocorrência única no arquivo.
+  (posição 608), com o carimbo `2026-10-20T09:31:51-03:00`. Ocorrência única no arquivo.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (o bloco injetado abre na posição 22.577 e `window.__SNAPSHOT__` é atribuído na posição
+  (o bloco injetado abre na posição 22.444 e `window.__SNAPSHOT__` é atribuído na posição
   96.638, contra a posição 99.088 da atribuição `window.__HISTORY__=` do `<script>` próprio do
   artifact — ordem de execução confirmada). O bloco embutido é, além disso, **byte a byte igual**
   ao `snapshot-data.js` gravado ao lado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 08:31,
-  abrindo na posição 163.845 e seguido apenas de `</body></html>`. Ocorrência única no arquivo.
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 09:31,
+  abrindo na posição 163.738 e seguido apenas de `</body></html>`. Ocorrência única no arquivo.
 - Roteamento de JQL testado de ponta a ponta: as **doze** chamadas dinâmicas que o artifact monta
   (as seis do mês corrente, as seis `planned` da visão acumulada mai–out/2026, sendo
   `planned_2026-10` comum às duas, e `getVisibleJiraProjects`) foram remontadas exatamente como
@@ -127,6 +129,11 @@ no intervalo.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é idêntico ao das rodadas anteriores — a última verificada em Chromium headless
   sem erros de script — e nesta rodada mudou apenas o carimbo de geração.
+- O Live Artifact de origem (`…\Artifacts\pr03-relatorio-indicadores-epics\index.html`) não é
+  legível a partir de uma sessão Cowork: o caminho fica em área protegida (dados internos do
+  Claude). A geração parte, como nas rodadas anteriores, do `index.html` já versionado neste
+  repositório, no qual só o bloco de dados e os dois carimbos são substituídos — o HTML do
+  artifact em si permanece o mesmo byte a byte.
 - Registre-se que o relógio da VM que executa os comandos no computador está em UTC: o carimbo
   foi calculado em BRT (UTC−3) e conferido no arquivo final.
 
@@ -136,10 +143,11 @@ no intervalo.
 
 O `index.html` e este `README.md` são gravados no *working tree* por esta rotina. O
 `git commit`/`push` é feito separadamente pela tarefa `PR03-Auto-Push-GitHub` do Windows Task
-Scheduler — que, pelo `.push-watchdog.log`, vem rodando a cada **10 minutos** — e o deploy no
-Vercel segue o push.
+Scheduler — que, pelo `.push-watchdog.log`, vem rodando a cada **10 minutos** (última passagem
+registrada às 09:24 de hoje, commit `fe762f9`, push verificado) — e o deploy no Vercel segue o
+push.
 
-> **Nota de publicação (20/10/2026, 08:31).** Esta rodada gravou no *working tree* os seis
+> **Nota de publicação (20/10/2026, 09:31).** Esta rodada gravou no *working tree* os seis
 > conjuntos de out/2026 e os dois de mai e jun/2026 em `_snap/`, a lista de projetos
 > `projects_min_2026-10-20.json`, o `index.html`, o `snapshot-data.js` e este `README.md`.
 > Nenhuma operação de `git` foi executada pela rotina; a próxima passagem da tarefa
