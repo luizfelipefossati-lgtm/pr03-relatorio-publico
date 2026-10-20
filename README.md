@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 20/10/2026 15:32** (`2026-10-20T15:32:46-03:00`)
+> **Última atualização do snapshot: 20/10/2026 16:31** (`2026-10-20T16:31:47-03:00`)
 
 ---
 
@@ -35,8 +35,8 @@ Visão acumulada (últimos 6 meses):
 
 | Conjunto | Registros | Origem nesta rodada |
 |---|---:|---|
-| `planned_2026-05` | 7 | reaproveitado de `_snap/` (rodada das 15:31) |
-| `planned_2026-06` | 1 | reaproveitado de `_snap/` (rodada das 15:31) |
+| `planned_2026-05` | 7 | consultado ao vivo nesta rodada |
+| `planned_2026-06` | 1 | consultado ao vivo nesta rodada |
 | `planned_2026-07` | 10 | congelado (mês encerrado, servido por `__HISTORY__`) |
 | `planned_2026-08` | 4 | congelado (mês encerrado, servido por `__HISTORY__`) |
 | `planned_2026-09` | 8 | congelado (mês encerrado, servido por `__HISTORY__`) |
@@ -46,12 +46,15 @@ Mais a chamada `getVisibleJiraProjects`, resolvida com os 21 projetos visíveis.
 
 ## Como foi gerado
 
-Geração em 20/10/2026 15:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 20/10/2026 16:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian. Foram
+executadas 9 chamadas: `getVisibleJiraProjects` e 8 consultas JQL (as seis do mês corrente mais
+as `planned` de mai e jun/2026, que compõem a visão acumulada e não estão congeladas em
+`__HISTORY__`).
 
 ### Nenhum indicador mudou nesta rodada
 
-Os seis conjuntos do mês corrente foram reconsultados do zero e voltaram idênticos aos da
-rodada anterior (17:3x UTC / 14:34 BRT):
+Os seis conjuntos do mês corrente foram reconsultados do zero e voltaram com as mesmas
+contagens da rodada anterior (18:3x UTC / 15:32 BRT):
 
 | Conjunto | Ao vivo nesta rodada | Rodada anterior | Situação |
 |---|---:|---:|---|
@@ -62,45 +65,49 @@ rodada anterior (17:3x UTC / 14:34 BRT):
 | `resolved_2026-10` | 6 | 6 | idêntico |
 | `rework_2026-10` | 4 | 4 | idêntico |
 
-A lista de projetos visíveis também foi reconsultada e conferida por hash contra a da rodada
-anterior: **sem diferença** (mesmos 21 projetos, mesmos nomes, mesmos tipos de issue).
+A lista de projetos visíveis também foi reconsultada: **sem diferença** (mesmos 21 projetos,
+mesmas chaves). O gerador compara as chaves contra as da rodada anterior e não emitiu aviso.
 
-As duas `planned` de mai e jun/2026 **não** foram reconsultadas nesta rodada: são meses
-encerrados, e os arquivos de `_snap/` reaproveitados vêm da rodada das 15:31 de hoje. Os três
-meses de jul a set/2026 seguem congelados no bloco `__HISTORY__`, como nas rodadas anteriores.
+As `planned` de mai e jun/2026 foram reconsultadas ao vivo nesta rodada (7 e 1 registros,
+mesmas contagens de antes). Os três meses de jul a set/2026 seguem congelados no bloco
+`__HISTORY__`, como nas rodadas anteriores.
 
-Com os dados iguais, o `index.html` desta rodada difere do anterior **apenas nos dois carimbos
-de tempo** (comentário no `<head>` e banner no fim do `<body>`), e mantém os mesmos tamanhos —
-`index.html` com **164.972 bytes** e `snapshot-data.js` com **77.186 bytes**.
+Com os dados estáveis, o `index.html` desta rodada mantém os mesmos tamanhos da anterior —
+`index.html` com **164.972 bytes** e `snapshot-data.js` com **77.186 bytes** — e as únicas
+diferenças observáveis são os dois carimbos de tempo (comentário no `<head>` e banner no fim
+do `<body>`).
 
 ### Epics com due date em out/2026 (15)
 
-Distribuição por projeto: EG0286 (DNIT/AC) 4, G0280 (DMAE) 5, EG0240 (GOITÁ/COMPESA) 3,
+Distribuição por projeto: G0280 (DMAE) 5, EG0286 (DNIT/AC) 4, EG0240 (GOITÁ/COMPESA) 3,
 EG0274 (DNIT) 2, EG291 (Arroio Feijó) 1.
 
 Seis epics entraram em "Enviado - Aguardando Análise" ao longo de out/2026 e seis foram
 concluídos no mês; quatro deles voltaram de "Enviado - Aguardando Análise" para revisão, o que
 os caracteriza como retrabalho. Nenhum epic está vencido sem conclusão.
 
-O olhar para frente registra 33 epics com due date em nov e dez/2026, mesma contagem das
-rodadas anteriores.
+O olhar para frente registra 33 epics com due date em nov e dez/2026 — EG0274 (DNIT) 11,
+EG0286 (DNIT/AC) 10, EG0285 4, EG0294 3, e um epic em cada um de EG0239, EG0240, EG0241,
+EG0275 e G0280 — mesma contagem das rodadas anteriores.
 
 ## Estrutura e verificações
 
-- Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>` (posição 608), com o
-  carimbo `2026-10-20T15:32:46-03:00`. Ocorrência única no arquivo.
+- Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
+  `2026-10-20T16:31:47-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 15:32,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 16:31,
   imediatamente antes do fechamento. Ocorrência única.
 - `__HISTORY__` exposto por accessor com merge defensivo, para que a atribuição direta feita
   pelo script do artifact não apague os meses congelados.
+- O bloco de dados foi executado em Node nesta rodada: carrega sem erro, expõe os 21 projetos
+  e os 11 conjuntos, e uma JQL de teste do mês corrente resolve para os 15 registros esperados.
 
 ### Ressalvas de método
 
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
-  HTML-fonte é idêntico ao das rodadas anteriores — a última verificada em Chromium headless
-  sem erros de script — e nesta rodada mudou apenas o carimbo de geração.
+  HTML-fonte é o mesmo das rodadas anteriores — a última verificada em Chromium headless sem
+  erros de script — e nesta rodada mudou apenas o bloco de dados e o carimbo de geração.
 - O HTML-fonte do Live Artifact não é acessível a partir de uma sessão Cowork (fica em área
   protegida de dados do Claude). A geração parte, como nas rodadas anteriores, do `index.html`
   já versionado neste repositório, com o bloco de dados substituído.
@@ -118,7 +125,7 @@ O commit e o push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Tas
 roda a cada 30 minutos e detecta mudanças no working tree. Esta geração não executa git. O
 deploy no Vercel acompanha o push, normalmente em cerca de um minuto.
 
-> **Nota de publicação (20/10/2026, 15:32).** Esta rodada regravou os seis conjuntos do mês
-> corrente com consulta ao vivo, reconferiu a lista de projetos e regerou `index.html`,
-> `snapshot-data.js` e este `README.md`. Os dados vieram idênticos aos da rodada anterior: o
-> `index.html` novo é byte a byte o mesmo, exceto pelos dois carimbos de tempo.
+> **Nota de publicação (20/10/2026, 16:31).** Esta rodada regravou os seis conjuntos do mês
+> corrente e as duas `planned` da visão acumulada com consulta ao vivo, reconferiu a lista de
+> projetos e regerou `index.html`, `snapshot-data.js` e este `README.md`. As contagens vieram
+> iguais às da rodada anterior; os dois arquivos gerados mantêm os mesmos tamanhos.
