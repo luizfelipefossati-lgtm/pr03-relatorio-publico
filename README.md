@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 20/10/2026 03:34** (`2026-10-20T03:34:40-03:00`)
+> **Última atualização do snapshot: 20/10/2026 04:37** (`2026-10-20T04:37:53-03:00`)
 
 ---
 
@@ -62,18 +62,19 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 20/10/2026 03:34 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 20/10/2026 04:37 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum indicador mudou nesta rodada
 
-Geração de 20/10 às 03:34, cerca de **uma hora** depois da das 02:34. As **seis** consultas JQL do
-mês corrente foram reexecutadas ao vivo com o predicado
-`issuetype in ("Epic","Fluxo de trabalho")` e a projeção de seis campos (`summary`, `status`,
-`project`, `duedate`, `resolutiondate`, `updated`). Todas voltaram completas
-(`pageInfo.hasNextPage = false`), sem paginação pendente e sem erro. As contagens repetem, uma a
-uma, as da rodada anterior:
+Geração de 20/10 às 04:37, cerca de **uma hora** depois da das 03:34. As **seis** consultas JQL do
+mês corrente mais as **seis** da visão acumulada (mai–out/2026) e a lista de projetos foram
+reexecutadas ao vivo com o predicado `issuetype in ("Epic","Fluxo de trabalho")` e a projeção de
+seis campos (`summary`, `status`, `project`, `duedate`, `resolutiondate`, `updated`). Todas
+voltaram completas (`pageInfo.hasNextPage = false`), sem paginação pendente e sem erro. Os
+conjuntos minimizados saíram **byte a byte idênticos** aos da rodada anterior (MD5 conferido
+arquivo a arquivo em `_snap/`), de modo que nenhum indicador mudou — só o carimbo de geração:
 
-| Conjunto | Ao vivo | Geração das 02:34 | Situação |
+| Conjunto | Ao vivo | Geração das 03:34 | Situação |
 |---|---:|---:|---|
 | `planned_2026-10` | 15 | 15 | idêntico |
 | `overdue_2026-10` | 0 | 0 | vazio, sem alteração |
@@ -255,20 +256,22 @@ artifact.
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
 - Comentário de geração no topo do `<head>`: presente, imediatamente após `<head>` (byte 609 do
-  arquivo), com o carimbo `2026-10-20T03:34:40-03:00`.
+  arquivo), com o carimbo `2026-10-20T04:37:53-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (o bloco injetado abre no byte 22.522 do `index.html` e `window.__SNAPSHOT__` é atribuído no
   byte 97.267, contra o byte 99.717 da atribuição `window.__HISTORY__=` do `<script>` próprio
   do artifact — ordem de execução confirmada). O bloco embutido é, além disso, **byte a byte
   igual** ao `snapshot-data.js` gravado ao lado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 03:34,
-  seguido apenas de `</body></html>`. Ocorrência única no arquivo (abre no byte 164.733).
-- Roteamento de JQL testado de ponta a ponta: as **nove** consultas que o artifact monta
-  (as seis do mês corrente mais `planned` de mai, jun e set/2026) foram confrontadas com as
-  expressões de `PATTERNS` lidas de volta do `index.html` publicado, e cada uma resolveu para o
-  conjunto correto. Foi esse teste que pegou o defeito de escape descrito acima.
-- Tamanhos da geração: `index.html` **164.972 bytes** (MD5 `2a8c54476695…`) e
-  `snapshot-data.js` **77.186 bytes** (MD5 `00c08865f8d4…`). Os tamanhos são exatamente os da
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 04:37,
+  seguido apenas de `</body></html>`. Ocorrência única no arquivo (abre no byte 164.840).
+- Roteamento de JQL testado de ponta a ponta: as **treze** chamadas dinâmicas que o artifact monta
+  (as seis do mês corrente, as seis `planned` da visão acumulada mai–out/2026 e
+  `getVisibleJiraProjects`) foram executadas contra o `snapshot-data.js` gerado, carregado em
+  Node. Todas resolveram para o conjunto correto, nenhuma caiu no aviso
+  `JQL sem correspondência no snapshot` — ou seja, a página publicada não tem como consultar o
+  Jira ao vivo.
+- Tamanhos da geração: `index.html` **164.972 bytes** (MD5 `56a48698d40a…`) e
+  `snapshot-data.js` **77.186 bytes** (MD5 `5b5c425f36c5…`). Os tamanhos são exatamente os da
   rodada anterior — o conteúdo embutido é idêntico e o carimbo de geração tem comprimento
   fixo —, enquanto os MD5 diferem apenas por causa do carimbo.
 - Contagens dos conjuntos **embutidos** lidas de volta do `snapshot-data.js` publicado e
