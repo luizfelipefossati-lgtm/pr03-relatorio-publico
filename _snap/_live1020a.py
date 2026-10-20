@@ -93,7 +93,7 @@ DATASETS['planned_2026-10'] = FRESH['planned_2026-10']
 # grava JSONs minimais para reuso
 for name, data in list(FRESH.items()):
     with io.open(os.path.join(SNAPDIR, name + '.json'), 'w', encoding='utf-8') as f:
-        f.write(json.dumps(data, ensure_ascii=False))
+        f.write(json.dumps(data, ensure_ascii=False, separators=(',', ':')))
 
 now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-3)))
 ISO = now.strftime('%Y-%m-%dT%H:%M:%S-03:00')
@@ -108,17 +108,17 @@ SNAP = {
 }
 
 PATTERNS = [
- ('rework_2026-10',    r'DURING \\("2026-10-01","2026-10-31"\\)[\\s\\S]*changed from'),
- ('sent_2026-10',      r'DURING \\("2026-10-01","2026-10-31"\\)'),
- ('resolved_2026-10',  r'resolved>="2026-10-01"[\\s\\S]*resolved<="2026-10-31"'),
- ('overdue_2026-10',   r'duedate<"2026-10-01"[\\s\\S]*statusCategory!=Done'),
- ('lookahead_2026-10', r'duedate>="2026-11-01"[\\s\\S]*duedate<="2026-12-31"'),
- ('planned_2026-05',   r'duedate>="2026-05-01"[\\s\\S]*duedate<="2026-05-31"'),
- ('planned_2026-06',   r'duedate>="2026-06-01"[\\s\\S]*duedate<="2026-06-30"'),
- ('planned_2026-07',   r'duedate>="2026-07-01"[\\s\\S]*duedate<="2026-07-31"'),
- ('planned_2026-08',   r'duedate>="2026-08-01"[\\s\\S]*duedate<="2026-08-31"'),
- ('planned_2026-09',   r'duedate>="2026-09-01"[\\s\\S]*duedate<="2026-09-30"'),
- ('planned_2026-10',   r'duedate>="2026-10-01"[\\s\\S]*duedate<="2026-10-31"'),
+ ('rework_2026-10',    r'DURING \("2026-10-01","2026-10-31"\)[\s\S]*changed from'),
+ ('sent_2026-10',      r'DURING \("2026-10-01","2026-10-31"\)'),
+ ('resolved_2026-10',  r'resolved>="2026-10-01"[\s\S]*resolved<="2026-10-31"'),
+ ('overdue_2026-10',   r'duedate<"2026-10-01"[\s\S]*statusCategory!=Done'),
+ ('lookahead_2026-10', r'duedate>="2026-11-01"[\s\S]*duedate<="2026-12-31"'),
+ ('planned_2026-05',   r'duedate>="2026-05-01"[\s\S]*duedate<="2026-05-31"'),
+ ('planned_2026-06',   r'duedate>="2026-06-01"[\s\S]*duedate<="2026-06-30"'),
+ ('planned_2026-07',   r'duedate>="2026-07-01"[\s\S]*duedate<="2026-07-31"'),
+ ('planned_2026-08',   r'duedate>="2026-08-01"[\s\S]*duedate<="2026-08-31"'),
+ ('planned_2026-09',   r'duedate>="2026-09-01"[\s\S]*duedate<="2026-09-30"'),
+ ('planned_2026-10',   r'duedate>="2026-10-01"[\s\S]*duedate<="2026-10-31"'),
 ]
 pat_js = '[' + ','.join('{n:%s,re:new RegExp(%s)}' % (json.dumps(n), json.dumps(r)) for n, r in PATTERNS) + ']'
 
