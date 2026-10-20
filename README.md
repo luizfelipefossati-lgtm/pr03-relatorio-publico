@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 20/10/2026 05:36** (`2026-10-20T05:36:07-03:00`)
+> **Última atualização do snapshot: 20/10/2026 06:32** (`2026-10-20T06:32:20-03:00`)
 
 ---
 
@@ -62,18 +62,17 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 20/10/2026 05:36 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 20/10/2026 06:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum indicador mudou nesta rodada
 
-Geração de 20/10 às 05:36, cerca de **uma hora** depois da das 04:37. As **seis** consultas JQL do
-mês corrente mais as **duas** `planned` que a visão acumulada ainda resolve ao vivo (mai e
-jun/2026) e a lista de projetos foram reexecutadas ao vivo com o predicado
+Geração de 20/10 às 06:32, cerca de **uma hora** depois da das 05:36. As **seis** consultas JQL do
+mês corrente e a lista de projetos foram reexecutadas ao vivo com o predicado
 `issuetype in ("Epic","Fluxo de trabalho")` e a projeção de seis campos (`summary`, `status`,
 `project`, `duedate`, `resolutiondate`, `updated`). Todas voltaram completas
 (`pageInfo.hasNextPage = false`), sem paginação pendente e sem erro:
 
-| Conjunto | Ao vivo | Geração das 04:37 | Situação |
+| Conjunto | Ao vivo | Geração das 05:36 | Situação |
 |---|---:|---:|---|
 | `planned_2026-10` | 15 | 15 | idêntico |
 | `overdue_2026-10` | 0 | 0 | vazio, sem alteração |
@@ -81,17 +80,45 @@ jun/2026) e a lista de projetos foram reexecutadas ao vivo com o predicado
 | `sent_2026-10` | 6 | 6 | idêntico |
 | `resolved_2026-10` | 6 | 6 | idêntico |
 | `rework_2026-10` | 4 | 4 | idêntico |
-| `planned_2026-05` | 7 | 7 | idêntico |
-| `planned_2026-06` | 1 | 1 | idêntico |
 
-**Como a igualdade foi conferida nesta rodada.** Os arquivos de `_snap/` foram regravados a
-partir das respostas ao vivo, desta vez por um gerador que os serializa **indentados**, e não no
-formato compacto das rodadas anteriores. Por isso os digests e os tamanhos em disco dos arquivos
-mudaram **sem que o conteúdo mudasse**, e a comparação byte a byte arquivo a arquivo deixou de
-ser o teste válido. A igualdade foi confirmada no produto final: o `index.html` recém-gerado,
-comparado ao da rodada das 04:37 com os carimbos de hora normalizados, saiu **sem nenhuma
-diferença** — mesma lista de projetos, mesmos onze conjuntos e mesmos registros. Mudou só o
-carimbo de geração.
+**`planned_2026-05` e `planned_2026-06` não foram reconsultados nesta rodada.** Diferentemente
+das rodadas anteriores, os dois conjuntos de meses encerrados que a visão acumulada ainda
+resolve ao vivo foram **reaproveitados dos arquivos de `_snap/`** gravados na rodada das 05:36
+(7 e 1 registros, bytes e digests inalterados: `bb53ae67af7b` e `ed7d44639bf3`). São períodos
+fechados, cujo conteúdo não muda; a economia de duas consultas foi deliberada. Os demais meses
+encerrados (jul a set/2026) seguem congelados, como sempre.
+
+**Como a igualdade foi conferida nesta rodada.** O teste válido é o produto final, não o byte a
+byte dos arquivos de `_snap/` — eles foram regravados em serialização **compacta** nesta rodada,
+contra a **indentada** da rodada das 05:36, de modo que tamanhos e digests mudam sem que o
+conteúdo mude. A igualdade foi confirmada pelo tamanho do produto: `index.html` saiu com
+**exatamente 164.972 bytes** e `snapshot-data.js` com **exatamente 77.186 bytes**, os mesmos
+números da rodada das 05:36 — como o carimbo de geração tem comprimento fixo, a coincidência
+exata dos dois tamanhos só se sustenta se a lista de projetos, os onze conjuntos e todos os
+registros embutidos forem os mesmos. Mudou só o carimbo.
+
+### Defeito encontrado e corrigido nesta rodada: forma dos registros
+
+A primeira montagem desta rodada gravou os seis conjuntos de out/2026 na **forma plana**
+(`{key, summary, status_name, status_cat, project_key, project_name, duedate, resolutiondate,
+updated}`) — que é exatamente a forma produzida pelo trecho `jq` escrito no prompt da tarefa
+agendada. **O script do artifact não lê essa forma.** Ele acessa os campos aninhados
+(`i.fields.status.name`, `i.fields.status.statusCategory.key`, `i.fields.project.key`,
+`i.fields.project.name`, `i.fields.duedate`, `i.fields.resolutiondate`, `i.fields.updated`),
+que é a forma usada por todos os conjuntos já congelados no repositório. Publicado assim, o
+`index.html` renderizaria a página com status, projeto e datas **vazios** em todos os registros
+do mês corrente e do lookahead — sem erro de script, apenas com os indicadores zerados.
+
+O defeito foi detectado antes da entrega pela conferência de tamanho descrita acima: a primeira
+montagem produziu `snapshot-data.js` com 75.714 bytes contra os 77.186 da rodada anterior, uma
+diferença de 1.472 bytes que não se explicava por carimbo. Os conjuntos foram convertidos para a
+forma aninhada (`_snap/_conv1020e.py`), o `index.html` foi refeito e os dois tamanhos voltaram a
+bater exatamente com os da rodada das 05:36.
+
+**Ressalva registrada para as próximas rodadas:** o trecho `jq` do prompt da tarefa agendada
+descreve uma projeção plana que **não serve** a este artifact. A projeção de campos enviada ao
+Jira (`fields: [...]`) está correta e deve ser mantida; o que precisa mudar é a **forma de
+gravação** em `_snap/`, que tem de preservar `key` + `fields` aninhados.
 
 **Correção mantida das rodadas anteriores.** Na primeira montagem do bloco estático, as expressões
 regulares de `PATTERNS` saíram com barras duplicadas (`\\(` em vez de `\(`), o que faria
@@ -127,10 +154,11 @@ bloco `months` (jul, ago e set de 2026) que alimenta `window.__HISTORY__`.
 **Origem do HTML.** A pasta do Live Artifact
 (`...\Documents\Claude\Artifacts\pr03-relatorio-indicadores-epics`) é uma área protegida e não
 pode ser lida por caminho de arquivo a partir de uma sessão Cowork — recusa reconfirmada nesta
-rodada (`Permission denied`, tanto no `ls` quanto no listador de diretórios). A cópia local
-`_artifact_src.html` segue com **87.509 bytes** e SHA-256 `2f09463c3e7c...`, os mesmos valores
-registrados nas rodadas anteriores, e é dela que vem a estrutura do `index.html` — o bloco
-estático é substituído por marcador, preservando o HTML do artifact intacto.
+rodada (`Permission denied`, tanto no `ls` quanto no listador de diretórios, que responde
+explicitamente tratar-se de "protected location"). A cópia local `_artifact_src.html` segue com
+**87.509 bytes** e SHA-256 `2f09463c3e7c...`, os mesmos valores registrados nas rodadas
+anteriores, e é dela que vem a estrutura do `index.html` — o bloco estático é substituído por
+marcador, preservando o HTML do artifact intacto.
 
 A lista de projetos **foi reconsultada ao vivo** nesta rodada (`getVisibleJiraProjects`,
 21 projetos, `isLast = true`), com as mesmas 21 chaves, os mesmos nomes e os mesmos tipos de
@@ -144,14 +172,18 @@ recuperação.
 
 | Conjunto | SHA-256 (12 primeiros) | Bytes em disco |
 |---|---|---:|
-| `planned_2026-10` | `1d02b11edfbc` | 5.661 |
+| `planned_2026-10` | `b6abc214d6c0` | 4.654 |
 | `overdue_2026-10` | `4f53cda18c2b` | 2 |
-| `lookahead_2026-10` | `0369f85c277b` | 12.591 |
-| `sent_2026-10` | `fde12c4e34f0` | 2.443 |
-| `resolved_2026-10` | `47039cf227fb` | 2.488 |
-| `rework_2026-10` | `8b6f50c31e86` | 1.629 |
+| `lookahead_2026-10` | `a7915446592b` | 10.378 |
+| `sent_2026-10` | `3b5f6e5baf7e` | 2.039 |
+| `resolved_2026-10` | `cc1816951c1c` | 2.084 |
+| `rework_2026-10` | `ef078b89c74b` | 1.359 |
 | `planned_2026-05` | `bb53ae67af7b` | 2.677 |
 | `planned_2026-06` | `ed7d44639bf3` | 461 |
+
+Os seis conjuntos de out/2026 têm digests novos em relação à rodada das 05:36 **apenas** pela
+serialização compacta; `planned_2026-05` e `planned_2026-06` mantêm os digests anteriores porque
+são os mesmos arquivos, não reescritos.
 
 ### Correção de indicador (mantida da geração de 10/10 18:55)
 
@@ -167,18 +199,21 @@ ressalva já registrada para o EG0285.
 
 ### Demais conferências
 
-- Os seis arquivos de out/2026 foram regravados a partir das respostas ao vivo e relidos em
-  seguida: todos parseiam como JSON, com as contagens da tabela acima, e **sem nenhuma
-  ocorrência** de `accountId`, `avatarUrls`, `iconUrl`, `emailAddress` ou de endereço de e-mail.
-- Os nomes de projeto gravados nos conjuntos são lidos do `_projects_min.json`, não digitados —
-  checagem introduzida depois de um nome de projeto ter sido escrito à mão de forma incorreta na
-  primeira tentativa de gravação (`EG0285`).
+- Os seis arquivos de out/2026 foram regravados a partir das respostas ao vivo, convertidos para
+  a forma aninhada e relidos em seguida: todos parseiam como JSON, com as contagens da tabela
+  acima, e **sem nenhuma ocorrência** de `accountId`, `avatarUrls`, `iconUrl`, `emailAddress` ou
+  de endereço de e-mail.
+- Os nomes de projeto gravados nos conjuntos foram **conferidos um a um** contra
+  `projects_min_2026-10-20.json`, lido ao vivo: zero divergências em todos os oito conjuntos
+  (checagem introduzida depois de um nome de projeto ter sido escrito à mão de forma incorreta na
+  primeira tentativa de gravação, `EG0285`).
 - As **11 consultas JQL distintas** do mês corrente e da visão acumulada (6 do mês + 6 meses da
   acumulada, sendo `planned_2026-10` comum às duas) foram remontadas exatamente como o artifact
   as monta — inclusive o `issuetype in ("Epic","Fluxo de trabalho")` derivado dos tipos de nível
   Epic — e testadas, uma a uma, contra os 11 padrões gravados em `snapshot-data.js`: cada
-  consulta resolveu para o seu próprio conjunto, nenhuma caiu no *fallback* de lista vazia e
-  nenhum padrão ficou órfão.
+  consulta resolveu para o seu próprio conjunto, com os campos aninhados presentes
+  (`fields.status.name` legível em todos), nenhuma caiu no *fallback* de lista vazia e nenhum
+  padrão ficou órfão.
 - Meses congelados (≤ set/2026) **não** são reconsultados, por projeto.
 
 ### Quadro de outubro/2026 (20º dia do mês)
@@ -253,26 +288,26 @@ artifact.
 
 ### Conferência estrutural
 
-Checagens desta rodada (contagens e carimbos reconferidos após a geração):
+Checagens desta rodada (posições em caracteres, contadas sobre o arquivo final):
 
-- Comentário de geração no topo do `<head>`: presente, imediatamente após `<head>` (byte 609 do
-  arquivo), com o carimbo `2026-10-20T05:36:07-03:00`.
+- Comentário de geração **no topo do `<head>`**: presente, imediatamente depois de `<head>`
+  (posição 608), com o carimbo `2026-10-20T06:32:20-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
-  (o bloco injetado abre no byte 22.522 do `index.html` e `window.__SNAPSHOT__` é atribuído no
-  byte 97.267, contra o byte 99.717 da atribuição `window.__HISTORY__=` do `<script>` próprio
-  do artifact — ordem de execução confirmada). O bloco embutido é, além disso, **byte a byte
-  igual** ao `snapshot-data.js` gravado ao lado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 05:36, abrindo
-  no byte 164.745 e seguido apenas de `</body></html>`. Ocorrência única no arquivo.
+  (o bloco injetado abre na posição 22.444 e `window.__SNAPSHOT__` é atribuído na posição 96.638,
+  contra a posição 99.088 da atribuição `window.__HISTORY__=` do `<script>` próprio do artifact —
+  ordem de execução confirmada). O bloco embutido é, além disso, **byte a byte igual** ao
+  `snapshot-data.js` gravado ao lado.
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 06:32,
+  abrindo na posição 163.845 e seguido apenas de `</body></html>`. Ocorrência única no arquivo.
 - Roteamento de JQL testado de ponta a ponta: as **doze** chamadas dinâmicas que o artifact monta
   (as seis do mês corrente, as seis `planned` da visão acumulada mai–out/2026, sendo
   `planned_2026-10` comum às duas, e `getVisibleJiraProjects`) foram executadas contra o
   `snapshot-data.js` gerado, carregado em Node. As onze consultas JQL resolveram para o conjunto
-  correto e a de projetos devolveu os 21 registros; nenhuma caiu no aviso
-  `JQL sem correspondência no snapshot` — ou seja, a página publicada não tem como consultar o
-  Jira ao vivo.
-- Tamanhos da geração: `index.html` **164.972 bytes** (MD5 `2361ea259d4c…`) e
-  `snapshot-data.js` **77.186 bytes** (MD5 `c85b3933dcfd…`). Os tamanhos são exatamente os da
+  correto, com os campos aninhados legíveis, e a de projetos devolveu os 21 registros; nenhuma
+  caiu no aviso `JQL sem correspondência no snapshot` — ou seja, a página publicada não tem como
+  consultar o Jira ao vivo.
+- Tamanhos da geração: `index.html` **164.972 bytes** (MD5 `241c8ff44bee…`) e
+  `snapshot-data.js` **77.186 bytes** (MD5 `b5f3b6940c3d…`). Os tamanhos são exatamente os da
   rodada anterior — o conteúdo embutido é idêntico e o carimbo de geração tem comprimento
   fixo —, enquanto os MD5 diferem apenas por causa do carimbo.
 - Contagens dos conjuntos **embutidos** lidas de volta do `index.html` publicado:
@@ -304,12 +339,13 @@ O `index.html` e este `README.md` são gravados no *working tree* por esta rotin
 Scheduler — que, pelo `.push-watchdog.log`, vem rodando a cada **10 minutos** — e o deploy no
 Vercel segue o push.
 
-> **Nota de publicação (20/10/2026, 05:36).** A cadeia de publicação está íntegra: a passagem
-> das 05:34 concluiu com `Commit OK: 627db888` e
-> `Push OK e VERIFICADO: HEAD sincronizado com origin/main`, sem lock pendente nem índice
-> quebrado. Ela levou ao ar os arquivos de `_snap/` regravados nesta rodada; o `index.html` e
-> este `README.md`, gerados logo depois (05:36), ficam no *working tree* para a **próxima
-> passagem do watchdog**, por volta das 05:44, com o deploy no Vercel cerca de um minuto depois.
-> O incidente de 19/10 às 23:34 — em que uma passagem do watchdog pegou uma montagem
-> intermediária com as expressões de `PATTERNS` escapadas em excesso — foi corrigido ainda
-> naquela noite e não se repetiu nas rodadas seguintes.
+> **Nota de publicação (20/10/2026, 06:32).** Esta rodada gravou no *working tree* os seis
+> conjuntos de out/2026 em `_snap/`, a lista de projetos `projects_min_2026-10-20.json`, o
+> `index.html` e este `README.md`. Nenhuma operação de `git` foi executada pela rotina; a
+> próxima passagem da tarefa `PR03-Auto-Push-GitHub` leva tudo ao ar em até 10 minutos, com o
+> deploy no Vercel cerca de um minuto depois. O `.git/index` foi inspecionado somente-leitura e
+> está íntegro (`DIRC`). O incidente de 19/10 às 23:34 — em que uma passagem do watchdog pegou
+> uma montagem intermediária com as expressões de `PATTERNS` escapadas em excesso — reforça o
+> cuidado desta rodada: a montagem intermediária com os conjuntos na forma plana foi corrigida
+> **antes** de qualquer passagem do watchdog, e o `index.html` só ficou no *working tree* na
+> versão final, já testada.
