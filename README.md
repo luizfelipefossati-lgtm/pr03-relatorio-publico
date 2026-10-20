@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 19/10/2026 21:30** (`2026-10-19T21:30:55-03:00`)
+> **Última atualização do snapshot: 19/10/2026 22:31** (`2026-10-19T22:31:05-03:00`)
 
 ---
 
@@ -62,18 +62,18 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 19/10/2026 21:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 19/10/2026 22:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum indicador mudou nesta rodada
 
-Quinta geração de 19/10, cerca de **uma hora** depois da das 20:31. As **seis** consultas JQL do
+Sexta geração de 19/10, cerca de **uma hora** depois da das 21:30. As **seis** consultas JQL do
 mês corrente foram reexecutadas ao vivo com o predicado
 `issuetype in ("Epic","Fluxo de trabalho")` e a projeção de seis campos (`summary`, `status`,
 `project`, `duedate`, `resolutiondate`, `updated`). Todas voltaram completas
 (`pageInfo.hasNextPage = false`), sem paginação pendente e sem erro. As contagens repetem, uma a
 uma, as da rodada anterior:
 
-| Conjunto | Ao vivo | Geração das 20:31 | Situação |
+| Conjunto | Ao vivo | Geração das 21:30 | Situação |
 |---|---:|---:|---|
 | `planned_2026-10` | 15 | 15 | idêntico |
 | `overdue_2026-10` | 0 | 0 | vazio, sem alteração |
@@ -82,17 +82,21 @@ uma, as da rodada anterior:
 | `resolved_2026-10` | 6 | 6 | idêntico |
 | `rework_2026-10` | 4 | 4 | idêntico |
 
-**Método desta rodada.** As seis consultas do mês corrente foram reexecutadas ao vivo e os seis
-arquivos de `_snap/` regravados a partir das respostas, no formato compacto
-(`json.dumps(..., ensure_ascii=False, separators=(',',':'))`) que é o do último *commit*. A
-regravação saiu **byte a byte igual** ao que já estava em disco e ao que está versionado: os seis
-arquivos mantêm `planned` 4.325, `overdue` 2, `lookahead` 9.653, `sent` 1.908, `resolved` 1.953 e
-`rework` 1.272 bytes, com os mesmos SHA-256 da tabela abaixo. (A tabela de bytes publicada na
-rodada das 20:31 — 4.654, 10.378, 2.039, 2.084 e 1.359 — descrevia uma reformatação com recuo
-que **não** corresponde ao conteúdo em disco nem ao versionado; os números desta rodada foram
-lidos dos arquivos e estão corrigidos.) O `lookahead_2026-10`, cuja resposta estourou o limite de
-tokens da ferramenta, foi reduzido aos seis campos a partir do arquivo salvo pela própria
-ferramenta e transferido ao repositório já minimizado.
+**Método desta rodada.** As seis consultas do mês corrente foram reexecutadas ao vivo e o
+resultado conferido **registro a registro** contra os arquivos de `_snap/` já em disco: mesmas
+chaves, mesmos `status` e `statusCategory`, mesmos `duedate`, `resolutiondate` e `updated`. Como
+não houve nenhuma diferença, os arquivos **não** foram reescritos — seguem com `planned` 4.325,
+`overdue` 2, `lookahead` 9.653, `sent` 1.908, `resolved` 1.953 e `rework` 1.272 bytes, e com os
+mesmos SHA-256 da tabela abaixo. O `lookahead_2026-10` foi conferido pela contagem total
+(`searchResultMode = count`, devolvendo 33), evitando o estouro de tokens da resposta completa.
+
+**Ressalva sobre o predicado.** O prompt da tarefa agendada descreve as consultas de forma
+abreviada, com `issuetype=Epic`. Esse predicado, tomado ao pé da letra, **perde** os projetos
+cujo tipo de nível Epic se chama `Fluxo de trabalho` (EG0285, EG0286, EG0291, EG0294): a
+consulta de `planned_2026-10` devolve 10 em vez de 15, e a de `lookahead_2026-10`, 15 em vez de
+33. O que vale é o predicado que o próprio artifact monta — `issuetype in (...)` a partir dos
+tipos com `hierarchyLevel === 1` da lista de projetos — e foi ele o usado nesta rodada, como nas
+anteriores. A divergência foi detectada e corrigida antes de qualquer gravação.
 
 **Meses encerrados continuam congelados.** As consultas dos meses ≤ set/2026 **não** foram
 reconsultadas nesta rodada, por projeto: os arquivos de `_snap/` desses meses são o retrato do
@@ -107,23 +111,20 @@ publicados.
 pode ser lida por caminho de arquivo a partir de uma sessão Cowork — recusa reconfirmada nesta
 rodada (`Permission denied` em `ls`). O HTML ao vivo foi obtido pela via própria de artifacts
 (`device_stage_files` com `artifact_ids`), refeito nesta rodada, e conferido contra a cópia
-local: mesmos **87.509 bytes** e MD5 idêntico (`6a2b6462a4efbec1890af4494a7f0b74`). A data de
-modificação do artifact ao vivo continua em **27/07/2026** — o artifact não mudou desde a última
-geração.
+local: mesmos **87.509 bytes**, mesmo SHA-256 (`2f09463c3e7c...`) e MD5 idêntico
+(`6a2b6462a4efbec1890af4494a7f0b74`). O artifact não mudou desde a última geração.
 
 A lista de projetos **foi reconsultada ao vivo** nesta rodada (`getVisibleJiraProjects`,
 21 projetos, `isLast = true`). A comparação com o `_projects_min.json` em disco foi feita projeto
 a projeto — mesmas 21 chaves, mesmos nomes, mesmos tipos de issue com o mesmo `hierarchyLevel` —
-e **não houve diferença de conteúdo**, apenas de ordenação do arquivo (o gerador ordena por nome
-ao carregar), de modo que o arquivo não foi alterado e os tipos de nível Epic
-(`Epic`, `Fluxo de trabalho`) usados no predicado seguem os mesmos. A cópia temporária usada na
-comparação foi movida para `_to_delete/`, que o `.gitignore` já exclui.
+e **não houve diferença de conteúdo**, de modo que o arquivo não foi alterado e os tipos de
+nível Epic (`Epic`, `Fluxo de trabalho`) usados no predicado seguem os mesmos. A cópia temporária
+usada na comparação foi movida para `_to_delete/`, que o `.gitignore` já exclui.
 
 Do lado do `git`, esta rodada não alterou nada: nenhum `add`, `commit`, `push`, `read-tree` ou
-tentativa de autenticação. Houve apenas inspeções somente-leitura — os quatro primeiros bytes de
-`.git/index`, que trazem a assinatura `DIRC` esperada (índice íntegro, sem necessidade de
-recuperação), e um `git show`/`git diff --stat` do diretório `_snap/` para confirmar que os
-arquivos regravados são idênticos aos do último *commit* (saída vazia).
+tentativa de autenticação. Houve apenas a inspeção somente-leitura dos quatro primeiros bytes de
+`.git/index`, que trazem a assinatura `DIRC` esperada — índice íntegro, sem necessidade de
+recuperação.
 
 | Conjunto | SHA-256 (12 primeiros) | Bytes em disco |
 |---|---|---:|
@@ -135,8 +136,8 @@ arquivos regravados são idênticos aos do último *commit* (saída vazia).
 | `rework_2026-10` | `7044e8e75f8e` | 1.272 |
 
 Os hashes acima são o SHA-256 dos **bytes dos arquivos em disco** e **não mudaram** em relação ao
-que está versionado — os arquivos regravados nesta rodada saíram idênticos. Eles não são
-comparáveis com os das tabelas de rodadas passadas, nem entre recipientes diferentes.
+que está versionado. Eles não são comparáveis com os das tabelas de rodadas passadas, nem entre
+recipientes diferentes.
 
 ### Correção de indicador (mantida da geração de 10/10 18:55)
 
