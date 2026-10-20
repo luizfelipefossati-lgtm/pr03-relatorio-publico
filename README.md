@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 20/10/2026 02:34** (`2026-10-20T02:34:18-03:00`)
+> **Última atualização do snapshot: 20/10/2026 03:34** (`2026-10-20T03:34:40-03:00`)
 
 ---
 
@@ -62,18 +62,18 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 20/10/2026 02:34 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 20/10/2026 03:34 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum indicador mudou nesta rodada
 
-Geração de 20/10 às 02:34, cerca de **uma hora** depois da das 01:36. As **seis** consultas JQL do
+Geração de 20/10 às 03:34, cerca de **uma hora** depois da das 02:34. As **seis** consultas JQL do
 mês corrente foram reexecutadas ao vivo com o predicado
 `issuetype in ("Epic","Fluxo de trabalho")` e a projeção de seis campos (`summary`, `status`,
 `project`, `duedate`, `resolutiondate`, `updated`). Todas voltaram completas
 (`pageInfo.hasNextPage = false`), sem paginação pendente e sem erro. As contagens repetem, uma a
 uma, as da rodada anterior:
 
-| Conjunto | Ao vivo | Geração das 01:36 | Situação |
+| Conjunto | Ao vivo | Geração das 02:34 | Situação |
 |---|---:|---:|---|
 | `planned_2026-10` | 15 | 15 | idêntico |
 | `overdue_2026-10` | 0 | 0 | vazio, sem alteração |
@@ -190,7 +190,7 @@ Indicadores do mês na geração: **OTD 20%** (3 de 15), **retrabalho 57%** (4 d
 **12 pendências do mês** e **nenhum em atraso acumulado**.
 
 Os quatro indicadores repetem os das gerações de 16/10 às 18:32, das rodadas de 19/10 e da
-rodada de 20/10 às 01:36, sem nenhuma transição nova no intervalo:
+rodada de 20/10 às 02:34, sem nenhuma transição nova no intervalo:
 
 - **OTD 20%** (3 de 15). Os três entregues — `EG0286-7`, `EG291-4` e `EG0274-38` — contam
   como **"SIM\*"** (entrega no mês, mas depois da due date), de modo que o painel marca
@@ -255,13 +255,13 @@ artifact.
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
 - Comentário de geração no topo do `<head>`: presente, imediatamente após `<head>` (byte 609 do
-  arquivo), com o carimbo `2026-10-20T02:34:18-03:00`.
+  arquivo), com o carimbo `2026-10-20T03:34:40-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (o bloco injetado abre no byte 22.522 do `index.html` e `window.__SNAPSHOT__` é atribuído no
   byte 97.267, contra o byte 99.717 da atribuição `window.__HISTORY__=` do `<script>` próprio
   do artifact — ordem de execução confirmada). O bloco embutido é, além disso, **byte a byte
   igual** ao `snapshot-data.js` gravado ao lado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 02:34,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 03:34,
   seguido apenas de `</body></html>`. Ocorrência única no arquivo (abre no byte 164.733).
 - Roteamento de JQL testado de ponta a ponta: as **nove** consultas que o artifact monta
   (as seis do mês corrente mais `planned` de mai, jun e set/2026) foram confrontadas com as
