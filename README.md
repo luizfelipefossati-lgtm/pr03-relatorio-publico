@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 20/10/2026 13:31** (`2026-10-20T13:31:39-03:00`)
+> **Última atualização do snapshot: 20/10/2026 14:34** (`2026-10-20T14:34:02-03:00`)
 
 ---
 
@@ -50,7 +50,7 @@ Meses encerrados de jul a set/2026 continuam servidos pelo histórico embutido e
 
 ## Conferência desta geração
 
-Geração em 20/10/2026 13:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 20/10/2026 14:34 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum indicador mudou nesta rodada
 
@@ -120,13 +120,13 @@ O dado foi preservado verbatim no snapshot.
 ### Conferência estrutural
 
 - Comentário de geração **no topo do `<head>`**: presente, imediatamente depois de `<head>`
-  (posição 608), com o carimbo `2026-10-20T13:31:39-03:00`. Ocorrência única no arquivo.
+  (posição 608), com o carimbo `2026-10-20T14:34:02-03:00`. Ocorrência única no arquivo.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (o bloco injetado abre na posição 22.444 e `window.__SNAPSHOT__` é atribuído na posição
   96.638, contra a posição 99.088 da atribuição `window.__HISTORY__=` do `<script>` próprio do
   artifact — ordem de execução confirmada). O bloco embutido é, além disso, **byte a byte igual**
   ao `snapshot-data.js` gravado ao lado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 13:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 14:34,
   abrindo na posição 163.845 e seguido apenas de `</body></html>`. Ocorrência única no arquivo.
 - Roteamento de JQL testado de ponta a ponta: as **doze** chamadas dinâmicas que o artifact monta
   (as seis do mês corrente, as seis `planned` da visão acumulada mai–out/2026, sendo
@@ -171,13 +171,13 @@ O dado foi preservado verbatim no snapshot.
 O `index.html` e este `README.md` são gravados no *working tree* por esta rotina. O
 `git commit`/`push` é feito separadamente pela tarefa `PR03-Auto-Push-GitHub` do Windows Task
 Scheduler — que, pelo `.push-watchdog.log`, vem rodando a cada **10 minutos** (última passagem
-registrada às 13:24 de hoje, push verificado contra `origin/main`) — e o deploy no Vercel segue o
+registrada às 14:34 de hoje, push verificado contra `origin/main`) — e o deploy no Vercel segue o
 push.
 
-> **Nota de publicação (20/10/2026, 13:31).** Esta rodada regravou os seis conjuntos do mês
+> **Nota de publicação (20/10/2026, 14:34).** Esta rodada regravou os seis conjuntos do mês
 > corrente em `_snap/` com o retorno ao vivo do Jira, reaproveitou as duas `planned` de mai e
 > jun/2026 já em disco, e gravou no *working tree* o `index.html`, o `snapshot-data.js` e este
-> `README.md`. Os dados vieram idênticos aos da rodada das 12:33: o `index.html` novo é byte a
+> `README.md`. Os dados vieram idênticos aos da rodada das 13:31: o `index.html` novo é byte a
 > byte igual ao anterior fora os dois carimbos de geração. A lista de projetos foi reconsultada
 > e conferida como idêntica. Nenhuma operação de `git` foi executada pela rotina; a próxima
 > passagem da tarefa `PR03-Auto-Push-GitHub` leva tudo ao ar em até 10 minutos, com o deploy no
