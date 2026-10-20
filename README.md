@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 20/10/2026 00:30** (`2026-10-20T00:30:42-03:00`)
+> **Última atualização do snapshot: 20/10/2026 01:36** (`2026-10-20T01:36:33-03:00`)
 
 ---
 
@@ -62,7 +62,7 @@ congelados pelo snapshot e mesclados a esse histórico.
 
 ## Conferência desta geração
 
-Geração em 20/10/2026 00:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
+Geração em 20/10/2026 01:36 BRT, com consulta ao vivo ao Jira via MCP Atlassian.
 
 ### Nenhum indicador mudou nesta rodada
 
@@ -255,13 +255,13 @@ artifact.
 Checagens desta rodada (contagens e carimbos reconferidos após a geração):
 
 - Comentário de geração no topo do `<head>`: presente, imediatamente após `<head>` (byte 609 do
-  arquivo), com o carimbo `2026-10-20T00:30:42-03:00`.
+  arquivo), com o carimbo `2026-10-20T01:36:33-03:00`.
 - Bloco `window.__SNAPSHOT__` injetado **antes** do script principal do artifact: confirmado
   (o bloco injetado abre no byte 22.522 do `index.html` e `window.__SNAPSHOT__` é atribuído no
   byte 97.267, contra o byte 99.717 da atribuição `window.__HISTORY__=` do `<script>` próprio
   do artifact — ordem de execução confirmada). O bloco embutido é, além disso, **byte a byte
   igual** ao `snapshot-data.js` gravado ao lado.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 00:30,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 01:36,
   seguido apenas de `</body></html>`. Ocorrência única no arquivo (abre no byte 164.733).
 - Roteamento de JQL testado de ponta a ponta: as **nove** consultas que o artifact monta
   (as seis do mês corrente mais `planned` de mai, jun e set/2026) foram confrontadas com as
