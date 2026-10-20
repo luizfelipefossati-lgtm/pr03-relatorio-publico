@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Gera o snapshot estatico PR.03 (execucao 2026-10-20 BRT, 4a rodada - regeracao 06:35 UTC)."""
+"""Gera o snapshot estatico PR.03 (execucao 2026-10-20 BRT, 4a rodada - regeracao 08:3x UTC)."""
 import json, os, re, io, datetime
 
 REPO = os.path.join(os.environ['HOME'], 'mnt', 'pr03-relatorio-publico')
