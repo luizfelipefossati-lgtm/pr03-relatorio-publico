@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 21/10/2026 14:35** (`2026-10-21T14:35:47-03:00`)
+> **Última atualização do snapshot: 21/10/2026 16:34** (`2026-10-21T16:34:16-03:00`)
 
 ---
 
@@ -49,18 +49,20 @@ Meses congelados servidos pelo `__HISTORY__` embutido: **2026-07, 2026-08, 2026-
 
 ## Como foi gerado
 
-Geração em 21/10/2026 14:35 BRT, com consulta ao vivo ao Jira. Foram executadas **12 chamadas**:
-`getVisibleJiraProjects` e 11 consultas JQL — as seis do mês corrente e as `planned` de mai, jun,
-jul, ago e set/2026. Os onze conjuntos foram buscados do zero, sem reaproveitar nada do
+Geração em 21/10/2026 16:34 BRT, com consulta ao vivo ao Jira. Foram executadas **11 chamadas**
+ao conector: `getVisibleJiraProjects` e 10 consultas JQL — as seis do mês corrente e as `planned`
+de mai, jun e set/2026, mais uma consulta única cobrindo jul+ago/2026 (dividida por due date na
+etapa de montagem). Os onze conjuntos foram buscados do zero, sem reaproveitar nada do
 `snapshot-data.js` já publicado.
 
-O `index.html` foi reconstruído pelo gerador canônico `_gen_snapshot.py`, que reinjeta o bloco
-de dados sobre o `_artifact_src.html` versionado, em vez de aplicar remendo no `index.html`
-anterior.
+O bloco de dados foi reinjetado no `index.html` anterior pelo gerador desta rodada
+(`_snap/_live1021r.py`), que substitui o bloco `<script>` do snapshot, reescreve o comentário de
+carimbo no `<head>` e reposiciona o banner no fim do `<body>`. O `snapshot-data.js` publicado ao
+lado é a cópia de referência do mesmo bloco.
 
 ### Via de acesso ao Jira nesta rodada
 
-O conector **MCP Atlassian respondeu normalmente nesta rodada** — as 12 chamadas foram feitas
+O conector **MCP Atlassian respondeu normalmente nesta rodada** — as 11 chamadas foram feitas
 por ele, com projeção mínima de campos
 (`summary`, `status`, `project`, `duedate`, `resolutiondate`, `updated`), e não houve necessidade
 de recorrer à CLI local `Documents\Claude\jira-cli\jira_query.py`. Nenhuma credencial passou pela
@@ -68,10 +70,9 @@ sessão nem aparece em log. Nenhuma tentativa de login web em Jira, GitHub ou Ve
 
 ### Nenhum indicador mudou nesta rodada
 
-Os onze conjuntos voltaram **byte a byte idênticos** aos da rodada anterior (21/10 15:30 BRT),
-incluindo as datas e os status de cada epic. A única diferença na coleta foi a ordem de retorno
-da lista de projetos em `getVisibleJiraProjects`, que o gerador normaliza por nome — o conjunto
-de 21 projetos e seus tipos de issue permanecem os mesmos.
+Os onze conjuntos voltaram com a **mesma composição** da rodada anterior (21/10 14:35 BRT) —
+mesmas chaves de epic em cada conjunto, mesmas datas e mesmos status. O conjunto de 21 projetos
+visíveis e seus tipos de issue também permanecem os mesmos.
 
 O olhar para frente registra 33 epics com due date em nov e dez/2026 — mesma contagem das
 rodadas anteriores.
@@ -79,21 +80,21 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-21T14:35:47-03:00`. Ocorrência única no arquivo.
+  `2026-10-21T16:34:16-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
-  byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
+  byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.314 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 14:35,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 16:34,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo.
 - Bloco de dados posicionado **antes** do script principal do artifact, de modo que a
   sobrescrita de `callMcpTool` já esteja em vigor quando a página inicializa — confirmado
-  nesta rodada (bloco no byte 22.522; próximo `<script>` no byte 96.116).
+  nesta rodada (bloco no byte 22.522; próximo `<script>` no byte 95.836).
 - `__HISTORY__` exposto por accessor com merge defensivo, para que a atribuição direta feita
   pelo script do artifact não apague os meses congelados.
-- O bloco de dados foi executado em Node (v24) nesta rodada: carrega sem erro, expõe os 21
-  projetos e os 11 conjuntos, e `getVisibleJiraProjects` resolve para a lista esperada.
-- `_artifact_src.html`, base sobre a qual o snapshot é reinjetado: 87.509 bytes,
+- O bloco de dados passou por `node --check` (v22) nesta rodada: sintaxe válida, com os 21
+  projetos e os 11 conjuntos presentes no `SNAP`/`DATASETS` lidos de volta do arquivo gerado.
+- `_artifact_src.html`, base histórica do snapshot: 87.509 bytes,
   MD5 `6a2b6462a4efbec1890af4494a7f0b74` — inalterado em relação à última rodada em que foi
   conferido contra o artifact ao vivo.
 
@@ -102,9 +103,10 @@ rodadas anteriores.
 - **O HTML do Live Artifact não pôde ser reconferido nesta rodada.** A pasta
   `Documents\Claude\Artifacts` é uma área protegida para sessões Cowork e não é legível nem
   pelo shell da sessão nem pelas ferramentas de arquivo. O snapshot foi gerado sobre o
-  `_artifact_src.html` versionado, cujo hash segue o mesmo da última conferência bem-sucedida
-  (acima). Se o artifact ao vivo tiver sido editado desde então, esta página não refletirá a
-  alteração de layout — apenas os dados são novos.
+  `index.html` da rodada anterior, cuja estrutura de layout vem do `_artifact_src.html`
+  versionado (hash acima, igual ao da última conferência bem-sucedida). Se o artifact ao vivo
+  tiver sido editado desde então, esta página não refletirá a alteração de layout — apenas os
+  dados são novos.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é o mesmo das rodadas anteriores — a última verificada em Chromium headless sem
   erros de script — e a validação desta rodada foi feita em Node sobre o bloco de dados
@@ -121,8 +123,8 @@ cabeçalho do bloco de dados).
 
 ## Publicação
 
-- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `69e7f7739a3872b347fd4acaee51fc61`).
+- `index.html` — página estática, auto-contida (161.100 bytes, MD5 `816f43fe47d00741c7b5f1504c8c086c`).
 - `snapshot-data.js` — cópia de referência do bloco de dados injetado, não carregada pela
-  página (73.594 bytes, MD5 `63fd0b8fc47c534aac120a759a9a4bb9`).
+  página (73.314 bytes, MD5 `2ffd524e7120adc00d7a1cef156b0255`).
 - Commit e push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler, a cada 30 minutos.
 - Deploy automático na Vercel a partir do push.
