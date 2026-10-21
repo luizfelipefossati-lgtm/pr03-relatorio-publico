@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 20/10/2026 21:32** (`2026-10-20T21:32:15-03:00`)
+> **Última atualização do snapshot: 20/10/2026 22:33** (`2026-10-20T22:33:50-03:00`)
 
 ---
 
@@ -46,7 +46,7 @@ Mais a chamada `getVisibleJiraProjects`, resolvida com os 21 projetos visíveis.
 
 ## Como foi gerado
 
-Geração em 20/10/2026 21:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian. Foram
+Geração em 20/10/2026 22:33 BRT, com consulta ao vivo ao Jira via MCP Atlassian. Foram
 executadas 9 chamadas: `getVisibleJiraProjects` e 8 consultas JQL (as seis do mês corrente mais
 as `planned` de mai e jun/2026, que compõem a visão acumulada e não estão congeladas em
 `__HISTORY__`).
@@ -54,7 +54,7 @@ as `planned` de mai e jun/2026, que compõem a visão acumulada e não estão co
 ### Nenhum indicador mudou nesta rodada
 
 Os seis conjuntos do mês corrente foram reconsultados do zero e voltaram com as mesmas
-contagens e as mesmas chaves da rodada anterior (23:31 UTC / 20:31 BRT):
+contagens e as mesmas chaves da rodada anterior (00:32 UTC / 21:32 BRT):
 
 | Conjunto | Ao vivo nesta rodada | Rodada anterior | Situação |
 |---|---:|---:|---|
@@ -65,11 +65,11 @@ contagens e as mesmas chaves da rodada anterior (23:31 UTC / 20:31 BRT):
 | `resolved_2026-10` | 6 | 6 | idêntico |
 | `rework_2026-10` | 4 | 4 | idêntico |
 
-A conferência desta rodada foi feita campo a campo, e não apenas por contagem: para cada
-conjunto, os registros retornados ao vivo foram comparados por igualdade estrutural completa
-(chave, resumo, status e categoria, projeto, due date, resolution date e updated) com os
-registros gravados na rodada anterior — todos coincidentes, inclusive no `lookahead` de 33
-registros e na lista de 21 projetos.
+A conferência desta rodada foi feita por contagem e por conjunto de chaves: para cada
+dataset, as chaves retornadas ao vivo foram comparadas, na mesma ordem, com as da rodada
+anterior — todas coincidentes, inclusive no `lookahead` de 33 registros. Os campos gravados
+são os seis do contrato do artifact (resumo, status e categoria, projeto, due date, resolution
+date e updated), sempre reescritos a partir da resposta ao vivo.
 
 A lista de projetos visíveis também foi reconsultada: **sem diferença** (mesmos 21 projetos,
 mesmas chaves). O gerador compara as chaves contra as da rodada anterior e não emitiu aviso.
@@ -99,10 +99,10 @@ EG0275 e G0280 — mesma contagem das rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-20T21:32:15-03:00`. Ocorrência única no arquivo.
+  `2026-10-20T22:33:50-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 21:32,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 22:33,
   imediatamente antes do fechamento. Ocorrência única.
 - `__HISTORY__` exposto por accessor com merge defensivo, para que a atribuição direta feita
   pelo script do artifact não apague os meses congelados.
@@ -138,8 +138,10 @@ O commit e o push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Tas
 roda a cada 30 minutos e detecta mudanças no working tree. Esta geração não executa git. O
 deploy no Vercel acompanha o push, normalmente em cerca de um minuto.
 
-> **Nota de publicação (20/10/2026, 21:32).** Esta rodada regravou os seis conjuntos do mês
+> **Nota de publicação (20/10/2026, 22:33).** Esta rodada regravou os seis conjuntos do mês
 > corrente e as duas `planned` da visão acumulada com consulta ao vivo, reconferiu a lista de
-> projetos e o HTML-fonte do artifact, e regerou `index.html`, `snapshot-data.js` e este
-> `README.md`. A comparação campo a campo contra a rodada anterior não acusou nenhuma
-> diferença nos onze conjuntos; os dois arquivos gerados mantêm os mesmos tamanhos.
+> projetos e regerou `index.html`, `snapshot-data.js` e este `README.md`. A comparação de
+> contagens e de chaves contra a rodada anterior não acusou nenhuma diferença nos onze
+> conjuntos; os dois arquivos gerados mantêm os mesmos tamanhos (164.972 e 77.186 bytes).
+> O HTML-fonte do artifact permanece o de 27/07/2026; a pasta interna de artifacts não é
+> legível a partir da sessão, e a base reinjetada é o próprio `index.html` versionado.
