@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 21/10/2026 06:31** (`2026-10-21T06:31:05-03:00`)
+> **Última atualização do snapshot: 21/10/2026 07:33** (`2026-10-21T07:33:11-03:00`)
 
 ---
 
@@ -39,22 +39,24 @@ Visão acumulada (últimos 6 meses):
 | `planned_2026-06` | 1 | conferido ao vivo nesta rodada |
 | `planned_2026-07` | 8 | congelado em `__HISTORY__` |
 | `planned_2026-08` | 3 | congelado em `__HISTORY__` |
-| `planned_2026-09` | 5 | congelado em `__HISTORY__` |
+| `planned_2026-09` | 5 | conferido ao vivo nesta rodada |
 | `planned_2026-10` | 15 | ao vivo nesta rodada |
 
 Mais a chamada `getVisibleJiraProjects`, resolvida com os 21 projetos visíveis.
 
 ## Como foi gerado
 
-Geração em 21/10/2026 06:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian. Foram
-executadas 9 chamadas: `getVisibleJiraProjects` e 8 consultas JQL (as seis do mês corrente mais
-as `planned` de mai e jun/2026, que compõem a visão acumulada e não estão congeladas em
-`__HISTORY__`).
+Geração em 21/10/2026 07:33 BRT, com consulta ao vivo ao Jira via MCP Atlassian. Foram
+executadas 10 chamadas: `getVisibleJiraProjects` e 9 consultas JQL (as seis do mês corrente
+mais as `planned` de mai, jun e set/2026). Em relação à rodada anterior, `planned_2026-09`
+deixou de ser lida do bloco congelado e passou a ser reconsultada ao vivo — voltou com os
+mesmos 5 registros e as mesmas chaves que estavam em `__HISTORY__`, o que confirma o valor
+congelado. Jul e ago/2026 seguem congelados.
 
 ### Nenhum indicador mudou nesta rodada
 
 Os seis conjuntos do mês corrente foram reconsultados do zero e voltaram com as mesmas
-contagens e as mesmas chaves da rodada anterior (08:31 UTC / 21/10 05:31 BRT):
+contagens e as mesmas chaves da rodada anterior (09:31 UTC / 21/10 06:31 BRT):
 
 | Conjunto | Ao vivo nesta rodada | Rodada anterior | Situação |
 |---|---:|---:|---|
@@ -65,18 +67,15 @@ contagens e as mesmas chaves da rodada anterior (08:31 UTC / 21/10 05:31 BRT):
 | `resolved_2026-10` | 6 | 6 | idêntico |
 | `rework_2026-10` | 4 | 4 | idêntico |
 
-A conferência foi feita por chave: o conjunto de chaves devolvido ao vivo em cada um dos oito
+A conferência foi feita por chave: o conjunto de chaves devolvido ao vivo em cada um dos nove
 conjuntos reconsultados foi comparado com o da rodada anterior, extraído do `snapshot-data.js`
 então publicado. O gerador não emitiu nenhuma linha `MUDOU` — não houve acréscimo nem remoção
-em nenhum deles.
+em nenhum deles. O `lookahead_2026-10` reconsultado é byte a byte idêntico ao JSON mínimo da
+rodada anterior (mesmo SHA-256).
 
 A lista de projetos visíveis também foi reconsultada: **sem diferença** (mesmos 21 projetos,
-mesmas chaves, mesmos tipos de issue). O gerador compara as chaves contra as da rodada
-anterior e não emitiu aviso.
-
-As `planned` de mai e jun/2026 foram conferidas ao vivo nesta rodada (7 e 1 registros, mesmas
-contagens de antes). Os três meses de jul a set/2026 seguem congelados no bloco `__HISTORY__`,
-como nas rodadas anteriores.
+mesmas chaves, mesmos tipos de issue, conferido por hash da forma canônica). O gerador compara
+as chaves contra as da rodada anterior e não emitiu aviso.
 
 Com os dados estáveis, o `index.html` desta rodada mantém os mesmos tamanhos da anterior —
 `index.html` com **161.100 bytes** e `snapshot-data.js` com **73.314 bytes** — e as únicas
@@ -85,7 +84,7 @@ do `<body>`).
 
 ### Nota sobre a cláusula de tipo de issue
 
-As consultas desta rodada usam `issuetype in ("Epic","Fluxo de trabalho")`, exatamente como o
+As consultas desta rodada usam `issuetype in (Epic,"Fluxo de trabalho")`, exatamente como o
 artifact monta a JQL a partir dos tipos de nível 1 dos projetos visíveis. A forma reduzida
 `issuetype=Epic` **não** serve: ela deixa de fora os projetos cujo tipo de nível 1 se chama
 `Fluxo de trabalho` e derrubaria, por exemplo, o `planned_2026-10` de 15 para 10 registros.
@@ -106,17 +105,17 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-21T06:31:05-03:00`. Ocorrência única no arquivo.
+  `2026-10-21T07:33:11-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.314 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 06:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 07:33,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo.
 - `__HISTORY__` exposto por accessor com merge defensivo, para que a atribuição direta feita
   pelo script do artifact não apague os meses congelados.
 - O bloco de dados foi executado em Node nesta rodada: carrega sem erro, expõe os 21 projetos
-  e os 11 conjuntos, serve jul–set/2026 por `__HISTORY__`, e as 11 JQL de teste resolveram
+  e os 11 conjuntos, serve jul e ago/2026 por `__HISTORY__`, e as 11 JQL de teste resolveram
   todas para os conjuntos esperados (15 registros de out/2026, 33 do lookahead, 21 projetos).
 
 ### Ressalvas de método
@@ -133,8 +132,8 @@ rodadas anteriores.
 Os JSONs embutidos contêm apenas `key`, `summary`, nome e categoria do status, chave e nome do
 projeto, due date, resolution date e updated. **Não há** `accountId`, e-mail, avatar, descrição
 em ADF nem qualquer campo de pessoa. A conferência desta rodada no `index.html` gerado não
-encontrou nenhuma ocorrência de `avatarUrls`, `emailAddress`, `iconUrl` ou de endereço de
-e-mail corporativo (a única ocorrência da string `accountId` é a linha de comentário do próprio
+encontrou nenhuma ocorrência de `avatarUrls`, `emailAddress` ou de endereço de e-mail
+corporativo (a única ocorrência da string `accountId` é a linha de comentário do próprio
 cabeçalho do bloco de dados).
 
 ## Publicação
