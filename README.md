@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 20/10/2026 23:31** (`2026-10-20T23:31:52-03:00`)
+> **Última atualização do snapshot: 21/10/2026 00:30** (`2026-10-21T00:30:47-03:00`)
 
 ---
 
@@ -46,7 +46,7 @@ Mais a chamada `getVisibleJiraProjects`, resolvida com os 21 projetos visíveis.
 
 ## Como foi gerado
 
-Geração em 20/10/2026 23:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian. Foram
+Geração em 21/10/2026 00:30 BRT, com consulta ao vivo ao Jira via MCP Atlassian. Foram
 executadas 9 chamadas: `getVisibleJiraProjects` e 8 consultas JQL (as seis do mês corrente mais
 as `planned` de mai e jun/2026, que compõem a visão acumulada e não estão congeladas em
 `__HISTORY__`).
@@ -54,7 +54,7 @@ as `planned` de mai e jun/2026, que compõem a visão acumulada e não estão co
 ### Nenhum indicador mudou nesta rodada
 
 Os seis conjuntos do mês corrente foram reconsultados do zero e voltaram com as mesmas
-contagens e as mesmas chaves da rodada anterior (01:33 UTC / 22:33 BRT):
+contagens e as mesmas chaves da rodada anterior (03:27 UTC / 20/10 23:31 BRT):
 
 | Conjunto | Ao vivo nesta rodada | Rodada anterior | Situação |
 |---|---:|---:|---|
@@ -65,11 +65,12 @@ contagens e as mesmas chaves da rodada anterior (01:33 UTC / 22:33 BRT):
 | `resolved_2026-10` | 6 | 6 | idêntico |
 | `rework_2026-10` | 4 | 4 | idêntico |
 
-A conferência desta rodada foi feita campo a campo, e não só por contagem: para cada conjunto,
-a serialização canônica dos registros gravados ao vivo foi comparada com a da rodada anterior —
-todos os oito conjuntos reconsultados vieram **idênticos**, inclusive no `lookahead` de 33
-registros. Os campos gravados são os seis do contrato do artifact (resumo, status e categoria,
-projeto, due date, resolution date e updated), sempre reescritos a partir da resposta ao vivo.
+A conferência desta rodada foi feita campo a campo, e não só por contagem: cada registro
+devolvido ao vivo foi comparado com o correspondente da rodada anterior (resumo, nome e
+categoria de status, projeto, due date, resolution date e updated). Para o `lookahead` de 33
+registros e para a lista de projetos a comparação foi feita por digest SHA-256 da serialização
+canônica — `e84f25daa972ace9…` e `42e8a14f9d6551ac…`, ambos iguais aos da rodada anterior.
+Todos os oito conjuntos reconsultados vieram **idênticos**.
 
 A lista de projetos visíveis também foi reconsultada: **sem diferença** (mesmos 21 projetos,
 mesmas chaves). O gerador compara as chaves contra as da rodada anterior e não emitiu aviso.
@@ -99,10 +100,10 @@ EG0275 e G0280 — mesma contagem das rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-20T23:31:52-03:00`. Ocorrência única no arquivo.
+  `2026-10-21T00:30:47-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 23:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 00:30,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo.
 - `__HISTORY__` exposto por accessor com merge defensivo, para que a atribuição direta feita
   pelo script do artifact não apague os meses congelados.
@@ -141,7 +142,7 @@ O commit e o push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Tas
 roda a cada 30 minutos e detecta mudanças no working tree. Esta geração não executa git. O
 deploy no Vercel acompanha o push, normalmente em cerca de um minuto.
 
-> **Nota de publicação (20/10/2026, 23:31).** Esta rodada regravou os seis conjuntos do mês
+> **Nota de publicação (21/10/2026, 00:30).** Esta rodada regravou os seis conjuntos do mês
 > corrente e as duas `planned` da visão acumulada com consulta ao vivo, reconferiu a lista de
 > projetos e regerou `index.html`, `snapshot-data.js` e este `README.md`. A comparação campo a
 > campo contra a rodada anterior não acusou nenhuma diferença nos oito conjuntos reconsultados
