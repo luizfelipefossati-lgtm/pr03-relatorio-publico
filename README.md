@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 21/10/2026 05:31** (`2026-10-21T05:31:11-03:00`)
+> **Última atualização do snapshot: 21/10/2026 06:31** (`2026-10-21T06:31:05-03:00`)
 
 ---
 
@@ -37,16 +37,16 @@ Visão acumulada (últimos 6 meses):
 |---|---:|---|
 | `planned_2026-05` | 7 | conferido ao vivo nesta rodada |
 | `planned_2026-06` | 1 | conferido ao vivo nesta rodada |
-| `planned_2026-07` | 10 | congelado em `__HISTORY__` |
-| `planned_2026-08` | 4 | congelado em `__HISTORY__` |
-| `planned_2026-09` | 8 | congelado em `__HISTORY__` |
+| `planned_2026-07` | 8 | congelado em `__HISTORY__` |
+| `planned_2026-08` | 3 | congelado em `__HISTORY__` |
+| `planned_2026-09` | 5 | congelado em `__HISTORY__` |
 | `planned_2026-10` | 15 | ao vivo nesta rodada |
 
 Mais a chamada `getVisibleJiraProjects`, resolvida com os 21 projetos visíveis.
 
 ## Como foi gerado
 
-Geração em 21/10/2026 05:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian. Foram
+Geração em 21/10/2026 06:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian. Foram
 executadas 9 chamadas: `getVisibleJiraProjects` e 8 consultas JQL (as seis do mês corrente mais
 as `planned` de mai e jun/2026, que compõem a visão acumulada e não estão congeladas em
 `__HISTORY__`).
@@ -54,7 +54,7 @@ as `planned` de mai e jun/2026, que compõem a visão acumulada e não estão co
 ### Nenhum indicador mudou nesta rodada
 
 Os seis conjuntos do mês corrente foram reconsultados do zero e voltaram com as mesmas
-contagens e as mesmas chaves da rodada anterior (07:31 UTC / 21/10 04:31 BRT):
+contagens e as mesmas chaves da rodada anterior (08:31 UTC / 21/10 05:31 BRT):
 
 | Conjunto | Ao vivo nesta rodada | Rodada anterior | Situação |
 |---|---:|---:|---|
@@ -67,7 +67,8 @@ contagens e as mesmas chaves da rodada anterior (07:31 UTC / 21/10 04:31 BRT):
 
 A conferência foi feita por chave: o conjunto de chaves devolvido ao vivo em cada um dos oito
 conjuntos reconsultados foi comparado com o da rodada anterior, extraído do `snapshot-data.js`
-então publicado. Não houve acréscimo nem remoção em nenhum deles.
+então publicado. O gerador não emitiu nenhuma linha `MUDOU` — não houve acréscimo nem remoção
+em nenhum deles.
 
 A lista de projetos visíveis também foi reconsultada: **sem diferença** (mesmos 21 projetos,
 mesmas chaves, mesmos tipos de issue). O gerador compara as chaves contra as da rodada
@@ -78,7 +79,7 @@ contagens de antes). Os três meses de jul a set/2026 seguem congelados no bloco
 como nas rodadas anteriores.
 
 Com os dados estáveis, o `index.html` desta rodada mantém os mesmos tamanhos da anterior —
-`index.html` com **164.972 bytes** e `snapshot-data.js` com **77.186 bytes** — e as únicas
+`index.html` com **161.100 bytes** e `snapshot-data.js` com **73.314 bytes** — e as únicas
 diferenças observáveis são os dois carimbos de tempo (comentário no `<head>` e banner no fim
 do `<body>`).
 
@@ -99,18 +100,18 @@ Seis epics entraram em "Enviado - Aguardando Análise" ao longo de out/2026 e se
 concluídos no mês; quatro deles voltaram de "Enviado - Aguardando Análise" para revisão, o que
 os caracteriza como retrabalho. Nenhum epic está vencido sem conclusão.
 
-O olhar para frente registra 33 epics com due date em nov e dez/2026 — EG0274 (DNIT) 11,
-EG0286 (DNIT/AC) 10, EG0285 4, EG0294 3, e um epic em cada um de EG0239, EG0240, EG0241,
-EG0275 e G0280 — mesma contagem das rodadas anteriores.
+O olhar para frente registra 33 epics com due date em nov e dez/2026 — mesma contagem das
+rodadas anteriores.
 
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-21T05:31:11-03:00`. Ocorrência única no arquivo.
+  `2026-10-21T06:31:05-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
-  byte a byte idêntica ao `snapshot-data.js` publicado ao lado (76.635 bytes).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 05:31,
+  byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.314 bytes) — conferido
+  nesta rodada.
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 06:31,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo.
 - `__HISTORY__` exposto por accessor com merge defensivo, para que a atribuição direta feita
   pelo script do artifact não apague os meses congelados.
@@ -133,7 +134,8 @@ Os JSONs embutidos contêm apenas `key`, `summary`, nome e categoria do status, 
 projeto, due date, resolution date e updated. **Não há** `accountId`, e-mail, avatar, descrição
 em ADF nem qualquer campo de pessoa. A conferência desta rodada no `index.html` gerado não
 encontrou nenhuma ocorrência de `avatarUrls`, `emailAddress`, `iconUrl` ou de endereço de
-e-mail corporativo.
+e-mail corporativo (a única ocorrência da string `accountId` é a linha de comentário do próprio
+cabeçalho do bloco de dados).
 
 ## Publicação
 
