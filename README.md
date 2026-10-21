@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 21/10/2026 10:29** (`2026-10-21T10:29:54-03:00`)
+> **Última atualização do snapshot: 21/10/2026 12:31** (`2026-10-21T12:31:05-03:00`)
 
 ---
 
@@ -46,7 +46,7 @@ Mais a chamada `getVisibleJiraProjects`, resolvida com os 21 projetos visíveis.
 
 ## Como foi gerado
 
-Geração em 21/10/2026 10:29 BRT, com consulta ao vivo ao Jira. Foram executadas **12 chamadas**:
+Geração em 21/10/2026 12:31 BRT, com consulta ao vivo ao Jira. Foram executadas **12 chamadas**:
 `getVisibleJiraProjects` e 11 consultas JQL — as seis do mês corrente e as `planned` de mai, jun,
 jul, ago e set/2026. Os onze conjuntos foram buscados do zero, sem reaproveitar nada do
 `snapshot-data.js` já publicado.
@@ -57,17 +57,17 @@ anterior.
 
 ### Via de acesso ao Jira nesta rodada
 
-O conector **MCP Atlassian não subiu nesta sessão** (`CONNECT_TIMEOUT`, 30 s). A consulta foi
-feita pela CLI local `Documents\Claude\jira-cli\jira_query.py`, que é o caminho alternativo
-documentado para exatamente este fim: mesmo Jira Cloud, mesma cláusula de tipo de issue, mesma
-projeção mínima de campos e mesmo formato de saída em `_snap/*.json` que o gerador consome.
-O token é lido pela própria CLI de `Documents\Claude\config\.env`, fora de qualquer repositório;
-nenhuma credencial passou pela sessão nem aparece em log. Nenhuma tentativa de login web em
-Jira, GitHub ou Vercel foi feita.
+O conector **MCP Atlassian não subiu nesta sessão** (`CONNECT_TIMEOUT`) — mesma falha da rodada
+anterior. A consulta foi feita pela CLI local `Documents\Claude\jira-cli\jira_query.py`, que é o
+caminho alternativo documentado para exatamente este fim: mesmo Jira Cloud, mesma cláusula de
+tipo de issue, mesma projeção mínima de campos e mesmo formato de saída em `_snap/*.json` que o
+gerador consome. O token é lido pela própria CLI de `Documents\Claude\config\.env`, fora de
+qualquer repositório; nenhuma credencial passou pela sessão nem aparece em log. Nenhuma
+tentativa de login web em Jira, GitHub ou Vercel foi feita.
 
 ### Nenhum indicador mudou nesta rodada
 
-Os onze conjuntos voltaram com as mesmas contagens da rodada anterior (21/10 09:33 BRT):
+Os onze conjuntos voltaram com as mesmas contagens da rodada anterior (21/10 10:29 BRT):
 
 | Conjunto | Ao vivo nesta rodada | Rodada anterior | Situação |
 |---|---:|---:|---|
@@ -97,13 +97,12 @@ e 5/1/8/3/38, **idênticos** aos do snapshot anterior.
 As consultas desta rodada usam `issuetype in ("Epic","Fluxo de trabalho")`, exatamente como o
 artifact monta a JQL a partir dos tipos de nível 1 dos projetos visíveis. A forma reduzida
 `issuetype=Epic` **não** serve: ela deixa de fora os projetos cujo tipo de nível 1 se chama
-`Fluxo de trabalho` e derrubaria, por exemplo, o `planned_2026-10` de 15 para 10 registros.
-A cláusula completa está em uso em todos os conjuntos desta rodada.
+`Fluxo de trabalho`. A cláusula completa está em uso em todos os conjuntos desta rodada.
 
 ### Epics com due date em out/2026 (15)
 
-Distribuição por projeto: G0280 (DMAE) 5, EG0286 (DNIT/AC) 4, EG0240 (GOITÁ/COMPESA) 3,
-EG0274 (DNIT) 2, EG291 (Arroio Feijó) 1.
+Distribuição por projeto: EG0280 (DMAE) 5, EG0286 (DNIT/AC) 4, EG0240 (GOITÁ/COMPESA) 3,
+EG0274 (DNIT) 2, EG0291 (Arroio Feijó) 1.
 
 Seis epics entraram em "Enviado - Aguardando Análise" ao longo de out/2026 e seis foram
 concluídos no mês; quatro deles voltaram de "Enviado - Aguardando Análise" para revisão, o que
@@ -115,22 +114,20 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-21T10:29:54-03:00`. Ocorrência única no arquivo.
+  `2026-10-21T12:31:05-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 10:29,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 12:31,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo.
 - Bloco de dados posicionado **antes** do script principal do artifact, de modo que a
   sobrescrita de `callMcpTool` já esteja em vigor quando a página inicializa — confirmado
-  nesta rodada pela posição do bloco (offset 22.444) frente ao próximo `<script>`.
+  nesta rodada (bloco em offset 93.078; próximo `<script>` em 95.519).
 - `__HISTORY__` exposto por accessor com merge defensivo, para que a atribuição direta feita
   pelo script do artifact não apague os meses congelados.
 - O bloco de dados foi executado em Node (v22.23.2) nesta rodada: carrega sem erro, expõe os 21
-  projetos e os 11 conjuntos, serve jul, ago e set/2026 por `__HISTORY__`, e as 12 chamadas de
-  teste resolveram todas para os conjuntos esperados (15 registros de out/2026, 33 do
-  lookahead, 21 projetos).
+  projetos e os 11 conjuntos, e `getVisibleJiraProjects` resolve para a lista esperada.
 - `_artifact_src.html`, base sobre a qual o snapshot é reinjetado: 87.509 bytes,
   MD5 `6a2b6462a4efbec1890af4494a7f0b74` — inalterado em relação à última rodada em que foi
   conferido contra o artifact ao vivo.
@@ -159,8 +156,8 @@ cabeçalho do bloco de dados).
 
 ## Publicação
 
-- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `b609e4920d6dc834d85b4c286714689d`).
+- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `622a4d981b8a07f69a0b863742818766`).
 - `snapshot-data.js` — cópia de referência do bloco de dados injetado, não carregada pela
-  página (73.594 bytes, MD5 `f08e548f6df3299059a21e974606c7ef`).
+  página (73.594 bytes, MD5 `e54d8454804dcb36f152a01da7718524`).
 - Commit e push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler, a cada 30 minutos.
 - Deploy automático na Vercel a partir do push.
