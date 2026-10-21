@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 20/10/2026 20:31** (`2026-10-20T20:31:28-03:00`)
+> **Última atualização do snapshot: 20/10/2026 21:32** (`2026-10-20T21:32:15-03:00`)
 
 ---
 
@@ -46,7 +46,7 @@ Mais a chamada `getVisibleJiraProjects`, resolvida com os 21 projetos visíveis.
 
 ## Como foi gerado
 
-Geração em 20/10/2026 20:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian. Foram
+Geração em 20/10/2026 21:32 BRT, com consulta ao vivo ao Jira via MCP Atlassian. Foram
 executadas 9 chamadas: `getVisibleJiraProjects` e 8 consultas JQL (as seis do mês corrente mais
 as `planned` de mai e jun/2026, que compõem a visão acumulada e não estão congeladas em
 `__HISTORY__`).
@@ -54,7 +54,7 @@ as `planned` de mai e jun/2026, que compõem a visão acumulada e não estão co
 ### Nenhum indicador mudou nesta rodada
 
 Os seis conjuntos do mês corrente foram reconsultados do zero e voltaram com as mesmas
-contagens e as mesmas chaves da rodada anterior (23:09 UTC / 20:09 BRT):
+contagens e as mesmas chaves da rodada anterior (23:31 UTC / 20:31 BRT):
 
 | Conjunto | Ao vivo nesta rodada | Rodada anterior | Situação |
 |---|---:|---:|---|
@@ -99,10 +99,10 @@ EG0275 e G0280 — mesma contagem das rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-20T20:31:28-03:00`. Ocorrência única no arquivo.
+  `2026-10-20T21:32:15-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 20:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 20/10/2026 21:32,
   imediatamente antes do fechamento. Ocorrência única.
 - `__HISTORY__` exposto por accessor com merge defensivo, para que a atribuição direta feita
   pelo script do artifact não apague os meses congelados.
@@ -138,8 +138,8 @@ O commit e o push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Tas
 roda a cada 30 minutos e detecta mudanças no working tree. Esta geração não executa git. O
 deploy no Vercel acompanha o push, normalmente em cerca de um minuto.
 
-> **Nota de publicação (20/10/2026, 20:31).** Esta rodada regravou os seis conjuntos do mês
+> **Nota de publicação (20/10/2026, 21:32).** Esta rodada regravou os seis conjuntos do mês
 > corrente e as duas `planned` da visão acumulada com consulta ao vivo, reconferiu a lista de
 > projetos e o HTML-fonte do artifact, e regerou `index.html`, `snapshot-data.js` e este
-> `README.md`. As contagens e as chaves vieram iguais às da rodada anterior; os dois arquivos
-> gerados mantêm os mesmos tamanhos.
+> `README.md`. A comparação campo a campo contra a rodada anterior não acusou nenhuma
+> diferença nos onze conjuntos; os dois arquivos gerados mantêm os mesmos tamanhos.
