@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 21/10/2026 09:33** (`2026-10-21T09:33:26-03:00`)
+> **Última atualização do snapshot: 21/10/2026 10:29** (`2026-10-21T10:29:54-03:00`)
 
 ---
 
@@ -46,20 +46,28 @@ Mais a chamada `getVisibleJiraProjects`, resolvida com os 21 projetos visíveis.
 
 ## Como foi gerado
 
-Geração em 21/10/2026 09:33 BRT, com consulta ao vivo ao Jira via MCP Atlassian. Foram
-executadas **12 chamadas**: `getVisibleJiraProjects` e 11 consultas JQL — as seis do mês
-corrente e as `planned` de mai, jun, jul, ago e set/2026. Ao contrário das rodadas recentes,
-que reaproveitavam jul e ago/2026 do `snapshot-data.js` já publicado, **nesta rodada os onze
-conjuntos foram buscados do zero**.
+Geração em 21/10/2026 10:29 BRT, com consulta ao vivo ao Jira. Foram executadas **12 chamadas**:
+`getVisibleJiraProjects` e 11 consultas JQL — as seis do mês corrente e as `planned` de mai, jun,
+jul, ago e set/2026. Os onze conjuntos foram buscados do zero, sem reaproveitar nada do
+`snapshot-data.js` já publicado.
 
 O `index.html` foi reconstruído pelo gerador canônico `_gen_snapshot.py`, que reinjeta o bloco
 de dados sobre o `_artifact_src.html` versionado, em vez de aplicar remendo no `index.html`
-anterior. Daí a pequena diferença de tamanho em relação à rodada das 08:30.
+anterior.
+
+### Via de acesso ao Jira nesta rodada
+
+O conector **MCP Atlassian não subiu nesta sessão** (`CONNECT_TIMEOUT`, 30 s). A consulta foi
+feita pela CLI local `Documents\Claude\jira-cli\jira_query.py`, que é o caminho alternativo
+documentado para exatamente este fim: mesmo Jira Cloud, mesma cláusula de tipo de issue, mesma
+projeção mínima de campos e mesmo formato de saída em `_snap/*.json` que o gerador consome.
+O token é lido pela própria CLI de `Documents\Claude\config\.env`, fora de qualquer repositório;
+nenhuma credencial passou pela sessão nem aparece em log. Nenhuma tentativa de login web em
+Jira, GitHub ou Vercel foi feita.
 
 ### Nenhum indicador mudou nesta rodada
 
-Os onze conjuntos voltaram com as mesmas chaves e as mesmas contagens da rodada anterior
-(21/10 08:30 BRT):
+Os onze conjuntos voltaram com as mesmas contagens da rodada anterior (21/10 09:33 BRT):
 
 | Conjunto | Ao vivo nesta rodada | Rodada anterior | Situação |
 |---|---:|---:|---|
@@ -75,19 +83,14 @@ Os onze conjuntos voltaram com as mesmas chaves e as mesmas contagens da rodada 
 | `planned_2026-08` | 3 | 3 | idêntico |
 | `planned_2026-09` | 5 | 5 | idêntico |
 
-A conferência foi feita registro a registro, não apenas por chave: oito dos onze JSONs mínimos
-ficaram **byte a byte idênticos** aos da rodada anterior. Os três restantes — `sent_2026-10`,
-`resolved_2026-10` e `rework_2026-10` — trazem exatamente as mesmas chaves e os mesmos valores
-de campo, diferindo só na **ordem** em que o Jira devolveu os registros; a página ordena esses
-conjuntos por conta própria (retrabalho primeiro), de modo que a ordem da resposta não afeta o
-que é exibido.
-
+O bloco de dados gerado tem **73.594 bytes**, exatamente o mesmo tamanho do bloco da rodada
+anterior; o MD5 difere apenas porque o carimbo de geração — de comprimento fixo — mudou.
 A lista de projetos visíveis também foi reconsultada: **sem diferença** (mesmos 21 projetos,
 mesmas chaves, mesmos tipos de issue de nível 1).
 
 Os meses congelados em `__HISTORY__` — jul, ago e set/2026 — foram recalculados a partir dos
-conjuntos reconsultados e saíram **idênticos** aos do snapshot anterior (comparação do objeto
-`months` inteiro, não só das contagens).
+conjuntos reconsultados: previstos/atraso/envios/retrabalho/lookahead de 8/0/11/5/26, 3/0/6/3/39
+e 5/1/8/3/38, **idênticos** aos do snapshot anterior.
 
 ### Nota sobre a cláusula de tipo de issue
 
@@ -112,19 +115,20 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-21T09:33:26-03:00`. Ocorrência única no arquivo.
+  `2026-10-21T10:29:54-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 09:33,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 10:29,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo.
 - Bloco de dados posicionado **antes** do script principal do artifact, de modo que a
-  sobrescrita de `callMcpTool` já esteja em vigor quando a página inicializa.
+  sobrescrita de `callMcpTool` já esteja em vigor quando a página inicializa — confirmado
+  nesta rodada pela posição do bloco (offset 22.444) frente ao próximo `<script>`.
 - `__HISTORY__` exposto por accessor com merge defensivo, para que a atribuição direta feita
   pelo script do artifact não apague os meses congelados.
-- O bloco de dados foi executado em Node (v22) nesta rodada: carrega sem erro, expõe os 21
-  projetos e os 11 conjuntos, serve jul, ago e set/2026 por `__HISTORY__`, e as 11 JQL de
+- O bloco de dados foi executado em Node (v22.23.2) nesta rodada: carrega sem erro, expõe os 21
+  projetos e os 11 conjuntos, serve jul, ago e set/2026 por `__HISTORY__`, e as 12 chamadas de
   teste resolveram todas para os conjuntos esperados (15 registros de out/2026, 33 do
   lookahead, 21 projetos).
 - `_artifact_src.html`, base sobre a qual o snapshot é reinjetado: 87.509 bytes,
@@ -135,11 +139,10 @@ rodadas anteriores.
 
 - **O HTML do Live Artifact não pôde ser reconferido nesta rodada.** A pasta
   `Documents\Claude\Artifacts` é uma área protegida para sessões Cowork e não é legível nem
-  pelo shell da sessão nem pelas ferramentas de arquivo; o canal de artifacts do desktop
-  também não estava disponível. O snapshot foi gerado sobre o `_artifact_src.html` versionado,
-  cujo hash segue o mesmo da última conferência bem-sucedida (acima). Se o artifact ao vivo
-  tiver sido editado desde então, esta página não refletirá a alteração de layout — apenas os
-  dados são novos.
+  pelo shell da sessão nem pelas ferramentas de arquivo. O snapshot foi gerado sobre o
+  `_artifact_src.html` versionado, cujo hash segue o mesmo da última conferência bem-sucedida
+  (acima). Se o artifact ao vivo tiver sido editado desde então, esta página não refletirá a
+  alteração de layout — apenas os dados são novos.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é o mesmo das rodadas anteriores — a última verificada em Chromium headless sem
   erros de script — e a validação desta rodada foi feita em Node sobre o bloco de dados
@@ -156,8 +159,8 @@ cabeçalho do bloco de dados).
 
 ## Publicação
 
-- `index.html` — página estática, auto-contida (161.380 bytes).
+- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `b609e4920d6dc834d85b4c286714689d`).
 - `snapshot-data.js` — cópia de referência do bloco de dados injetado, não carregada pela
-  página (73.594 bytes, MD5 `23d05661b1979c4d78f148882f234678`).
+  página (73.594 bytes, MD5 `f08e548f6df3299059a21e974606c7ef`).
 - Commit e push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler, a cada 30 minutos.
 - Deploy automático na Vercel a partir do push.
