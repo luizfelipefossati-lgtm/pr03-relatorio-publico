@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 21/10/2026 04:31** (`2026-10-21T04:31:02-03:00`)
+> **Última atualização do snapshot: 21/10/2026 05:31** (`2026-10-21T05:31:11-03:00`)
 
 ---
 
@@ -46,7 +46,7 @@ Mais a chamada `getVisibleJiraProjects`, resolvida com os 21 projetos visíveis.
 
 ## Como foi gerado
 
-Geração em 21/10/2026 04:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian. Foram
+Geração em 21/10/2026 05:31 BRT, com consulta ao vivo ao Jira via MCP Atlassian. Foram
 executadas 9 chamadas: `getVisibleJiraProjects` e 8 consultas JQL (as seis do mês corrente mais
 as `planned` de mai e jun/2026, que compõem a visão acumulada e não estão congeladas em
 `__HISTORY__`).
@@ -54,7 +54,7 @@ as `planned` de mai e jun/2026, que compõem a visão acumulada e não estão co
 ### Nenhum indicador mudou nesta rodada
 
 Os seis conjuntos do mês corrente foram reconsultados do zero e voltaram com as mesmas
-contagens e as mesmas chaves da rodada anterior (06:31 UTC / 21/10 03:31 BRT):
+contagens e as mesmas chaves da rodada anterior (07:31 UTC / 21/10 04:31 BRT):
 
 | Conjunto | Ao vivo nesta rodada | Rodada anterior | Situação |
 |---|---:|---:|---|
@@ -106,11 +106,11 @@ EG0275 e G0280 — mesma contagem das rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-21T04:31:02-03:00`. Ocorrência única no arquivo.
+  `2026-10-21T05:31:11-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (76.635 bytes).
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 04:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 05:31,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo.
 - `__HISTORY__` exposto por accessor com merge defensivo, para que a atribuição direta feita
   pelo script do artifact não apague os meses congelados.
