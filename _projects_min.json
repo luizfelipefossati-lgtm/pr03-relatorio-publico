@@ -1,8 +1,12 @@
 [
  {
-  "key": "G0120",
-  "name": "EG0120 - DAER",
+  "key": "CREA",
+  "name": "GESTÃO - CREA ",
   "issueTypes": [
+   {
+    "name": "Fluxo de trabalho",
+    "hierarchyLevel": 1
+   },
    {
     "name": "Tarefa",
     "hierarchyLevel": 0
@@ -10,10 +14,6 @@
    {
     "name": "Subtarefa",
     "hierarchyLevel": -1
-   },
-   {
-    "name": "Epic",
-    "hierarchyLevel": 1
    }
   ]
  },
@@ -228,24 +228,6 @@
   ]
  },
  {
-  "key": "G0280",
-  "name": "EG0280 - DMAE",
-  "issueTypes": [
-   {
-    "name": "Tarefa",
-    "hierarchyLevel": 0
-   },
-   {
-    "name": "Subtarefa",
-    "hierarchyLevel": -1
-   },
-   {
-    "name": "Epic",
-    "hierarchyLevel": 1
-   }
-  ]
- },
- {
   "key": "EG0285",
   "name": "EG0285 - EMBASA - BARREIRAS",
   "issueTypes": [
@@ -300,24 +282,6 @@
   ]
  },
  {
-  "key": "EG291",
-  "name": "EG0291 - Arroio Feijó",
-  "issueTypes": [
-   {
-    "name": "Fluxo de trabalho",
-    "hierarchyLevel": 1
-   },
-   {
-    "name": "Tarefa",
-    "hierarchyLevel": 0
-   },
-   {
-    "name": "Subtarefa",
-    "hierarchyLevel": -1
-   }
-  ]
- },
- {
   "key": "EG0292",
   "name": "EG0292 - PREFEITURA DE BLUMENAU",
   "issueTypes": [
@@ -354,8 +318,8 @@
   ]
  },
  {
-  "key": "CREA",
-  "name": "GESTÃO - CREA ",
+  "key": "EG291",
+  "name": "EG0291 - Arroio Feijó",
   "issueTypes": [
    {
     "name": "Fluxo de trabalho",
@@ -368,6 +332,42 @@
    {
     "name": "Subtarefa",
     "hierarchyLevel": -1
+   }
+  ]
+ },
+ {
+  "key": "G0120",
+  "name": "EG0120 - DAER",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   },
+   {
+    "name": "Epic",
+    "hierarchyLevel": 1
+   }
+  ]
+ },
+ {
+  "key": "G0280",
+  "name": "EG0280 - DMAE",
+  "issueTypes": [
+   {
+    "name": "Tarefa",
+    "hierarchyLevel": 0
+   },
+   {
+    "name": "Subtarefa",
+    "hierarchyLevel": -1
+   },
+   {
+    "name": "Epic",
+    "hierarchyLevel": 1
    }
   ]
  },

@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 21/10/2026 12:31** (`2026-10-21T12:31:05-03:00`)
+> **Última atualização do snapshot: 21/10/2026 14:35** (`2026-10-21T14:35:47-03:00`)
 
 ---
 
@@ -44,9 +44,12 @@ Visão acumulada (últimos 6 meses) — **todos os seis meses reconsultados ao v
 
 Mais a chamada `getVisibleJiraProjects`, resolvida com os 21 projetos visíveis.
 
+Meses congelados servidos pelo `__HISTORY__` embutido: **2026-07, 2026-08, 2026-09** (além de
+2026-04 a 2026-06, que já viajam no HTML-fonte do artifact).
+
 ## Como foi gerado
 
-Geração em 21/10/2026 12:31 BRT, com consulta ao vivo ao Jira. Foram executadas **12 chamadas**:
+Geração em 21/10/2026 14:35 BRT, com consulta ao vivo ao Jira. Foram executadas **12 chamadas**:
 `getVisibleJiraProjects` e 11 consultas JQL — as seis do mês corrente e as `planned` de mai, jun,
 jul, ago e set/2026. Os onze conjuntos foram buscados do zero, sem reaproveitar nada do
 `snapshot-data.js` já publicado.
@@ -57,56 +60,18 @@ anterior.
 
 ### Via de acesso ao Jira nesta rodada
 
-O conector **MCP Atlassian não subiu nesta sessão** (`CONNECT_TIMEOUT`) — mesma falha da rodada
-anterior. A consulta foi feita pela CLI local `Documents\Claude\jira-cli\jira_query.py`, que é o
-caminho alternativo documentado para exatamente este fim: mesmo Jira Cloud, mesma cláusula de
-tipo de issue, mesma projeção mínima de campos e mesmo formato de saída em `_snap/*.json` que o
-gerador consome. O token é lido pela própria CLI de `Documents\Claude\config\.env`, fora de
-qualquer repositório; nenhuma credencial passou pela sessão nem aparece em log. Nenhuma
-tentativa de login web em Jira, GitHub ou Vercel foi feita.
+O conector **MCP Atlassian respondeu normalmente nesta rodada** — as 12 chamadas foram feitas
+por ele, com projeção mínima de campos
+(`summary`, `status`, `project`, `duedate`, `resolutiondate`, `updated`), e não houve necessidade
+de recorrer à CLI local `Documents\Claude\jira-cli\jira_query.py`. Nenhuma credencial passou pela
+sessão nem aparece em log. Nenhuma tentativa de login web em Jira, GitHub ou Vercel foi feita.
 
 ### Nenhum indicador mudou nesta rodada
 
-Os onze conjuntos voltaram com as mesmas contagens da rodada anterior (21/10 10:29 BRT):
-
-| Conjunto | Ao vivo nesta rodada | Rodada anterior | Situação |
-|---|---:|---:|---|
-| `planned_2026-10` | 15 | 15 | idêntico |
-| `overdue_2026-10` | 0 | 0 | idêntico |
-| `lookahead_2026-10` | 33 | 33 | idêntico |
-| `sent_2026-10` | 6 | 6 | idêntico |
-| `resolved_2026-10` | 6 | 6 | idêntico |
-| `rework_2026-10` | 4 | 4 | idêntico |
-| `planned_2026-05` | 7 | 7 | idêntico |
-| `planned_2026-06` | 1 | 1 | idêntico |
-| `planned_2026-07` | 8 | 8 | idêntico |
-| `planned_2026-08` | 3 | 3 | idêntico |
-| `planned_2026-09` | 5 | 5 | idêntico |
-
-O bloco de dados gerado tem **73.594 bytes**, exatamente o mesmo tamanho do bloco da rodada
-anterior; o MD5 difere apenas porque o carimbo de geração — de comprimento fixo — mudou.
-A lista de projetos visíveis também foi reconsultada: **sem diferença** (mesmos 21 projetos,
-mesmas chaves, mesmos tipos de issue de nível 1).
-
-Os meses congelados em `__HISTORY__` — jul, ago e set/2026 — foram recalculados a partir dos
-conjuntos reconsultados: previstos/atraso/envios/retrabalho/lookahead de 8/0/11/5/26, 3/0/6/3/39
-e 5/1/8/3/38, **idênticos** aos do snapshot anterior.
-
-### Nota sobre a cláusula de tipo de issue
-
-As consultas desta rodada usam `issuetype in ("Epic","Fluxo de trabalho")`, exatamente como o
-artifact monta a JQL a partir dos tipos de nível 1 dos projetos visíveis. A forma reduzida
-`issuetype=Epic` **não** serve: ela deixa de fora os projetos cujo tipo de nível 1 se chama
-`Fluxo de trabalho`. A cláusula completa está em uso em todos os conjuntos desta rodada.
-
-### Epics com due date em out/2026 (15)
-
-Distribuição por projeto: EG0280 (DMAE) 5, EG0286 (DNIT/AC) 4, EG0240 (GOITÁ/COMPESA) 3,
-EG0274 (DNIT) 2, EG0291 (Arroio Feijó) 1.
-
-Seis epics entraram em "Enviado - Aguardando Análise" ao longo de out/2026 e seis foram
-concluídos no mês; quatro deles voltaram de "Enviado - Aguardando Análise" para revisão, o que
-os caracteriza como retrabalho. Nenhum epic está vencido sem conclusão.
+Os onze conjuntos voltaram **byte a byte idênticos** aos da rodada anterior (21/10 15:30 BRT),
+incluindo as datas e os status de cada epic. A única diferença na coleta foi a ordem de retorno
+da lista de projetos em `getVisibleJiraProjects`, que o gerador normaliza por nome — o conjunto
+de 21 projetos e seus tipos de issue permanecem os mesmos.
 
 O olhar para frente registra 33 epics com due date em nov e dez/2026 — mesma contagem das
 rodadas anteriores.
@@ -114,19 +79,19 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-21T12:31:05-03:00`. Ocorrência única no arquivo.
+  `2026-10-21T14:35:47-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 12:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 14:35,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo.
 - Bloco de dados posicionado **antes** do script principal do artifact, de modo que a
   sobrescrita de `callMcpTool` já esteja em vigor quando a página inicializa — confirmado
-  nesta rodada (bloco em offset 93.078; próximo `<script>` em 95.519).
+  nesta rodada (bloco no byte 22.522; próximo `<script>` no byte 96.116).
 - `__HISTORY__` exposto por accessor com merge defensivo, para que a atribuição direta feita
   pelo script do artifact não apague os meses congelados.
-- O bloco de dados foi executado em Node (v22.23.2) nesta rodada: carrega sem erro, expõe os 21
+- O bloco de dados foi executado em Node (v24) nesta rodada: carrega sem erro, expõe os 21
   projetos e os 11 conjuntos, e `getVisibleJiraProjects` resolve para a lista esperada.
 - `_artifact_src.html`, base sobre a qual o snapshot é reinjetado: 87.509 bytes,
   MD5 `6a2b6462a4efbec1890af4494a7f0b74` — inalterado em relação à última rodada em que foi
@@ -156,8 +121,8 @@ cabeçalho do bloco de dados).
 
 ## Publicação
 
-- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `622a4d981b8a07f69a0b863742818766`).
+- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `69e7f7739a3872b347fd4acaee51fc61`).
 - `snapshot-data.js` — cópia de referência do bloco de dados injetado, não carregada pela
-  página (73.594 bytes, MD5 `e54d8454804dcb36f152a01da7718524`).
+  página (73.594 bytes, MD5 `63fd0b8fc47c534aac120a759a9a4bb9`).
 - Commit e push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler, a cada 30 minutos.
 - Deploy automático na Vercel a partir do push.
