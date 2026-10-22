@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 22/10/2026 16:31** (`2026-10-22T16:31:25-03:00`)
+> **Última atualização do snapshot: 22/10/2026 17:30** (`2026-10-22T17:30:50-03:00`)
 
 ---
 
@@ -49,7 +49,7 @@ Meses congelados servidos pelo `__HISTORY__` embutido: **2026-07, 2026-08, 2026-
 
 ## Como foi gerado
 
-Geração em 22/10/2026 16:31 BRT, em execução agendada e autônoma, com consulta ao vivo ao Jira.
+Geração em 22/10/2026 17:30 BRT, em execução agendada e autônoma, com consulta ao vivo ao Jira.
 Foram feitas **7 chamadas bem-sucedidas** ao conector MCP Atlassian: `getVisibleJiraProjects` e as
 seis consultas JQL do mês corrente — `planned`, `overdue`, `lookahead`, `sent`, `resolved` e
 `rework` —, cada uma em uma única janela de mês cheio, sem paginação (`hasNextPage` falso em
@@ -62,7 +62,7 @@ rebuscá-los só poderia introduzir divergência em relação ao fechamento.
 A montagem usou o gerador versionado na raiz, `_gen_snapshot.py`, que parte do
 `_artifact_src.html` limpo, insere o carimbo no início do `<head>`, injeta o bloco `<script>` do
 snapshot **antes** do script principal do artifact e acrescenta o banner como último elemento do
-`<body>`. A procedência desta rodada está registrada em `_snap/_data1022e.py`. O
+`<body>`. A procedência desta rodada está registrada em `_snap/_data1022f.py`. O
 `snapshot-data.js` publicado ao lado é a cópia de referência do mesmo bloco, e foi conferido como
 idêntico ao embutido no `index.html`.
 
@@ -93,7 +93,7 @@ projetos e `a38b4d9c77584b034fe2d7c2d0e61cd9` para o `lookahead`, idênticos dos
 ### Nenhum indicador mudou nesta rodada
 
 Os sete conjuntos reconsultados voltaram com a **mesma composição** da rodada anterior (22/10
-15:33 BRT). A conferência foi feita por MD5 canônico (`jq -S -c 'sort_by(.key)'`) dos JSONs
+16:31 BRT). A conferência foi feita por MD5 canônico (`jq -S -c 'sort_by(.key)'`) dos JSONs
 mínimos recém-extraídos contra os já gravados em `_snap/`, o que neutraliza diferenças de ordem
 de retorno do Jira — relevante porque as JQLs de `sent`, `resolved` e `rework` que o artifact
 monta não têm `ORDER BY`. Os seis conjuntos do mês e a lista de 21 projetos visíveis bateram
@@ -118,15 +118,15 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-22T16:31:25-03:00`. Ocorrência única no arquivo.
+  `2026-10-22T17:30:50-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 22/10/2026 16:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 22/10/2026 17:30,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo.
-- Bloco de dados posicionado **antes** do script principal do artifact (offsets 93.078 e
-  95.528), de modo que a sobrescrita de `callMcpTool` já esteja em vigor quando a página
+- Bloco de dados posicionado **antes** do script principal do artifact (bloco em 22.444–95.519,
+  script principal do artifact começando exatamente em 95.519), de modo que a sobrescrita de `callMcpTool` já esteja em vigor quando a página
   inicializa — confirmado nesta rodada por comparação de posição no arquivo.
 - `__HISTORY__` exposto por accessor com merge defensivo. Testado nesta rodada: após uma
   atribuição direta `window.__HISTORY__ = {...}` tentando sobrescrever 2026-09, como a que o
@@ -168,8 +168,8 @@ cabeçalho do bloco de dados).
 
 ## Publicação
 
-- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `3bd1be5cc24d2c96d3d71614ed3b3216`).
+- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `db0fe156aaee218a00e7f35269435887`).
 - `snapshot-data.js` — cópia de referência do bloco de dados injetado, não carregada pela
-  página (73.594 bytes, MD5 `ba7a1e09a74f519c849cb496d840ceb3`).
+  página (73.594 bytes, MD5 `be7c95c0f73503250295b916d1910c22`).
 - Commit e push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler, a cada 30 minutos.
 - Deploy automático na Vercel a partir do push.
