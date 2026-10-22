@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 21/10/2026 16:34** (`2026-10-21T16:34:16-03:00`)
+> **Última atualização do snapshot: 21/10/2026 17:33** (`2026-10-21T17:33:49-03:00`)
 
 ---
 
@@ -18,7 +18,7 @@ Fonte: Jira Cloud `projetos-engeplus` (`ead785de-33f3-4746-9bdb-a2a58cf5213b`)
 Tipos de issue considerados como Epic: `Epic`, `Fluxo de trabalho` (derivados dos tipos de nível 1 dos projetos visíveis)
 Projetos visíveis mapeados: **21**
 
-### Consultas resolvidas (11 consultas JQL + lista de projetos)
+### Consultas resolvidas (11 conjuntos + lista de projetos)
 
 Mês corrente — **out/2026**:
 
@@ -49,30 +49,40 @@ Meses congelados servidos pelo `__HISTORY__` embutido: **2026-07, 2026-08, 2026-
 
 ## Como foi gerado
 
-Geração em 21/10/2026 16:34 BRT, com consulta ao vivo ao Jira. Foram executadas **11 chamadas**
-ao conector: `getVisibleJiraProjects` e 10 consultas JQL — as seis do mês corrente e as `planned`
-de mai, jun e set/2026, mais uma consulta única cobrindo jul+ago/2026 (dividida por due date na
-etapa de montagem). Os onze conjuntos foram buscados do zero, sem reaproveitar nada do
-`snapshot-data.js` já publicado.
+Geração em 21/10/2026 17:33 BRT, com consulta ao vivo ao Jira. Foram feitas **6 chamadas** ao
+conector MCP Atlassian: `getVisibleJiraProjects` e 5 consultas JQL — uma consulta única cobrindo
+`duedate` de 01/05/2026 a 31/12/2026 (dividida por mês na montagem, servindo às seis `planned` e
+ao `lookahead`), mais `overdue`, `sent`, `resolved` e `rework` do mês corrente. Os onze conjuntos
+foram buscados do zero, sem reaproveitar nada do `snapshot-data.js` já publicado.
 
-O bloco de dados foi reinjetado no `index.html` anterior pelo gerador desta rodada
-(`_snap/_live1021r.py`), que substitui o bloco `<script>` do snapshot, reescreve o comentário de
-carimbo no `<head>` e reposiciona o banner no fim do `<body>`. O `snapshot-data.js` publicado ao
-lado é a cópia de referência do mesmo bloco.
+A montagem usou o gerador versionado `_gen_snapshot.py`, que parte do `_artifact_src.html`,
+escreve o comentário de carimbo no início do `<head>`, injeta o bloco `<script>` do snapshot
+**antes** do script principal do artifact e acrescenta o banner no fim do `<body>`. O
+`snapshot-data.js` publicado ao lado é a cópia de referência do mesmo bloco.
+
+### Filtro de tipo de issue
+
+A JQL usada é a **mesma que o artifact monta em tempo de execução**:
+`issuetype in ("Epic","Fluxo de trabalho")`, derivada dos tipos de nível 1 (`hierarchyLevel === 1`)
+dos projetos visíveis. O filtro simplificado `issuetype=Epic` **não** reproduz o relatório: os
+projetos EG0285, EG0286 e EG0291 nomeiam seu tipo de nível Epic como `Fluxo de trabalho` e ficariam
+de fora. Conferido nesta rodada: com `issuetype=Epic` o mês corrente cairia de 15 para 10 epics
+previstos, de 6 para 4 envios e de 6 para 4 concluídos.
 
 ### Via de acesso ao Jira nesta rodada
 
-O conector **MCP Atlassian respondeu normalmente nesta rodada** — as 11 chamadas foram feitas
-por ele, com projeção mínima de campos
-(`summary`, `status`, `project`, `duedate`, `resolutiondate`, `updated`), e não houve necessidade
-de recorrer à CLI local `Documents\Claude\jira-cli\jira_query.py`. Nenhuma credencial passou pela
-sessão nem aparece em log. Nenhuma tentativa de login web em Jira, GitHub ou Vercel foi feita.
+O conector **MCP Atlassian respondeu normalmente** — todas as chamadas foram feitas por ele, com
+projeção mínima de campos (`summary`, `status`, `project`, `duedate`, `resolutiondate`, `updated`),
+sem necessidade de recorrer à CLI local `Documents\Claude\jira-cli\jira_query.py`. Nenhuma
+credencial passou pela sessão nem aparece em log. Nenhuma tentativa de login web em Jira, GitHub
+ou Vercel foi feita.
 
 ### Nenhum indicador mudou nesta rodada
 
-Os onze conjuntos voltaram com a **mesma composição** da rodada anterior (21/10 14:35 BRT) —
-mesmas chaves de epic em cada conjunto, mesmas datas e mesmos status. O conjunto de 21 projetos
-visíveis e seus tipos de issue também permanecem os mesmos.
+Os onze conjuntos voltaram com a **mesma composição** da rodada anterior (21/10 16:34 BRT) —
+mesmas chaves de epic em cada conjunto, mesmas datas e mesmos status; a comparação chave a chave
+contra a versão em `HEAD` não acusou inclusão nem remoção em nenhum dos seis `planned`. O conjunto
+de 21 projetos visíveis e seus tipos de issue também permanecem os mesmos.
 
 O olhar para frente registra 33 epics com due date em nov e dez/2026 — mesma contagem das
 rodadas anteriores.
@@ -80,21 +90,22 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-21T16:34:16-03:00`. Ocorrência única no arquivo.
+  `2026-10-21T17:33:49-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
-  byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.314 bytes) — conferido
+  byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 16:34,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 17:33,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo.
 - Bloco de dados posicionado **antes** do script principal do artifact, de modo que a
   sobrescrita de `callMcpTool` já esteja em vigor quando a página inicializa — confirmado
-  nesta rodada (bloco no byte 22.522; próximo `<script>` no byte 95.836).
+  nesta rodada (bloco no byte 22.522; próximo `<script>` no byte 96.116).
 - `__HISTORY__` exposto por accessor com merge defensivo, para que a atribuição direta feita
   pelo script do artifact não apague os meses congelados.
 - O bloco de dados passou por `node --check` (v22) nesta rodada: sintaxe válida, com os 21
-  projetos e os 11 conjuntos presentes no `SNAP`/`DATASETS` lidos de volta do arquivo gerado.
-- `_artifact_src.html`, base histórica do snapshot: 87.509 bytes,
+  projetos, os 3 meses congelados e os 11 conjuntos presentes no `SNAP`/`DATASETS` lidos de
+  volta do arquivo gerado.
+- `_artifact_src.html`, base do snapshot: 87.509 bytes,
   MD5 `6a2b6462a4efbec1890af4494a7f0b74` — inalterado em relação à última rodada em que foi
   conferido contra o artifact ao vivo.
 
@@ -103,10 +114,9 @@ rodadas anteriores.
 - **O HTML do Live Artifact não pôde ser reconferido nesta rodada.** A pasta
   `Documents\Claude\Artifacts` é uma área protegida para sessões Cowork e não é legível nem
   pelo shell da sessão nem pelas ferramentas de arquivo. O snapshot foi gerado sobre o
-  `index.html` da rodada anterior, cuja estrutura de layout vem do `_artifact_src.html`
-  versionado (hash acima, igual ao da última conferência bem-sucedida). Se o artifact ao vivo
-  tiver sido editado desde então, esta página não refletirá a alteração de layout — apenas os
-  dados são novos.
+  `_artifact_src.html` versionado (hash acima, igual ao da última conferência bem-sucedida).
+  Se o artifact ao vivo tiver sido editado desde então, esta página não refletirá a alteração
+  de layout — apenas os dados são novos.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é o mesmo das rodadas anteriores — a última verificada em Chromium headless sem
   erros de script — e a validação desta rodada foi feita em Node sobre o bloco de dados
@@ -117,14 +127,13 @@ rodadas anteriores.
 Os JSONs embutidos contêm apenas `key`, `summary`, nome e categoria do status, chave e nome do
 projeto, due date, resolution date e updated. **Não há** `accountId`, e-mail, avatar, descrição
 em ADF nem qualquer campo de pessoa. A conferência desta rodada no `index.html` gerado não
-encontrou nenhuma ocorrência de `avatarUrls`, `emailAddress` ou de endereço de e-mail
-corporativo (a única ocorrência da string `accountId` é a linha de comentário do próprio
-cabeçalho do bloco de dados).
+encontrou nenhuma ocorrência de `avatarUrls`, `emailAddress`, `iconUrl` ou `self` (a única
+ocorrência da string `accountId` é a linha de comentário do próprio cabeçalho do bloco de dados).
 
 ## Publicação
 
-- `index.html` — página estática, auto-contida (161.100 bytes, MD5 `816f43fe47d00741c7b5f1504c8c086c`).
+- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `24666af19e566296cdd992d5440cf4cb`).
 - `snapshot-data.js` — cópia de referência do bloco de dados injetado, não carregada pela
-  página (73.314 bytes, MD5 `2ffd524e7120adc00d7a1cef156b0255`).
+  página (73.594 bytes, MD5 `7669996a23f9193c33c56b1b71254bd6`).
 - Commit e push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler, a cada 30 minutos.
 - Deploy automático na Vercel a partir do push.
