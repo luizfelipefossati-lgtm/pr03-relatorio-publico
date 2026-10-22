@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 22/10/2026 13:02** (`2026-10-22T13:02:03-03:00`)
+> **Última atualização do snapshot: 22/10/2026 14:53** (`2026-10-22T14:53:27-03:00`)
 
 ---
 
@@ -49,10 +49,10 @@ Meses congelados servidos pelo `__HISTORY__` embutido: **2026-07, 2026-08, 2026-
 
 ## Como foi gerado
 
-Geração em 22/10/2026 13:02 BRT, com consulta ao vivo ao Jira. Foram feitas **8 chamadas
-bem-sucedidas** ao conector MCP Atlassian: `getVisibleJiraProjects` e sete consultas JQL —
-`planned`, `overdue`, `lookahead`, `resolved` e `rework` do mês corrente, mais `sent` em duas
-janelas quinzenais (ver ressalva abaixo).
+Geração em 22/10/2026 14:53 BRT, com consulta ao vivo ao Jira. Foram feitas **7 chamadas
+bem-sucedidas** ao conector MCP Atlassian: `getVisibleJiraProjects` e as seis consultas JQL do
+mês corrente — `planned`, `overdue`, `lookahead`, `sent`, `resolved` e `rework` —, cada uma em
+uma única janela de mês cheio.
 
 Os conjuntos de 2026-07, 2026-08 e 2026-09, e os `planned` de mai e jun/2026, foram mantidos das
 rodadas de fechamento: são meses encerrados, servidos pelo `__HISTORY__` congelado, de modo que
@@ -61,9 +61,9 @@ rebuscá-los só poderia introduzir divergência em relação ao fechamento.
 A montagem usou o gerador versionado na raiz, `_gen_snapshot.py`, que parte do
 `_artifact_src.html` limpo, insere o carimbo no início do `<head>`, injeta o bloco `<script>` do
 snapshot **antes** do script principal do artifact e acrescenta o banner como último elemento do
-`<body>`. Os dados desta rodada estão em `_snap/_data1022b.py`, que grava os seis JSONs do mês
-corrente em `_snap/`. O `snapshot-data.js` publicado ao lado é a cópia de referência do mesmo
-bloco, e foi conferido como idêntico ao embutido no `index.html`.
+`<body>`. A procedência desta rodada está registrada em `_snap/_data1022c.py`. O
+`snapshot-data.js` publicado ao lado é a cópia de referência do mesmo bloco, e foi conferido como
+idêntico ao embutido no `index.html`.
 
 ### Filtro de tipo de issue
 
@@ -80,21 +80,20 @@ Todas as chamadas foram feitas pelo conector **MCP Atlassian**, com projeção m
 passou pela sessão nem aparece em log. Nenhuma tentativa de login web em Jira, GitHub ou Vercel
 foi feita.
 
-O conector esteve **instável nesta rodada**: várias chamadas estouraram o limite de 180 s e duas
-voltaram com HTTP 502 do gateway, exigindo repetição. A consulta `sent` do mês cheio não
-completou em nenhuma tentativa e foi dividida em duas janelas — `("2026-10-01","2026-10-16")`,
-com 6 resultados, e `("2026-10-16","2026-10-31")`, vazia —, cuja união é o conjunto publicado.
-Como a segunda janela não teve nenhuma transição, o `rework` foi apurado apenas sobre a primeira,
-sem perda de cobertura.
+O conector seguiu **instável nesta rodada**: oito tentativas falharam antes de completar as sete
+consultas — três com HTTP 502 do gateway e quatro estourando o limite de 180 s, com nova 502
+intercalada. Todas as consultas acabaram completando na janela de mês cheio após nova tentativa,
+sem necessidade de dividir período, e o backoff aplicado entre as repetições foi de 45 a 70
+segundos.
 
 ### Nenhum indicador mudou nesta rodada
 
-Os onze conjuntos voltaram com a **mesma composição** da rodada anterior (22/10 09:35 BRT) —
-mesmas chaves de epic em cada conjunto, mesmas datas e mesmos status. A comparação chave a chave
-contra a versão em `HEAD` não acusou inclusão, remoção nem alteração de campo em nenhum conjunto;
-`_snap/resolved_2026-10.json` e `_snap/lookahead_2026-10.json` aparecem como modificados apenas
-por ordenação e serialização. O conjunto de 21 projetos visíveis e seus tipos de issue também
-permanecem os mesmos.
+Os sete conjuntos reconsultados voltaram com a **mesma composição** da rodada anterior (22/10
+13:02 BRT). A conferência foi feita por MD5 dos JSONs mínimos recém-extraídos contra os já
+gravados em `_snap/`: `planned`, `overdue`, `lookahead`, `sent` e `rework` bateram byte a byte, e
+`resolved` traz o mesmo conjunto de seis epics apenas em outra ordem de retorno do Jira. A lista
+de 21 projetos visíveis e seus tipos de issue também permanece a mesma. Como nada mudou, **nenhum
+JSON em `_snap/` foi reescrito**; o `index.html` foi regerado apenas para renovar o carimbo.
 
 O olhar para frente registra 33 epics com due date em nov e dez/2026 — mesma contagem das
 rodadas anteriores.
@@ -102,23 +101,24 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-22T13:02:03-03:00`. Ocorrência única no arquivo.
+  `2026-10-22T14:53:27-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 22/10/2026 13:02,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 22/10/2026 14:53,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo.
 - Bloco de dados posicionado **antes** do script principal do artifact, de modo que a
   sobrescrita de `callMcpTool` já esteja em vigor quando a página inicializa — confirmado
-  nesta rodada (bloco no byte 93.078; script principal no byte 95.528).
+  nesta rodada.
 - `__HISTORY__` exposto por accessor com merge defensivo, para que a atribuição direta feita
   pelo script do artifact não apague os meses congelados.
 - O bloco de dados passou por `node --check` (v22) e foi **executado** em Node nesta rodada:
-  quatro das JQLs que o artifact monta em tempo de execução para out/2026 — `planned`,
-  `lookahead`, `sent` e `rework` — foram submetidas ao resolvedor embutido e devolveram,
-  respectivamente, 15, 33, 6 e 4 registros, e `getVisibleJiraProjects` devolveu os 21 projetos
-  — ou seja, nenhum padrão testado ficou sem correspondência.
+  as seis JQLs que o artifact monta em tempo de execução para out/2026 — `planned`, `overdue`,
+  `lookahead`, `sent`, `resolved` e `rework` — foram submetidas ao resolvedor embutido e
+  devolveram, respectivamente, 15, 0, 33, 6, 6 e 4 registros; `getVisibleJiraProjects` devolveu
+  os 21 projetos, e `__HISTORY__` expôs 2026-07, 2026-08 e 2026-09. Nenhum padrão testado ficou
+  sem correspondência.
 - Removidos do `index.html` o comentário, o bloco de dados e o banner, o restante é **idêntico
   byte a byte** ao `_artifact_src.html` — conferido nesta rodada.
 - `_artifact_src.html`, base do snapshot: 87.509 bytes,
@@ -149,8 +149,8 @@ cabeçalho do bloco de dados).
 
 ## Publicação
 
-- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `edc8b95a04c0d235f5de3950c248424d`).
+- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `ac4604b4962d29e555426c48b0713ff2`).
 - `snapshot-data.js` — cópia de referência do bloco de dados injetado, não carregada pela
-  página (73.594 bytes, MD5 `080237a10abf41856446b9b0d22982af`).
+  página (73.594 bytes, MD5 `efd7c354b95bdfb91d4813fdbe19d349`).
 - Commit e push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler, a cada 30 minutos.
 - Deploy automático na Vercel a partir do push.
