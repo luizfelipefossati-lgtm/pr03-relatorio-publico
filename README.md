@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 21/10/2026 17:33** (`2026-10-21T17:33:49-03:00`)
+> **Última atualização do snapshot: 22/10/2026 08:34** (`2026-10-22T08:34:15-03:00`)
 
 ---
 
@@ -49,16 +49,25 @@ Meses congelados servidos pelo `__HISTORY__` embutido: **2026-07, 2026-08, 2026-
 
 ## Como foi gerado
 
-Geração em 21/10/2026 17:33 BRT, com consulta ao vivo ao Jira. Foram feitas **6 chamadas** ao
-conector MCP Atlassian: `getVisibleJiraProjects` e 5 consultas JQL — uma consulta única cobrindo
-`duedate` de 01/05/2026 a 31/12/2026 (dividida por mês na montagem, servindo às seis `planned` e
-ao `lookahead`), mais `overdue`, `sent`, `resolved` e `rework` do mês corrente. Os onze conjuntos
-foram buscados do zero, sem reaproveitar nada do `snapshot-data.js` já publicado.
+Geração em 22/10/2026 08:34 BRT, com consulta ao vivo ao Jira. Foram feitas **10 chamadas** ao
+conector MCP Atlassian: `getVisibleJiraProjects` e 9 consultas JQL — `planned`, `overdue`,
+`lookahead`, `sent`, `resolved` e `rework` do mês corrente, mais uma consulta cobrindo
+`duedate` de 01/05/2026 a 30/06/2026 (dividida por mês na montagem) e duas sondagens de
+contagem para mai/2026 e jun/2026.
 
-A montagem usou o gerador versionado `_gen_snapshot.py`, que parte do `_artifact_src.html`,
-escreve o comentário de carimbo no início do `<head>`, injeta o bloco `<script>` do snapshot
-**antes** do script principal do artifact e acrescenta o banner no fim do `<body>`. O
-`snapshot-data.js` publicado ao lado é a cópia de referência do mesmo bloco.
+Os conjuntos `planned_2026-07`, `planned_2026-08` e `planned_2026-09` foram mantidos da rodada
+anterior: são meses encerrados, servidos pelo `__HISTORY__` congelado, de modo que rebuscá-los
+só poderia introduzir divergência em relação ao fechamento. A lista de projetos e o conjunto
+`lookahead_2026-10` foram rebuscados e conferidos por hash contra a rodada anterior — idênticos,
+e por isso reaproveitados byte a byte. Os demais nove conjuntos foram buscados do zero.
+
+A montagem usou o gerador da rodada `_snap/_live1022a.py`, que reescreve o carimbo no início do
+`<head>`, substitui o bloco `<script>` do snapshot — que vem **antes** do script principal do
+artifact — e regrava o banner como último elemento do `<body>`. O `snapshot-data.js` publicado
+ao lado é a cópia de referência do mesmo bloco, e foi conferido como idêntico ao embutido no
+`index.html`. O HTML-fonte do Live Artifact fica em local protegido e não é legível pela sessão
+Cowork; a base usada é o `index.html` já publicado, cuja estrutura corresponde ao artifact
+(sem alterações no artifact desde 27/07/2026).
 
 ### Filtro de tipo de issue
 
@@ -90,12 +99,12 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-21T17:33:49-03:00`. Ocorrência única no arquivo.
+  `2026-10-22T08:34:15-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 21/10/2026 17:33,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 22/10/2026 08:34,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo.
 - Bloco de dados posicionado **antes** do script principal do artifact, de modo que a
   sobrescrita de `callMcpTool` já esteja em vigor quando a página inicializa — confirmado
