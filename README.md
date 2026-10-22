@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 22/10/2026 17:30** (`2026-10-22T17:30:50-03:00`)
+> **Última atualização do snapshot: 22/10/2026 18:31** (`2026-10-22T18:31:33-03:00`)
 
 ---
 
@@ -49,7 +49,7 @@ Meses congelados servidos pelo `__HISTORY__` embutido: **2026-07, 2026-08, 2026-
 
 ## Como foi gerado
 
-Geração em 22/10/2026 17:30 BRT, em execução agendada e autônoma, com consulta ao vivo ao Jira.
+Geração em 22/10/2026 18:31 BRT, em execução agendada e autônoma, com consulta ao vivo ao Jira.
 Foram feitas **7 chamadas bem-sucedidas** ao conector MCP Atlassian: `getVisibleJiraProjects` e as
 seis consultas JQL do mês corrente — `planned`, `overdue`, `lookahead`, `sent`, `resolved` e
 `rework` —, cada uma em uma única janela de mês cheio, sem paginação (`hasNextPage` falso em
@@ -118,12 +118,12 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-22T17:30:50-03:00`. Ocorrência única no arquivo.
+  `2026-10-22T18:31:33-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 22/10/2026 17:30,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 22/10/2026 18:31,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo.
 - Bloco de dados posicionado **antes** do script principal do artifact (bloco em 22.444–95.519,
   script principal do artifact começando exatamente em 95.519), de modo que a sobrescrita de `callMcpTool` já esteja em vigor quando a página
@@ -168,8 +168,8 @@ cabeçalho do bloco de dados).
 
 ## Publicação
 
-- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `db0fe156aaee218a00e7f35269435887`).
+- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `0938c027efe589395b73be2d0e74a020`).
 - `snapshot-data.js` — cópia de referência do bloco de dados injetado, não carregada pela
-  página (73.594 bytes, MD5 `be7c95c0f73503250295b916d1910c22`).
+  página (73.594 bytes, MD5 `9855ecf827b7aeb39da95408b7fc14f2`).
 - Commit e push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler, a cada 30 minutos.
 - Deploy automático na Vercel a partir do push.
