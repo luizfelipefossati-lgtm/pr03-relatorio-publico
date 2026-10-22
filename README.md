@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 22/10/2026 08:34** (`2026-10-22T08:34:15-03:00`)
+> **Última atualização do snapshot: 22/10/2026 09:35** (`2026-10-22T09:35:08-03:00`)
 
 ---
 
@@ -49,15 +49,15 @@ Meses congelados servidos pelo `__HISTORY__` embutido: **2026-07, 2026-08, 2026-
 
 ## Como foi gerado
 
-Geração em 22/10/2026 08:34 BRT, com consulta ao vivo ao Jira. Foram feitas **10 chamadas** ao
-conector MCP Atlassian: `getVisibleJiraProjects` e 9 consultas JQL — `planned`, `overdue`,
-`lookahead`, `sent`, `resolved` e `rework` do mês corrente, mais uma consulta cobrindo
-`duedate` de 01/05/2026 a 30/06/2026 (dividida por mês na montagem) e duas sondagens de
-contagem para mai/2026 e jun/2026.
+Geração em 22/10/2026 09:35 BRT, com consulta ao vivo ao Jira. Foram feitas **12 chamadas** ao
+conector MCP Atlassian: `getVisibleJiraProjects` e 11 consultas JQL — `planned`, `overdue`,
+`lookahead`, `sent`, `resolved` e `rework` do mês corrente, mais uma consulta `planned` por mês
+da visão acumulada (mai, jun, jul, ago e set/2026).
 
-Os conjuntos `planned_2026-07`, `planned_2026-08` e `planned_2026-09` foram mantidos da rodada
-anterior: são meses encerrados, servidos pelo `__HISTORY__` congelado, de modo que rebuscá-los
-só poderia introduzir divergência em relação ao fechamento. A lista de projetos e o conjunto
+Os conjuntos `overdue`, `lookahead`, `sent`, `resolved` e `rework` de 2026-07, 2026-08 e
+2026-09 foram mantidos das rodadas de fechamento: são meses encerrados, servidos pelo
+`__HISTORY__` congelado, de modo que rebuscá-los só poderia introduzir divergência em relação
+ao fechamento. A lista de projetos e o conjunto
 `lookahead_2026-10` foram rebuscados e conferidos por hash contra a rodada anterior — idênticos,
 e por isso reaproveitados byte a byte. Os demais nove conjuntos foram buscados do zero.
 
@@ -99,12 +99,12 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-22T08:34:15-03:00`. Ocorrência única no arquivo.
+  `2026-10-22T09:35:08-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 22/10/2026 08:34,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 22/10/2026 09:35,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo.
 - Bloco de dados posicionado **antes** do script principal do artifact, de modo que a
   sobrescrita de `callMcpTool` já esteja em vigor quando a página inicializa — confirmado
