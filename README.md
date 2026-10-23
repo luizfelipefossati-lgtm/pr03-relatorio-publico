@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 23/10/2026 15:31** (`2026-10-23T15:31:16-03:00`)
+> **Última atualização do snapshot: 23/10/2026 16:31** (`2026-10-23T16:31:04-03:00`)
 
 ---
 
@@ -41,7 +41,7 @@ ao vivo nesta rodada, como reconferência:
 | `planned_2026-07` | 8 | reconsultado ao vivo (idêntico ao congelado) |
 | `planned_2026-08` | 3 | reconsultado ao vivo (idêntico ao congelado) |
 | `planned_2026-09` | 5 | reconsultado ao vivo (idêntico ao congelado) |
-| `planned_2026-10` | 15 | consultado ao vivo |
+| `planned_2026-10` | 15 | consultado ao vivo — **dois registros mudaram** (ver abaixo) |
 
 Mais a chamada `getVisibleJiraProjects`, resolvida com os 21 projetos visíveis.
 
@@ -50,7 +50,7 @@ Meses congelados servidos pelo `__HISTORY__` embutido: **2026-07, 2026-08, 2026-
 
 ## Como foi gerado
 
-Geração em 23/10/2026 15:31 BRT (18:31 UTC), em execução agendada e autônoma, com consulta ao
+Geração em 23/10/2026 16:31 BRT (19:31 UTC), em execução agendada e autônoma, com consulta ao
 vivo ao Jira. Foram feitas **12 chamadas bem-sucedidas** ao conector MCP Atlassian:
 `getVisibleJiraProjects`, as seis consultas JQL do mês corrente — `planned`, `overdue`,
 `lookahead`, `sent`, `resolved` e `rework` — e as cinco consultas `planned` da visão acumulada
@@ -65,7 +65,7 @@ fechamento.
 A montagem usou o gerador versionado na raiz, `_gen_snapshot.py`, que parte do
 `_artifact_src.html` limpo, insere o carimbo no início do `<head>`, injeta o bloco `<script>` do
 snapshot **antes** do script principal do artifact e acrescenta o banner como último elemento do
-`<body>`. A procedência desta rodada está registrada em `_snap/_data1023f.py`. O
+`<body>`. A procedência desta rodada está registrada em `_snap/_data1023g.py`. O
 `snapshot-data.js` publicado ao lado é a cópia de referência do mesmo bloco, e foi conferido como
 idêntico ao embutido no `index.html`.
 
@@ -94,52 +94,61 @@ Duas ressalvas de forma, sem efeito sobre os dados:
   como arquivo pelo próprio conector; os campos mínimos foram extraídos desse arquivo e
   conferidos por MD5 canônico contra o `_projects_min.json` em uso — `cf7b59de6bf68fc6489470cf9018bd6e`
   dos dois lados.
-- A consulta `lookahead` foi pedida nesta rodada com a **projeção completa** de seis campos
-  (diferentemente da rodada anterior, que usou projeção reduzida). A resposta também excedeu o
-  limite e veio como arquivo; os 33 registros foram extraídos dele na mesma forma aninhada usada
-  em `_snap/` e conferidos por **MD5 canônico** — `a38b4d9c77584b034fe2d7c2d0e61cd9` dos dois
-  lados. O `lookahead` passa assim a ser conferido registro a registro, e não só por chave.
-- As cinco `planned` da visão acumulada continuam executadas com projeção reduzida (`duedate`)
-  para não estourar o limite; a conferência desses conjuntos é por **comparação do conjunto de
-  chaves** (7, 1, 8, 3 e 5). Como os conjuntos do mês corrente foram conferidos **campo a campo**
-  (chave, projeto, due date, status, categoria, resolution date, updated e summary), a
-  verificação por chaves é suficiente para esses meses encerrados, servidos pelo `__HISTORY__`
-  congelado.
+- A consulta `lookahead` foi novamente pedida com a **projeção completa** de seis campos. A
+  resposta excedeu o limite e veio como arquivo; os 33 registros foram extraídos dele na mesma
+  forma aninhada usada em `_snap/` e conferidos por **MD5 canônico** —
+  `a38b4d9c77584b034fe2d7c2d0e61cd9` dos dois lados, registro a registro.
+- Nesta rodada as cinco `planned` da visão acumulada também foram pedidas com **projeção
+  completa** (e não reduzida, como em rodadas anteriores), de modo que a conferência desses
+  cinco meses encerrados passou a ser **campo a campo**, e não apenas por conjunto de chaves.
+  Todos os 24 registros (7 + 1 + 8 + 3 + 5) bateram, inclusive na ordem de retorno.
 
-### Nenhum indicador mudou nesta rodada
+### Dois registros mudaram nesta rodada
 
-Os doze conjuntos reconsultados voltaram com a **mesma composição** da rodada anterior (23/10
-14:31 BRT) — a oitava rodada seguida sem nenhuma mudança de dado, tanto no mês corrente quanto nos cinco `planned` da visão acumulada. Além da
-comparação campo a campo do mês corrente, a conferência foi feita por MD5 canônico
-(`jq -S -c 'sort_by(.key)'`) contra os JSONs já gravados em `_snap/`, o que neutraliza diferenças
-de ordem de retorno do Jira — relevante porque as JQLs de `sent`, `resolved` e `rework` que o
-artifact monta não têm `ORDER BY`. Todos os conjuntos e a lista de 21 projetos visíveis bateram
-integralmente:
+Depois de **oito rodadas seguidas sem nenhuma alteração**, o `planned` do mês corrente mudou. Duas
+epics do projeto **EG0240 — GOITÁ/ COMPESA** tiveram o due date adiado hoje, por volta das
+16:10 BRT, pouco antes desta geração:
 
-| Conjunto | MD5 canônico |
-|---|---|
-| `planned_2026-10` | `beb20fe094f4f249b43b20e9becc072f` |
-| `overdue_2026-10` | `58e0494c51d30eb3494f7c9198986bb9` |
-| `lookahead_2026-10` | `a38b4d9c77584b034fe2d7c2d0e61cd9` |
-| `sent_2026-10` | `1f995242d71713c8c893953b6abdacb5` |
-| `resolved_2026-10` | `de830431136ac892018b47b0219897c3` |
-| `rework_2026-10` | `92ac5a1b9b202bf88b9a210c5e83dbcd` |
-| `planned_2026-05` | `7b561eb1414d581166c3ffb820fa6c81` |
-| `planned_2026-06` | `b483385522e7aba4bff7eaac7c70c70b` |
-| `planned_2026-07` | `89c430d7301c007c96e90c518882ae87` |
-| `planned_2026-08` | `4e49e617a3b2a5abc00c9a1b5f858fa6` |
-| `planned_2026-09` | `1b5fac7dd7a83479c00b2ef40f75e97c` |
-| `_projects_min` | `cf7b59de6bf68fc6489470cf9018bd6e` |
+| Chave | Resumo | Due date anterior | Due date atual |
+|---|---|---|---|
+| `EG0240-43` | TOMO IV - PROJETO DE INSTRUMENTAÇÃO | 23/10/2026 | **26/10/2026** |
+| `EG0240-4` | TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE) | 23/10/2026 | **26/10/2026** |
 
-Como nada mudou, **nenhum JSON em `_snap/` foi reescrito**; o `index.html` foi regerado apenas
-para renovar o carimbo.
+Ambas seguem em **Em Revisão** (categoria `indeterminate`), sem resolution date. O conjunto de 15
+chaves de `planned_2026-10` **não mudou** — mudaram apenas o `duedate` e o `updated` desses dois
+registros, e a ordem de retorno dentro do bloco EG0240 (as três epics do projeto passam a
+compartilhar o mesmo due date, 26/10). Com isso as três epics de EG0240 em outubro vencem agora
+no dia 26, e nenhuma delas conta como atrasada na data desta geração.
 
-Uma observação de método desta rodada: o `resolved` do mês corrente é consultado sem `ORDER BY`,
-e o Jira devolveu os **mesmos seis registros em ordem diferente** da gravada em `_snap/`. A
-conferência campo a campo por posição acusou as seis linhas; refeita por conjunto, deu
-igualdade exata (mesmo MD5 canônico `de830431136ac892018b47b0219897c3`). A ordem não é
-carregada pelo relatório: o gerador funde `sent` e `resolved` em um mapa por chave e ordena os
-detalhes pelo sinalizador de retrabalho. Por isso o arquivo foi mantido como estava.
+Os demais dez conjuntos e a lista de 21 projetos visíveis voltaram **idênticos** aos gravados. A
+conferência foi feita por MD5 canônico (`jq -S -c 'sort_by(.key)'`) contra os JSONs em `_snap/`, o
+que neutraliza diferenças de ordem de retorno do Jira — relevante porque as JQLs de `sent`,
+`resolved` e `rework` que o artifact monta não têm `ORDER BY`:
+
+| Conjunto | MD5 canônico | Nesta rodada |
+|---|---|---|
+| `planned_2026-10` | `3fe8384df0f1b8cd9245df2901c72ef6` | **reescrito** (era `beb20fe094f4f249b43b20e9becc072f`) |
+| `overdue_2026-10` | `58e0494c51d30eb3494f7c9198986bb9` | inalterado |
+| `lookahead_2026-10` | `a38b4d9c77584b034fe2d7c2d0e61cd9` | inalterado |
+| `sent_2026-10` | `1f995242d71713c8c893953b6abdacb5` | inalterado |
+| `resolved_2026-10` | `de830431136ac892018b47b0219897c3` | inalterado |
+| `rework_2026-10` | `92ac5a1b9b202bf88b9a210c5e83dbcd` | inalterado |
+| `planned_2026-05` | `7b561eb1414d581166c3ffb820fa6c81` | inalterado |
+| `planned_2026-06` | `b483385522e7aba4bff7eaac7c70c70b` | inalterado |
+| `planned_2026-07` | `89c430d7301c007c96e90c518882ae87` | inalterado |
+| `planned_2026-08` | `4e49e617a3b2a5abc00c9a1b5f858fa6` | inalterado |
+| `planned_2026-09` | `1b5fac7dd7a83479c00b2ef40f75e97c` | inalterado |
+| `_projects_min` | `cf7b59de6bf68fc6489470cf9018bd6e` | inalterado |
+
+Apenas `_snap/planned_2026-10.json` foi reescrito (a versão anterior ficou preservada em
+`_snap/planned_2026-10.json.bak-20261023`), e o `index.html`, o `snapshot-data.js` e este README
+foram regerados.
+
+Como nas rodadas anteriores, o `resolved` do mês corrente é consultado sem `ORDER BY` e o Jira
+devolveu os **mesmos seis registros em ordem diferente** da gravada em `_snap/`. Por conjunto os
+dois lados são exatamente iguais (mesmo MD5 canônico `de830431136ac892018b47b0219897c3`), e a
+ordem não é carregada pelo relatório: o gerador funde `sent` e `resolved` em um mapa por chave e
+ordena os detalhes pelo sinalizador de retrabalho. O arquivo foi mantido como estava.
 
 O olhar para frente registra 33 epics com due date em nov e dez/2026 — mesma contagem das
 rodadas anteriores.
@@ -147,29 +156,30 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-23T15:31:16-03:00`. Ocorrência única no arquivo.
+  `2026-10-23T16:31:04-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 23/10/2026 15:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 23/10/2026 16:31,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo, que
   termina íntegra em `</div>\n</body>\n</html>`.
 - Bloco de dados posicionado **antes** do script principal do artifact (bloco em 22.444–95.519,
   script principal do artifact começando exatamente em 95.519), de modo que a sobrescrita de
   `callMcpTool` já esteja em vigor quando a página inicializa — confirmado nesta rodada por
   comparação de posição no arquivo.
-- `__HISTORY__` exposto por accessor com merge defensivo. Testado nesta rodada: após uma
-  atribuição direta `window.__HISTORY__ = {...}` tentando sobrescrever 2026-09, como a que o
-  script do artifact faz, os meses congelados continuam presentes e intactos, e uma chave nova
-  (2026-04) é aceita normalmente.
+- `__HISTORY__` exposto por accessor com merge defensivo, preservando os meses congelados
+  diante de uma atribuição direta `window.__HISTORY__ = {...}` como a que o script do artifact
+  faz.
 - O bloco de dados foi **executado** em Node nesta rodada: as seis JQLs que o artifact monta em
   tempo de execução para out/2026 — `planned`, `overdue`, `lookahead`, `sent`, `resolved` e
   `rework` — foram submetidas ao resolvedor embutido e devolveram, respectivamente, 15, 0, 33,
   6, 6 e 4 registros; as cinco JQLs `planned` da visão acumulada devolveram 7, 1, 8, 3 e 5;
   `getVisibleJiraProjects` devolveu os 21 projetos, e `__HISTORY__` expôs 2026-07, 2026-08 e
   2026-09. Nenhum padrão testado ficou sem correspondência (nenhum aviso
-  `JQL sem correspondencia no snapshot`).
+  `JQL sem correspondencia no snapshot`). O conjunto `planned_2026-10` servido pelo bloco traz
+  as três epics de EG0240 com due date 2026-10-26, confirmando que a alteração do Jira chegou
+  à página gerada.
 - Removidos do `index.html` o comentário, o bloco de dados e o banner, o restante é **idêntico
   byte a byte** ao `_artifact_src.html` — conferido nesta rodada (diferença de comprimento = 0).
 - `_artifact_src.html`, base do snapshot: 87.509 bytes,
@@ -178,10 +188,10 @@ rodadas anteriores.
 
 ### Ressalvas de método
 
-- A pasta `Documents\Claude\Artifacts` continua inacessível ao shell da sessão e, nesta rodada,
-  também a `device_list_dir` (área protegida).
-  Nesta rodada, porém, o HTML do Live Artifact foi obtido pela via oficial de staging de
-  artifacts e comparado ao `_artifact_src.html`: mesmos 87.509 bytes e mesmo MD5
+- A pasta `Documents\Claude\Artifacts` segue inacessível tanto ao shell da sessão quanto a
+  `device_list_dir` (área protegida). Isso não é bloqueio: o HTML do Live Artifact foi obtido
+  pela via oficial de staging de artifacts (`device_stage_files` com `artifact_ids`) e comparado
+  ao `_artifact_src.html` — mesmos 87.509 bytes e mesmo MD5
   `6a2b6462a4efbec1890af4494a7f0b74`. O layout publicado está, portanto, em dia com o artifact.
 - Renderização não reexecutada em navegador nesta rodada (execução agendada e autônoma). O
   HTML-fonte é o mesmo das rodadas anteriores — a última verificada em Chromium headless sem
@@ -199,8 +209,8 @@ comentário do próprio cabeçalho do bloco de dados).
 
 ## Publicação
 
-- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `404df979edc4be6c101119c6221636b2`).
+- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `ad940a3f454333c0cb41aa14299d9c5a`).
 - `snapshot-data.js` — cópia de referência do bloco de dados injetado, não carregada pela
-  página (73.594 bytes, MD5 `56f0f5382d773975524891e7440c42b8`).
+  página (73.594 bytes, MD5 `1fe7504f3bf46643577a27e9771086ab`).
 - Commit e push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler, a cada 30 minutos.
 - Deploy automático na Vercel a partir do push.
