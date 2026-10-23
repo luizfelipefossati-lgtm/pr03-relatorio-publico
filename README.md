@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 23/10/2026 16:31** (`2026-10-23T16:31:04-03:00`)
+> **Última atualização do snapshot: 23/10/2026 19:33** (`2026-10-23T19:33:34-03:00`)
 
 ---
 
@@ -50,7 +50,7 @@ Meses congelados servidos pelo `__HISTORY__` embutido: **2026-07, 2026-08, 2026-
 
 ## Como foi gerado
 
-Geração em 23/10/2026 16:31 BRT (19:31 UTC), em execução agendada e autônoma, com consulta ao
+Geração em 23/10/2026 19:33 BRT (22:33 UTC), em execução agendada e autônoma, com consulta ao
 vivo ao Jira. Foram feitas **12 chamadas bem-sucedidas** ao conector MCP Atlassian:
 `getVisibleJiraProjects`, as seis consultas JQL do mês corrente — `planned`, `overdue`,
 `lookahead`, `sent`, `resolved` e `rework` — e as cinco consultas `planned` da visão acumulada
@@ -65,7 +65,7 @@ fechamento.
 A montagem usou o gerador versionado na raiz, `_gen_snapshot.py`, que parte do
 `_artifact_src.html` limpo, insere o carimbo no início do `<head>`, injeta o bloco `<script>` do
 snapshot **antes** do script principal do artifact e acrescenta o banner como último elemento do
-`<body>`. A procedência desta rodada está registrada em `_snap/_data1023g.py`. O
+`<body>`. A procedência desta rodada está registrada em `_snap/_data1023h.py`. O
 `snapshot-data.js` publicado ao lado é a cópia de referência do mesmo bloco, e foi conferido como
 idêntico ao embutido no `index.html`.
 
@@ -98,51 +98,45 @@ Duas ressalvas de forma, sem efeito sobre os dados:
   resposta excedeu o limite e veio como arquivo; os 33 registros foram extraídos dele na mesma
   forma aninhada usada em `_snap/` e conferidos por **MD5 canônico** —
   `a38b4d9c77584b034fe2d7c2d0e61cd9` dos dois lados, registro a registro.
-- Nesta rodada as cinco `planned` da visão acumulada também foram pedidas com **projeção
-  completa** (e não reduzida, como em rodadas anteriores), de modo que a conferência desses
-  cinco meses encerrados passou a ser **campo a campo**, e não apenas por conjunto de chaves.
-  Todos os 24 registros (7 + 1 + 8 + 3 + 5) bateram, inclusive na ordem de retorno.
+- As cinco `planned` da visão acumulada foram novamente pedidas com **projeção completa** de
+  seis campos, de modo que a conferência desses cinco meses encerrados é **campo a campo**, e
+  não apenas por conjunto de chaves. Todos os 24 registros (7 + 1 + 8 + 3 + 5) bateram,
+  inclusive na ordem de retorno.
 
-### Dois registros mudaram nesta rodada
+### Nenhum dado mudou nesta rodada
 
-Depois de **oito rodadas seguidas sem nenhuma alteração**, o `planned` do mês corrente mudou. Duas
-epics do projeto **EG0240 — GOITÁ/ COMPESA** tiveram o due date adiado hoje, por volta das
-16:10 BRT, pouco antes desta geração:
+Os **onze conjuntos** e a lista de 21 projetos visíveis voltaram do Jira **idênticos** aos
+gravados em `_snap/`, inclusive na ordem de retorno — a única exceção conhecida e inofensiva é o
+`resolved` do mês corrente, tratada logo abaixo. A alteração de due date das epics do EG0240,
+registrada na rodada das 16:31 BRT, permanece refletida: `EG0240-43`, `EG0240-5` e `EG0240-4`
+seguem com due date **26/10/2026**, em **Em Revisão**, sem resolution date, e nenhuma delas conta
+como atrasada na data desta geração.
 
-| Chave | Resumo | Due date anterior | Due date atual |
-|---|---|---|---|
-| `EG0240-43` | TOMO IV - PROJETO DE INSTRUMENTAÇÃO | 23/10/2026 | **26/10/2026** |
-| `EG0240-4` | TOMO V - PROJETO DE RECUPERAÇÃO ESTRUTURAL (PRE) | 23/10/2026 | **26/10/2026** |
-
-Ambas seguem em **Em Revisão** (categoria `indeterminate`), sem resolution date. O conjunto de 15
-chaves de `planned_2026-10` **não mudou** — mudaram apenas o `duedate` e o `updated` desses dois
-registros, e a ordem de retorno dentro do bloco EG0240 (as três epics do projeto passam a
-compartilhar o mesmo due date, 26/10). Com isso as três epics de EG0240 em outubro vencem agora
-no dia 26, e nenhuma delas conta como atrasada na data desta geração.
-
-Os demais dez conjuntos e a lista de 21 projetos visíveis voltaram **idênticos** aos gravados. A
-conferência foi feita por MD5 canônico (`jq -S -c 'sort_by(.key)'`) contra os JSONs em `_snap/`, o
-que neutraliza diferenças de ordem de retorno do Jira — relevante porque as JQLs de `sent`,
-`resolved` e `rework` que o artifact monta não têm `ORDER BY`:
+A conferência foi feita por MD5 canônico (`jq -S -c 'sort_by(.key)'`) contra os JSONs em `_snap/`,
+o que neutraliza diferenças de ordem de retorno do Jira — relevante porque as JQLs de `sent`,
+`resolved` e `rework` que o artifact monta não têm `ORDER BY`. Além do MD5 canônico, nesta rodada
+também foi conferida a **impressão digital da ordem** de cada conjunto (MD5 da sequência de
+chaves), lado a lado entre o que o Jira devolveu agora e o que está gravado:
 
 | Conjunto | MD5 canônico | Nesta rodada |
 |---|---|---|
-| `planned_2026-10` | `3fe8384df0f1b8cd9245df2901c72ef6` | **reescrito** (era `beb20fe094f4f249b43b20e9becc072f`) |
-| `overdue_2026-10` | `58e0494c51d30eb3494f7c9198986bb9` | inalterado |
-| `lookahead_2026-10` | `a38b4d9c77584b034fe2d7c2d0e61cd9` | inalterado |
-| `sent_2026-10` | `1f995242d71713c8c893953b6abdacb5` | inalterado |
-| `resolved_2026-10` | `de830431136ac892018b47b0219897c3` | inalterado |
-| `rework_2026-10` | `92ac5a1b9b202bf88b9a210c5e83dbcd` | inalterado |
-| `planned_2026-05` | `7b561eb1414d581166c3ffb820fa6c81` | inalterado |
-| `planned_2026-06` | `b483385522e7aba4bff7eaac7c70c70b` | inalterado |
-| `planned_2026-07` | `89c430d7301c007c96e90c518882ae87` | inalterado |
-| `planned_2026-08` | `4e49e617a3b2a5abc00c9a1b5f858fa6` | inalterado |
-| `planned_2026-09` | `1b5fac7dd7a83479c00b2ef40f75e97c` | inalterado |
+| `planned_2026-10` | `3fe8384df0f1b8cd9245df2901c72ef6` | inalterado (conjunto e ordem) |
+| `overdue_2026-10` | `58e0494c51d30eb3494f7c9198986bb9` | inalterado (vazio dos dois lados) |
+| `lookahead_2026-10` | `a38b4d9c77584b034fe2d7c2d0e61cd9` | inalterado (conjunto e ordem) |
+| `sent_2026-10` | `1f995242d71713c8c893953b6abdacb5` | inalterado (conjunto e ordem) |
+| `resolved_2026-10` | `de830431136ac892018b47b0219897c3` | inalterado como conjunto; ordem diferente |
+| `rework_2026-10` | `92ac5a1b9b202bf88b9a210c5e83dbcd` | inalterado (conjunto e ordem) |
+| `planned_2026-05` | `7b561eb1414d581166c3ffb820fa6c81` | inalterado (conjunto e ordem) |
+| `planned_2026-06` | `b483385522e7aba4bff7eaac7c70c70b` | inalterado (conjunto e ordem) |
+| `planned_2026-07` | `89c430d7301c007c96e90c518882ae87` | inalterado (conjunto e ordem) |
+| `planned_2026-08` | `4e49e617a3b2a5abc00c9a1b5f858fa6` | inalterado (conjunto e ordem) |
+| `planned_2026-09` | `1b5fac7dd7a83479c00b2ef40f75e97c` | inalterado (conjunto e ordem) |
 | `_projects_min` | `cf7b59de6bf68fc6489470cf9018bd6e` | inalterado |
 
-Apenas `_snap/planned_2026-10.json` foi reescrito (a versão anterior ficou preservada em
-`_snap/planned_2026-10.json.bak-20261023`), e o `index.html`, o `snapshot-data.js` e este README
-foram regerados.
+**Nenhum JSON de `_snap/` foi reescrito.** Foram regerados apenas o `index.html`, o
+`snapshot-data.js` e este README, que diferem da rodada anterior somente nos carimbos de data e
+hora — os dois arquivos mantêm exatamente os mesmos tamanhos (161.380 e 73.594 bytes), porque os
+carimbos trocados têm o mesmo número de caracteres.
 
 Como nas rodadas anteriores, o `resolved` do mês corrente é consultado sem `ORDER BY` e o Jira
 devolveu os **mesmos seis registros em ordem diferente** da gravada em `_snap/`. Por conjunto os
@@ -156,12 +150,12 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-23T16:31:04-03:00`. Ocorrência única no arquivo.
+  `2026-10-23T19:33:34-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 23/10/2026 16:31,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 23/10/2026 19:33,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo, que
   termina íntegra em `</div>\n</body>\n</html>`.
 - Bloco de dados posicionado **antes** do script principal do artifact (bloco em 22.444–95.519,
