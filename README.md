@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 26/10/2026 14:32** (`2026-10-26T14:32:33-03:00`)
+> **Última atualização do snapshot: 26/10/2026 15:34** (`2026-10-26T15:34:33-03:00`)
 
 ---
 
@@ -49,7 +49,7 @@ Meses congelados servidos pelo `__HISTORY__` embutido: **2026-07, 2026-08, 2026-
 
 ## Como foi gerado
 
-Geração em 26/10/2026 14:32 BRT (26/10/2026 17:32 UTC), em execução agendada e autônoma, com
+Geração em 26/10/2026 15:34 BRT (26/10/2026 18:34 UTC), em execução agendada e autônoma, com
 consulta ao vivo ao Jira. Foram feitas **12 chamadas bem-sucedidas** ao conector MCP Atlassian:
 `getVisibleJiraProjects`, as seis consultas JQL do mês corrente — `planned`, `overdue`,
 `lookahead`, `sent`, `resolved` e `rework` — e as cinco consultas `planned` da visão acumulada
@@ -69,7 +69,7 @@ conferido como idêntico ao embutido no `index.html`.
 
 ### Intervalo desde a rodada anterior
 
-A rodada anterior foi em 26/10/2026 13:33 BRT, cerca de 59 minutos antes desta — cadência normal
+A rodada anterior foi em 26/10/2026 14:32 BRT, cerca de 62 minutos antes desta — cadência normal
 da tarefa agendada, sem lacuna a investigar.
 
 ### Execução
@@ -139,7 +139,7 @@ usado pela consulta `sent`, por isso aparece em `resolved_2026-10` e não em `se
 
 `index.html` e `snapshot-data.js` mantêm exatamente os mesmos tamanhos da rodada anterior
 (161.380 e 73.594 bytes), porque os carimbos trocados têm o mesmo número de caracteres. Os MD5
-desta rodada são `9cc2d3223298b1d5c760750ff4cf2d03` e `22e797ce9f62c98ac849f713baa71938`.
+desta rodada são `0301ab85aa1a36d725e4435208ead915` e `61a5d7f88ca387a6e37e15e04e9aca4d`.
 
 O olhar para frente registra 33 epics com due date em nov e dez/2026 — mesma contagem das
 rodadas anteriores.
@@ -147,12 +147,12 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-26T14:32:33-03:00`. Ocorrência única no arquivo.
+  `2026-10-26T15:34:33-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 26/10/2026 14:32,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 26/10/2026 15:34,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo, que
   termina íntegra em `</div>\n</body>\n</html>`.
 - Bloco de dados posicionado **antes** do script principal do artifact (bloco em 22.444–95.519,
