@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 26/10/2026 10:40** (`2026-10-26T10:40:55-03:00`)
+> **Última atualização do snapshot: 26/10/2026 11:35** (`2026-10-26T11:35:12-03:00`)
 
 ---
 
@@ -50,7 +50,7 @@ Meses congelados servidos pelo `__HISTORY__` embutido: **2026-07, 2026-08, 2026-
 
 ## Como foi gerado
 
-Geração em 26/10/2026 10:40 BRT (26/10/2026 13:40 UTC), em execução agendada e autônoma, com consulta ao
+Geração em 26/10/2026 11:35 BRT (26/10/2026 14:35 UTC), em execução agendada e autônoma, com consulta ao
 vivo ao Jira. Foram feitas **12 chamadas bem-sucedidas** ao conector MCP Atlassian:
 `getVisibleJiraProjects`, as seis consultas JQL do mês corrente — `planned`, `overdue`,
 `lookahead`, `sent`, `resolved` e `rework` — e as cinco consultas `planned` da visão acumulada
@@ -65,16 +65,15 @@ fechamento.
 A montagem usou o gerador versionado na raiz, `_gen_snapshot.py`, que parte do
 `_artifact_src.html` limpo, insere o carimbo no início do `<head>`, injeta o bloco `<script>` do
 snapshot **antes** do script principal do artifact e acrescenta o banner como último elemento do
-`<body>`. A procedência desta rodada está registrada em `_snap/_data1026a.py`. O
+`<body>`. A procedência desta rodada está registrada em `_snap/_data1026b.py`. O
 `snapshot-data.js` publicado ao lado é a cópia de referência do mesmo bloco, e foi conferido como
 idêntico ao embutido no `index.html`.
 
 ### Intervalo desde a rodada anterior
 
-A rodada anterior foi em 24/10/2026 00:33 BRT (sábado). Entre ela e esta não houve geração: o
-`.watch.log` registra o watcher reiniciando às 09:18 de 26/10 (segunda), compatível com a
-estação desligada no fim de semana. Nenhum dado do Jira mudou nesse intervalo, de modo que a
-página publicada não ficou defasada em conteúdo — apenas no carimbo.
+A rodada anterior foi em 26/10/2026 10:40 BRT, cerca de 55 minutos antes desta — cadência normal
+da tarefa agendada, sem lacuna a investigar. Nenhum dado do Jira mudou no intervalo, de modo que
+a página publicada não ficou defasada em conteúdo, apenas no carimbo.
 
 ### Filtro de tipo de issue
 
@@ -95,17 +94,22 @@ foi feita.
 O conector esteve estável: as doze consultas completaram na primeira tentativa, sem HTTP 502, sem
 estouro de tempo e sem necessidade de backoff ou de dividir o período.
 
-Duas ressalvas de forma, sem efeito sobre os dados:
+Ressalvas de forma, sem efeito sobre os dados:
 
+- As doze chamadas foram executadas por **dois subagentes em paralelo** (um para os seis
+  conjuntos do mês corrente, outro para as cinco `planned` da visão acumulada mais
+  `getVisibleJiraProjects`), cada um projetando os campos mínimos na mesma forma aninhada usada
+  em `_snap/` e gravando os JSONs fora da árvore do repositório, para conferência antes de
+  qualquer escrita.
 - `getVisibleJiraProjects` e a consulta `lookahead` excedem o limite de tokens da ferramenta.
-  As duas foram executadas por subagente, que projetou os campos mínimos na mesma forma
-  aninhada usada em `_snap/` e conferiu por MD5 canônico contra os arquivos em uso: os 21
-  projetos e os 33 registros do olhar para frente bateram, e os arquivos resultantes ficaram
-  **byte a byte idênticos** aos gravados (3.836 e 10.378 bytes).
-- Os nove conjuntos restantes vieram inteiros na resposta e foram conferidos **campo a campo**
-  contra `_snap/`, registro a registro (key, summary, status.name, statusCategory.key,
-  project.key, project.name, duedate, resolutiondate, updated), por MD5 canônico calculado em
-  Python sobre a projeção aninhada e comparado ao mesmo cálculo sobre os arquivos gravados.
+  Nos dois casos a resposta foi salva em arquivo pela própria ferramenta e processada a partir
+  do arquivo, sem redigitar conteúdo truncado; os 21 projetos e os 33 registros do olhar para
+  frente bateram com os arquivos em uso.
+- A conferência foi feita **registro a registro** (key, summary, status.name,
+  statusCategory.key, project.key, project.name, duedate, resolutiondate, updated), por MD5
+  canônico calculado em Python sobre a projeção aninhada, em duas formas: preservando a ordem
+  de retorno e reordenando por `key`. Os doze conjuntos bateram nas duas formas, exceto o
+  `resolved` do mês corrente, que bateu apenas na forma reordenada — ver abaixo.
 
 ### Nenhum dado mudou nesta rodada
 
@@ -155,12 +159,12 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-26T10:40:55-03:00`. Ocorrência única no arquivo.
+  `2026-10-26T11:35:12-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 26/10/2026 10:40,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 26/10/2026 11:35,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo, que
   termina íntegra em `</div>\n</body>\n</html>`.
 - Bloco de dados posicionado **antes** do script principal do artifact (bloco em 22.444–95.519,
@@ -203,13 +207,14 @@ projeto, due date, resolution date e updated. **Não há** `accountId`, e-mail, 
 em ADF nem qualquer campo de pessoa. A conferência desta rodada no `index.html` gerado não
 encontrou nenhuma ocorrência de `avatarUrls`, `emailAddress`, `iconUrl`, `displayName`,
 `atlassianAccountId`, `projectTypeKey` ou `self":`. A única ocorrência da string `accountId` é a
-linha de comentário do próprio cabeçalho do bloco de dados, e a única sequência com `@` no
-arquivo é a versão do CDN `chart.js@4.5.0` no `<head>` do artifact — não há e-mail algum.
+linha de comentário do próprio cabeçalho do bloco de dados. A varredura por regex de e-mail não
+acusou nenhuma ocorrência; a única sequência com `@` no arquivo é a versão do CDN
+`chart.js@4.5.0` no `<head>` do artifact, que não casa como e-mail — não há e-mail algum.
 
 ## Publicação
 
-- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `69f781af4582ceb0111dccfcdad6dc20`).
+- `index.html` — página estática, auto-contida (161.380 bytes, MD5 `f8a8f0aa10a5c9713759dad0bcbcc5f0`).
 - `snapshot-data.js` — cópia de referência do bloco de dados injetado, não carregada pela
-  página (73.594 bytes, MD5 `8da4fb22d4ae67b1aff183fbf7e02989`).
+  página (73.594 bytes, MD5 `7c23993de4400fc4634f5fa04c1c3dfc`).
 - Commit e push são feitos pela tarefa `PR03-Auto-Push-GitHub` do Windows Task Scheduler, a cada 30 minutos.
 - Deploy automático na Vercel a partir do push.
