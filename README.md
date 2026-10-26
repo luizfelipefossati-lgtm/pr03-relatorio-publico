@@ -2,7 +2,7 @@
 
 Publicação estática (snapshot) do dashboard **Estudos e Projetos — Relatório de Indicadores** da Engeplus Engenharia e Consultoria.
 
-> **Última atualização do snapshot: 26/10/2026 13:33** (`2026-10-26T13:33:01-03:00`)
+> **Última atualização do snapshot: 26/10/2026 14:32** (`2026-10-26T14:32:33-03:00`)
 
 ---
 
@@ -49,7 +49,7 @@ Meses congelados servidos pelo `__HISTORY__` embutido: **2026-07, 2026-08, 2026-
 
 ## Como foi gerado
 
-Geração em 26/10/2026 13:33 BRT (26/10/2026 16:33 UTC), em execução agendada e autônoma, com
+Geração em 26/10/2026 14:32 BRT (26/10/2026 17:32 UTC), em execução agendada e autônoma, com
 consulta ao vivo ao Jira. Foram feitas **12 chamadas bem-sucedidas** ao conector MCP Atlassian:
 `getVisibleJiraProjects`, as seis consultas JQL do mês corrente — `planned`, `overdue`,
 `lookahead`, `sent`, `resolved` e `rework` — e as cinco consultas `planned` da visão acumulada
@@ -69,7 +69,7 @@ conferido como idêntico ao embutido no `index.html`.
 
 ### Intervalo desde a rodada anterior
 
-A rodada anterior foi em 26/10/2026 12:31 BRT, cerca de 62 minutos antes desta — cadência normal
+A rodada anterior foi em 26/10/2026 13:33 BRT, cerca de 59 minutos antes desta — cadência normal
 da tarefa agendada, sem lacuna a investigar.
 
 ### Execução
@@ -101,9 +101,9 @@ foi feita.
 O conector esteve estável: as doze consultas completaram na primeira tentativa, sem HTTP 502, sem
 estouro de tempo e sem necessidade de backoff ou de dividir o período.
 
-Ressalva de forma, sem efeito sobre os dados: respostas grandes (`getVisibleJiraProjects` e a
-consulta `lookahead`) excedem o limite de tokens da ferramenta; nesses casos a resposta é salva
-em arquivo pela própria ferramenta e processada a partir do arquivo, sem redigitar conteúdo
+Ressalva de forma, sem efeito sobre os dados: respostas grandes — nesta rodada, a consulta
+`lookahead` — excedem o limite de tokens da ferramenta; nesses casos a resposta é salva em
+arquivo pela própria ferramenta e processada a partir do arquivo, sem redigitar conteúdo
 truncado.
 
 ### Nenhum dado mudou nesta rodada
@@ -112,11 +112,15 @@ Os **onze conjuntos** e a lista de 21 projetos visíveis voltaram do Jira com co
 ao gravado em `_snap/`, conferido por MD5 canônico (`jq -S -c 'sort_by(.key)'`), que neutraliza
 diferenças de ordem de retorno — relevante porque as JQLs de `sent`, `resolved` e `rework` que o
 artifact monta não têm `ORDER BY`. Nesta rodada os doze conjuntos bateram também **na ordem de
-retorno**, inclusive `resolved_2026-10`, que nas rodadas anteriores vinha embaralhado.
+retorno**, conferida por MD5 da lista de chaves (`jq -c '[.[].key]'`).
 
 As três epics do EG0240 — `EG0240-43`, `EG0240-5` e `EG0240-4` — seguem com due date
 **26/10/2026**, em **Em Revisão**, sem resolution date. Como a geração é de 26/10, nenhuma delas
 conta como atrasada: `overdue_2026-10` segue vazio.
+
+Permanece registrada a divergência de nome de status que explica `resolved` sem `sent`:
+`EG0239-28` está em "Enviado - Aguardando Análise**1**" (com o "1" ao final), status distinto do
+usado pela consulta `sent`, por isso aparece em `resolved_2026-10` e não em `sent_2026-10`.
 
 | Conjunto | MD5 canônico | Nesta rodada |
 |---|---|---|
@@ -135,7 +139,7 @@ conta como atrasada: `overdue_2026-10` segue vazio.
 
 `index.html` e `snapshot-data.js` mantêm exatamente os mesmos tamanhos da rodada anterior
 (161.380 e 73.594 bytes), porque os carimbos trocados têm o mesmo número de caracteres. Os MD5
-desta rodada são `ba80c1290d00bcb66036fcce60386445` e `e1770c209a834f2ce1534531cc2c0ee2`.
+desta rodada são `9cc2d3223298b1d5c760750ff4cf2d03` e `22e797ce9f62c98ac849f713baa71938`.
 
 O olhar para frente registra 33 epics com due date em nov e dez/2026 — mesma contagem das
 rodadas anteriores.
@@ -143,12 +147,12 @@ rodadas anteriores.
 ## Estrutura e verificações
 
 - Comentário `<!-- Snapshot gerado em ... -->` no início do `<head>`, com o carimbo
-  `2026-10-26T13:33:01-03:00`. Ocorrência única no arquivo.
+  `2026-10-26T14:32:33-03:00`. Ocorrência única no arquivo.
 - Bloco `<script>` com `window.__SNAPSHOT__` e a sobrescrita de `window.cowork.callMcpTool`,
   que devolve os dados pré-buscados conforme o padrão da JQL recebida. Ocorrência única,
   byte a byte idêntica ao `snapshot-data.js` publicado ao lado (73.594 bytes) — conferido
   nesta rodada.
-- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 26/10/2026 13:33,
+- Banner de snapshot como **último elemento do `<body>`**, com o carimbo 26/10/2026 14:32,
   imediatamente antes do fechamento. Ocorrência única, confirmada na cauda do arquivo, que
   termina íntegra em `</div>\n</body>\n</html>`.
 - Bloco de dados posicionado **antes** do script principal do artifact (bloco em 22.444–95.519,
@@ -162,7 +166,7 @@ rodadas anteriores.
 - O bloco de dados foi **executado** em Node nesta rodada: as seis JQLs que o artifact monta em
   tempo de execução para out/2026 — `planned`, `overdue`, `lookahead`, `sent`, `resolved` e
   `rework` — foram submetidas ao resolvedor embutido e devolveram, respectivamente, 15, 0, 33,
-  6, 6 e 4 registros; as seis JQLs `planned` da visão acumulada devolveram 7, 1, 8, 3, 5 e 15;
+  6, 6 e 4 registros; as cinco JQLs `planned` de mai a set/2026 devolveram 7, 1, 8, 3 e 5;
   `getVisibleJiraProjects` devolveu os 21 projetos, e `__HISTORY__` expôs 2026-07, 2026-08 e
   2026-09. Nenhum padrão testado ficou sem correspondência (nenhum aviso
   `JQL sem correspondencia no snapshot`). `epicTypeNames` no bloco: `["Epic","Fluxo de trabalho"]`.
@@ -174,8 +178,7 @@ rodadas anteriores.
 - Varredura de privacidade no `index.html`: zero ocorrências de `avatarUrls`, `emailAddress`,
   `iconUrl`, `displayName`, `projectTypeKey`, `atlassianAccountId` e `self":`. A única ocorrência
   de `accountId` é a palavra "accountIds" na linha de comentário do cabeçalho do próprio bloco de
-  dados. A varredura por regex de e-mail acusa uma única correspondência, que não é um e-mail: a
-  URL de CDN `chart.js@4.5.0`, presente no próprio HTML-fonte do artifact.
+  dados (linha 287). A varredura por regex de e-mail não acusou nenhuma correspondência.
 
 ### Ressalvas de método
 
