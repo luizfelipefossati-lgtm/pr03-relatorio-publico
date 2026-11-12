@@ -216,3 +216,8 @@
 2026-11-11 23:34:35  === Watchdog concluido com sucesso ===
 2026-11-12 09:16:07  === Watchdog iniciando ===
 2026-11-12 09:16:20  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'False' | lock: 'False' | index quebrado: 'False'
+2026-11-12 09:16:20  Commit OK: fb623b979bfd7894d10e5190ccf63acf9ee08305
+2026-11-12 09:16:20  Empurrando para origin/main...
+2026-11-12 09:16:32  ERRO: push falhou (exit 128): fatal: unable to access 'https://github.com/luizfelipefossati-lgtm/pr03-relatorio-publico.git/': Could not resolve host: github.com
+2026-11-12 09:21:54  === Watchdog iniciando ===
+2026-11-12 09:21:56  Pendencia detectada -> mudancas locais: 'True' | commits nao enviados: 'True' | lock: 'False' | index quebrado: 'False'
